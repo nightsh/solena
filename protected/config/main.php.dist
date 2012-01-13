@@ -25,11 +25,13 @@ return array(
 	// application components
 	'components'=>array(
 		'user'=>array(
+			'class' => 'WebUser',
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
-		// uncomment the following to enable URLs in path-format
-		/*
+		'authManager'=>array(
+			'class' => 'PhpAuthManager',
+		),
 		'urlManager'=>array(
 			'urlFormat'=>'path',
 			'rules'=>array(
@@ -38,7 +40,6 @@ return array(
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
-		*/
 		'ldap'=>array(
 			'class' => 'SLdapServer',
 			'baseDn' => 'dc=kde,dc=org',
