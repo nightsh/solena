@@ -137,6 +137,18 @@ final class SLdapServer extends CApplicationComponent
 		$results = $this->getConnection()->search( $base, $filter, $options );
 		return new SLdapSearchResult($results, $paginator, $sorting);
 	}
+
+	public function reauthenticate($dn, $password)
+	{
+		// Try to bind using the credentials we were given...
+		$result = $this->getConnection()->bind($dn, $password);
+		// Did we fail? If so, rebind as who we originally were
+		if( PEAR::isError($result) ) {
+			$this->getConnection()->bind();
+			return false;
+		}
+		return $result;
+	}
 }
 
 ?>
