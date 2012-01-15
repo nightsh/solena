@@ -20,7 +20,8 @@ class WebUser extends CWebUser
 		if( !$user ) {
 			return array();
 		}
-		return $user->groupMember;
+		$groupMember = $user->groupMember;
+		return is_string($groupMember) ? array($groupMember) : $groupMember;
 	}
 
 	/**
