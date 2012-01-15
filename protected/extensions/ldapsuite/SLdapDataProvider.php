@@ -15,6 +15,10 @@ class SLdapDataProvider extends CDataProvider
 	 */
 	public $uniqueAttributes = null;
 	/**
+	 * Names of the attributes this data provider will retrieve from LDAP
+	 */
+	public $attributesToLoad = array();
+	/**
 	 * The filter which this data provider will apply to all searches and other operations it performs
 	 */
 	private $_filter;
@@ -93,6 +97,25 @@ class SLdapDataProvider extends CDataProvider
 	}
 
 	/**
+	 * Returns the names of the attributes that this data provider will be loading
+	 * If an empty array is returned, then all attributes held by items will be retrieved
+	 */
+	public function getAttributesToLoad()
+	{
+		return $this->attributesToLoad;
+	}
+
+	/**
+	 * Sets the attributes which this data provider will be loading
+	 * If a requested attribute is not found on a retrieved entry, then the value requested will be null.
+	 * Attempting to read attributes not included in this list, other than 'objectClass' will lead to null being returned.
+	 */
+	public function setAttributesToLoad(array $attributesToLoad)
+	{
+		$this->attributesToLoad = $attributesToLoad;
+	}
+
+	/**
 	 * Fetches the data from the persistent data storage.
 	 * @return array list of data items
 	 */
@@ -149,7 +172,7 @@ class SLdapDataProvider extends CDataProvider
 			$filter = $this->buildFilter();
 		}
 
-		$results = $this->model->findByFilter($filter, array(), $pagination, $sort, array('sizelimit' => 100));
+		$results = $this->model->findByFilter($filter,  $this->attributesToLoad, $pagination, $sort, array('sizelimit' => 150));
 
 		// Set some metadata which the displays will use later...
 		if( $pagination !== false ) {
