@@ -34,6 +34,9 @@ return array(
 			'enableCookieValidation' => true,
 			'enableCsrfValidation' => true,
 		),
+		'securityManager'=>array(
+			'cryptAlgorithm' => 'rijndael-256',
+		),
 		/*
 		'urlManager'=>array(
 			'urlFormat'=>'path',
