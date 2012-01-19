@@ -35,6 +35,16 @@ class WebUser extends CWebUser
 		}
 		return $this->_model;
 	}
+
+	protected function afterLogin($fromCookie)
+	{
+		User::getLdapConnection()->retainCredentials();
+	}
+
+	protected function afterLogout()
+	{
+		User::getLdapConnection()->discardCredentials();
+	}
 }
 
 ?>

@@ -57,6 +57,10 @@ final class SLdapServer extends CApplicationComponent
 	 * Internal LDAP server connection
 	 */
 	private $_ldap = null;
+	/**
+	 * Copy of credentials we reauthenticated with
+	 */
+	private $_credentials = array();
 
     public function init()
 	{
@@ -73,8 +77,11 @@ final class SLdapServer extends CApplicationComponent
 		}
 
 		// See if the users credentials are available and should be used...
-		if( $this->operateAsUser ) {
-			// TBD
+		if( $this->operateAsUser && !Yii::app()->user->isGuest ) {
+			$state = $this->loadPersistentCredentials($config);
+			if( !$state ) {
+				throw new CException('An unexpected error has occurred');
+			}
 		}
 
 		$ldap = Net_LDAP2::connect($config);
@@ -95,7 +102,6 @@ final class SLdapServer extends CApplicationComponent
 
 		// We are now all setup and ready to rock and roll
 		$this->_ldap = $ldap;
-		
 	}
 	
 	public function getConnection()
@@ -147,7 +153,70 @@ final class SLdapServer extends CApplicationComponent
 			$this->getConnection()->bind();
 			return false;
 		}
+		// Bind succeeded, stow away the credentials
+		$this->_credentials['binddn'] = $dn;
+		$this->_credentials['bindpw'] = $password;
 		return $result;
+	}
+
+	/**
+	 * This function stores the previously given credentials so that the application will be able to "operate as the user".
+	 *
+	 * Every user session will have an encryption key uniquely generated for them
+	 * The password will then be encyrpted using CSecurityManager, and HMAC armoured to prevent tampering
+	 *
+	 * The encryption key will be stored in the user's session - and the password stored in a seperate cookie
+	 * The cookie will be restricted to prevent it being read in javascript, and will be stored for the length of the session only.
+	 *
+	 * This process will fail if the user's session is being maintained using Cookies - a PHP session must be used
+	 */
+	public function retainCredentials()
+	{
+		// First - make sure the session is not attempting to use cookies at all
+		if( Yii::app()->user->allowAutoLogin ) {
+			throw new CException('Credentials cannot be retained if Cookie based sessions are in use for security reasons');
+		}
+		// Do we have any retained credentials?
+		if( empty($this->_credentials) ) {
+			return;
+		}
+		
+		// Generate a new key to encrypt the password with then encrypt the password with it
+		$key = sprintf('%08x%08x%08x%08x',mt_rand(),mt_rand(),mt_rand(),mt_rand());
+		$securePassword = Yii::app()->securityManager->encrypt($this->_credentials['bindpw'], $key);
+		
+		// Send the now encyrpted and armoured password back to the user
+		$cookie = new CHttpCookie('accessKey', $securePassword);
+		$cookie->secure = Yii::app()->request->isSecureConnection;
+		$cookie->httpOnly = true;
+		
+		// Send the Cookie to the user, and save the given DN and the encryption key for future usage in the session
+		Yii::app()->request->cookies['accessKey'] = $cookie;
+		Yii::app()->user->setState('userDn', $this->_credentials['binddn']);
+		Yii::app()->user->setState('userPasswordKey', $key);
+	}
+
+	public function discardCredentials()
+	{
+		unset(Yii::app()->request->cookies['accessKey']);
+	}
+
+	private function loadPersistentCredentials(&$config)
+	{
+		// Make sure we have an access key to use...
+		if( !isset(Yii::app()->request->cookies['accessKey']) ) {
+			return false;
+		}
+		
+		// Retrieve and decrypt the password
+		$securedPassword = Yii::app()->request->cookies['accessKey']->value;
+		$passwordKey = Yii::app()->user->getState('userPasswordKey');
+		$plainPassword = Yii::app()->securityManager->decrypt($securedPassword, $passwordKey);
+		
+		// Set the configuration
+		$config['binddn'] = Yii::app()->user->getState('userDn');
+		$config['bindpw'] = $plainPassword;
+		return true;
 	}
 }
 
