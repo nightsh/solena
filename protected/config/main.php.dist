@@ -26,12 +26,15 @@ return array(
 	'components'=>array(
 		'user'=>array(
 			'class' => 'WebUser',
-			// enable cookie-based authentication
-			'allowAutoLogin'=>true,
 		),
 		'authManager'=>array(
 			'class' => 'PhpAuthManager',
 		),
+		'request'=>array(
+			'enableCookieValidation' => true,
+			'enableCsrfValidation' => true,
+		),
+		/*
 		'urlManager'=>array(
 			'urlFormat'=>'path',
 			'rules'=>array(
@@ -40,11 +43,13 @@ return array(
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
+		*/
 		'ldap'=>array(
 			'class' => 'SLdapServer',
 			'baseDn' => 'dc=kde,dc=org',
 			'bindDn' => 'cn=Sysadmin,dc=kde,dc=org',
 			'bindPassword' => '',
+			'operateAsUser' => true,
 		),
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=testdrive',
