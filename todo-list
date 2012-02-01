@@ -1,11 +1,43 @@
 ** Current todo
 
-* LDAP login to Solena
-  * Operate as the user we are logging in as
-  * Password should be encrypted using php-mcrypt
-  * Assign member groups as roles
-  
 * RBAC
-  * Database or PHP file based?
-  * write${Attribute} permissions - to be used in the UI
-  * reading of attributes is controlled by LDAP server (via Solena login limitations)
+  * PHP file based - describe the structure of actions
+
+* SLdapModel
+  * Check function names - renaming may be required to make full sense
+  * Add events - needed for givenName + " " + sn = cn
+
+* people/index
+  * Add view person links to entries
+  * Make the mail filter run over secondaryMail addresses as well
+  * Display secondaryMail addresses as well as primary mail addresses perhaps? (should work in theory)
+  
+* people/editProfile
+  * Add validators for Gender/Timezone
+  * Make Timezone a drop down
+
+* people/editContactDetails
+  * Adjust validation system to be able to handle presence of arrays if it cannot already
+
+* User/People controller
+  * Controller exists for the purposes of both administration and normal user changes
+    - UI should be friendly to both purposes
+    - Details which require control validation (namely email addresses) to be validated only if "current user == user being edited"
+    - All variables should be required to pass strict tests for validity
+  * Design:
+    - Users have a "profile" and "contact details"
+    - Profile = name, timezone, gender, language preference, homepage
+    - Contact details = email, jabber, irc nick, address, phone number (permitted to have multiples of all - email must be verified)
+    - GPG/SSH key administration
+  * Actions:
+    - index (list of users, paginated, with filters of username/name/email & custom filters for group membership)
+    - create (creates a new user - the Base must be specified)
+    - delete (destroys a user)
+    - view (display the profile and contact details of the specified user - as well as their avatar)
+    - move (changes the Base the user is in - eg: locked, services, people)
+    - lock (locks or unlocks the user)
+    - manageProfile (manage the profile fields)
+    - manageContact (manage the contact information)
+    - manageAvatar (allows users to change their avatar)
+    - manageKeys (manage the ssh/gpg? keys - including downloading them)
+    - changePassword (changes the password of the user - will need to invoke retainCredentials)
