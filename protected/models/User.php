@@ -59,6 +59,21 @@ class User extends SLdapModel
 	{
 		return array_merge( array($this->mail), (array) $this->secondaryMail );
 	}
+
+	protected function beforeSave()
+	{
+		// Are both givenName and sn available to us?
+		if( is_null($this->givenName) || is_null($this->sn) ) {
+			return false;
+		}
+		// Update the attribute "cn" based on the value of givenName and sn
+		$givenName = $this->givenName;
+		$sn = $this->sn;
+		$this->cn = "$givenName $sn";
+		
+		// Call our parent now
+		return parent::beforeSave();
+	}
 }
 
 ?>
