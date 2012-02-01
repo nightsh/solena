@@ -78,7 +78,7 @@ final class SLdapServer extends CApplicationComponent
 
 		// See if the users credentials are available and should be used...
 		if( $this->operateAsUser && !Yii::app()->user->isGuest ) {
-			$state = $this->loadPersistentCredentials($config);
+			$state = $this->loadRetainedCredentials($config);
 			if( !$state ) {
 				throw new CException('An unexpected error has occurred');
 			}
@@ -201,7 +201,7 @@ final class SLdapServer extends CApplicationComponent
 		unset(Yii::app()->request->cookies['accessKey']);
 	}
 
-	private function loadPersistentCredentials(&$config)
+	private function loadRetainedCredentials(&$config)
 	{
 		// Make sure we have an access key to use...
 		if( !isset(Yii::app()->request->cookies['accessKey']) ) {

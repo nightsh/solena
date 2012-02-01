@@ -21,7 +21,7 @@ class WebUser extends CWebUser
 			return array();
 		}
 		$groupMember = $user->groupMember;
-		return is_string($groupMember) ? array($groupMember) : $groupMember;
+		return (array) $groupMember;
 	}
 
 	/**
@@ -29,7 +29,7 @@ class WebUser extends CWebUser
 	 */
 	private function getModel()
 	{
-		if (!$this->isGuest && $this->_model === null){
+		if( !$this->isGuest && $this->_model === null ) {
 			$filter = Net_LDAP2_Filter::create('uid', 'equals', $this->id);
 			$this->_model = User::model()->findFirstByFilter($filter, array('groupMember'));
 		}
