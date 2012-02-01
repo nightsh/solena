@@ -118,6 +118,7 @@ class SLdapSearchResult extends CComponent implements Iterator
 		}
 
 		$this->_resultsCache = $results;
+		reset($this->_resultsCache);
 	}
 
 	/**
