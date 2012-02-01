@@ -24,23 +24,40 @@ class User extends SLdapModel
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('uid, cn, mail, sn, givenName', 'required'),
-			array('uid, cn, mail, sn, givenName', 'length', 'max'=>128),
-			// The following rule is used by search().
-			// Please remove those attributes that should not be searched.
-			array('uid, cn, mail', 'safe', 'on'=>'search'),
+			// General Validation
+			array('givenName, sn, personalTitle, academicTitle', 'length', 'min' => 2, 'max' => 64),
+			array('mail, secondaryMail', 'email'),
+			array('dateOfBirth', 'date', 'format' => 'dd/MM/yyyy'),
+			array('labeledURI', 'url'),
+			array('uid', 'required'),
+			// Searching (used on index)
+			array('uid, cn, mail, secondaryMail', 'safe', 'on'=>'search'),
+			// Profile Editing
+			array('givenName, sn', 'required', 'on' => 'editProfile'),
+			array('personalTitle, academicTitle, dateOfBirth, gender, timezone', 'safe', 'on' => 'editProfile'),
+			// User creation
+			array('uid, givenName, sn, mail', 'required', 'on' => 'create')
 		);
 	}
 
 	public function attributeLabels()
 	{
 		return array(
+			'parentDn' => 'Parent Organisational Unit',
 			'uid' => 'Username',
 			'sn' => 'Last name',
 			'givenName' => 'First name',
 			'cn' => 'Full name',
 			'mail' => 'Email address',
+			'labeledURI' => 'Website',
+			'ircNick' => 'IRC Nickname',
+			'jabberId' => 'Jabber ID',
 		);
+	}
+
+	public function getEmailAddresses()
+	{
+		return array_merge( array($this->mail), (array) $this->secondaryMail );
 	}
 }
 
