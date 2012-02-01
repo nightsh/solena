@@ -30,6 +30,10 @@ return array(
 		'authManager'=>array(
 			'class' => 'PhpAuthManager',
 		),
+		'format'=>array(
+			'class' => 'application.components.Formatter',
+			'dateFormat' => 'dd/MM/yyyy',
+		),
 		'request'=>array(
 			'enableCookieValidation' => true,
 			'enableCsrfValidation' => true,
