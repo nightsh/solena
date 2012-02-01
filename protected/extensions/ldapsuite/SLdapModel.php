@@ -458,11 +458,20 @@ abstract class SLdapModel extends CModel
 			return false;
 		}
 		
+		// Does beforeSave permit us to save?
+		if( !$this->beforeSave() ) {
+			return false;
+		}
+		
+		// Perform the save
 		$result = $this->_entry->update($ldap->getConnection());
 		if( PEAR::isError($result) ) {
 			$this->addError("system", $result->message);
 			return false;
 		}
+		
+		// Save is successful as far as we can tell, indicate that
+		$this->afterSave();
 		return $result;
 	}
     
@@ -485,12 +494,21 @@ abstract class SLdapModel extends CModel
 	 */
 	public function delete($recursive=false)
 	{
+		// It is simply not possible to delete new entries, so bail out
 		if( $this->isNewObject ) {
+			throw new CException('Entries which have not yet been saved cannot be deleted');
+		}
+		
+		// Does beforeDelete permit us to delete this entry?
+		if( !$this->beforeDelete() ) {
 			return false;
 		}
+		
+		// Perform the deletion - and did it succeed?
 		$status = $this->getLdapConnection()->getConnection()->delete( $this->_entry, $recursive );
 		if( $status ) {
 			$this->_entry->markAsNew();
+			$this->afterDelete();
 		}
 		return $status;
 	}
@@ -649,6 +667,103 @@ abstract class SLdapModel extends CModel
 		$instance->attachBehaviors($this->behaviors());
 		$instance->afterConstruct();
 		return $instance;
+	}
+
+	/**
+	 * This event is raised prior to the entry being saved
+	 * @param CEvent $event the event parameter
+	 */
+	public function onBeforeSave($event)
+	{
+		$this->raiseEvent('onBeforeSave', $event);
+	}
+
+	/**
+	 * This event is raised after the entry has been saved.
+	 * @param CEvent $event the event parameter
+	 */
+	public function onAfterSave($event)
+	{
+		$this->raiseEvent('onAfterSave', $event);
+	}
+
+	/**
+	 * This event is raised prior to the entry being deleted.
+	 * @param CEvent $event the event parameter
+	 */
+	public function onBeforeDelete($event)
+	{
+		$this->raiseEvent('onBeforeDelete', $event);
+	}
+
+	/**
+	 * This event is raised after the entry has been deleted.
+	 * @param CEvent $event the event parameter
+	 */
+	public function onAfterDelete($event)
+	{
+		$this->raiseEvent('onAfterDelete', $event);
+	}
+
+	/**
+	 * This method is called prior to an entry being saved, after validation is performed if required
+	 * By default this raises the {@link onBeforeSave} event.
+	 * This method may be overridden to prepare the object to be saved.
+	 * If overridden then the parent implementation must be invoked otherwise the event will not be raised properly.
+	 * Use {@link isNewObject} to determine if the save is for a new entry or a pre-existing entry.
+	 * @return boolean whether the saving should be executed. Defaults to true.
+	 */
+	protected function beforeSave()
+	{
+		if( $this->hasEventHandler('onBeforeSave') ) {
+			$event = new CEvent($this);
+			$this->onBeforeSave($event);
+		}
+		return true;
+	}
+
+	/**
+	 * This method is called after an entry has been saved successfully.
+	 * By default this raises the {@link onAfterSave} event.
+	 * This method may be overridden to perform needed post-processing,
+	 * If overridden then the parent implementation must be invoked otherwise the event will not be raised properly.
+	 */
+	protected function afterSave()
+	{
+		if( $this->hasEventHandler('onAfterSave') ) {
+			$event = new CEvent($this);
+			$this->onAfterSave($event);
+		}
+	}
+
+	/**
+	 * This method is called prior to the deletion of an entry,
+	 * By default this raises the {@link onBeforeDelete} event.
+	 * This method may be overridden to perform pre-deletion preperations.
+	 * If overridden then the parent implementation must be invoked otherwise the event will not be raised properly.
+	 * @return boolean whether the entry should be deleted. Defaults to true.
+	 */
+	protected function beforeDelete()
+	{
+		if( $this->hasEventHandler('onBeforeDelete') ) {
+			$event = new CEvent($this);
+			$this->onBeforeDelete($event);
+		}
+		return true;
+	}
+
+	/**
+	 * This method is invoked after an entry has been deleted.
+	 * By default this raises the {@link onAfterDelete} event.
+	 * This method may be overridden to perform needed post-processing,
+	 * If overridden then the parent implementation must be invoked otherwise the event will not be raised properly.
+	 */
+	protected function afterDelete()
+	{
+		if( $this->hasEventHandler('onAfterDelete') ) {
+			$event = new CEvent($this);
+			$this->onAfterDelete($event);
+		}
 	}
 }
 
