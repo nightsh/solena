@@ -231,6 +231,26 @@ abstract class SLdapModel extends CModel
 		// Set the New DN
 		return $this->setDn($new_dn);
 	}
+
+	/**
+	 * Returns the current Parent of this Entry in the LDAP Directory.
+	 * If this entry has not yet been created, then null will be returned
+	 */
+	public function getParentDn()
+	{
+		$dn = $this->getDn();
+		if( is_null($dn) ) {
+			return null;
+		}
+		// Split the current DN up - and make sure we succeeded at that
+		$parent = Net_LDAP2_Util::ldap_explode_dn($dn);
+		if( Net_LDAP2::isError($parent) ) {
+			return null;
+		}
+		// Seperate our RDN off and return the Parent DN
+		$child = array_shift($parent);
+		return strtolower( Net_LDAP2_Util::canonical_dn($parent) );
+	}
 	
 	/**
 	 * Generate a RDN for the item
@@ -281,7 +301,7 @@ abstract class SLdapModel extends CModel
 		
 		$schema = $this->getLdapConnection()->schema();
 		$objectClasses = $this->getAttribute("objectClass");
-		return $schema->checkAttribute($name, $objectClasses);
+		return $schema->checkAttribute($name, (array) $objectClasses);
 	}
 
 	/**
@@ -348,10 +368,9 @@ abstract class SLdapModel extends CModel
 	public function removeAttributesByObjectClass($objectClassName)
 	{
 		$objectClasses = $this->_entry->getValue("objectClass");
-		$schema = $this->getLdapConnection()->schema();
 
 		// Check if we even have the given object class - removing it if we do and bailing out if we don't
-		$key = array_search($objectClassName, $objectClasses);
+		$key = array_search($objectClassName, (array) $objectClasses);
 		if( $key === false ) {
 			return false;
 		}
@@ -439,10 +458,9 @@ abstract class SLdapModel extends CModel
 			return false;
 		}
 		
-		$objectClass = $this->getAttribute("objectClass");
-		
 		$result = $this->_entry->update($ldap->getConnection());
 		if( PEAR::isError($result) ) {
+			$this->addError("system", $result->message);
 			return false;
 		}
 		return $result;
@@ -540,8 +558,10 @@ abstract class SLdapModel extends CModel
 		}
 		
 		// Prepare the filter
-		$search_filter = array($filter, $this->generateFilter());
-		$search_filter = Net_LDAP2_Filter::combine('and', $search_filter);
+		$search_filter = $this->generateFilter();
+		if( !is_null($filter) ) {
+			$search_filter = Net_LDAP2_Filter::combine('and', array($filter, $search_filter));
+		}
 		
 		// Do the search...
 		$ldap = $this->getLdapConnection();
