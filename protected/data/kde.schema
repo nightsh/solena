@@ -1,0 +1,111 @@
+# KDE LDAP Schema
+# PEN = 1.3.6.1.4.1.36417
+
+# .1 - Object Classes 
+# .2 - Object Attributes for kdeAccount class
+#    .1 - IRC Nick
+#    .2 - Jabber ID
+# .3 - Object Attributes for eV members
+
+# KDE Account attributes
+
+attributetype ( 1.3.6.1.4.1.36417.2.1
+	NAME 'ircNick'
+	DESC 'Internet Relay Chat nickname'
+	EQUALITY caseIgnoreIA5Match
+	SUBSTR caseIgnoreIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 )
+
+attributetype ( 1.3.6.1.4.1.36417.2.2
+	NAME 'jabberID'
+	DESC 'JID for Jabber instant messaging protocol'
+	EQUALITY caseIgnoreIA5Match
+	SUBSTR caseIgnoreIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 )
+
+attributetype ( 1.3.6.1.4.1.36417.2.3
+	NAME 'timezone'
+	DESC 'Timezone of the represented person'
+	EQUALITY caseIgnoreIA5Match
+	SUBSTR caseIgnoreIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 )
+
+attributetype ( 1.3.6.1.4.1.36417.2.4
+	NAME 'secondaryMail'
+	DESC 'Secondary email addresses of the person'
+	EQUALITY caseIgnoreIA5Match
+	SUBSTR caseIgnoreIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 )
+
+attributetype ( 1.3.6.1.4.1.36417.2.5
+	NAME 'groupMember'
+	DESC 'CN of the group the user is a member of'
+	EQUALITY caseIgnoreIA5Match
+	SUBSTR caseIgnoreIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 )
+
+attributetype ( 1.3.6.1.4.1.36417.2.6
+	NAME 'academicTitle'
+	DESC 'Field to represent the academic title'
+	EQUALITY caseIgnoreMatch
+	SUBSTR caseIgnoreSubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.15 )
+
+attributetype ( 1.3.6.1.4.1.36417.2.7
+	NAME ( 'gender' 'sex' )
+	DESC 'Gender: M for male, F for female'
+	EQUALITY caseIgnoreIA5Match
+	SYNTAX  1.3.6.1.4.1.1466.115.121.1.26{1}
+	SINGLE-VALUE )
+
+attributetype ( 1.3.6.1.4.1.36417.2.8
+	NAME ( 'dateOfBirth' 'dob' )
+	DESC    'Date of birth in ISO 8601 format'
+	EQUALITY caseIgnoreMatch
+	SYNTAX  1.3.6.1.4.1.1466.115.121.1.15{10}
+	SINGLE-VALUE )
+
+# eV Member attributes
+
+attributetype ( 1.3.6.1.4.1.36417.3.1
+	NAME 'memberStatus'
+	DESC 'Lists the status of the members eV membership: active, extraordinary, supporting'
+	EQUALITY caseIgnoreIA5Match
+	SUBSTR caseIgnoreIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 )
+
+attributetype ( 1.3.6.1.4.1.36417.3.2
+	NAME 'memberPublic'
+	DESC 'Determines if the membership is publicly listed'
+	EQUALITY caseIgnoreIA5Match
+	SUBSTR caseIgnoreIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 )
+
+attributetype ( 1.3.6.1.4.1.36417.3.3
+	NAME 'evMail'
+	DESC 'Email address used by the e.V to contact the person'
+	EQUALITY caseIgnoreIA5Match
+	SUBSTR caseIgnoreIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 )
+
+attributetype ( 1.3.6.1.4.1.36417.3.4
+	NAME 'memberDisclosure'
+	DESC 'Determines if personal information is disclosed to e.V members'
+	EQUALITY caseIgnoreIA5Match
+	SUBSTR caseIgnoreIA5SubstringsMatch
+	SYNTAX 1.3.6.1.4.1.1466.115.121.1.26 )
+
+# KDE Object Class
+
+objectclass ( 1.3.6.1.4.1.36417.1.1
+	NAME 'kdeAccount'
+	DESC 'Extended attributes for KDE Identity account holders'
+	SUP top AUXILIARY
+	MUST ( givenName $ sn $ cn $ uid )
+	MAY ( personalTitle $ academicTitle $ dateOfBirth $ gender $ timezone $ secondaryMail $ ircNick $ jabberID $ groupMember $ memberPublic $ memberStatus $ evMail $ memberDisclosure ) )
+
+objectclass ( 1.3.6.1.4.1.36417.1.2
+	NAME 'kdeEvMember'
+	DESC 'Extended attributes for members of the KDE e.V'
+	SUP top AUXILIARY
+	MUST ( cn $ uid $ givenName $ sn $ memberStatus $ memberPublic $ evMail $ memberDisclosure ) )
