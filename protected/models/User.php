@@ -30,6 +30,7 @@ class User extends SLdapModel
 			array('dateOfBirth', 'date', 'format' => 'dd/MM/yyyy'),
 			array('labeledURI', 'url'),
 			array('uid', 'required'),
+			array('gender', 'in', 'range' => array_keys($this->validGenders())),
 			// Searching (used on index)
 			array('uid, cn, mail, secondaryMail', 'safe', 'on'=>'search'),
 			// Profile Editing
@@ -58,6 +59,11 @@ class User extends SLdapModel
 	public function getEmailAddresses()
 	{
 		return array_merge( array($this->mail), (array) $this->secondaryMail );
+	}
+
+	public function validGenders()
+	{
+		return array('F' => 'Female', 'M' => 'Male', 'O' => 'Other');
 	}
 
 	protected function beforeSave()

@@ -77,7 +77,7 @@ $this->menu = array(
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'gender'); ?>
-		<?php echo $form->dropDownList($model, 'gender', array('F' => 'Female', 'M' => 'Male', 'O' => 'Other'), array('empty'=> 'Not disclosed')); ?>
+		<?php echo $form->dropDownList($model, 'gender', $model->validGenders(), array('empty'=> 'Not disclosed')); ?>
 		<?php echo $form->error($model, 'gender'); ?>
 	</div>
 
