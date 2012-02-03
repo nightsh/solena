@@ -83,7 +83,7 @@ $this->menu = array(
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'timezone'); ?>
-		<?php echo $form->textField($model, 'timezone', array('size' => 60, 'maxlength' => 128)); ?>
+		<?php echo $form->dropDownList($model, 'timezone', $model->validTimezones(), array('empty'=> 'Not disclosed')); ?>
 		<?php echo $form->error($model, 'timezone'); ?>
 	</div>
 
