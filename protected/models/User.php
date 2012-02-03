@@ -51,7 +51,7 @@ class User extends SLdapModel
 			'mail' => 'Email address',
 			'labeledURI' => 'Website',
 			'ircNick' => 'IRC Nickname',
-			'jabberId' => 'Jabber ID',
+			'jabberID' => 'Jabber ID',
 		);
 	}
 

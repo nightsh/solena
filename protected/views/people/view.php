@@ -41,7 +41,7 @@ $this->menu = array(
 		'homePhone',
 		'labeledURI:url',
 		'ircNick',
-		'jabberId',
+		'jabberID',
 		'emailAddresses:email',
 	),
 )); ?>
