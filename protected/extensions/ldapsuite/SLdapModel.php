@@ -222,12 +222,26 @@ abstract class SLdapModel extends CModel
 			$parent = $parent->getDn();
 		}
 		
+		// Generate a RDN
+		$rdn = array();
+		foreach( $this->uniqueAttributes() as $attribute ) {
+			$rdn[$attribute] = $this->getAttribute($attribute);
+		}
+		// Remove all null values, then check to see if we even have a possible RDN (as all values might have been empty)
+		$rdn = array_filter($rdn, 'strlen');
+		if( empty($rdn) ) {
+			return false;
+		}
+		
 		// Generate the New DN
 		$parent = Net_LDAP2_Util::ldap_explode_dn($parent);
-		$rdn = array($this->generateRdn());
-		$new_dn = array_merge($rdn, $parent);
+		$new_dn = array_merge(array($rdn), $parent);
 		$new_dn = Net_LDAP2_Util::canonical_dn($new_dn);
 		
+		// Is the change even needed? - if the DN's match then don't do anything
+		if( $this->getDn() == strtolower($new_dn) ) {
+			return true;
+		}
 		// Set the New DN
 		return $this->setDn($new_dn);
 	}
@@ -250,19 +264,6 @@ abstract class SLdapModel extends CModel
 		// Seperate our RDN off and return the Parent DN
 		$child = array_shift($parent);
 		return strtolower( Net_LDAP2_Util::canonical_dn($parent) );
-	}
-	
-	/**
-	 * Generate a RDN for the item
-	 * By default this uses the specified unique attributes to build a assured unique RDN
-	 */
-	public function generateRdn()
-	{
-		$rdn_items = array();
-		foreach( $this->uniqueAttributes() as $attribute ) {
-			$rdn_items[$attribute] = $this->getAttribute($attribute);
-		}
-		return Net_LDAP2_Util::canonical_dn( array($rdn_items) );
 	}
 
 	/**
