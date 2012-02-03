@@ -21,11 +21,6 @@ class PhpAuthManager extends CPhpAuthManager
 			}
 		}
 	}
-
-	protected function checkAttributeWritable($attribute, $model)
-	{
-		return false;
-	}
 }
 
 ?>
