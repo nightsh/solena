@@ -42,6 +42,8 @@ class User extends SLdapModel
 			// Profile Editing
 			array('givenName, sn', 'required', 'on' => 'editProfile'),
 			array('personalTitle, academicTitle, dateOfBirth, gender, timezone', 'safe', 'on' => 'editProfile'),
+			// Contact Details editing
+			array('homePostalAddress, homePhone, labeledURI, ircNick, jabberID', 'safe', 'on' => 'editContactDetails'),
 			// User creation
 			array('uid, givenName, sn, mail', 'required', 'on' => 'create')
 		);

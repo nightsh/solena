@@ -104,6 +104,13 @@ class PeopleController extends Controller
 		$model = $this->loadModel($uid);
 		$model->setScenario('editContactDetails');
 		
+		if( isset($_POST['User']) ) {
+			$model->attributes = $_POST['User'];
+			if( $model->save() ) {
+				$this->redirect( array('view', 'uid' => $model->uid) );
+			}
+		}
+		
 		$this->render('editContactDetails', array(
 			'model' => $model,
 		));
