@@ -60,7 +60,8 @@ abstract class SLdapModel extends CModel
 	public function __get($name)
 	{
 		if( $this->_entry->exists($name) ) {
-			return $this->_entry->getValue($name);
+			$value = $this->_entry->getValue($name);
+			return in_array($name, $this->multivaluedAttributes()) ? (array) $value : $value;
 		} else if( $this->hasAttribute($name) ) {
 			return null;
 		}
@@ -143,6 +144,16 @@ abstract class SLdapModel extends CModel
 	 * @return array the unique attribute(s) used by objects represented by this model
 	 */
 	public function uniqueAttributes()
+	{
+		return array();
+	}
+
+	/**
+	 * Returns a list of attributes which are intended to be multi-valued.
+	 * These attributes will always be returned as an array by the Model accessors.
+	 * @return array the attributes which are intended to be multi-valued.
+	 */
+	public function multivaluedAttributes()
 	{
 		return array();
 	}
@@ -333,7 +344,8 @@ abstract class SLdapModel extends CModel
 			return null;
 		}
 		
-		return $this->_entry->getValue($name);
+		$value = $this->_entry->getValue($name);
+		return in_array($name, $this->multivaluedAttributes()) ? (array) $value : $value;
 	}
 
 	/**
@@ -368,7 +380,7 @@ abstract class SLdapModel extends CModel
 	 */
 	public function removeAttributesByObjectClass($objectClassName)
 	{
-		$objectClasses = $this->_entry->getValue("objectClass");
+		$objectClasses = $this->getAttribute("objectClass");
 
 		// Check if we even have the given object class - removing it if we do and bailing out if we don't
 		$key = array_search($objectClassName, (array) $objectClasses);
