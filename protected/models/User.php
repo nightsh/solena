@@ -19,6 +19,11 @@ class User extends SLdapModel
 		return array('objectClass' => array('top','person','organizationalPerson','inetOrgPerson','kdeAccount') );
 	}
 
+	public function multivaluedAttributes()
+	{
+		return array('homePostalAddress', 'homePhone', 'labeledURI', 'ircNick', 'jabberID', 'emailAddresses');
+	}
+
 	public function rules()
 	{
 		// NOTE: you should only define rules for those attributes that
