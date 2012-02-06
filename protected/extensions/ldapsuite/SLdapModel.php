@@ -415,6 +415,10 @@ abstract class SLdapModel extends CModel
 		if( !$this->hasAttribute($name) ) {
 			return false;
 		}
+		// If it is an array, sanitize it - remove empty fields then re-key it.
+		if( is_array($value) ) {
+			$value = array_values( array_filter($value) );
+		}
 		
 		$addition = array($name => $value);
 		return $this->_entry->add($addition);
@@ -432,6 +436,10 @@ abstract class SLdapModel extends CModel
 	{
 		if( !$this->hasAttribute($name) ) {
 			return false;
+		}
+		// If it is an array, sanitize it - remove empty fields then re-key it.
+		if( is_array($value) ) {
+			$value = array_values( array_filter($value) );
 		}
 		
 		$replacement = array($name => $value);
