@@ -21,7 +21,7 @@ class User extends SLdapModel
 
 	public function multivaluedAttributes()
 	{
-		return array('homePostalAddress', 'homePhone', 'labeledURI', 'ircNick', 'jabberID', 'emailAddresses');
+		return array('homePostalAddress', 'homePhone', 'labeledURI', 'ircNick', 'jabberID', 'sshPublicKey');
 	}
 
 	public function rules()
@@ -44,6 +44,8 @@ class User extends SLdapModel
 			array('personalTitle, academicTitle, dateOfBirth, gender, timezone', 'safe', 'on' => 'editProfile'),
 			// Contact Details editing
 			array('homePostalAddress, homePhone, labeledURI, ircNick, jabberID', 'safe', 'on' => 'editContactDetails'),
+			// SSH Key management
+			array('sshPublicKey', 'application.validators.SSHKeyValidator', 'on' => 'editKeys'),
 			// User creation
 			array('uid, givenName, sn, mail', 'required', 'on' => 'create')
 		);
@@ -67,6 +69,19 @@ class User extends SLdapModel
 	public function getEmailAddresses()
 	{
 		return array_merge( array($this->mail), (array) $this->secondaryMail );
+	}
+
+	/**
+	 * Converts the unpresentable SSH Keys into a presentable format.
+	 * Includes the key type, fingerprint and it's comment if it has one
+	 */
+	public function getProcessedSshKeys()
+	{
+		$keyData = array();
+		foreach( (array) $this->getAttribute("sshPublicKey") as $id => $key) {
+			$keyData[] = SSHForm::splitKey($key, $id);
+		}
+		return $keyData;
 	}
 
 	public function validGenders()

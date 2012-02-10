@@ -128,6 +128,29 @@ class PeopleController extends Controller
 	 */
 	public function actionEditKeys($uid)
 	{
+		$model = $this->loadModel($uid);
+		$model->setScenario('editKeys');
+		
+		$sshForm = new SSHForm;
+		$sshForm->existingKeys = (array) $model->getAttribute("sshPublicKey");
+		
+		// Are we removing any keys?
+		if( isset($_POST['removeKeys']) && isset($_POST['selectedKeys']) ) {
+			$this->processKeyRemoval($model, $_POST['selectedKeys']);
+		}
+		
+		// Maybe we are adding keys then?
+		if( isset($_POST['addKeys']) && isset($_POST['SSHForm']) ) {
+			$sshForm->attributes = $_POST['SSHForm'];
+			$this->processKeyAddition($model, $sshForm);
+		}
+		
+		$dataProvider = new CArrayDataProvider($model->getProcessedSshKeys());
+		$this->render('editKeys', array(
+			'model' => $model,
+			'sshForm' => $sshForm,
+			'dataProvider' => $dataProvider,
+		));
 	}
 
 	/**
@@ -162,6 +185,56 @@ class PeopleController extends Controller
 			throw new CHttpException(404,'The requested page does not exist.');
 		}
 		return $entry;
+	}
+
+	/**
+	 * Process the addition of a SSH Key to a user
+	 * To be used by actionEditKeys only
+	 */
+	protected function processKeyAddition($model, $sshForm)
+	{
+		// Make sure the SSH Form is valid....
+		if( !$sshForm->validate() ) {
+			return false;
+		}
+		// We will be adding a SSH Key now - so make sure we have the appropriate Object Class added
+		if( !$model->hasObjectClass("ldapPublicKey") ) {
+			$model->addAttribute("objectClass", "ldapPublicKey");
+		}
+		// We are assured the SSH Key is valid - and not a duplicate now, so we can add it - and clear the form
+		$model->addAttribute("sshPublicKey", $sshForm->newKey);
+		$sshForm->newKey = null;
+		// Now try and save - if we succeed add a flash message so the user knows we succeeded
+		if( $model->save() ) {
+			Yii::app()->user->setFlash('success', 'SSH Keys updated');
+			return true;
+		}
+		return false;
+	}
+
+	/**
+	 * Process the removal of SSH Key's from a user
+	 * To be used by actionEditKeys only
+	 */
+	protected function processKeyRemoval($model, $selectedKeys)
+	{
+		// Determine which SSH Keys we want to remove based on their index - then make sure we have SSH Keys to remove
+		$selectedKeys = array_intersect_key( $model->sshPublicKey, array_flip($selectedKeys) );
+		if( empty($selectedKeys) ) {
+			return false;
+		}
+		// Remove the key(s) we need to remove....
+		$model->removeAttribute("sshPublicKey", $selectedKeys);
+		// If we no longer have any SSH Keys, then remove the needed Object Class
+		if( empty($model->sshPublicKey) ) {
+			$model->removeAttribute("objectClass", "ldapPublicKey");
+		}
+		// Now try and save - if we succeed add a flash message so the user knows we succeeded
+		if( $model->save() ) {
+			Yii::app()->user->setFlash('success', 'SSH Keys updated');
+			return true;
+		}
+		return false;
 	}
 };
 
