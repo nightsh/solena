@@ -69,6 +69,17 @@ class PeopleController extends Controller
 	}
 
 	/**
+	 * Return the Avatar image of the given person
+	 */
+	public function actionViewAvatar($uid)
+	{
+		$model = $this->loadModel($uid);
+		header('Content-type: octet-stream');
+		header('Content-Transfer-Encoding: binary');
+		echo $model->jpegPhoto;
+	}
+
+	/**
 	 * Delete an existing person
 	 */
 	public function actionDelete($uid)
@@ -121,6 +132,28 @@ class PeopleController extends Controller
 	 */
 	public function actionEditAvatar($uid)
 	{
+		$model = $this->loadModel($uid);
+		$model->setScenario('editAvatar');
+		
+		// Handle the upload of an image
+		if( isset($_POST['User']) ) {
+			$model->jpegPhoto = CUploadedFile::getInstance($model, 'jpegPhoto');
+			if( $model->save() ) {
+				Yii::app()->user->setFlash('success', 'Avatar updated');
+			}
+		}
+		
+		// Handle the clearing of the avatar
+		if( isset($_POST['clearAvatar']) ) {
+			$model->removeAttribute("jpegPhoto");
+			if( $model->save() ) {
+				Yii::app()->user->setFlash('success', 'Avatar deleted');
+			}
+		}
+		
+		$this->render('editAvatar', array(
+			'model' => $model,
+		));
 	}
 
 	/**

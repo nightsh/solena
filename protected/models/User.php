@@ -46,6 +46,8 @@ class User extends SLdapModel
 			array('homePostalAddress, homePhone, labeledURI, ircNick, jabberID', 'safe', 'on' => 'editContactDetails'),
 			// SSH Key management
 			array('sshPublicKey', 'application.validators.SSHKeyValidator', 'on' => 'editKeys'),
+			// Avatar changing - 3MB max upload limit, file must be a jpeg/gif/png image
+			array('jpegPhoto', 'file', 'on' => 'editAvatar', 'types' => 'jpg, gif, png', 'maxSize' => 1024 * 1024 * 3, 'allowEmpty' => true),
 			// User creation
 			array('uid, givenName, sn, mail', 'required', 'on' => 'create')
 		);
@@ -63,6 +65,7 @@ class User extends SLdapModel
 			'labeledURI' => 'Website',
 			'ircNick' => 'IRC Nickname',
 			'jabberID' => 'Jabber ID',
+			'jpegPhoto' => 'Avatar upload',
 		);
 	}
 
@@ -113,6 +116,25 @@ class User extends SLdapModel
 		$givenName = $this->givenName;
 		$sn = $this->sn;
 		$this->cn = "$givenName $sn";
+		
+		// Do we have a newly uploaded photo?
+		if( $this->jpegPhoto instanceof CUploadedFile ) {
+			// Create an Imagick instance and read the image in to commence processing it
+			$im = new Imagick();
+			try {
+				$im->readImage($this->jpegPhoto->tempName);
+			} catch( Exception $e ) {
+				$this->addError("jpegPhoto", "Invalid or corrupted image uploaded");
+				return false;
+			}
+			// gif/png images which use Alpha channels are distorted without this
+			$im->setImageOpacity(1.0);
+			// Resize the image to 147x200 at best fit, with 0.5 sharpness
+			$im->resizeImage(147, 200, Imagick::FILTER_UNDEFINED, 0.5, TRUE);
+			// Save the JPEG image into LDAP
+			$im->setImageFormat('jpeg'); 
+			$this->jpegPhoto = $im->getImageBlob();
+		}
 		
 		// Call our parent now
 		return parent::beforeSave();
