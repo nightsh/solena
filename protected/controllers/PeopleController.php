@@ -203,6 +203,26 @@ class PeopleController extends Controller
 	 */
 	public function actionMove($uid)
 	{
+		$model = $this->loadModel($uid);
+		$model->setScenario('move');
+
+		// Are we attempting to perform the create action?
+		if( isset($_POST['User']) ) {
+			// Determine the DN we want to be under
+			$parent = OrganisationalUnit::model()->findByDn( $_POST['User']['parentDn'] );
+			if( $parent instanceof OrganisationalUnit ) {
+				$model->setDnByParent($parent);
+			}
+			
+			// Create the new person
+			if( $model->save() ) {
+				$this->redirect(array('view', 'uid' => $model->uid));
+			}
+		}
+		
+		$this->render('move', array(
+			'model' => $model,
+		));
 	}
 
 	/**
