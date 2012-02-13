@@ -84,6 +84,18 @@ class PeopleController extends Controller
 	 */
 	public function actionDelete($uid)
 	{
+		$model = $this->loadModel($uid);
+		$model->setScenario('delete');
+
+		if( isset($_POST['confirmDeletion']) && isset($_POST['deleteAccount']) ) {
+			if( $model->delete() ) {
+				$this->redirect( array('index') );
+			}
+		}
+
+		$this->render('delete', array(
+			'model' => $model,
+		));
 	}
 
 	/**
