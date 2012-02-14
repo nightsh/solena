@@ -242,10 +242,10 @@ class PeopleController extends Controller
 	/**
 	 * Retrieve the user specified by $uid from the LDAP Server
 	 */
-	protected function loadModel($uid)
+	protected function loadModel($uid, $attributes = array())
 	{
 		$filter = Net_LDAP2_Filter::create('uid', 'equals', $uid);
-		$entry = User::model()->findFirstByFilter($filter);
+		$entry = User::model()->findFirstByFilter($filter, $attributes);
 		if($entry === null) {
 			throw new CHttpException(404,'The requested page does not exist.');
 		}
