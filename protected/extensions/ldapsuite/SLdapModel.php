@@ -374,7 +374,7 @@ abstract class SLdapModel extends CModel
 			return false;
 		}
 		
-		$to_remove = array( $name => $value );
+		$to_remove = is_null($value) ? array($name) : array( $name => $value );
 		return $this->_entry->delete( $to_remove );
 	}
 
