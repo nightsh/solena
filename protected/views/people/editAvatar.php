@@ -49,7 +49,7 @@ foreach(Yii::app()->user->getFlashes() as $key => $message) {
 		<?php echo $form->fileField($model, 'jpegPhoto'); ?>
 		<?php echo $form->error($model, 'jpegPhoto'); ?>
 	</div>
-	<div class="row">
+	<div class="row buttons">
 		<?php echo CHtml::submitButton('Upload', array('name' => 'uploadAvatar')); ?>
 	</div>
 
