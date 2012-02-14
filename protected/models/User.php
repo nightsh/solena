@@ -2,6 +2,12 @@
 
 class User extends SLdapModel
 {
+	// Constants defining the types of lock
+	const AccountUnlocked = "Unlocked";
+	const AccountTemporaryLocked = "Temporarily locked";
+	const AccountPermanentLocked = "Permanently locked";
+	const InfinitelyLocked = "000001010000Z"; // Magic value meaning "infinitely locked by an administrator"
+
 	protected $_requiredObjectClasses = array('kdeAccount');
 
 	public static function model($className=__CLASS__)
@@ -85,6 +91,19 @@ class User extends SLdapModel
 			$keyData[] = SSHForm::splitKey($key, $id);
 		}
 		return $keyData;
+	}
+
+	/**
+	 * Retrieves the status of the account - unlocked, temporarily locked and indefinitely locked
+	 */
+	public function getAccountStatus()
+	{
+		if( !isset($this->pwdAccountLockedTime) ) {
+			return User::AccountUnlocked;
+		} else if( $this->pwdAccountLockedTime == User::InfinitelyLocked ) {
+			return User::AccountPermanentLocked;
+		}
+		return User::AccountTemporaryLocked;
 	}
 
 	public function validGenders()

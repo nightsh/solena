@@ -230,6 +230,29 @@ class PeopleController extends Controller
 	 */
 	public function actionToggleLock($uid)
 	{
+		$model = $this->loadModel($uid, array('pwdAccountLockedTime', 'uid', 'cn'));
+		$model->setScenario('toggleLock');
+		
+		// Handle the unlocking of an account
+		if( isset($_POST['unlockAccount']) ) {
+			$model->removeAttribute("pwdAccountLockedTime");
+			if( $model->save() ) {
+				Yii::app()->user->setFlash('success', 'Account lock released');
+			}
+		}
+		
+		// Handle the clearing of the avatar
+		if( isset($_POST['lockAccount']) ) {
+			// Magic value of 000001010000Z means 'locked infinitely by an administrator'
+			$model->replaceAttribute("pwdAccountLockedTime", User::InfinitelyLocked);
+			if( $model->save() ) {
+				Yii::app()->user->setFlash('success', 'Account infinitely locked');
+			}
+		}
+		
+		$this->render('toggleLock', array(
+			'model' => $model,
+		));
 	}
 
 	/**
