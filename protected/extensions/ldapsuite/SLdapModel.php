@@ -20,6 +20,10 @@ abstract class SLdapModel extends CModel
 	 * Internal - Cache of LDAP Server connection
 	 */
 	private static $_ldap = null;
+	/**
+	 * Internal - List of operational attributes
+	 */
+	private static $_operationalAttributes = array("pwdAccountLockedTime", "pwdChangedTime", "pwdFailureTime", "pwdHistory");
 	
 	/**
 	 * Constructor.
@@ -308,6 +312,9 @@ abstract class SLdapModel extends CModel
 	public function hasAttribute($name)
 	{
 		if( $this->_entry->exists($name) ) {
+			return true;
+		}
+		if( in_array($name, self::$_operationalAttributes) ) {
 			return true;
 		}
 		
