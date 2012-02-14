@@ -108,14 +108,11 @@ class User extends SLdapModel
 
 	protected function beforeSave()
 	{
-		// Are both givenName and sn available to us?
-		if( is_null($this->givenName) || is_null($this->sn) ) {
-			return false;
+		// Update the CN if we need to - it is only needed for the editProfile scenario
+		if( $this->scenario == 'editProfile' ) {
+			// The validators will prevent this code from being reached if givenName/sn are null - so no need to check
+			$this->cn = sprintf("%s %s", $this->givenName, $this->sn);
 		}
-		// Update the attribute "cn" based on the value of givenName and sn
-		$givenName = $this->givenName;
-		$sn = $this->sn;
-		$this->cn = "$givenName $sn";
 		
 		// Do we have a newly uploaded photo?
 		if( $this->jpegPhoto instanceof CUploadedFile ) {
