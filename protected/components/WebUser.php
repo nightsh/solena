@@ -25,6 +25,18 @@ class WebUser extends CWebUser
 	}
 
 	/**
+	 * Returns the DN of the currently logged in user
+	 * Returns null if nobody is logged in
+	 */
+	public function getDn()
+	{
+		if( $this->isGuest ) {
+			return null;
+		}
+		return $this->getModel()->dn;
+	}
+
+	/**
 	 * Find the user's entry in LDAP
 	 */
 	private function getModel()

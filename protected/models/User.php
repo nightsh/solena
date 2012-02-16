@@ -106,6 +106,21 @@ class User extends SLdapModel
 		return User::AccountTemporaryLocked;
 	}
 
+	/**
+	 * Hashes the given password and sets it to the user model, in preperation for saving it
+	 * Does not perform the saving procedure itself
+	 */
+	public function changePassword($newPassword)
+	{
+		// Generate a new Salt
+		$salt = substr(pack("h*", md5(mt_rand())), 0, 8);
+		$salt = substr(sha1($salt.$newPassword, true), 0, 4);
+		// Hash the password, prepending the {SSHA} indicator that LDAP relies on to identify it as a Salted-SHA1 password
+		$hashedPassword = "{SSHA}".base64_encode(sha1($newPassword.$salt, true).$salt);
+		// Write the password
+		$this->userPassword = $hashedPassword;
+	}
+
 	public function validGenders()
 	{
 		return array('F' => 'Female', 'M' => 'Male', 'O' => 'Other');
