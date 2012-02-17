@@ -108,6 +108,7 @@ class PeopleController extends Controller
 
 		if( isset($_POST['User']) ) {
 			$model->attributes = $_POST['User'];
+			$model->uid = $_POST['User']['uid'];
 			$model->setDnByParent( $model->getParentDn() );
 			if( $model->save() ) {
 				$this->redirect( array('view', 'uid' => $model->uid) );

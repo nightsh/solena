@@ -35,27 +35,28 @@ class User extends SLdapModel
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			// General Validation
-			array('givenName, sn, personalTitle, academicTitle', 'length', 'min' => 2, 'max' => 64),
-			array('mail, secondaryMail', 'email'),
-			array('dateOfBirth', 'date', 'format' => 'dd/MM/yyyy'),
-			array('labeledURI', 'url'),
-			array('uid', 'required'),
-			array('gender', 'in', 'range' => array_keys($this->validGenders())),
-			array('timezoneName', 'in', 'range' => array_keys($this->validTimezones())),
 			// Searching (used on index)
 			array('uid, cn, mail, secondaryMail', 'safe', 'on'=>'search'),
+			// Shared validations...
+			array('uid, givenName, sn', 'required', 'on' => 'editProfile, create'),
+			array('uid, givenName, sn', 'length', 'min' => 2, 'max' => 64, 'on' => 'editProfile, create'),
+			array('mail', 'email', 'on' => 'editContactDetails, create'),
 			// Profile Editing
-			array('givenName, sn', 'required', 'on' => 'editProfile'),
-			array('personalTitle, academicTitle, dateOfBirth, gender, timezone', 'safe', 'on' => 'editProfile'),
+			array('uid', 'unsafe', 'on' => 'editProfile'), // The username can never be mass-assigned
+			array('personalTitle, academicTitle', 'length', 'min' => 2, 'max' => 64, 'on' => 'editProfile'),
+			array('dateOfBirth', 'date', 'format' => 'dd/MM/yyyy', 'on' => 'editProfile'),
+			array('gender', 'in', 'range' => array_keys($this->validGenders()), 'on' => 'editProfile'),
+			array('timezoneName', 'in', 'range' => array_keys($this->validTimezones()), 'on' => 'editProfile'),
 			// Contact Details editing
 			array('homePostalAddress, homePhone, labeledURI, ircNick, jabberID', 'safe', 'on' => 'editContactDetails'),
 			// SSH Key management
 			array('sshPublicKey', 'application.validators.SSHKeyValidator', 'on' => 'editKeys'),
 			// Avatar changing - 3MB max upload limit, file must be a jpeg/gif/png image
 			array('jpegPhoto', 'file', 'on' => 'editAvatar', 'types' => 'jpg, gif, png', 'maxSize' => 1024 * 1024 * 3, 'allowEmpty' => true),
+			// Password validation - to ensure only Salted-SHA1 passwords are saved to protect outselves
+			array('userPassword', 'match', 'pattern' => '/\{SSHA\}.+/'),
 			// User creation
-			array('uid, givenName, sn, mail', 'required', 'on' => 'create')
+			array('mail', 'required', 'on' => 'create'),
 		);
 	}
 
