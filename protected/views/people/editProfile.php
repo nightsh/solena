@@ -82,9 +82,9 @@ $this->menu = array(
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model, 'timezone'); ?>
-		<?php echo $form->dropDownList($model, 'timezone', $model->validTimezones(), array('empty'=> 'Not disclosed')); ?>
-		<?php echo $form->error($model, 'timezone'); ?>
+		<?php echo $form->labelEx($model, 'timezoneName'); ?>
+		<?php echo $form->dropDownList($model, 'timezoneName', $model->validTimezones(), array('empty'=> 'Not disclosed')); ?>
+		<?php echo $form->error($model, 'timezoneName'); ?>
 	</div>
 
 	<div class="row buttons">

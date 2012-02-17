@@ -26,8 +26,12 @@ $this->menu = array(
 		'personalTitle',
 		'academicTitle',
 		'dateOfBirth',
-		'gender',
-		'timezone',
+		'gender:gender',
+		'timezoneName:timezone:Current Time',
+		array(
+			'name' => 'timezone',
+			'visible' => isset($model->timezone),
+		),
 	),
 )); ?>
 <br />

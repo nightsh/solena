@@ -6,6 +6,7 @@
 class Formatter extends CFormatter
 {
 	public $arraySeperator = "<br />";
+	public $timezoneFormat = 'g:i a - F j, Y';
 
 	public function format($value, $type)
 	{
@@ -20,6 +21,19 @@ class Formatter extends CFormatter
 			$results[] = parent::format($entry, $type);
 		}
 		return implode($this->arraySeperator, $results);
+	}
+
+	public function formatTimezone($value)
+	{
+		$timezone = new DateTimeZone($value);
+		$currentTime = new DateTime("now", $timezone);
+		return $currentTime->format($this->timezoneFormat);
+	}
+
+	public function formatGender($value)
+	{
+		$genderList = User::validGenders();
+		return $this->formatText( $genderList[$value] );
 	}
 };
 
