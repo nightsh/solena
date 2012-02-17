@@ -4,3 +4,4 @@ protected/config/main.php
 protected/data/ldap_schema.cache
 themes/classic/views/
 *~
+*.kate-swp
