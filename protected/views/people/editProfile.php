@@ -31,11 +31,13 @@ $this->menu = array(
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model, 'uid'); ?>
-		<?php echo $form->textField($model, 'uid', array('size' => 60, 'maxlength' => 128)); ?>
-		<?php echo $form->error($model, 'uid'); ?>
-	</div>
+	<?php if( Yii::app()->user->checkAccess('changeUserUsername', array('user' => $model)) ) { ?>
+		<div class="row">
+			<?php echo $form->labelEx($model, 'uid'); ?>
+			<?php echo $form->textField($model, 'uid', array('size' => 60, 'maxlength' => 128)); ?>
+			<?php echo $form->error($model, 'uid'); ?>
+		</div>
+	<?php } ?>
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'givenName'); ?>

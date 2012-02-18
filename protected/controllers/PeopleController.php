@@ -147,10 +147,18 @@ class PeopleController extends Controller
 		$model = $this->loadModel($uid);
 		$model->setScenario('editProfile');
 
+		if( !Yii::app()->user->checkAccess('changeUserDetails', array('user' => $model)) ) {
+			throw new CHttpException(403, 'You are not permitted to change the details of this person');
+		}
+
 		if( isset($_POST['User']) ) {
+			// If we have the permission to, update the users username - and update their DN
+			if( Yii::app()->user->checkAccess('changeUserUsername', array('user' => $model)) ) {
+				$model->uid = $_POST['User']['uid'];
+				$model->setDnByParent( $model->getParentDn() );
+			}
+			// Update all other attriutes...
 			$model->attributes = $_POST['User'];
-			$model->uid = $_POST['User']['uid'];
-			$model->setDnByParent( $model->getParentDn() );
 			if( $model->save() ) {
 				$this->redirect( array('view', 'uid' => $model->uid) );
 			}
@@ -168,7 +176,11 @@ class PeopleController extends Controller
 	{
 		$model = $this->loadModel($uid);
 		$model->setScenario('editContactDetails');
-		
+
+		if( !Yii::app()->user->checkAccess('changeUserDetails', array('user' => $model)) ) {
+			throw new CHttpException(403, 'You are not permitted to change the details of this person');
+		}
+
 		if( isset($_POST['User']) ) {
 			$model->attributes = $_POST['User'];
 			if( $model->save() ) {
@@ -188,7 +200,11 @@ class PeopleController extends Controller
 	{
 		$model = $this->loadModel($uid);
 		$model->setScenario('editAvatar');
-		
+
+		if( !Yii::app()->user->checkAccess('changeUserAvatar', array('user' => $model)) ) {
+			throw new CHttpException(403, 'You are not permitted to change the details of this person');
+		}
+
 		// Handle the upload of an image
 		if( isset($_POST['User']) ) {
 			$model->jpegPhoto = CUploadedFile::getInstance($model, 'jpegPhoto');
@@ -217,10 +233,13 @@ class PeopleController extends Controller
 	{
 		$model = $this->loadModel($uid);
 		$model->setScenario('editKeys');
-		
 		$sshForm = new SSHForm;
 		$sshForm->existingKeys = (array) $model->getAttribute("sshPublicKey");
-		
+
+		if( !Yii::app()->user->checkAccess('changeUserSshKeys', array('user' => $model)) ) {
+			throw new CHttpException(403, 'You are not permitted to change the details of this person');
+		}
+
 		// Are we removing any keys?
 		if( isset($_POST['removeKeys']) && isset($_POST['selectedKeys']) ) {
 			$this->processKeyRemoval($model, $_POST['selectedKeys']);
@@ -306,7 +325,11 @@ class PeopleController extends Controller
 		$model->setScenario('changePassword');
 		$form = new PasswordChangeForm;
 		$form->model = $model;
-		
+
+		if( !Yii::app()->user->checkAccess('changeUserPassword', array('user' => $model)) ) {
+			throw new CHttpException(403, 'You are not permitted to change the details of this person');
+		}
+
 		if( isset($_POST['PasswordChangeForm']) ) {
 			$form->attributes = $_POST['PasswordChangeForm'];
 			if( $this->processChangePassword($form, $model) ) {
