@@ -8,6 +8,47 @@ class PeopleController extends Controller
 	public $layout='//layouts/column2';
 
 	/**
+	 * @return array action filters
+	 */
+	public function filters()
+	{
+		return array(
+			'accessControl', // perform access control for CRUD operations
+		);
+	}
+
+	/**
+	 * Specifies the access control rules.
+	 * This method is used by the 'accessControl' filter.
+	 * @return array access control rules
+	 */
+	public function accessRules()
+	{
+		// Note: finer grained access control wrt profile/contact details/avatar/ssh key/password changing is done at action level
+		return array(
+			array('allow',  // Everyone who is authenticated may list people and view them (including avatars)
+				'actions' => array('index', 'view', 'viewAvatar'),
+				'users' => array('@'),
+			),
+			array('allow', // Everyone is allowed to change their profile, contact details, avatar and password
+				'actions' => array('editProfile', 'editContactDetails', 'editAvatar', 'changePassword'),
+				'users' => array('@'),
+			),
+			array('allow', // Developers, Disabled Developers and Sysadmins are allowed to change SSH keys
+				'actions' => array('editKeys'),
+				'roles' => array('developers', 'disabled-developers', 'sysadmins'),
+			),
+			array('allow', // Creating, Deleting, Moving and Locking is for Sysadmins only
+				'actions' => array('create', 'delete', 'move', 'toggleLock'),
+				'roles' => array('sysadmins'),
+			),
+			array('deny',  // If not permitted above - access is denied...
+				'users' => array('*'),
+			),
+		);
+	}
+
+	/**
 	 * Show the list of people
 	 */
 	public function actionIndex()

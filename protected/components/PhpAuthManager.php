@@ -17,6 +17,9 @@ class PhpAuthManager extends CPhpAuthManager
 		// Assign the roles to the current user, if we have one...
 		if( !Yii::app()->user->isGuest ) {
 			foreach(Yii::app()->user->roles as $role) {
+				if( is_null($this->getAuthItem($role)) ) {
+					continue;
+				}
 				$this->assign($role, Yii::app()->user->id);
 			}
 		}

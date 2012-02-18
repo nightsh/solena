@@ -28,13 +28,6 @@ return array(
 		'bizRule' => '',
 		'data' => '',
 	),
-
-	'ev-active' => array(
-		'type' => CAuthItem::TYPE_ROLE,
-		'description' => 'Is a active member of the KDE e.V',
-		'bizRule' => '',
-		'data' => '',
-	),
 );
 
 ?>
