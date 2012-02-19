@@ -52,18 +52,6 @@ $this->menu = array(
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model, 'personalTitle'); ?>
-		<?php echo $form->textField($model, 'personalTitle', array('size' => 60, 'maxlength' => 128)); ?>
-		<?php echo $form->error($model, 'personalTitle'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model, 'academicTitle'); ?>
-		<?php echo $form->textField($model, 'academicTitle', array('size' => 60, 'maxlength' => 128)); ?>
-		<?php echo $form->error($model, 'academicTitle'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model, 'dateOfBirth'); ?>
 		<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
 			'model' => $model,
@@ -79,13 +67,13 @@ $this->menu = array(
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'gender'); ?>
-		<?php echo $form->dropDownList($model, 'gender', $model->validGenders(), array('empty'=> 'Not disclosed')); ?>
+		<?php echo $form->dropDownList($model, 'gender', $model->validGenders(), array('empty'=> 'Not set')); ?>
 		<?php echo $form->error($model, 'gender'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'timezoneName'); ?>
-		<?php echo $form->dropDownList($model, 'timezoneName', $model->validTimezones(), array('empty'=> 'Not disclosed')); ?>
+		<?php echo $form->dropDownList($model, 'timezoneName', $model->validTimezones(), array('empty'=> 'Not set')); ?>
 		<?php echo $form->error($model, 'timezoneName'); ?>
 	</div>
 

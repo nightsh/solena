@@ -23,8 +23,6 @@ $this->menu = array(
 	'data' => $model,
 	'attributes' => array(
 		'uid',
-		'personalTitle',
-		'academicTitle',
 		'dateOfBirth',
 		'gender:gender',
 		'timezoneName:timezone:Current Time',

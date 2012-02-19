@@ -43,7 +43,6 @@ class User extends SLdapModel
 			array('mail', 'email', 'on' => 'editContactDetails, create'),
 			// Profile Editing
 			array('uid', 'unsafe', 'on' => 'editProfile'), // The username can never be mass-assigned
-			array('personalTitle, academicTitle', 'length', 'min' => 2, 'max' => 64, 'on' => 'editProfile'),
 			array('dateOfBirth', 'date', 'format' => 'dd/MM/yyyy', 'on' => 'editProfile'),
 			array('gender', 'in', 'range' => array_keys($this->validGenders()), 'on' => 'editProfile'),
 			array('timezoneName', 'in', 'range' => array_keys($this->validTimezones()), 'on' => 'editProfile'),
@@ -52,7 +51,7 @@ class User extends SLdapModel
 			// SSH Key management
 			array('sshPublicKey', 'application.validators.SSHKeyValidator', 'on' => 'editKeys'),
 			// Avatar changing - 3MB max upload limit, file must be a jpeg/gif/png image
-			array('jpegPhoto', 'file', 'on' => 'editAvatar', 'types' => 'jpg, gif, png', 'maxSize' => 1024 * 1024 * 3, 'allowEmpty' => true),
+			array('jpegPhoto', 'file', 'on' => 'editAvatar', 'types' => 'jpg, jpeg, gif, png', 'maxSize' => 1024 * 1024 * 3, 'allowEmpty' => true),
 			// Password validation - to ensure only Salted-SHA1 passwords are saved to protect outselves
 			array('userPassword', 'match', 'pattern' => '/\{SSHA\}.+/'),
 			// User creation
@@ -70,6 +69,7 @@ class User extends SLdapModel
 			'cn' => 'Full name',
 			'mail' => 'Email address',
 			'labeledURI' => 'Website',
+			'homePostalAddress' => 'Physical address',
 			'ircNick' => 'IRC Nickname',
 			'jabberID' => 'Jabber ID',
 			'jpegPhoto' => 'Avatar upload',
@@ -139,8 +139,8 @@ class User extends SLdapModel
 
 	protected function beforeSave()
 	{
-		// Update the CN if we need to - it is only needed for the editProfile scenario
-		if( $this->scenario == 'editProfile' ) {
+		// Update the CN if we need to - it is only needed for the editProfile and create scenarios
+		if( $this->scenario == 'editProfile' || $this->scenario == 'create' ) {
 			// The validators will prevent this code from being reached if givenName/sn are null - so no need to check
 			$this->cn = sprintf("%s %s", $this->givenName, $this->sn);
 		}
