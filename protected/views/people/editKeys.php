@@ -36,12 +36,17 @@ foreach(Yii::app()->user->getFlashes() as $key => $message) {
 )); ?>
 
 	<div class="row">
-		<?php $removeKeyButton = CHtml::submitButton('Remove selected keys', array('name' => 'removeKeys')); ?>
+		<?php
+			$template = '{items}';
+			if( $dataProvider->itemCount > 0 ) {
+				$template .= CHtml::submitButton('Remove selected keys', array('name' => 'removeKeys'));
+			}
+		?>
 		<?php $this->widget('zii.widgets.grid.CGridView', array(
 			'id' => 'sshkey-grid',
 			'selectableRows' => 2,
 			'dataProvider' => $dataProvider,
-			'template' => "{items}$removeKeyButton",
+			'template' => $template,
 			'columns'=> array(
 				array(
 					'class' => 'CCheckBoxColumn',
