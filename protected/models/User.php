@@ -56,7 +56,7 @@ class User extends SLdapModel
 			// Avatar changing - 3MB max upload limit, file must be a jpeg/gif/png image
 			array('jpegPhoto', 'file', 'on' => 'editAvatar', 'types' => 'jpg, jpeg, gif, png', 'maxSize' => 1024 * 1024 * 3, 'allowEmpty' => true),
 			// Password validation - to ensure only Salted-SHA1 passwords are saved to protect outselves
-			array('userPassword', 'match', 'pattern' => '/\{SSHA\}.+/'),
+			array('userPassword', 'match', 'pattern' => '/\{SSHA\}.+/', 'on' => 'changePassword'),
 			// User creation
 			array('mail', 'required', 'on' => 'create'),
 		);
