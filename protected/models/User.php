@@ -36,7 +36,7 @@ class User extends SLdapModel
 		// will receive user inputs.
 		return array(
 			// Searching (used on index)
-			array('uid, cn, mail, secondaryMail', 'safe', 'on'=>'search'),
+			array('uid, cn, mail, secondaryMail', 'safe', 'on' => 'search'),
 			// Shared validations...
 			array('uid, givenName, sn', 'required', 'on' => 'editProfile, create'),
 			array('uid, givenName, sn', 'length', 'min' => 2, 'max' => 64, 'on' => 'editProfile, create'),
@@ -47,14 +47,14 @@ class User extends SLdapModel
 			array('gender', 'in', 'range' => array_keys($this->validGenders()), 'on' => 'editProfile'),
 			array('timezoneName', 'in', 'range' => array_keys($this->validTimezones()), 'on' => 'editProfile'),
 			// Contact Details editing
-			array('jabberID', 'MultiValidator', 'on' => 'editContactDetails', 'validator' => 'email'),
-			array('secondaryMail', 'MultiValidator', 'on' => 'editContactDetails', 'validator' => 'email'),
-			array('labeledURI', 'MultiValidator', 'on' => 'editContactDetails', 'validator' => 'url', 'defaultScheme' => 'http'),
-			array('homePostalAddress, homePhone, ircNick', 'MultiValidator', 'on' => 'editContactDetails', 'validator' => 'length',  'min' => 4),
+			array('jabberID', 'MultiValidator', 'validator' => 'email', 'on' => 'editContactDetails'),
+			array('secondaryMail', 'MultiValidator', 'validator' => 'email',  'on' => 'editContactDetails'),
+			array('labeledURI', 'MultiValidator', 'validator' => 'url', 'defaultScheme' => 'http', 'on' => 'editContactDetails'),
+			array('homePostalAddress, homePhone, ircNick', 'MultiValidator', 'validator' => 'length',  'min' => 4, 'on' => 'editContactDetails'),
 			// SSH Key management
 			array('sshPublicKey', 'application.validators.SSHKeyValidator', 'on' => 'editKeys'),
 			// Avatar changing - 3MB max upload limit, file must be a jpeg/gif/png image
-			array('jpegPhoto', 'file', 'on' => 'editAvatar', 'types' => 'jpg, jpeg, gif, png', 'maxSize' => 1024 * 1024 * 3, 'allowEmpty' => true),
+			array('jpegPhoto', 'file', 'types' => 'jpg, jpeg, gif, png', 'maxSize' => 1024 * 1024 * 3, 'allowEmpty' => true, 'on' => 'editAvatar'),
 			// Password validation - to ensure only Salted-SHA1 passwords are saved to protect outselves
 			array('userPassword', 'match', 'pattern' => '/\{SSHA\}.+/', 'on' => 'changePassword'),
 			// User creation
