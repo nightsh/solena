@@ -47,7 +47,10 @@ class User extends SLdapModel
 			array('gender', 'in', 'range' => array_keys($this->validGenders()), 'on' => 'editProfile'),
 			array('timezoneName', 'in', 'range' => array_keys($this->validTimezones()), 'on' => 'editProfile'),
 			// Contact Details editing
-			array('homePostalAddress, homePhone, labeledURI, ircNick, jabberID', 'safe', 'on' => 'editContactDetails'),
+			array('jabberID', 'application.validators.MultiValidator', 'on' => 'editContactDetails', 'validator' => 'email'),
+			array('secondaryMail', 'application.validators.MultiValidator', 'on' => 'editContactDetails', 'validator' => 'email'),
+			array('labeledURI', 'application.validators.MultiValidator', 'on' => 'editContactDetails', 'validator' => 'url', 'defaultScheme' => 'http'),
+			array('homePostalAddress, homePhone, ircNick', 'safe', 'on' => 'editContactDetails'),
 			// SSH Key management
 			array('sshPublicKey', 'application.validators.SSHKeyValidator', 'on' => 'editKeys'),
 			// Avatar changing - 3MB max upload limit, file must be a jpeg/gif/png image
