@@ -3,10 +3,6 @@ $this->breadcrumbs = array(
 	'People' => array('index'),
 	'Create',
 );
-
-$this->menu = array(
-	array('label' => 'People List', 'url' => array('index')),
-);
 ?>
 
 <h1>Create Person</h1>
