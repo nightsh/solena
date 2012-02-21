@@ -114,10 +114,15 @@ class PeopleController extends Controller
 	 */
 	public function actionViewAvatar($uid)
 	{
-		$model = $this->loadModel($uid);
 		header('Content-type: octet-stream');
 		header('Content-Transfer-Encoding: binary');
-		echo $model->jpegPhoto;
+		$model = $this->loadModel($uid);
+		if( isset($model->jpegPhoto) ) {
+			echo $model->jpegPhoto;
+		} else {
+			$path = Yii::app()->basePath . DIRECTORY_SEPARATOR . "data" . DIRECTORY_SEPARATOR . "default-avatar.png";
+			echo file_get_contents($path);
+		}
 	}
 
 	/**
