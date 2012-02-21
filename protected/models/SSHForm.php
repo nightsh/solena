@@ -10,7 +10,7 @@ class SSHForm extends CFormModel
 	{
 		return array(
 			// The submitted SSH Key must be valid
-			array('newKey', 'application.validators.SSHKeyValidator', 'existingKeys' => $this->existingKeys),
+			array('newKey', 'SSHKeyValidator', 'existingKeys' => $this->existingKeys),
 		);
 	}
 
