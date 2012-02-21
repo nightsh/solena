@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs = array('People');
-$this->menu = array( array('label' => 'Create Person', 'url' => array('create')) );
+$this->menu = array( array('label' => 'Create Person', 'url' => array('create'), 'visible' => Yii::app()->user->checkAccess('sysadmins') ) );
 ?>
 
 <h1>People</h1>

@@ -363,6 +363,48 @@ class PeopleController extends Controller
 	}
 
 	/**
+	 * Generate a Menu for one of the Model based views...
+	 */
+	protected function generateMenu($model)
+	{
+		$menu = array();
+		$params = array('user' => $model);
+		// General actions first..
+		if( $this->action->id != 'view' ) {
+			$menu[] = array('label' => 'View Profile', 'url' => array('view', 'uid' => $model->uid));
+		}
+		if( Yii::app()->user->checkAccess('changeUserDetails', $params) && $this->action->id != 'editProfile' ) {
+			$menu[] = array('label' => 'Edit Profile', 'url' => array('editProfile', 'uid' => $model->uid));
+		}
+		if( Yii::app()->user->checkAccess('changeUserDetails', $params) && $this->action->id != 'editContactDetails' ) {
+			$menu[] = array('label' => 'Edit Contact Details', 'url' => array('editContactDetails', 'uid' => $model->uid));
+		}
+		if( Yii::app()->user->checkAccess('changeUserAvatar', $params) && $this->action->id != 'editAvatar' ) {
+			$menu[] = array('label' => 'Change Avatar', 'url' => array('editAvatar', 'uid' => $model->uid));
+		}
+		if( Yii::app()->user->checkAccess('changeUserSshKeys', $params) && $this->action->id != 'editKeys' ) {
+			$menu[] = array('label' => 'Manage SSH Keys', 'url' => array('editKeys', 'uid' => $model->uid));
+		}
+		if( Yii::app()->user->checkAccess('changeUserPassword', $params) && $this->action->id != 'changePassword' ) {
+			$menu[] = array('label' => 'Change Password', 'url' => array('changePassword', 'uid' => $model->uid));
+		}
+		// Sysadmin only actions now
+		if( Yii::app()->user->checkAccess('sysadmins') ) {
+			if( $this->action->id != 'toggleLock' ) {
+				$menu[] = array('label' => 'Toggle Account Lock', 'url' => array('toggleLock', 'uid' => $model->uid));
+			}
+			if( $this->action->id != 'move' ) {
+				$menu[] = array('label' => 'Move Entry', 'url' => array('move', 'uid' => $model->uid));
+			}
+			if( $this->action->id != 'delete' ) {
+				$menu[] = array('label' => 'Delete Person', 'url' => array('delete', 'uid' => $model->uid));
+			}
+		}
+		// Return results
+		return $menu;
+	}
+
+	/**
 	 * Process the addition of a SSH Key to a user
 	 * To be used by actionEditKeys only
 	 */
