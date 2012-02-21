@@ -50,7 +50,7 @@ class User extends SLdapModel
 			array('jabberID', 'application.validators.MultiValidator', 'on' => 'editContactDetails', 'validator' => 'email'),
 			array('secondaryMail', 'application.validators.MultiValidator', 'on' => 'editContactDetails', 'validator' => 'email'),
 			array('labeledURI', 'application.validators.MultiValidator', 'on' => 'editContactDetails', 'validator' => 'url', 'defaultScheme' => 'http'),
-			array('homePostalAddress, homePhone, ircNick', 'safe', 'on' => 'editContactDetails'),
+			array('homePostalAddress, homePhone, ircNick', 'application.validators.MultiValidator', 'on' => 'editContactDetails', 'validator' => 'length',  'min' => 4),
 			// SSH Key management
 			array('sshPublicKey', 'application.validators.SSHKeyValidator', 'on' => 'editKeys'),
 			// Avatar changing - 3MB max upload limit, file must be a jpeg/gif/png image
