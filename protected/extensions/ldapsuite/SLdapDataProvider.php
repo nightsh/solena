@@ -19,6 +19,10 @@ class SLdapDataProvider extends CDataProvider
 	 */
 	public $attributesToLoad = array();
 	/**
+	 * Limit to the number of entries which should be retrieved
+	 */
+	public $retrieveLimit = 150;
+	/**
 	 * The filter which this data provider will apply to all searches and other operations it performs
 	 */
 	private $_filter;
@@ -81,6 +85,10 @@ class SLdapDataProvider extends CDataProvider
 	public function setFilterByModel($model, $attributes)
 	{
 		$filters = array();
+		// Add the currently applied filter if we have one...
+		if( $this->_filter instanceof Net_LDAP2_Filter ) {
+			$filters[] = $this->_filter;
+		}
 		// Build the filter...
 		foreach($attributes as $attrName) {
 			$value = $model->getAttribute($attrName);
@@ -136,11 +144,7 @@ class SLdapDataProvider extends CDataProvider
 		$keys = array();
 		$uniqueAttrs = is_null($this->uniqueAttributes) ? $this->model->uniqueAttributes() : $this->uniqueAttributes;
 		foreach($this->getData() as $k => $data) {
-			$value = array();
-			foreach($uniqueAttrs as $name) {
-				$value[$name] = $data->$name;
-			}
-			$keys[$k] = implode(',', $value);
+			$keys[$k] = $data->dn;
 		}
 		return $keys;
 	}
@@ -172,7 +176,7 @@ class SLdapDataProvider extends CDataProvider
 			$filter = $this->buildFilter();
 		}
 
-		$results = $this->model->findByFilter($filter,  $this->attributesToLoad, $pagination, $sort, array('sizelimit' => 150));
+		$results = $this->model->findByFilter($filter,  $this->attributesToLoad, $pagination, $sort, array('sizelimit' => $this->retrieveLimit));
 
 		// Set some metadata which the displays will use later...
 		if( $pagination !== false ) {
