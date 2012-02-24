@@ -7,7 +7,7 @@ return array(
 		'description' => 'Is a KDE Sysadmin',
 		'bizRule' => '',
 		'data' => '',
-		'children' => array('changeUserDetails', 'changeUserSshKeys', 'changeUserAvatar', 'changeUserPassword', 'changeUserUsername'),
+		'children' => array('changeUserDetails', 'changeUserSshKeys', 'changeUserAvatar', 'changeUserPassword', 'changeUserUsername', 'manageGroup'),
 	),
 
 	'web-admins' => array(
@@ -80,6 +80,13 @@ return array(
 	'changeUserUsername' => array(
 		'type' => CAuthItem::TYPE_OPERATION,
 		'description' => 'Allowed to change user usernames',
+		'bizRule' => '',
+		'data' => '',
+	),
+
+	'manageGroup' => array(
+		'type' => CAuthItem::TYPE_OPERATION,
+		'description' => 'Allowed to manage a group, including the descriptions and members',
 		'bizRule' => '',
 		'data' => '',
 	),
