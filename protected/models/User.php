@@ -80,6 +80,15 @@ class User extends SLdapModel
 		);
 	}
 
+	/**
+	 * Returns Group instances for the groups this user is a member of
+	 */
+	public function getGroups()
+	{
+		$filter = Net_LDAP2_Filter::create('memberUid', 'equals', $this->uid);
+		return Group::model()->findByFilter($filter);
+	}
+
 	public function getEmailAddresses()
 	{
 		return array_merge( array($this->mail), (array) $this->secondaryMail );
