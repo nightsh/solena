@@ -184,6 +184,23 @@ class User extends SLdapModel
 		// Call our parent now
 		return parent::beforeSave();
 	}
+
+	protected function afterMove()
+	{
+		// If the current user is changing their dn we have to update the saved dn otherwise future transactions will break....
+		if( Yii::app()->user->dn == $this->originalDn ) {
+			User::getLdapConnection()->updateRetainedDn( $this->dn );
+			Yii::app()->user->setId( $this->uid );
+		}
+
+		// If they are a member of any groups - we need to update the groups with their new dn / uid
+		$filter = Net_LDAP2_Filter::create('memberUid', 'equals', $this->getAttribute('uid', true));
+		$currentGroups = Group::model()->findByFilter($filter);
+		foreach( $currentGroups as $group ) {
+			$group->updateExistingMember($this);
+			$group->save();
+		}
+	}
 }
 
 ?>
