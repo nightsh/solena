@@ -145,6 +145,18 @@ class Group extends SLdapModel
 		// Call our parent now
 		return parent::beforeSave();
 	}
+
+	protected function afterDelete()
+	{
+		// We need to remove our members from our group now....
+		foreach( $this->members as $member ) {
+			$this->removeMember($member);
+			$member->save();
+		}
+
+		// Call our parent now
+		return parent::afterDelete();
+	}
 };
 
 ?>
