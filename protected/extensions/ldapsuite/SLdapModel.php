@@ -11,6 +11,10 @@ abstract class SLdapModel extends CModel
 	 * Internal - LDAP Entry we represent
 	 */
 	private $_entry = null;
+	/**
+	 * Internal - Copy of the LDAP Entry we represent, used to provide "original" state
+	 */
+	private $_originalEntry = null;
 
 	/**
 	 * Internal - Cache of static Model instances
@@ -37,7 +41,7 @@ abstract class SLdapModel extends CModel
 
 		$this->setScenario($scenario);
 		// Create the entry with no DN specified - a parent will need to be set and the RDN will be auto re-generated
-		$this->_entry = Net_LDAP2_Entry::createFresh(null, $this->defaultAttributes());
+		$this->setEntry();
 
 		$this->init();
 		$this->attachBehaviors($this->behaviors());
@@ -185,7 +189,7 @@ abstract class SLdapModel extends CModel
 		}
 		
 		$model = self::$_models[$className] = new $className(null);
-		$model->_entry = Net_LDAP2_Entry::createFresh(null, $model->defaultAttributes());
+		$model->setEntry();
 		$model->attachBehaviors($model->behaviors());
 		return $model;
 	}
@@ -209,6 +213,16 @@ abstract class SLdapModel extends CModel
 	public function getDn()
 	{
 		return $this->_entry->dn();
+	}
+
+	/**
+	 * Returns the DN which is currently in LDAP for this LDAP entry.
+	 * Will return null if this is a new entry.
+	 * @return mixed DN currently saved in LDAP
+	 */
+	public function getOriginalDn()
+	{
+		return $this->_originalEntry->dn();
 	}
 
 	/**
@@ -344,14 +358,16 @@ abstract class SLdapModel extends CModel
 	 * @return mixed the attribute value. Null if the attribute is not set or does not exist.
 	 * @see hasAttribute
 	 */
-	public function getAttribute($name)
+	public function getAttribute($name, $original = false)
 	{
+		// Use the necessary entry object
+		$entry = $original ? $this->_originalEntry : $this->_entry;
 		// There is no point trying to retrieve the value if it does not exist...
-		if( !$this->_entry->exists($name) ) {
+		if( !$entry->exists($name) ) {
 			return null;
 		}
 		
-		$value = $this->_entry->getValue($name);
+		$value = $entry->getValue($name);
 		return in_array($name, $this->multivaluedAttributes()) ? (array) $value : $value;
 	}
 
@@ -500,6 +516,7 @@ abstract class SLdapModel extends CModel
 		
 		// Save is successful as far as we can tell, indicate that
 		$this->afterSave();
+		$this->_originalEntry = clone $this->_entry;
 		return $result;
 	}
     
@@ -549,7 +566,8 @@ abstract class SLdapModel extends CModel
 	public function refresh()
 	{
 		$ldap = $this->getLdapConnection()->getConnection();
-		$this->_entry = $ldap->getEntry( $this->getDn(), $this->attributeNames() );
+		$entry = $ldap->getEntry( $this->getDn(), $this->attributeNames() );
+		$this->setEntry($entry);
 	}
 	
 	/**
@@ -689,12 +707,21 @@ abstract class SLdapModel extends CModel
 		$instance = new $class(null);
 		
 		$instance->setScenario('update');
-		$instance->_entry = $entry;
+		$instance->setEntry($entry);
 
 		$instance->init();
 		$instance->attachBehaviors($this->behaviors());
 		$instance->afterConstruct();
 		return $instance;
+	}
+
+	private function setEntry( $entry = null )
+	{
+		if( is_null($entry) ) {
+			$entry = Net_LDAP2_Entry::createFresh(null, $this->defaultAttributes());
+		}
+		$this->_entry = $entry;
+		$this->_originalEntry = clone $entry;
 	}
 
 	/**
