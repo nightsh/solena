@@ -200,6 +200,9 @@ class User extends SLdapModel
 			$group->updateExistingMember($this);
 			$group->save();
 		}
+
+		// Call our parent now
+		return parent::afterMove();
 	}
 }
 
