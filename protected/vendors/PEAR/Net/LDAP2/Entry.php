@@ -839,8 +839,8 @@ class Net_LDAP2_Entry extends PEAR
             }
             
             // Find out what is missing from $value and exclude it
-            $currentValue = $fullEntry->getValue($attr, "all");
-            $modifications[$attr] = array_diff( $currentValue, $value );
+            $currentValue = isset($modifications[$attr]) ? $modifications[$attr] : $fullEntry->getValue($attr, "all");
+            $modifications[$attr] = array_values( array_diff( $currentValue, $value ) );
         }
 
         // REPLACE
