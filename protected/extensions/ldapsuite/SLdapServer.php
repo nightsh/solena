@@ -196,6 +196,11 @@ final class SLdapServer extends CApplicationComponent
 		Yii::app()->user->setState('userPasswordKey', $key);
 	}
 
+	public function updateRetainedDn($newDn)
+	{
+		Yii::app()->user->setState('userDn', $newDn);
+	}
+
 	public function discardCredentials()
 	{
 		unset(Yii::app()->request->cookies['accessKey']);
