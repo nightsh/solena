@@ -507,11 +507,17 @@ abstract class SLdapModel extends CModel
 			return false;
 		}
 		
-		// Perform the save
+		// Save our moving status then perform the save
+		$moveStatus = $this->_entry->willBeMoved();
 		$result = $this->_entry->update($ldap->getConnection());
 		if( PEAR::isError($result) ) {
 			$this->addError("system", $result->message);
 			return false;
+		}
+		
+		// Have we moved? If so indicate it
+		if( $moveStatus ) {
+			$this->afterMove();
 		}
 		
 		// Save is successful as far as we can tell, indicate that
@@ -743,6 +749,16 @@ abstract class SLdapModel extends CModel
 	}
 
 	/**
+	 * This event is raised after the DN of an entry has been changed during a save.
+	 * It executes before onAfterSave but after the new DN has been saved.
+	 * @param CEvent $event the event parameter
+	 */
+	public function onAfterMove($event)
+	{
+		$this->raiseEvent('onAfterMove', $event);
+	}
+
+	/**
 	 * This event is raised prior to the entry being deleted.
 	 * @param CEvent $event the event parameter
 	 */
@@ -788,6 +804,21 @@ abstract class SLdapModel extends CModel
 		if( $this->hasEventHandler('onAfterSave') ) {
 			$event = new CEvent($this);
 			$this->onAfterSave($event);
+		}
+	}
+
+	/**
+	 * This method is called after an entry dn has been changed and then saved successfully.
+	 * By default this raises the {@link onAfterMove} event.
+	 * This method may be overridden to perform needed post-processing,
+	 * If overridden then the parent implementation must be invoked otherwise the event will not be raised properly.
+	 * @param SLdapModel $previousState copy of the SLdapModel instance made right before the save was performed
+	 */
+	protected function afterMove()
+	{
+		if( $this->hasEventHandler('onAfterMove') ) {
+			$event = new CEvent($this);
+			$this->onAfterMove($event);
 		}
 	}
 
