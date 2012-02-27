@@ -204,6 +204,29 @@ class User extends SLdapModel
 		// Call our parent now
 		return parent::afterMove();
 	}
+
+	protected function beforeDelete()
+	{
+		// Make sure we are not trying to delete ourselves, as that is strictly prohibited
+		if( Yii::app()->user->dn == $this->dn ) {
+			$this->addError("dn", "People cannot delete themselves - suicide not permitted");
+		}
+
+		// Call our parent now
+		return parent::beforeDelete();
+	}
+
+	protected function afterDelete()
+	{
+		// Remove us from any groups we were a member of prior to deletion
+		foreach( $this->groups as $group ) {
+			$group->removeMember($this);
+			$group->save();
+		}
+
+		// Call our parent now
+		return parent::afterDelete();
+	}
 }
 
 ?>
