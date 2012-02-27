@@ -91,6 +91,23 @@ class Group extends SLdapModel
 		$user->removeAttribute('groupMember', $this->cn);
 	}
 
+	public function updateExistingMember($user)
+	{
+		// Make sure the old user is a member of the group - we cannot update a existing member if they are not a member
+		$originalUid = $user->getAttribute('uid', true);
+		if( !in_array($originalUid, $this->memberUid) ) {
+			return false;
+		}
+
+		// Remove the old user data
+		$this->removeAttribute('memberUid', $originalUid);
+		$this->removeAttribute('member', $user->originalDn);
+
+		// Add in the new user data
+		$this->addAttribute('memberUid', $user->uid);
+		$this->addAttribute('member', $user->dn);
+	}
+
 	protected function beforeSave()
 	{
 		// Make sure we have a gidNumber - as we have to have one....
