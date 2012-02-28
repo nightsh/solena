@@ -152,6 +152,22 @@ class Group extends SLdapModel
 		return parent::beforeSave();
 	}
 
+	protected function afterMove()
+	{
+		// We need to update group members with the new name of the group
+		$originalName = $this->getAttribute('cn', true);
+		$filter = Net_LDAP2_Filter::create('groupMember', 'equals', $originalName);
+		$currentMembers = User::model()->findByFilter($filter);
+		foreach( $currentMembers as $member ) {
+			$member->removeAttribute('groupMember', $originalName);
+			$member->addAttribute('groupMember', $this->cn);
+			$member->save();
+		}
+
+		// Call our parent now
+		return parent::afterMove();
+	}
+
 	protected function afterDelete()
 	{
 		// We need to remove our members from our group now....
