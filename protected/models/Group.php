@@ -143,6 +143,11 @@ class Group extends SLdapModel
 			$this->member = $this->dn;
 		}
 		
+		// Do we need to cleanup the workaround for RFC2307 compliance?
+		if( !empty($this->memberUid) && in_array($this->dn, $this->member) ) {
+			$this->removeAttribute('member', $this->dn);
+		}
+		
 		// Call our parent now
 		return parent::beforeSave();
 	}
