@@ -38,6 +38,7 @@ class Group extends SLdapModel
 			// Shared validations...
 			array('cn, description', 'required', 'on' => 'edit, create'),
 			array('cn, description', 'length', 'min' => 2, 'max' => 64, 'on' => 'edit, create'),
+			array('cn', 'match', 'pattern' => '/^([a-z]|-)+$/', 'on' => 'edit, create'),
 		);
 	}
 

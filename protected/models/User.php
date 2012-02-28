@@ -40,6 +40,7 @@ class User extends SLdapModel
 			// Shared validations...
 			array('uid, givenName, sn', 'required', 'on' => 'editProfile, create'),
 			array('uid, givenName, sn', 'length', 'min' => 2, 'max' => 64, 'on' => 'editProfile, create'),
+			array('uid', 'match', 'pattern' => '/^([a-z]|-)+$/', 'on' => 'editProfile, create'),
 			array('mail', 'email', 'on' => 'editContactDetails, create'),
 			// Profile Editing
 			array('uid', 'unsafe', 'on' => 'editProfile'), // The username can never be mass-assigned
