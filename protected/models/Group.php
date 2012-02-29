@@ -39,6 +39,7 @@ class Group extends SLdapModel
 			array('cn, description', 'required', 'on' => 'edit, create'),
 			array('cn, description', 'length', 'min' => 2, 'max' => 64, 'on' => 'edit, create'),
 			array('cn', 'match', 'pattern' => '/^([a-z]|-)+$/', 'on' => 'edit, create'),
+			array('cn', 'UniqueAttributeValidator', 'on' => 'edit, create'),
 		);
 	}
 
