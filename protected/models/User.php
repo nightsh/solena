@@ -204,6 +204,10 @@ class User extends SLdapModel
 			}
 			$this->addAttribute("sshPublicKey", $this->sshKeysAdded);
 		}
+		// Do we no longer have any SSH Keys?
+		if( $this->hasObjectClass("ldapPublicKey") && empty($this->sshPublicKey) ) {
+			$this->removeAttribute("objectClass", "ldapPublicKey");
+		}
 		
 		// Call our parent now
 		return parent::beforeSave();

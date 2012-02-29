@@ -416,10 +416,6 @@ class PeopleController extends Controller
 		}
 		// Remove the key(s) we need to remove....
 		$model->removeAttribute("sshPublicKey", $selectedKeys);
-		// If we no longer have any SSH Keys, then remove the needed Object Class
-		if( empty($model->sshPublicKey) ) {
-			$model->removeAttribute("objectClass", "ldapPublicKey");
-		}
 		// Now try and save - if we succeed add a flash message so the user knows we succeeded
 		if( $model->save() ) {
 			Yii::app()->user->setFlash('success', 'SSH Keys updated');
