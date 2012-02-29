@@ -238,8 +238,6 @@ class PeopleController extends Controller
 	{
 		$model = $this->loadModel($uid);
 		$model->setScenario('editKeys');
-		$sshForm = new SSHForm;
-		$sshForm->existingKeys = (array) $model->getAttribute("sshPublicKey");
 
 		if( !Yii::app()->user->checkAccess('changeUserSshKeys', array('user' => $model)) ) {
 			throw new CHttpException(403, 'You are not permitted to change the details of this person');
@@ -251,15 +249,17 @@ class PeopleController extends Controller
 		}
 		
 		// Maybe we are adding keys then?
-		if( isset($_POST['addKeys']) && isset($_POST['SSHForm']) ) {
-			$sshForm->attributes = $_POST['SSHForm'];
-			$this->processKeyAddition($model, $sshForm);
+		if( isset($_POST['uploadKeys']) ) {
+			$keyUpload = CUploadedFile::getInstance($model, 'sshKeysAdded');
+			$model->addSSHKeys($keyUpload);
+			if( $model->save() ) {
+				Yii::app()->user->setFlash('success', 'SSH Keys updated');
+			}
 		}
 		
 		$dataProvider = new CArrayDataProvider($model->getProcessedSshKeys());
 		$this->render('editKeys', array(
 			'model' => $model,
-			'sshForm' => $sshForm,
 			'dataProvider' => $dataProvider,
 		));
 	}
@@ -401,31 +401,6 @@ class PeopleController extends Controller
 		}
 		// Return results
 		return $menu;
-	}
-
-	/**
-	 * Process the addition of a SSH Key to a user
-	 * To be used by actionEditKeys only
-	 */
-	protected function processKeyAddition($model, $sshForm)
-	{
-		// Make sure the SSH Form is valid....
-		if( !$sshForm->validate() ) {
-			return false;
-		}
-		// We will be adding a SSH Key now - so make sure we have the appropriate Object Class added
-		if( !$model->hasObjectClass("ldapPublicKey") ) {
-			$model->addAttribute("objectClass", "ldapPublicKey");
-		}
-		// We are assured the SSH Key is valid - and not a duplicate now, so we can add it - and clear the form
-		$model->addAttribute("sshPublicKey", $sshForm->newKey);
-		$sshForm->newKey = null;
-		// Now try and save - if we succeed add a flash message so the user knows we succeeded
-		if( $model->save() ) {
-			Yii::app()->user->setFlash('success', 'SSH Keys updated');
-			return true;
-		}
-		return false;
 	}
 
 	/**

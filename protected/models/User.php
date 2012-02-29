@@ -9,6 +9,7 @@ class User extends SLdapModel
 	const InfinitelyLocked = "000001010000Z"; // Magic value meaning "infinitely locked by an administrator"
 
 	protected $_requiredObjectClasses = array('kdeAccount');
+	public $sshKeysAdded = array();
 
 	public static function model($className=__CLASS__)
 	{
@@ -54,6 +55,7 @@ class User extends SLdapModel
 			array('homePostalAddress, homePhone, ircNick', 'MultiValidator', 'validator' => 'length',  'min' => 4, 'on' => 'editContactDetails'),
 			// SSH Key management
 			array('sshPublicKey', 'application.validators.SSHKeyValidator', 'on' => 'editKeys'),
+			array('sshKeysAdded', 'application.validators.SSHKeyValidator', 'existingKeys' => $this->getAttribute("sshPublicKey"), 'on' => 'editKeys'),
 			// Avatar changing - 3MB max upload limit, file must be a jpeg/gif/png image
 			array('jpegPhoto', 'file', 'types' => 'jpg, jpeg, gif, png', 'maxSize' => 1024 * 1024 * 3, 'allowEmpty' => true, 'on' => 'editAvatar'),
 			// Password validation - to ensure only Salted-SHA1 passwords are saved to protect outselves
@@ -102,8 +104,8 @@ class User extends SLdapModel
 	public function getProcessedSshKeys()
 	{
 		$keyData = array();
-		foreach( (array) $this->getAttribute("sshPublicKey") as $id => $key) {
-			$keyData[] = SSHForm::splitKey($key, $id);
+		foreach( $this->getAttribute("sshPublicKey") as $id => $key) {
+			$keyData[] = SSHKeyValidator::splitKey($key, $id);
 		}
 		return $keyData;
 	}
@@ -119,6 +121,19 @@ class User extends SLdapModel
 			return User::AccountPermanentLocked;
 		}
 		return User::AccountTemporaryLocked;
+	}
+
+	/**
+	 * Stages the uploaded SSH Keys for saving to the model
+	 * They will not be available until the model has been validated and saved
+	 * Does not perform the saving procedure itself
+	 */
+	public function addSSHKeys($uploadedKeys)
+	{
+		// Retrieve the content of the file, and then stage the keys for addition so they can be validated first
+		$keys = file_get_contents($uploadedKeys->tempName);
+		$keys = explode("\n", trim($keys));
+		$this->sshKeysAdded = array_merge($keys, $this->sshKeysAdded);
 	}
 
 	/**
@@ -180,6 +195,14 @@ class User extends SLdapModel
 		// Have we set a timezoneName? If so, clear timezone as it is deprecated now
 		if( isset($this->timezoneName) && isset($this->timezone) ) {
 			$this->removeAttribute('timezone');
+		}
+		
+		// Have we got newly uploaded SSH Keys to add?
+		if( !empty($this->sshKeysAdded) ) {
+			if( !$this->hasObjectClass("ldapPublicKey") ) {
+				$this->addAttribute("objectClass", "ldapPublicKey");
+			}
+			$this->addAttribute("sshPublicKey", $this->sshKeysAdded);
 		}
 		
 		// Call our parent now

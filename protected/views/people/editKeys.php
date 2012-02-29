@@ -23,6 +23,7 @@ foreach(Yii::app()->user->getFlashes() as $key => $message) {
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'person-form',
 	'enableAjaxValidation' => false,
+	'htmlOptions' => array('enctype' => 'multipart/form-data'),
 )); ?>
 
 	<div class="row">
@@ -52,12 +53,12 @@ foreach(Yii::app()->user->getFlashes() as $key => $message) {
 	<hr />
 	<h3>Add new SSH Key</h3>
 	<div class="row">
-		<?php echo $form->textArea($sshForm, 'newKey', array('cols' => 80, 'rows' => 6)); ?>
-		<?php echo $form->error($sshForm, 'newKey'); ?>
+		<?php echo $form->fileField($model, 'sshKeysAdded'); ?>
+		<?php echo $form->error($model, 'sshKeysAdded'); ?>
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Add key', array('name' => 'addKeys')); ?>
+		<?php echo CHtml::submitButton('Upload keys', array('name' => 'uploadKeys')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
