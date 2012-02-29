@@ -307,9 +307,8 @@ class PeopleController extends Controller
 			}
 		}
 		
-		// Handle the clearing of the avatar
+		// Handle the (infinite) locking of an account
 		if( isset($_POST['lockAccount']) ) {
-			// Magic value of 000001010000Z means 'locked infinitely by an administrator'
 			$model->replaceAttribute("pwdAccountLockedTime", User::InfinitelyLocked);
 			if( $model->save() ) {
 				Yii::app()->user->setFlash('success', 'Account infinitely locked');
