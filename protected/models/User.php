@@ -56,7 +56,7 @@ class User extends SLdapModel
 			array('homePostalAddress, homePhone, ircNick', 'MultiValidator', 'validator' => 'length',  'min' => 4, 'on' => 'editContactDetails'),
 			// SSH Key management
 			array('sshPublicKey', 'application.validators.SSHKeyValidator', 'on' => 'editKeys'),
-			array('sshKeysAdded', 'application.validators.SSHKeyValidator', 'existingKeys' => $this->getAttribute("sshPublicKey"), 'on' => 'editKeys'),
+			array('sshKeysAdded', 'application.validators.SSHKeyValidator', 'existingKeys' => (array) $this->getAttribute("sshPublicKey"), 'on' => 'editKeys'),
 			// Avatar changing - 3MB max upload limit, file must be a jpeg/gif/png image
 			array('jpegPhoto', 'file', 'types' => 'jpg, jpeg, gif, png', 'maxSize' => 1024 * 1024 * 3, 'allowEmpty' => true, 'on' => 'editAvatar'),
 			// Password validation - to ensure only Salted-SHA1 passwords are saved to protect outselves
@@ -105,7 +105,7 @@ class User extends SLdapModel
 	public function getProcessedSshKeys()
 	{
 		$keyData = array();
-		foreach( $this->getAttribute("sshPublicKey") as $id => $key) {
+		foreach( (array) $this->getAttribute("sshPublicKey") as $id => $key) {
 			$keyData[] = SSHKeyValidator::splitKey($key, $id);
 		}
 		return $keyData;
@@ -206,7 +206,7 @@ class User extends SLdapModel
 			$this->addAttribute("sshPublicKey", $this->sshKeysAdded);
 		}
 		// Do we no longer have any SSH Keys?
-		if( $this->hasObjectClass("ldapPublicKey") && empty($this->sshPublicKey) ) {
+		if( $this->hasObjectClass("ldapPublicKey") && empty($this->sshPublicKey) && $this->scenario == 'editKeys') {
 			$this->removeAttribute("objectClass", "ldapPublicKey");
 		}
 		

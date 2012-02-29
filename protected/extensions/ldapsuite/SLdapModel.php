@@ -361,7 +361,7 @@ abstract class SLdapModel extends CModel
 		$entry = $original ? $this->_originalEntry : $this->_entry;
 		// There is no point trying to retrieve the value if it does not exist...
 		if( !$entry->exists($name) ) {
-			return in_array($name, $this->multivaluedAttributes()) ? array() : null;
+			return null;
 		}
 		
 		$value = $entry->getValue($name);
