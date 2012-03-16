@@ -1,4 +1,4 @@
-assets/
+/assets/
 protected/runtime/
 protected/config/main.php
 protected/data/ldap_schema.cache
