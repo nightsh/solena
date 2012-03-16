@@ -1,43 +1,60 @@
-** Current todo
+=== Current todo ===
 
-* RBAC
-  * PHP file based - describe the structure of actions
+* people/<general>: e.V attribute management (includes seperate object class stuff)
 
-* SLdapModel
-  * Check function names - renaming may be required to make full sense
-  * Add events - needed for givenName + " " + sn = cn
+* people/<general>: Support adding of email addresses (this is going to be slightly messy)
+
+* people/<general>: prevent foot shooting - block account-lock on self
+
+* SLdapModel API adjustments - findByFilter to be gone:
+  * findByDn( dn, attributes )
+  * findByUniqueAttribute( value, attributes )
+  * findAll( filter, attributes, .... )
 
 * people/index
-  * Add view person links to entries
   * Make the mail filter run over secondaryMail addresses as well
   * Display secondaryMail addresses as well as primary mail addresses perhaps? (should work in theory)
-  
-* people/editProfile
-  * Add validators for Gender/Timezone
-  * Make Timezone a drop down
 
-* people/editContactDetails
-  * Adjust validation system to be able to handle presence of arrays if it cannot already
-
-* User/People controller
-  * Controller exists for the purposes of both administration and normal user changes
-    - UI should be friendly to both purposes
-    - Details which require control validation (namely email addresses) to be validated only if "current user == user being edited"
-    - All variables should be required to pass strict tests for validity
-  * Design:
-    - Users have a "profile" and "contact details"
-    - Profile = name, timezone, gender, language preference, homepage
-    - Contact details = email, jabber, irc nick, address, phone number (permitted to have multiples of all - email must be verified)
-    - GPG/SSH key administration
-  * Actions:
-    - index (list of users, paginated, with filters of username/name/email & custom filters for group membership)
-    - create (creates a new user - the Base must be specified)
-    - delete (destroys a user)
-    - view (display the profile and contact details of the specified user - as well as their avatar)
-    - move (changes the Base the user is in - eg: locked, services, people)
-    - lock (locks or unlocks the user)
-    - manageProfile (manage the profile fields)
-    - manageContact (manage the contact information)
-    - manageAvatar (allows users to change their avatar)
-    - manageKeys (manage the ssh/gpg? keys - including downloading them)
-    - changePassword (changes the password of the user - will need to invoke retainCredentials)
+* group/<general>: Handle dynamic groups
+  * Members cannot be added/removed when working with dynamic groups
+  * Groups should be created as Dynamic or Normal - maybe a "type" drop down on the creation form or perhaps seperate create forms for them both
+  * Dynamic groups will need configuration for their filters - seperate page or a section of the edit dialog?
+    
+=== Notes ===
+ 
+<toma> maybe languages might be handy
+<bcooksley> good idea, we don't have that atm
+<toma> phonenumbers?
+<bcooksley> that is in contact details
+<bcooksley> the second section
+<toma> ah, there is a home phone
+<bcooksley> yeah, I can rename that
+<PovAddict> is there user-controlled access control for that?
+<bcooksley> and probably should
+<toma> maybe an emergency phone or more general 'emergency contact details'
+<bcooksley> PovAddict: LDAP access controls and a little bit of Yii's own rbac will be doing that
+<bcooksley> hm, good idea
+<toma> and we need ev-details i guess?
+<toma> and a picture :)
+<PovAddict> bcooksley: I meant like "here's my phone number, but only other KDE devs can see it; here's the languages I speak, feel free to make this public"
+<bcooksley> the ev-details stuff i'm still weighing up
+<bcooksley> should it be a seperate page or shown on the same view page (obviously only ev-members would have that section)
+<bcooksley> and for the avatar... I haven't decided if i'll embed it into the page
+<bcooksley> or get it loaded from a url
+<bcooksley> (embed = data: uri)
+<toma> maybe just link it to that avatar site
+<bcooksley> people are already allowed to upload avatars to the existing identity atm
+<bcooksley> gravatar?
+<toma> yeah, think s
+<toma> o
+<bcooksley> when I implement the avatar management functionality (as shown beside in the operations sidebar) then i'll probably implement the showing of the avatar on the view page
+<toma> maybe some social media stuff, twitter, identi.ca, facebook ?
+<bcooksley> duly thought of
+<toma> or is that overkill ?
+<bcooksley> hmm, could be, but I don't see too much of a problem
+<PovAddict> the more info the better, as long as the user can keep it from being public :)
+<toma> yeah
+<bcooksley> fortunately now that we are using native LDAP access controls
+<toma> maybe add a selection per field 'public, devs, ev-members, ev-board' ?
+<PovAddict> we don't need Facebook's privacy panel
+<PovAddict> but some control is needed
