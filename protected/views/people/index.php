@@ -11,13 +11,11 @@ $this->menu = array( array('label' => 'Create Person', 'url' => array('create'),
 	'dataProvider'=> $dataProvider,
 	'filter'=> $model,
 	'columns'=> array(
-		'uid',
-		'cn',
-		'mail',
 		array(
-			'class' => 'CButtonColumn',
-			'template' => '{view}',
-			'viewButtonUrl' => 'Yii::app()->createUrl("/people/view", array("uid" => $data->uid))',
+			'class' => 'LinkDataColumn',
+			'name' => 'cn',
+			'urlExpression'=> 'Yii::app()->createUrl("/people/view", array("uid" => $data->uid))',
 		),
+		'mail',
 	),
 )); ?>

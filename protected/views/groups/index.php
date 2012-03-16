@@ -11,12 +11,11 @@ $this->menu = array( array('label' => 'Create Group', 'url' => array('create'), 
 	'dataProvider' => $dataProvider,
 	'filter' => $model,
 	'columns' => array(
-		'cn',
-		'description',
 		array(
-			'class' => 'CButtonColumn',
-			'template' => '{view}',
-			'viewButtonUrl' => 'Yii::app()->createUrl("/groups/view", array("cn" => $data->cn))',
+			'class' => 'LinkDataColumn',
+			'name' => 'cn',
+			'urlExpression' => 'Yii::app()->createUrl("/groups/view", array("cn" => $data->cn))',
 		),
+		'description',
 	),
 )); ?>
