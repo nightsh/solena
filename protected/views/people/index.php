@@ -13,9 +13,10 @@ $this->menu = array( array('label' => 'Create Person', 'url' => array('create'),
 	'columns'=> array(
 		array(
 			'class' => 'LinkDataColumn',
-			'name' => 'cn',
+			'name' => 'uid',
 			'urlExpression'=> 'Yii::app()->createUrl("/people/view", array("uid" => $data->uid))',
 		),
+		'cn',
 		'mail',
 	),
 )); ?>
