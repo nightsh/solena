@@ -36,14 +36,13 @@ $this->menu = $this->generateMenu($model);
 				'id' => 'selectedPerson',
 				'visible' => Yii::app()->user->checkAccess('manageGroup'),
 			),
-			'uid',
-			'cn',
-			'mail',
 			array(
-				'class' => 'CButtonColumn',
-				'template' => '{view}',
-				'viewButtonUrl' => 'Yii::app()->createUrl("/people/view", array("uid" => $data->uid))',
+				'class' =>'LinkDataColumn',
+				'name' => 'uid',
+				'urlExpression' => 'Yii::app()->createUrl("/people/view", array("uid" => $data->uid))',
 			),
+			'cn',
+			'mail'
 		),
 	)); ?>
 
