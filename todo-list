@@ -14,11 +14,6 @@
 * people/index
   * Make the mail filter run over secondaryMail addresses as well
   * Display secondaryMail addresses as well as primary mail addresses perhaps? (should work in theory)
-
-* group/<general>: Handle dynamic groups
-  * Members cannot be added/removed when working with dynamic groups
-  * Groups should be created as Dynamic or Normal - maybe a "type" drop down on the creation form or perhaps seperate create forms for them both
-  * Dynamic groups will need configuration for their filters - seperate page or a section of the edit dialog?
     
 === Notes ===
  
