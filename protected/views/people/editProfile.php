@@ -67,6 +67,22 @@ $this->menu = $this->generateMenu($model);
 		<?php echo $form->error($model, 'timezoneName'); ?>
 	</div>
 
+	<?php if( Yii::app()->user->checkAccess('manageEvMembershipData', array('user' => $model)) ) { ?>
+		<div class="row">
+			<?php echo $form->labelEx($model, 'memberStatus'); ?>
+			<?php echo $form->dropDownList($model, 'memberStatus', $model->validMemberStatus(), array('empty'=> 'Not set')); ?>
+			<?php echo $form->error($model, 'memberStatus'); ?>
+		</div>
+	<?php } ?>
+
+	<?php if( Yii::app()->user->checkAccess('changeUserEvDetails', array('user' => $model)) ) { ?>
+		<div class="row">
+			<?php echo $form->labelEx($model, 'evMail'); ?>
+			<?php echo $form->dropDownList($model, 'evMail', $model->validEmailAddresses(), array('empty'=> 'Not set')); ?>
+			<?php echo $form->error($model, 'evMail'); ?>
+		</div>
+	<?php } ?>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Update Profile'); ?>
 	</div>

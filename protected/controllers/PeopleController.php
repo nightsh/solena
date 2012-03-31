@@ -162,6 +162,10 @@ class PeopleController extends Controller
 				$model->uid = $_POST['User']['uid'];
 				$model->setDnByParent( $model->getParentDn() );
 			}
+			// If we have permission to update their KDE e.V membership
+			if( Yii::app()->user->checkAccess('manageEvMembershipData', array('user' => $model)) ) {
+				$model->memberStatus = $_POST['User']['memberStatus'];
+			}
 			// Update all other attriutes...
 			$model->attributes = $_POST['User'];
 			if( $model->save() ) {

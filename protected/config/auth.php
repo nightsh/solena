@@ -7,7 +7,7 @@ return array(
 		'description' => 'Is a KDE Sysadmin',
 		'bizRule' => '',
 		'data' => '',
-		'children' => array('changeUserDetails', 'changeUserSshKeys', 'changeUserAvatar', 'changeUserPassword', 'changeUserUsername', 'manageGroup'),
+		'children' => array('changeUserDetails', 'changeUserSshKeys', 'changeUserAvatar', 'changeUserPassword', 'changeUserUsername', 'manageEvMembershipData', 'manageGroup'),
 	),
 
 	'web-admins' => array(
@@ -38,6 +38,15 @@ return array(
 		'description' => 'Is a member of the KDE e.V',
 		'bizRule' => '',
 		'data' => '',
+		'children' => array('selfChangeUserEvDetails'),
+	),
+
+	'ev-board' => array(
+		'type' => CAuthItem::TYPE_ROLE,
+		'description' => 'Is a member of the KDE e.V Board',
+		'bizRule' => '',
+		'data' => '',
+		'children' => array('manageEvMembership', 'manageEvMembershipData'),
 	),
 
 	'users' => array(
@@ -84,6 +93,13 @@ return array(
 		'data' => '',
 	),
 
+	'changeUserEvDetails' => array(
+		'type' => CAuthItem::TYPE_OPERATION,
+		'description' => 'Allowed to change user KDE e.V membership related details, excluding type',
+		'bizRule' => 'return in_array("ev-members", $params["user"]->groupMember);',
+		'data' => '',
+	),
+
 	'manageGroup' => array(
 		'type' => CAuthItem::TYPE_OPERATION,
 		'description' => 'Allowed to manage a group, including the descriptions and members',
@@ -106,6 +122,30 @@ return array(
 		'bizRule' => 'return Yii::app()->user->dn == $params["user"]->dn;',
 		'data' => '',
 		'children' => array('changeUserSshKeys'),
+	),
+
+	'selfChangeUserEvDetails' => array(
+		'type' => CAuthItem::TYPE_TASK,
+		'description' => 'e.V Members are permitted to change their own membership details',
+		'bizRule' => 'return Yii::app()->user->dn == $params["user"]->dn;',
+		'data' => '',
+		'children' => array('changeUserEvDetails'),
+	),
+
+	'manageEvMembership' => array(
+		'type' => CAuthItem::TYPE_TASK,
+		'description' => 'People permitted to manage the ev-members group',
+		'bizRule' => 'return $params["group"]->cn == "ev-members";',
+		'data' => '',
+		'children' => array('manageGroup'),
+	),
+
+	'manageEvMembershipData' => array(
+		'type' => CAuthItem::TYPE_TASK,
+		'description' => 'Allowed to access and change data on KDE e.V members',
+		'bizRule' => 'return in_array("ev-members", $params["user"]->groupMember);',
+		'data' => '',
+		'children' => array('changeUserEvDetails', 'changeUserDetails'),
 	),
 );
 
