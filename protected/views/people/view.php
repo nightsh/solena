@@ -20,6 +20,10 @@ $this->menu = $this->generateMenu($model);
 			'name' => 'timezone',
 			'visible' => isset($model->timezone),
 		),
+		array(
+			'name' => 'memberStatus',
+			'visible' => isset($model->memberStatus),
+		),
 	),
 )); ?>
 <br />
@@ -35,5 +39,10 @@ $this->menu = $this->generateMenu($model);
 		'ircNick',
 		'jabberID',
 		'emailAddresses:email',
+		array(
+			'name' => 'evMail',
+			'type' => 'email',
+			'visible' => isset($model->evMail),
+		),
 	),
 )); ?>
