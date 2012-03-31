@@ -303,6 +303,11 @@ class PeopleController extends Controller
 		$model = $this->loadModel($uid, array('pwdAccountLockedTime', 'uid', 'cn'));
 		$model->setScenario('toggleLock');
 		
+		// Locking yourself is prohibited
+		if($model->dn == Yii::app()->user->dn) {
+			throw new CHttpException(403, 'You are not permitted to lock yourself out');
+		}
+		
 		// Handle the unlocking of an account
 		if( isset($_POST['unlockAccount']) ) {
 			$model->removeAttribute("pwdAccountLockedTime");
