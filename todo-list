@@ -1,7 +1,5 @@
 === Current todo ===
 
-* people/<general>: e.V attribute management (includes seperate object class stuff)
-
 * people/<general>: Support adding of email addresses (this is going to be slightly messy)
 
 * people/<general>: prevent foot shooting - block account-lock on self
