@@ -73,6 +73,13 @@ class Group extends SLdapModel
 		$this->addAttribute('memberUid', $user->uid);
 		$this->addAttribute('member', $user->dn);
 		$user->addAttribute('groupMember', $this->cn);
+		
+		// If the group is the ev-members group, then we do some very special handling
+		if( $this->cn == 'ev-members' ) {
+			$user->addAttribute('objectClass', 'kdeEvMember');
+			$user->addAttribute('memberStatus', 'Active');
+			$user->addAttribute('evMail', $user->mail);
+		}
 	}
 
 	public function removeMember($user)
@@ -91,6 +98,13 @@ class Group extends SLdapModel
 		$this->removeAttribute('memberUid', $user->uid);
 		$this->removeAttribute('member', $user->dn);
 		$user->removeAttribute('groupMember', $this->cn);
+		
+		// If the group is the ev-members group, then we do some very special handling
+		if( $this->cn == 'ev-members' ) {
+			$user->removeAttribute('memberStatus');
+			$user->removeAttribute('evMail');
+			$user->removeAttribute('objectClass', 'kdeEvMember');
+		}
 	}
 
 	public function updateExistingMember($user)
