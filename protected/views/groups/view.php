@@ -20,7 +20,7 @@ $this->menu = $this->generateMenu($model);
 
 	<?php
 		$template = '{summary}{items}';
-		if( Yii::app()->user->checkAccess('manageGroup') && $dataProvider->itemCount > 0 ) {
+		if( Yii::app()->user->checkAccess('manageGroup', array('group' => $model)) && $dataProvider->itemCount > 0 ) {
 			$template .= CHtml::submitButton('Remove member', array('name' => 'removeMember', 'style' => 'float:left'));
 		}
 		$template .= '{pager}';
@@ -34,7 +34,7 @@ $this->menu = $this->generateMenu($model);
 			array(
 				'class' => 'CCheckBoxColumn',
 				'id' => 'selectedPerson',
-				'visible' => Yii::app()->user->checkAccess('manageGroup'),
+				'visible' => Yii::app()->user->checkAccess('manageGroup', array('group' => $model)),
 			),
 			array(
 				'class' =>'LinkDataColumn',

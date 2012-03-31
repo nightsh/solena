@@ -20,7 +20,7 @@ $this->menu = $this->generateMenu($model);
 
 	<?php
 		$template = '{summary}{items}';
-		if( Yii::app()->user->checkAccess('manageGroup') && $dataProvider->itemCount > 0 ) {
+		if( $dataProvider->itemCount > 0 ) {
 			$template .= CHtml::submitButton('Add member', array('name' => 'addMember', 'style' => 'float:left'));
 		}
 		$template .= '{pager}';

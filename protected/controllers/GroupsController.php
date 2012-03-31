@@ -41,7 +41,7 @@ class GroupsController extends Controller
 	}
 
 	/**
-	 * Show the list of people
+	 * Show the list of groups
 	 */
 	public function actionIndex()
 	{
@@ -63,7 +63,7 @@ class GroupsController extends Controller
 	}
 
 	/**
-	 * Create a new person
+	 * Create a new group
 	 */
 	public function actionCreate()
 	{
@@ -91,18 +91,12 @@ class GroupsController extends Controller
 	}
 
 	/**
-	 * Show a person's profile and contact details
+	 * Show a list of the group members
 	 */
 	public function actionView($cn)
 	{
 		// Load the group we are displaying here...
 		$model = $this->loadModel($cn);
-
-		// Create the model instance we will be using for searches....
-		$user = new User('search');
-		if( isset($_GET['User']) ) {
-			$user->attributes = $_GET['User'];
-		}
 
 		// Create a data provider
 		$filter = Net_LDAP2_Filter::create('groupMember', 'equals', $model->cn);
@@ -116,7 +110,7 @@ class GroupsController extends Controller
 	}
 
 	/**
-	 * Edit the person's profile values
+	 * Allow the internal and user-visible group name to be changed
 	 */
 	public function actionEdit($cn)
 	{
@@ -142,7 +136,7 @@ class GroupsController extends Controller
 	}
 
 	/**
-	 * Delete an existing person
+	 * Delete a group
 	 */
 	public function actionDelete($cn)
 	{
@@ -248,10 +242,10 @@ class GroupsController extends Controller
 			$menu[] = array('label' => 'View Group', 'url' => array('view', 'cn' => $model->cn));
 		}
 		// Group management actions...
-		if( Yii::app()->user->checkAccess('manageGroup') && $this->action->id != 'edit' ) {
+		if( Yii::app()->user->checkAccess('manageGroup', $params) && $this->action->id != 'edit' ) {
 			$menu[] = array('label' => 'Edit Group', 'url' => array('edit', 'cn' => $model->cn));
 		}
-		if( Yii::app()->user->checkAccess('manageGroup') && $this->action->id != 'addMember' ) {
+		if( Yii::app()->user->checkAccess('manageGroup', $params) && $this->action->id != 'addMember' ) {
 			$menu[] = array('label' => 'Add Member To Group', 'url' => array('addMember', 'cn' => $model->cn));
 		}
 		// Sysadmin only actions now
