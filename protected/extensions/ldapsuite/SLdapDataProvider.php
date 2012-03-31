@@ -44,7 +44,7 @@ class SLdapDataProvider extends CDataProvider
 			$this->model = SLdapModel::model($this->modelName);
 		} else if($model instanceof SLdapModel) {
 			$this->modelName = get_class($model);
-			$this->model = SLdapModel::model($this->modelName);
+			$this->model = $model;
 		}
 		// Load the configuration....
 		foreach($config as $key=>$value) {
