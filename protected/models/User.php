@@ -49,6 +49,10 @@ class User extends SLdapModel
 			array('dateOfBirth', 'date', 'format' => 'dd/MM/yyyy', 'on' => 'editProfile'),
 			array('gender', 'in', 'range' => array_keys($this->validGenders()), 'on' => 'editProfile'),
 			array('timezoneName', 'in', 'range' => array_keys($this->validTimezones()), 'on' => 'editProfile'),
+			// KDE e.V membership detail editing
+			array('memberStatus', 'unsafe', 'on' => 'editProfile'),
+			array('memberStatus', 'in', 'range' => array_keys($this->validMemberStatus()), 'on' => 'editProfile'),
+			array('evMail', 'in', 'range' => array_keys($this->validEmailAddresses()), 'on' => 'editProfile'),
 			// Contact Details editing
 			array('jabberID', 'MultiValidator', 'validator' => 'email', 'on' => 'editContactDetails'),
 			array('secondaryMail', 'MultiValidator', 'validator' => 'email',  'on' => 'editContactDetails'),
@@ -81,6 +85,8 @@ class User extends SLdapModel
 			'jabberID' => 'Jabber ID',
 			'jpegPhoto' => 'Avatar upload',
 			'timezoneName' => 'Timezone',
+			'memberStatus' => 'e.V Membership Status',
+			'evMail' => 'Email address for e.V matters',
 		);
 	}
 
@@ -164,6 +170,20 @@ class User extends SLdapModel
 			$timezoneNames[$tzName] = $tzName;
 		}
 		return $timezoneNames;
+	}
+
+	public function validMemberStatus()
+	{
+		return array('Active' => 'Active', 'Extraordinary' => 'Extraordinary', 'Supporting' => 'Supporting');
+	}
+
+	public function validEmailAddresses()
+	{
+		$addresses = array();
+		foreach( $this->emailAddresses as $email ) {
+			$addresses[$email] = $email;
+		}
+		return $addresses;
 	}
 
 	protected function beforeSave()
