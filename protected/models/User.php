@@ -54,6 +54,7 @@ class User extends SLdapModel
 			array('memberStatus', 'in', 'range' => array_keys($this->validMemberStatus()), 'on' => 'editProfile'),
 			array('evMail', 'in', 'range' => array_keys($this->validEmailAddresses()), 'on' => 'editProfile'),
 			// Contact Details editing
+			array('mail, secondaryMail', 'unsafe', 'on' => 'editContactDetails'),
 			array('jabberID', 'MultiValidator', 'validator' => 'email', 'on' => 'editContactDetails'),
 			array('secondaryMail', 'MultiValidator', 'validator' => 'email',  'on' => 'editContactDetails'),
 			array('labeledURI', 'MultiValidator', 'validator' => 'url', 'defaultScheme' => 'http', 'on' => 'editContactDetails'),
@@ -102,6 +103,64 @@ class User extends SLdapModel
 	public function getEmailAddresses()
 	{
 		return array_merge( array($this->mail), (array) $this->secondaryMail );
+	}
+
+	/**
+	 * Provides detailed information about the email addresses held by this user
+	 * Specifies the primary, secondary and pending addresses - and includes this information
+	 */
+	public function getEmailAddressData()
+	{
+		// Start the list of email data, starting with the primary address....
+		$emailData = array( array('id' => 0, 'mail' => $this->mail, 'type' => 'primary') );
+
+		// Now add secondary addresses
+		foreach( $this->secondaryMail as $address ) {
+			$emailData[] = array('id' => count($emailData), 'mail' => $address, 'type' => 'secondary');
+		}
+
+		// Finally add any pending addresses...
+		$pendingAddresses = Token::model()->findAllByAttributes( array('uid' => $this->uid, 'type' => Token::TypeVerifyAddress) );
+		foreach( $pendingAddresses as $pending ) {
+			$emailData[] = array('id' => count($emailData), 'mail' => $pending->mail, 'type' => 'pending');
+		}
+
+		return $emailData;
+	}
+
+	/**
+	 * Sets the primary email address for the user.
+	 * The given address must already be set as a secondary address
+	 */
+	public function setPrimaryEmailAddress($address)
+	{
+		if( !in_array($address, $this->secondaryMail) ) {
+			return false;
+		}
+		$this->addAttribute("secondaryMail", $this->mail);
+		$this->removeAttribute("secondaryMail", $address);
+		$this->replaceAttribute("mail", $address);
+		return true;
+	}
+
+	/**
+	 * Removes the given email address from the user entry.
+	 * The given address must be either a secondary or pending address.
+	 * This applies immediately, and will save all pending changes!
+	 */
+	public function removeEmailAddress($address)
+	{
+		// We search for a possibly pending address first, and if found will delete that
+		$pending = Token::model()->findByAttributes( array('uid' => $this->uid, 'type' => Token::TypeVerifyAddress, 'mail' => $address) );
+		if( $pending instanceof CActiveRecord ) {
+			return $pending->delete();
+		// No pending address found, so maybe it is a secondary address...
+		} else if( in_array($address, $this->secondaryMail) ) {
+			$this->removeAttribute("secondaryMail", $address);
+			return $this->save();
+		}
+		// Neither was found, invalid request so we fail it
+		return false;
 	}
 
 	/**
