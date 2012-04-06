@@ -20,4 +20,17 @@ class Controller extends CController
 	 * for more details on how to specify this property.
 	 */
 	public $breadcrumbs=array();
+
+	protected function sendEmail($to, $template, $template_data = array())
+	{
+		// Initial setup
+		$mail = New YiiMailMessage;
+		$template_data['mailer'] = &$mail;
+		// Configure the email to be sent out
+		$mail->from = Yii::app()->params['adminEmail'];
+		$mail->to = array($to);
+		$mail->body = $this->renderPartial($template, $template_data, true, true);
+		// Send the email
+		Yii::app()->mail->send($mail);
+	}
 }
