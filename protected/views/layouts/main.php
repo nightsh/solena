@@ -31,8 +31,10 @@
 				array('label' => 'Home', 'url' => array('/site/index')),
 				array('label' => 'People', 'url' => array('/people/index')),
 				array('label' => 'Groups', 'url' => array('/groups/index')),
+				array('label' => 'Registrations', 'url' => array('/registration/list'), 'visible' => Yii::app()->user->checkAccess('sysadmins')),
 				array('label' => 'My Account', 'url' => array('/people/view', 'uid' => Yii::app()->user->id), 'visible' => !Yii::app()->user->isGuest),
 				array('label' => 'Login', 'url'=>array('/site/login'), 'visible' => Yii::app()->user->isGuest),
+				array('label' => 'Register', 'url'=>array('/registration/index'), 'visible' => Yii::app()->user->isGuest),
 				array('label' => 'Logout ('.Yii::app()->user->name.')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
 			),
 		)); ?>

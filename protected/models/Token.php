@@ -32,14 +32,54 @@ class Token extends CActiveRecord
 	 */
 	public function rules()
 	{
-		// NOTE: you should only define rules for those attributes that
-		// will receive user inputs.
 		return array(
-			array('token, type, mail, uid, givenName, sn', 'required'),
-			array('type', 'numerical', 'integerOnly' => true),
+			// Operational validations
+			array('token, type', 'unsafe'),
+			array('token, type', 'required'),
 			array('token', 'length', 'max' => 50),
-			array('mail, uid, givenName, sn', 'length', 'max' => 255),
+			array('type', 'numerical', 'integerOnly' => true),
+			// Data validations
+			array('uid', 'length', 'max' => 64, 'on' => 'verify, reset'),
+			array('mail', 'email', 'on' => 'verify, register'),
+			array('mail', 'unique', 'on' => 'verify, register'), // Database check
+			array('mail', 'validateUniqueEmail', 'on' => 'verify, register'), // LDAP check
+			array('mail', 'length', 'max' => 64, 'on' => 'verify, register'),
+			// Verify address validations
+			array('uid, mail', 'required', 'on' => 'verify'),
+			// Registration validations
+			array('mail, givenName, sn', 'required', 'on' => 'register'),
+			array('givenName, sn', 'length', 'max' => 64, 'on' => 'register'),
 		);
+	}
+
+	public function attributeLabels()
+	{
+		return array(
+			'uid' => 'Username',
+			'sn' => 'Last name',
+			'givenName' => 'First name',
+			'mail' => 'Email address',
+		);
+	}
+
+	public function getName()
+	{
+		return sprintf('%s %s', $this->givenName, $this->sn);
+	}
+
+	public function validateUniqueEmail($attribute, $params)
+	{
+		// Build the filter for the LDAP check
+		$filters = array();
+		$filters[] = Net_LDAP2_Filter::create('mail', 'equals', $this->$attribute);
+		$filters[] = Net_LDAP2_Filter::create('secondaryMail', 'equals', $this->$attribute);
+		$filter = Net_LDAP2_Filter::combine('or', $filters);
+
+		// Check against LDAP
+		$result = User::model()->findByFilter($filter);
+		if( $result->count() > 0 ) {
+			$this->addError("mail", "Email address is already in use.");
+		}
 	}
 
 	protected function beforeValidate()

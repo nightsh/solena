@@ -1,5 +1,7 @@
 <?php
 
+require_once('StringCleaner.php');
+
 class User extends SLdapModel
 {
 	// Constants defining the types of lock
@@ -42,11 +44,11 @@ class User extends SLdapModel
 			// Searching (used on index)
 			array('uid, cn, mail, secondaryMail', 'safe', 'on' => 'search'),
 			// Shared validations...
-			array('uid, givenName, sn', 'required', 'on' => 'editProfile, create'),
-			array('uid, givenName, sn', 'length', 'min' => 2, 'max' => 64, 'on' => 'editProfile, create'),
-			array('uid', 'match', 'pattern' => '/^([a-z]|-)+$/', 'on' => 'editProfile, create'),
-			array('uid', 'UniqueAttributeValidator', 'on' => 'editProfile, create'),
-			array('mail', 'email', 'on' => 'editContactDetails, create'),
+			array('uid, givenName, sn', 'required', 'on' => 'editProfile, create, register'),
+			array('uid, givenName, sn', 'length', 'min' => 2, 'max' => 64, 'on' => 'editProfile, create, register'),
+			array('uid', 'match', 'pattern' => '/^([a-z]|-)+$/', 'on' => 'editProfile, create, register'),
+			array('uid', 'UniqueAttributeValidator', 'on' => 'editProfile, create, register'),
+			array('mail', 'email', 'on' => 'editContactDetails, create, register'),
 			// Profile Editing
 			array('uid', 'unsafe', 'on' => 'editProfile'), // The username can never be mass-assigned
 			array('dateOfBirth', 'date', 'format' => 'dd/MM/yyyy', 'on' => 'editProfile'),
@@ -68,13 +70,16 @@ class User extends SLdapModel
 			// Avatar changing - 3MB max upload limit, file must be a jpeg/gif/png image
 			array('jpegPhoto', 'file', 'types' => 'jpg, jpeg, gif, png', 'maxSize' => 1024 * 1024 * 3, 'allowEmpty' => true, 'on' => 'editAvatar'),
 			// Password validation - to ensure only Salted-SHA1 passwords are saved to protect outselves
-			array('userPassword', 'match', 'pattern' => '/\{SSHA\}.+/', 'on' => 'changePassword'),
+			array('userPassword', 'match', 'pattern' => '/\{SSHA\}.+/', 'on' => 'changePassword, register'),
 			array('currentPassword', 'verifyPassword', 'on' => 'changePassword'),
-			array('newPassword', 'length', 'min' => 6, 'on' => 'changePassword'),
-			array('newPassword, confirmNewPassword', 'required', 'on' => 'changePassword'),
-			array('newPassword', 'compare', 'compareAttribute' => 'confirmNewPassword', 'on' => 'changePassword'),
+			array('newPassword', 'length', 'min' => 6, 'on' => 'changePassword, register'),
+			array('newPassword, confirmNewPassword', 'required', 'on' => 'changePassword, register'),
+			array('newPassword', 'compare', 'compareAttribute' => 'confirmNewPassword', 'on' => 'changePassword, register'),
 			// User creation
 			array('mail', 'required', 'on' => 'create'),
+			// User registration
+			array('givenName, sn, mail', 'unsafe', 'on' => 'register'), // Do not massive assign these, as they are previously known
+			array('uid', 'in', 'range' => array_keys($this->validUsernames()), 'on' => 'register'),
 		);
 	}
 
@@ -252,6 +257,33 @@ class User extends SLdapModel
 		return $addresses;
 	}
 
+	public function validUsernames()
+	{
+		// Prepare
+		$prospects = array();
+		$firstname = cleanString($this->givenName);
+		$lastname  = cleanString($this->sn);
+
+		// Build a prospective list of usernames
+		$prospects[] = substr($firstname, 0, 1) . $lastname; // jsmith
+		$prospects[] = $firstname . substr($lastname, 0, 1); // johns
+		$prospects[] = $lastname; // smith
+		$prospects[] = $firstname . $lastname; // johnsmith
+		$prospects[] = $lastname . $firstname; // smithjohn
+
+		// Actualise the prospective addresses by ensuring they are not already in use
+		$usernames = array();
+		foreach($prospects as $prospect) {
+			$filter = Net_LDAP2_Filter::create('uid', 'equals', $prospect);
+			$results = User::model()->findFirstByFilter( $filter, array('uid') );
+			if( is_null($results) && strlen($prospect) > 4) {
+				$usernames[$prospect] = $prospect;
+			}
+		}
+
+		return $usernames;
+	}
+
 	public function verifyPassword($attribute, $params)
 	{
 		// We only do this verification if they are changing their own password, or if we do not have a User instance yet
@@ -269,7 +301,7 @@ class User extends SLdapModel
 	protected function beforeSave()
 	{
 		// Update the CN if we need to - it is only needed for the editProfile and create scenarios
-		if( $this->scenario == 'editProfile' || $this->scenario == 'create' ) {
+		if( $this->scenario == 'editProfile' || $this->scenario == 'create' || $this->scenario == 'register' ) {
 			// The validators will prevent this code from being reached if givenName/sn are null - so no need to check
 			$this->cn = sprintf("%s %s", $this->givenName, $this->sn);
 		}
