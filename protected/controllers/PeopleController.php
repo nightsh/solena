@@ -90,6 +90,7 @@ class PeopleController extends Controller
 			
 			// Create the new person
 			if( $model->save() ) {
+				Yii::app()->user->setFlash('success', 'Person created successfully');
 				$this->redirect(array('view', 'uid' => $model->uid));
 			}
 		}
@@ -135,6 +136,7 @@ class PeopleController extends Controller
 
 		if( isset($_POST['confirmDeletion']) && isset($_POST['deleteAccount']) ) {
 			if( $model->delete() ) {
+				Yii::app()->user->setFlash('success', 'Person deleted successfully');
 				$this->redirect( array('index') );
 			}
 		}
@@ -169,6 +171,7 @@ class PeopleController extends Controller
 			// Update all other attriutes...
 			$model->attributes = $_POST['User'];
 			if( $model->save() ) {
+				Yii::app()->user->setFlash('success', 'Profile updated successfully');
 				$this->redirect( array('view', 'uid' => $model->uid) );
 			}
 		}
@@ -193,6 +196,7 @@ class PeopleController extends Controller
 		if( isset($_POST['User']) ) {
 			$model->attributes = $_POST['User'];
 			if( $model->save() ) {
+				Yii::app()->user->setFlash('success', 'Contact details updated successfully');
 				$this->redirect( array('view', 'uid' => $model->uid) );
 			}
 		}
@@ -257,7 +261,7 @@ class PeopleController extends Controller
 			$keyUpload = CUploadedFile::getInstance($model, 'sshKeysAdded');
 			$model->addSSHKeys($keyUpload);
 			if( $model->save() ) {
-				Yii::app()->user->setFlash('success', 'SSH Keys updated');
+				Yii::app()->user->setFlash('success', 'SSH key(s) added');
 			}
 		}
 		
@@ -424,7 +428,7 @@ class PeopleController extends Controller
 		$model->removeAttribute("sshPublicKey", $selectedKeys);
 		// Now try and save - if we succeed add a flash message so the user knows we succeeded
 		if( $model->save() ) {
-			Yii::app()->user->setFlash('success', 'SSH Keys updated');
+			Yii::app()->user->setFlash('success', 'SSH key(s) removed');
 			return true;
 		}
 		return false;

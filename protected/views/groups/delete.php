@@ -23,7 +23,7 @@ $this->menu = $this->generateMenu($model);
 
 	<div class="row">
 		<?php echo CHtml::checkbox('confirmDeletion') ?>
-		Confirm account deletion
+		Confirm group deletion
 	</div>
 
 	<div class="row buttons">

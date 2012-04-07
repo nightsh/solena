@@ -81,6 +81,7 @@ class GroupsController extends Controller
 
 			// Create the new group
 			if( $model->save() ) {
+				Yii::app()->user->setFlash('success', 'Group created successfully' );
 				$this->redirect(array('view', 'cn' => $model->cn));
 			}
 		}
@@ -126,6 +127,7 @@ class GroupsController extends Controller
 			$model->attributes = $_POST['Group'];
 			$model->setDnByParent( $model->getParentDn() );
 			if( $model->save() ) {
+				Yii::app()->user->setFlash('success', 'Group details updated successfully');
 				$this->redirect( array('view', 'cn' => $model->cn) );
 			}
 		}
@@ -145,6 +147,7 @@ class GroupsController extends Controller
 
 		if( isset($_POST['confirmDeletion']) && isset($_POST['deleteGroup']) ) {
 			if( $model->delete() ) {
+				Yii::app()->user->setFlash('success', 'Group deleted successfully');
 				$this->redirect( array('index') );
 			}
 		}
@@ -206,7 +209,7 @@ class GroupsController extends Controller
 		if( isset($_POST['confirmRemoval']) ) {
 			$model->removeMember($member);
 			if( $model->save() && $member->save() ) {
-				Yii::app()->user->setFlash('success', sprintf('Person %s removed from group successfully', $member->cn) );
+				Yii::app()->user->setFlash('success', sprintf('%s removed from group successfully', $member->cn) );
 				$this->redirect(array('view', 'cn' => $model->cn));
 			}
 		}
@@ -292,7 +295,7 @@ class GroupsController extends Controller
 		// Add them into the given group
 		$group->addMember( $selectedUser );
 		if( $group->save() && $selectedUser->save() ) {
-			Yii::app()->user->setFlash('success', sprintf('Person %s added to group successfully', $selectedUser->cn) );
+			Yii::app()->user->setFlash('success', sprintf('%s added to group successfully', $selectedUser->cn) );
 			$this->redirect(array('view', 'cn' => $group->cn));
 			return true;
 		}
