@@ -10,6 +10,9 @@ class User extends SLdapModel
 
 	protected $_requiredObjectClasses = array('kdeAccount');
 	public $sshKeysAdded = array();
+	public $currentPassword = '';
+	public $newPassword = '';
+	public $confirmNewPassword = '';
 
 	public static function model($className=__CLASS__)
 	{
@@ -66,6 +69,10 @@ class User extends SLdapModel
 			array('jpegPhoto', 'file', 'types' => 'jpg, jpeg, gif, png', 'maxSize' => 1024 * 1024 * 3, 'allowEmpty' => true, 'on' => 'editAvatar'),
 			// Password validation - to ensure only Salted-SHA1 passwords are saved to protect outselves
 			array('userPassword', 'match', 'pattern' => '/\{SSHA\}.+/', 'on' => 'changePassword'),
+			array('currentPassword', 'verifyPassword', 'on' => 'changePassword'),
+			array('newPassword', 'length', 'min' => 6, 'on' => 'changePassword'),
+			array('newPassword, confirmNewPassword', 'required', 'on' => 'changePassword'),
+			array('newPassword', 'compare', 'compareAttribute' => 'confirmNewPassword', 'on' => 'changePassword'),
 			// User creation
 			array('mail', 'required', 'on' => 'create'),
 		);
@@ -245,12 +252,31 @@ class User extends SLdapModel
 		return $addresses;
 	}
 
+	public function verifyPassword($attribute, $params)
+	{
+		// We only do this verification if they are changing their own password, or if we do not have a User instance yet
+		if( $this->isNewObject || Yii::app()->user->dn != $this->dn ) {
+			return true;
+		}
+		// Now we check their password...
+		$state = User::getLdapConnection()->reauthenticate($this->dn, $this->$attribute);
+		if( !$state ) {
+			$this->addError($attribute, 'Password is not correct');
+		}
+		return $state;
+	}
+
 	protected function beforeSave()
 	{
 		// Update the CN if we need to - it is only needed for the editProfile and create scenarios
 		if( $this->scenario == 'editProfile' || $this->scenario == 'create' ) {
 			// The validators will prevent this code from being reached if givenName/sn are null - so no need to check
 			$this->cn = sprintf("%s %s", $this->givenName, $this->sn);
+		}
+		
+		// Have we got a changed password?
+		if( $this->newPassword != '' ) {
+			$this->changePassword($this->newPassword);
 		}
 		
 		// Do we have a newly uploaded photo?
@@ -291,6 +317,18 @@ class User extends SLdapModel
 		
 		// Call our parent now
 		return parent::beforeSave();
+	}
+
+	protected function afterSave()
+	{
+		// If the password has been changed, then make sure the user session is updated if needed
+		if( $this->newPassword != '' && Yii::app()->user->dn == $this->dn ) {
+			User::getLdapConnection()->reauthenticate($this->dn, $this->newPassword);
+			User::getLdapConnection()->retainCredentials();
+		}
+
+		// Call our parent now
+		return parent::afterSave();
 	}
 
 	protected function afterCreate()

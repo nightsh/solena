@@ -19,26 +19,26 @@ $this->menu = $this->generateMenu($model);
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
-	<?php echo $form->errorSummary($passwordForm); ?>
+	<?php echo $form->errorSummary($model); ?>
 
 	<?php if( Yii::app()->user->dn == $model->dn ) { ?>
 		<div class="row">
-			<?php echo $form->labelEx($passwordForm, 'currentPassword'); ?>
-			<?php echo $form->passwordField($passwordForm, 'currentPassword', array('size' => 60, 'maxlength' => 128)); ?>
-			<?php echo $form->error($passwordForm, 'currentPassword'); ?>
+			<?php echo $form->labelEx($model, 'currentPassword'); ?>
+			<?php echo $form->passwordField($model, 'currentPassword', array('size' => 60, 'maxlength' => 128)); ?>
+			<?php echo $form->error($model, 'currentPassword'); ?>
 		</div>
 	<?php } ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($passwordForm, 'newPassword'); ?>
-		<?php echo $form->passwordField($passwordForm, 'newPassword', array('size' => 60, 'maxlength' => 128)); ?>
-		<?php echo $form->error($passwordForm, 'newPassword'); ?>
+		<?php echo $form->labelEx($model, 'newPassword'); ?>
+		<?php echo $form->passwordField($model, 'newPassword', array('size' => 60, 'maxlength' => 128)); ?>
+		<?php echo $form->error($model, 'newPassword'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($passwordForm, 'confirmNewPassword'); ?>
-		<?php echo $form->passwordField($passwordForm, 'confirmNewPassword', array('size' => 60, 'maxlength' => 128)); ?>
-		<?php echo $form->error($passwordForm, 'confirmNewPassword'); ?>
+		<?php echo $form->labelEx($model, 'confirmNewPassword'); ?>
+		<?php echo $form->passwordField($model, 'confirmNewPassword', array('size' => 60, 'maxlength' => 128)); ?>
+		<?php echo $form->error($model, 'confirmNewPassword'); ?>
 	</div>
 
 	<div class="row buttons">

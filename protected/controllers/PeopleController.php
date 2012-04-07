@@ -336,16 +336,14 @@ class PeopleController extends Controller
 	{
 		$model = $this->loadModel($uid);
 		$model->setScenario('changePassword');
-		$form = new PasswordChangeForm;
-		$form->model = $model;
 
 		if( !Yii::app()->user->checkAccess('changeUserPassword', array('user' => $model)) ) {
 			throw new CHttpException(403, 'You are not permitted to change the details of this person');
 		}
 
-		if( isset($_POST['PasswordChangeForm']) ) {
-			$form->attributes = $_POST['PasswordChangeForm'];
-			if( $this->processChangePassword($form, $model) ) {
+		if( isset($_POST['User']) ) {
+			$model->attributes = $_POST['User'];
+			if( $model->save() ) {
 				Yii::app()->user->setFlash('success', 'Password changed successfully');
 				$this->redirect( array('view', 'uid' => $model->uid) );
 			}
@@ -353,7 +351,6 @@ class PeopleController extends Controller
 		
 		$this->render('changePassword', array(
 			'model' => $model,
-			'passwordForm' => $form,
 		));
 	}
 
@@ -431,30 +428,6 @@ class PeopleController extends Controller
 			return true;
 		}
 		return false;
-	}
-
-	/**
-	 * Process the change of a user password
-	 * To be used by actionChangePassword only
-	 */
-	protected function processChangePassword($form, $model)
-	{
-		// Ensure the form is valid first....
-		if( !$form->validate() ) {
-			return false;
-		}
-		// Hash the password and insert it into the model
-		$model->changePassword($form->newPassword);
-		// Save the new password
-		$state = $model->save();
-		// If we are changing our own password then we have to update the retained credentials
-		// This is a little bit of a hack, but the User/WebUser instances do not have access to the raw password
-		if( Yii::app()->user->dn == $model->dn && $state ) {
-			User::getLdapConnection()->reauthenticate($model->dn, $form->newPassword);
-			User::getLdapConnection()->retainCredentials();
-		}
-		// Return our final state...
-		return $state;
 	}
 };
 
