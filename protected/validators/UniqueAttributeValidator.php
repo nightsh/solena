@@ -17,7 +17,7 @@ class UniqueAttributeValidator extends CValidator
 		}
 		// Now we check the DN names to see if they match....
 		$entry = array_shift($results->entries());
-		if( $entry->dn != $object->dn || $object->isNewObject ) {
+		if( $entry->dn != strtolower($object->dn) || $object->isNewObject ) {
 			$this->addError($object, $attribute, "{attribute} is already in use.");
 		}
 	}
