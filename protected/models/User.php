@@ -293,6 +293,23 @@ class User extends SLdapModel
 		return parent::beforeSave();
 	}
 
+	protected function afterCreate()
+	{
+		// Is the user a member of any groups? If they are not, add them to the default group
+		if( $this->groups->count() == 0 ) {
+			$filter = Net_LDAP2_Filter::create('cn', 'equals', Yii::app()->params['defaultGroup']);
+			$entry = Group::model()->findFirstByFilter($filter);
+			if( $entry instanceof Group ) {
+				$entry->addMember($this);
+				$this->save();
+				$entry->save();
+			}
+		}
+
+		// Call our parent now
+		return parent::afterCreate();
+	}
+
 	protected function afterMove()
 	{
 		// If the current user is changing their dn we have to update the saved dn otherwise future transactions will break....
