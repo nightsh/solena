@@ -506,10 +506,16 @@ abstract class SLdapModel extends CModel
 		
 		// Save our moving status then perform the save
 		$moveStatus = $this->_entry->willBeMoved();
+		$newStatus = $this->isNewObject;
 		$result = $this->_entry->update($ldap->getConnection());
 		if( PEAR::isError($result) ) {
 			$this->addError("system", $result->message);
 			return false;
+		}
+		
+		// Are new newly created? If so indicate it
+		if( $newStatus ) {
+			$this->afterCreate();
 		}
 		
 		// Have we moved? If so indicate it
@@ -746,6 +752,16 @@ abstract class SLdapModel extends CModel
 	}
 
 	/**
+	 * This event is raised after the new entry has been created in LDAP.
+	 * It executes before onAfterSave
+	 * @param CEvent $event the event parameter
+	 */
+	public function onAfterCreate($event)
+	{
+		$this->raiseEvent('onAfterCreate', $event);
+	}
+
+	/**
 	 * This event is raised after the DN of an entry has been changed during a save.
 	 * It executes before onAfterSave but after the new DN has been saved.
 	 * @param CEvent $event the event parameter
@@ -801,6 +817,20 @@ abstract class SLdapModel extends CModel
 		if( $this->hasEventHandler('onAfterSave') ) {
 			$event = new CEvent($this);
 			$this->onAfterSave($event);
+		}
+	}
+
+	/**
+	 * This method is called after an new entry dn has been created in LDAP successfully.
+	 * By default this raises the {@link onAfterCreate} event.
+	 * This method may be overridden to perform needed post-processing,
+	 * If overridden then the parent implementation must be invoked otherwise the event will not be raised properly.
+	 */
+	protected function afterCreate()
+	{
+		if( $this->hasEventHandler('onAfterCreate') ) {
+			$event = new CEvent($this);
+			$this->onAfterCreate($event);
 		}
 	}
 
