@@ -115,7 +115,7 @@ class User extends SLdapModel
 		$emailData = array( array('id' => 0, 'mail' => $this->mail, 'type' => 'primary') );
 
 		// Now add secondary addresses
-		foreach( $this->secondaryMail as $address ) {
+		foreach( (array) $this->secondaryMail as $address ) {
 			$emailData[] = array('id' => count($emailData), 'mail' => $address, 'type' => 'secondary');
 		}
 
