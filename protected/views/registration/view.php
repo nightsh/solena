@@ -10,12 +10,6 @@ $this->menu = array(
 );
 ?>
 
-<?php
-foreach(Yii::app()->user->getFlashes() as $key => $message) {
-	echo CHtml::tag('div', array('class' => 'flash-' . $key), CHtml::encode($message));
-}
-?>
-
 <h1>View registration of <?php echo $model->name; ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(

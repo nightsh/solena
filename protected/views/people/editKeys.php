@@ -12,12 +12,6 @@ Yii::app()->clientScript->registerScript("disableCheckAll", "$('input.select-on-
 
 <h1>Manage SSH Keys of <?php echo $model->cn; ?></h1>
 
-<?php
-foreach(Yii::app()->user->getFlashes() as $key => $message) {
-	echo CHtml::tag('div', array('class' => 'flash-' . $key), CHtml::encode($message));
-}
-?>
-
 <div class="form">
 
 <?php $form = $this->beginWidget('CActiveForm', array(

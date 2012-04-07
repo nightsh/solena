@@ -12,12 +12,6 @@ $this->menu = $this->generateMenu($model);
 
 <div class="form">
 
-<?php
-foreach(Yii::app()->user->getFlashes() as $key => $message) {
-	echo CHtml::tag('div', array('class' => 'flash-' . $key), CHtml::encode($message));
-}
-?>
-
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'person-form',
 	'enableAjaxValidation' => false,

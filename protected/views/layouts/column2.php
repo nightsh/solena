@@ -2,6 +2,11 @@
 <div class="container">
 	<div class="span-19">
 		<div id="content">
+			<?php
+				foreach(Yii::app()->user->getFlashes() as $key => $message) {
+					echo CHtml::tag('div', array('class' => 'flash-' . $key), CHtml::encode($message));
+				}
+			?>
 			<?php echo $content; ?>
 		</div><!-- content -->
 	</div>
