@@ -40,15 +40,19 @@ class Token extends CActiveRecord
 			array('type', 'numerical', 'integerOnly' => true),
 			// Data validations
 			array('uid', 'length', 'max' => 64, 'on' => 'verify, reset'),
-			array('mail', 'email', 'on' => 'verify, register'),
+			array('mail', 'email'),
+			array('mail', 'length', 'max' => 64),
 			array('mail', 'unique', 'on' => 'verify, register'), // Database check
 			array('mail', 'validateUniqueEmail', 'on' => 'verify, register'), // LDAP check
-			array('mail', 'length', 'max' => 64, 'on' => 'verify, register'),
 			// Verify address validations
 			array('uid, mail', 'required', 'on' => 'verify'),
 			// Registration validations
 			array('mail, givenName, sn', 'required', 'on' => 'register'),
 			array('givenName, sn', 'length', 'max' => 64, 'on' => 'register'),
+			// Password reset validations
+			array('mail, uid', 'required', 'on' => 'reset'),
+			array('mail', 'validateEmailMatches', 'on' => 'reset'),
+			array('uid', 'validateUsernameExists', 'on' => 'reset'),
 		);
 	}
 
@@ -79,6 +83,35 @@ class Token extends CActiveRecord
 		$result = User::model()->findByFilter($filter);
 		if( $result->count() > 0 ) {
 			$this->addError("mail", "Email address is already in use.");
+		}
+	}
+
+	public function validateUsernameExists($attribute, $params)
+	{
+		// Create the filter and perform the search
+		$filter = Net_LDAP2_Filter::create('uid', 'equals', $this->$attribute);
+		$result = User::model()->findByFilter($filter);
+		// If we do not have one result exactly then either it does not exist, or more than one user has this username...
+		if( $result->count() != 1 ) {
+			$this->addError("uid", "Username does not exist.");
+		}
+	}
+
+	public function validateEmailMatches($attribute, $params)
+	{
+		// Build the email filters
+		$mailFilters = array();
+		$mailFilters[] = Net_LDAP2_Filter::create('mail', 'equals', $this->$attribute);
+		$mailFilters[] = Net_LDAP2_Filter::create('secondaryMail', 'equals', $this->$attribute);
+		// Combine the mail filters with a username filter
+		$filters = array();
+		$filters[] = Net_LDAP2_Filter::combine('or', $mailFilters);
+		$filters[] = Net_LDAP2_Filter::create('uid', 'equals', $this->uid);
+		// Create the final filter, and perform the search
+		$filter = Net_LDAP2_Filter::combine('and', $filters);
+		$result = User::model()->findByFilter($filter);
+		if( $result->count() != 1 ) {
+			$this->addError("mail", "Email address does not match those known for the given username");
 		}
 	}
 
