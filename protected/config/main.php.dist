@@ -6,14 +6,14 @@
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 return array(
-	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
+	'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
 	'name' => 'Solena',
 
 	// preloading 'log' component
-	'preload'=>array('log', 'ldap'),
+	'preload' => array('log', 'ldap'),
 
 	// autoloading model and component classes
-	'import'=>array(
+	'import' => array(
 		'application.models.*',
 		'application.components.*',
 		'application.validators.*',
@@ -22,26 +22,26 @@ return array(
 		'application.vendors.PEAR.*',
 	),
 
-	'modules'=>array(),
+	'modules' => array(),
 
 	// application components
-	'components'=>array(
-		'user'=>array(
+	'components' => array(
+		'user' => array(
 			'class' => 'WebUser',
 			'autoUpdateFlash' => false,
 		),
-		'authManager'=>array(
+		'authManager' => array(
 			'class' => 'PhpAuthManager',
 		),
-		'format'=>array(
+		'format' => array(
 			'class' => 'application.components.Formatter',
 			'dateFormat' => 'dd/MM/yyyy',
 		),
-		'request'=>array(
+		'request' => array(
 			'enableCookieValidation' => true,
 			'enableCsrfValidation' => true,
 		),
-		'securityManager'=>array(
+		'securityManager' => array(
 			'cryptAlgorithm' => 'rijndael-256',
 		),
 		/*
@@ -54,14 +54,14 @@ return array(
 			),
 		),
 		*/
-		'ldap'=>array(
+		'ldap' => array(
 			'class' => 'SLdapServer',
 			'baseDn' => 'dc=kde,dc=org',
 			'bindDn' => 'cn=Sysadmin,dc=kde,dc=org',
 			'bindPassword' => '',
 			'operateAsUser' => true,
 		),
-		'db'=>array(
+		'db' => array(
 			'connectionString' => 'mysql:host=localhost;dbname=testdrive',
 			'emulatePrepare' => true,
 			'username' => 'root',
@@ -73,32 +73,23 @@ return array(
 			'transportType' => 'php',
 			'viewPath' => 'application.views.mail',
 		),
-		'errorHandler'=>array(
-			// use 'site/error' action to display errors
-			'errorAction'=>'site/error',
+		'errorHandler' => array(
+			'errorAction' => 'site/error',
 		),
-		'log'=>array(
-			'class'=>'CLogRouter',
-			'routes'=>array(
+		'log' => array(
+			'class' => 'CLogRouter',
+			'routes' => array(
 				array(
-					'class'=>'CFileLogRoute',
-					'levels'=>'error, warning',
+					'class' => 'CFileLogRoute',
+					'levels' => 'error, warning',
 				),
-				// uncomment the following to show log messages on web pages
-				/*
-				array(
-					'class'=>'CWebLogRoute',
-				),
-				*/
 			),
 		),
 	),
 
-	// application-level parameters that can be accessed
-	// using Yii::app()->params['paramName']
-	'params'=>array(
-		// this is used in contact page
-		'adminEmail'=>'webmaster@example.com',
+	// application-level parameters
+	'params' => array(
+		'adminEmail' => 'webmaster@example.com',
 		'registrationUnit' => 'ou=people,dc=kde,dc=org',
 		'defaultGroup' => 'users',
 	),
