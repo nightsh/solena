@@ -28,6 +28,7 @@ return array(
 	'components'=>array(
 		'user'=>array(
 			'class' => 'WebUser',
+			'autoUpdateFlash' => false,
 		),
 		'authManager'=>array(
 			'class' => 'PhpAuthManager',
