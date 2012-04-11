@@ -48,7 +48,7 @@ class Token extends CActiveRecord
 			array('uid, mail', 'required', 'on' => 'verify'),
 			// Registration validations
 			array('mail, givenName, sn', 'required', 'on' => 'register'),
-			array('givenName, sn', 'length', 'max' => 64, 'on' => 'register'),
+			array('givenName, sn', 'length', 'min' => 2, 'max' => 64, 'on' => 'register'),
 			// Password reset validations
 			array('mail, uid', 'required', 'on' => 'reset'),
 			array('mail', 'validateEmailMatches', 'on' => 'reset'),
