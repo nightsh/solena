@@ -15,7 +15,7 @@ class SSHKeyValidator extends CValidator
 		}
 
 		// Start the validation
-		$value = isset($object->$attribute) ? $object->$attribute : array();
+		$value = isset($object->$attribute) ? (array) $object->$attribute : array();
 		foreach( $value as $key ) {
 			// Make sure the key is valid....
 			$split = SSHKeyValidator::splitKey($key);
