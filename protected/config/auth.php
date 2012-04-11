@@ -7,7 +7,7 @@ return array(
 		'description' => 'Is a KDE Sysadmin',
 		'bizRule' => '',
 		'data' => '',
-		'children' => array('changeUserDetails', 'changeUserSshKeys', 'changeUserAvatar', 'changeUserPassword', 'changeUserUsername', 'manageEvMembershipData', 'manageGroup'),
+		'children' => array('changeUserDetails', 'changeUserSshKeys', 'changeUserAvatar', 'changeUserPassword', 'changeUserUsername', 'manageEvMembershipData', 'manageGroup', 'manageDeveloperApplications'),
 	),
 
 	'web-admins' => array(
@@ -54,7 +54,7 @@ return array(
 		'description' => 'Is a KDE Identity user',
 		'bizRule' => '',
 		'data' => '',
-		'children' => array('selfChangeUserData'),
+		'children' => array('selfChangeUserData', 'selfViewDeveloperApplication'),
 	),
 
 	// Operations - we check the access to an operation on these
@@ -107,6 +107,13 @@ return array(
 		'data' => '',
 	),
 
+	'manageDeveloperApplications' => array(
+		'type' => CAuthItem::TYPE_OPERATION,
+		'description' => 'Allowed to view and manage developer applications',
+		'bizRule' => '',
+		'data' => '',
+	),
+
 	// Tasks - grant permission to conduct an operation
 	'selfChangeUserData' => array(
 		'type' => CAuthItem::TYPE_TASK,
@@ -130,6 +137,14 @@ return array(
 		'bizRule' => 'return Yii::app()->user->dn == $params["user"]->dn;',
 		'data' => '',
 		'children' => array('changeUserEvDetails'),
+	),
+
+	'selfViewDeveloperApplication' => array(
+		'type' => CAuthItem::TYPE_TASK,
+		'description' => 'Users are allowed to view their own developer application',
+		'bizRule' => 'return Yii::app()->user->id == $params["application"]->uid;',
+		'data' => '',
+		'children' => array('manageDeveloperApplications'),
 	),
 
 	'manageEvMembership' => array(
