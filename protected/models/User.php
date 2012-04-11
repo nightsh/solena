@@ -210,7 +210,7 @@ class User extends SLdapModel
 	public function addSSHKeys($uploadedKeys)
 	{
 		// Retrieve the content of the file if needed, and then stage the keys for addition so they can be validated first
-		$keys = ($uploadedKeys instanceof CUploadedFile) : file_get_contents($uploadedKeys->tempName) ? $uploadedKeys;
+		$keys = ($uploadedKeys instanceof CUploadedFile) ? file_get_contents($uploadedKeys->tempName) : $uploadedKeys;
 		$keys = explode("\n", trim($keys));
 		$this->sshKeysAdded = array_merge($keys, $this->sshKeysAdded);
 	}
