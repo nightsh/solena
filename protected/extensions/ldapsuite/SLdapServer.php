@@ -76,6 +76,11 @@ final class SLdapServer extends CApplicationComponent
 			$config['bindpw'] = $this->bindPassword;
 		}
 
+		// When we are running as a Console application, then we cannot ever operate as the user
+		if( Yii::app() instanceof CConsoleApplication ) {
+			$this->operateAsUser = false;
+		}
+
 		// See if the users credentials are available and should be used...
 		if( $this->operateAsUser && !Yii::app()->user->isGuest ) {
 			$state = $this->loadRetainedCredentials($config);
