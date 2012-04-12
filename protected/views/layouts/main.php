@@ -45,6 +45,7 @@
 						array('label' => 'Logout ('.Yii::app()->user->name.')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
 					),
 					'htmlOptions' => array('class'=>'nav'),
+					'itemTemplate' => '<i class="test"></i>{menu}',
 					)); ?>
 				</div>
 			</div>
