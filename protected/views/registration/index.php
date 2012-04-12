@@ -24,7 +24,7 @@ $this->menu = array();
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Continue registration', array('name' => 'continue')); ?>
+	<?php echo CHtml::submitButton('Continue registration', array('name' => 'continue', 'class' => 'btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
