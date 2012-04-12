@@ -51,7 +51,7 @@ final class SLdapServer extends CApplicationComponent
 	 * Whilst this may be disabled, it will cause a severe performance impact as the LDAP schemas must be retrieved each time
 	 * Defaults to protected/data/ldap_schema.cache 
 	 */
-	public $schemaCachePrefix = "data/ldap_schema.cache";
+	public $schemaCachePrefix = "runtime/ldap_schema.cache";
 	
 	/**
 	 * Internal LDAP server connection
