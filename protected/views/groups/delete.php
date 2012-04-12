@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
 $this->menu = $this->generateMenu($model);
 ?>
 
-<h1>Delete group <?php echo $model->description; ?></h1>
+<h1>Delete group <?php echo CHtml::encode($model->description); ?></h1>
 
 <div class="form">
 
@@ -18,7 +18,7 @@ $this->menu = $this->generateMenu($model);
 )); ?>
 
 	<div class="row">
-		The group '<?php echo $model->cn; ?>' will be deleted if you proceed.
+		The group '<?php echo CHtml::encode($model->cn); ?>' will be deleted if you proceed.
 	</div>
 
 	<div class="row">

@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
 $this->menu = $this->generateMenu($model);
 ?>
 
-<h1>Remove member from group <?php echo $model->description; ?></h1>
+<h1>Remove member from group <?php echo CHtml::encode($model->description); ?></h1>
 
 <div class="form">
 
@@ -18,7 +18,7 @@ $this->menu = $this->generateMenu($model);
 )); ?>
 
 	<div class="row">
-		The member '<?php echo $member->cn; ?>' will be removed from the group '<?php echo $model->description; ?>' if you proceed.
+		The member '<?php echo CHtml::encode($member->cn); ?>' will be removed from the group '<?php echo CHtml::encode($model->description); ?>' if you proceed.
 	</div>
 
 	<div class="row buttons">

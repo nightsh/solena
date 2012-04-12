@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
 $this->menu = $this->generateMenu($model);
 ?>
 
-<h1>Edit information of group <?php echo $model->description; ?></h1>
+<h1>Edit information of group <?php echo CHtml::encode($model->description); ?></h1>
 
 <div class="form">
 
