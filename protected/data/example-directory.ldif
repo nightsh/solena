@@ -1,0 +1,100 @@
+# kde.org
+dn: dc=kde,dc=org
+dc: kde
+description: kde
+objectClass: dcObject
+objectClass: top
+objectClass: locality
+
+# people, kde.org
+dn: ou=people,dc=kde,dc=org
+objectClass: organizationalUnit
+ou: people
+
+# site-admin, people, kde.org
+dn: uid=site-admin,ou=people,dc=kde,dc=org
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: kdeAccount
+uid: site-admin
+givenName: Site
+sn: Admin
+cn: Site Admin
+mail: sysadmin@kde.org
+groupMember: sysadmins
+userPassword: (replaceme)
+
+# groups, kde.org
+dn: ou=groups,dc=kde,dc=org
+objectClass: organizationalUnit
+ou: groups
+
+# sysadmins, groups, kde.org
+dn: cn=sysadmins,ou=groups,dc=kde,dc=org
+gidNumber: 1000
+objectClass: top
+objectClass: posixGroup
+objectClass: groupOfNames
+cn: sysadmins
+description: Site Administrators
+memberUid: site-admin
+member: uid=site-admin,ou=people,dc=kde,dc=org
+
+# users, groups, kde.org
+dn: cn=users,ou=groups,dc=kde,dc=org
+gidNumber: 1001
+objectClass: top
+objectClass: posixGroup
+objectClass: groupOfNames
+cn: users
+description: Users
+member: cn=users,ou=groups,dc=kde,dc=org
+
+# developers, groups, kde.org
+dn: cn=developers,ou=groups,dc=kde,dc=org
+gidNumber: 1002
+objectClass: top
+objectClass: posixGroup
+objectClass: groupOfNames
+cn: developers
+description: Developers
+member: cn=developers,ou=groups,dc=kde,dc=org
+
+# disabled-developers, groups, kde.org
+dn: cn=disabled-developers,ou=groups,dc=kde,dc=org
+gidNumber: 1003
+objectClass: top
+objectClass: posixGroup
+objectClass: groupOfNames
+cn: disabled-developers
+description: Disabled Developers
+member: cn=disabled-developers,ou=groups,dc=kde,dc=org
+
+# locked, kde.org
+dn: ou=locked,dc=kde,dc=org
+objectClass: organizationalUnit
+ou: locked
+
+# passwordpolicy, kde.org
+dn: cn=passwordpolicy,dc=kde,dc=org
+objectClass: top
+objectClass: organizationalRole
+objectClass: pwdPolicy
+cn: passwordpolicy
+pwdAttribute: userPassword
+pwdAllowUserChange: TRUE
+pwdLockout: TRUE
+pwdLockoutDuration: 3600
+pwdMaxFailure: 5
+
+# solena-service, kde.org
+dn: cn=solena-service,dc=kde,dc=org
+objectClass: top
+objectClass: person
+objectClass: inetOrgPerson
+givenName: Solena
+sn: Service
+cn: Solena Service
+userPassword: (replaceme)
