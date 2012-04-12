@@ -33,7 +33,7 @@ class User extends SLdapModel
 
 	public function multivaluedAttributes()
 	{
-		return array('homePostalAddress', 'homePhone', 'labeledURI', 'ircNick', 'jabberID', 'sshPublicKey', 'groupMember');
+		return array('homePostalAddress', 'homePhone', 'labeledURI', 'ircNick', 'jabberID', 'secondaryMail', 'sshPublicKey', 'groupMember');
 	}
 
 	public function rules()
