@@ -7,17 +7,30 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 
-DROP TABLE IF EXISTS tokens;
-CREATE TABLE IF NOT EXISTS tokens (
-  id int(11) NOT NULL AUTO_INCREMENT,
-  token varchar(50) NOT NULL,
+DROP TABLE IF EXISTS `developer_applications`;
+CREATE TABLE IF NOT EXISTS `developer_applications` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `status` int(1) NOT NULL,
+  `uid` varchar(64) NOT NULL,
+  `supporter_uid` varchar(64) NOT NULL,
+  `special_reason` tinyint(1) NOT NULL,
+  `justification` text NOT NULL,
+  `evidence_links` text NOT NULL,
+  `ssh_key` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
+
+DROP TABLE IF EXISTS `tokens`;
+CREATE TABLE IF NOT EXISTS `tokens` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `token` varchar(50) NOT NULL,
   `type` int(1) NOT NULL,
-  mail varchar(255) NOT NULL,
-  uid varchar(255) NOT NULL,
-  givenName varchar(255) NOT NULL,
-  sn varchar(255) NOT NULL,
-  PRIMARY KEY (id)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
+  `mail` varchar(255) NOT NULL,
+  `uid` varchar(255) NOT NULL,
+  `givenName` varchar(255) NOT NULL,
+  `sn` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
