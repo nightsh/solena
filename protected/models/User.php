@@ -360,6 +360,11 @@ class User extends SLdapModel
 			User::getLdapConnection()->retainCredentials();
 		}
 
+		// We might need to update the name the user has set for themselves
+		if( Yii::app() instanceof CWebApplication && Yii::app()->user->dn == $this->dn ) {
+			Yii::app()->user->setName( $this->cn );
+		}
+
 		// Call our parent now
 		return parent::afterSave();
 	}
