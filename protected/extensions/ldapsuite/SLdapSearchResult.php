@@ -94,8 +94,9 @@ class SLdapSearchResult extends CComponent implements Iterator
 			// Build up the array_multisort call
 			$multisort = array();
 			foreach( $metadata as $attr => $desc ) {
-				$multisort[] = $data[$attr];
-				$multisort[] = $desc ? SORT_DESC : SORT_ASC;
+				$direction = $desc ? SORT_DESC : SORT_ASC;
+				$multisort[] = &$data[$attr];
+				$multisort[] = &$direction
 			}
 			$multisort[] = &$results;
 
