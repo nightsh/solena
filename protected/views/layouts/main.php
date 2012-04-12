@@ -5,7 +5,7 @@
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
-	<meta name="author" content="">
+	<meta name="author" content="Ben Cooksley">
 
 	<!-- Le styles -->
 	<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.css" rel="stylesheet">
@@ -20,8 +20,36 @@
 	<link rel="shortcut icon" href="<?php echo Yii::app()->request->baseUrl; ?>/images/favicon.ico">
 </head>
 
-<body>
+<body data-spy="scroll">
 
+	<div id="header" class="navbar navbar-top Neverland">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="/"><img src="skins/custom/img/logo.plain.png"/></a>
+				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</a>
+				<div class="nav-pills pull-right nav-collapse">
+				<?php $this->widget('zii.widgets.CMenu',array(
+					'items'=>array(
+						array('label' => 'Home', 'url' => array('/site/index')),
+						array('label' => 'People', 'url' => array('/people/index')),
+						array('label' => 'Groups', 'url' => array('/groups/index')),
+						array('label' => 'Registrations', 'url' => array('/registration/list'), 'visible' => Yii::app()->user->checkAccess('sysadmins')),
+						array('label' => 'Developer Applications', 'url' => array('/developerApplication/list'), 'visible' => Yii::app()->user->checkAccess('sysadmins')),
+						array('label' => 'My Account', 'url' => array('/people/view', 'uid' => Yii::app()->user->id), 'visible' => !Yii::app()->user->isGuest),
+						array('label' => 'Login', 'url'=>array('/site/login'), 'visible' => Yii::app()->user->isGuest),
+						array('label' => 'Register', 'url'=>array('/registration/index'), 'visible' => Yii::app()->user->isGuest),
+						array('label' => 'Logout ('.Yii::app()->user->name.')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
+						),
+					)); ?>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 <div class="container" id="page">
 
 	<div id="header">
@@ -29,19 +57,7 @@
 	</div><!-- header -->
 
 	<div id="mainmenu">
-		<?php $this->widget('zii.widgets.CMenu',array(
-			'items'=>array(
-				array('label' => 'Home', 'url' => array('/site/index')),
-				array('label' => 'People', 'url' => array('/people/index')),
-				array('label' => 'Groups', 'url' => array('/groups/index')),
-				array('label' => 'Registrations', 'url' => array('/registration/list'), 'visible' => Yii::app()->user->checkAccess('sysadmins')),
-				array('label' => 'Developer Applications', 'url' => array('/developerApplication/list'), 'visible' => Yii::app()->user->checkAccess('sysadmins')),
-				array('label' => 'My Account', 'url' => array('/people/view', 'uid' => Yii::app()->user->id), 'visible' => !Yii::app()->user->isGuest),
-				array('label' => 'Login', 'url'=>array('/site/login'), 'visible' => Yii::app()->user->isGuest),
-				array('label' => 'Register', 'url'=>array('/registration/index'), 'visible' => Yii::app()->user->isGuest),
-				array('label' => 'Logout ('.Yii::app()->user->name.')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
-			),
-		)); ?>
+
 	</div><!-- mainmenu -->
 	<?php if(isset($this->breadcrumbs)):?>
 		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
