@@ -91,3 +91,7 @@
 .grid-view .filters input, .grid-view .filters select {
 	width: auto;
 }
+
+.form .row input {
+	width: 100%;
+}
