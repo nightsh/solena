@@ -41,12 +41,13 @@ class NeverMenu extends CMenu {
 			
 			if(isset($item['url']))
 			{
-				if(!isset($item['glyphIcon']))
-				{
-					echo "icon needed";
-				}
 				$label=$this->linkLabelWrapper===null ? $item['label'] : '<'.$this->linkLabelWrapper.'>'.$item['label'].'</'.$this->linkLabelWrapper.'>';
-				$menu=CHtml::link($label,$item['url'],isset($item['linkOptions']) ? $item['linkOptions'] : array());
+				if(isset($item['glyphIcon']))
+				{
+					$menu=CHtml::link('<i class="icon-'.$item['glyphIcon'].'></i>'.$label,$item['url'],isset($item['linkOptions']) ? $item['linkOptions'] : array());
+				} else {
+					$menu=CHtml::link($label,$item['url'],isset($item['linkOptions']) ? $item['linkOptions'] : array());
+				}
 			}
 			else
 				$menu=CHtml::tag('span',isset($item['linkOptions']) ? $item['linkOptions'] : array(), $item['label']);
