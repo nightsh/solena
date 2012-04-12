@@ -84,7 +84,7 @@ $this->menu = $this->generateMenu($model);
 	<?php } ?>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Update Profile'); ?>
+		<?php echo CHtml::submitButton('Update Profile', array('class' => 'btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
