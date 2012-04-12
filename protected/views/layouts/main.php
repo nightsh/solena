@@ -34,7 +34,7 @@
 				<div class="nav-pills pull-right nav-collapse">
 				<?php $this->widget('zii.widgets.CMenu',array(
 					'items'=>array(
-						array('label' => 'Home', 'url' => array('/site/index')),
+						array('label' => 'Home', 'url' => array('/site/index'), 'template' => '<i class="icon-home"></i>{menu}'),
 						array('label' => 'People', 'url' => array('/people/index')),
 						array('label' => 'Groups', 'url' => array('/groups/index')),
 						array('label' => 'Registrations', 'url' => array('/registration/list'), 'visible' => Yii::app()->user->checkAccess('sysadmins')),
@@ -45,7 +45,6 @@
 						array('label' => 'Logout ('.Yii::app()->user->name.')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
 					),
 					'htmlOptions' => array('class'=>'nav'),
-					'itemTemplate' => '<i class="test"></i>{menu}',
 					)); ?>
 				</div>
 			</div>
