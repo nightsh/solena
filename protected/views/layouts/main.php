@@ -54,20 +54,30 @@
 	
 <div class="container Neverland" id="page">
 
-	<?php if(isset($this->breadcrumbs)):?>
-		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
-			'links'=>$this->breadcrumbs,
-		)); ?><!-- breadcrumbs -->
-	<?php endif?>
-
 	<?php echo $content; ?>
 
-	<div id="footer">
-		Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
-		All Rights Reserved.<br/>
-		<?php echo Yii::powered(); ?>
-	</div><!-- footer -->
-
+	<div id="footerRow" class="row">
+		<div class="navbar navbar-bottom Neverland">
+			<div class="navbar-inner">
+				<div class="container">
+					<ul class="breadcrumb">
+						<li>
+						<?php if(isset($this->breadcrumbs)):?>
+							<?php $this->widget('zii.widgets.CBreadcrumbs', array(
+								'links'=>$this->breadcrumbs,
+							)); ?><!-- breadcrumbs -->
+						<?php endif?>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<footer class="Neverland">
+			<p>Copyright &copy; <?php echo date('Y'); ?> by My Company.</p>
+			<p>All Rights Reserved.</p>
+			<p><?php echo Yii::powered(); ?></p>
+		</footer>
+	</div>
 </div><!-- page -->
 
 </body>
