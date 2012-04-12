@@ -34,14 +34,14 @@
 				<div class="nav-pills pull-right nav-collapse">
 				<?php $this->widget('application.components.NeverMenu',array(
 					'items'=>array(
-						array('label' => 'People', 'url' => array('/people/index'), 'template' => '<i class="icon-user"></i>{menu}'),
-						array('label' => 'Groups', 'url' => array('/groups/index'), 'template' => '<i class="icon-th-large"></i>{menu}'),
-						array('label' => 'Registrations', 'url' => array('/registration/list'), 'template' => '<i class="icon-pencil"></i>{menu}', 'visible' => Yii::app()->user->checkAccess('sysadmins')),
-						array('label' => 'Developer Applications', 'url' => array('/developerApplication/list'), 'template' => '<i class="icon-file"></i>{menu}', 'visible' => Yii::app()->user->checkAccess('sysadmins')),
-						array('label' => 'My Account', 'url' => array('/people/view', 'uid' => Yii::app()->user->id), 'template' => '<i class="icon-user"></i>{menu}', 'visible' => !Yii::app()->user->isGuest),
+						array('label' => 'People', 'url' => array('/people/index'), 'glyphIcon' => 'user'),
+						array('label' => 'Groups', 'url' => array('/groups/index'), 'glyphIcon' => 'th-large'),
+						array('label' => 'Registrations', 'url' => array('/registration/list'), 'glyphIcon' => 'pencil', 'visible' => Yii::app()->user->checkAccess('sysadmins')),
+						array('label' => 'Developer Applications', 'url' => array('/developerApplication/list'), 'glyphIcon' => 'file', 'visible' => Yii::app()->user->checkAccess('sysadmins')),
+						array('label' => 'My Account', 'url' => array('/people/view', 'uid' => Yii::app()->user->id), 'glyphIcon' => 'user', 'visible' => !Yii::app()->user->isGuest),
 						array('label' => 'Login', 'url'=>array('/site/login'), 'visible' => Yii::app()->user->isGuest),
-						array('label' => 'Register', 'url'=>array('/registration/index'), 'template' => '<i class="icon-pencil"></i>{menu}', 'visible' => Yii::app()->user->isGuest),
-						array('label' => 'Logout ('.Yii::app()->user->name.')', 'url' => array('/site/logout'), 'template' => '<i class="icon-remove-sign"></i>{menu}', 'visible' => !Yii::app()->user->isGuest)
+						array('label' => 'Register', 'url'=>array('/registration/index'), 'glyphIcon' => 'pencil', 'visible' => Yii::app()->user->isGuest),
+						array('label' => 'Logout ('.Yii::app()->user->name.')', 'url' => array('/site/logout'), 'glyphIcon' => 'remove-sign', 'visible' => !Yii::app()->user->isGuest)
 					),
 					'htmlOptions' => array('class'=>'nav'),
 					)); ?>
