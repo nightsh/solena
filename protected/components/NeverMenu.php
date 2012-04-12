@@ -4,6 +4,9 @@ class NeverMenu extends CMenu {
 	// must set this to allow  parameter changes in CMenu widget call
 	public $activateItemsOuter = true;
 
+	//needed to render a glyphicon for the menu
+	public $glyphIcon;
+	
 	public function run() {
 		$this->renderMenu($this->items);
 	}
@@ -38,6 +41,10 @@ class NeverMenu extends CMenu {
 			
 			if(isset($item['url']))
 			{
+				if($item['glyphIcon'])
+				{
+					echo "icon needed";
+				}
 				$label=$this->linkLabelWrapper===null ? $item['label'] : '<'.$this->linkLabelWrapper.'>'.$item['label'].'</'.$this->linkLabelWrapper.'>';
 				$menu=CHtml::link($label,$item['url'],isset($item['linkOptions']) ? $item['linkOptions'] : array());
 			}
