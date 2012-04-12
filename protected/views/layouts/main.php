@@ -51,15 +51,8 @@
 		</div>
 	</div>
 	
-<div class="container" id="page">
+<div class="container Neverland" id="page">
 
-	<div id="header">
-		<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>
-	</div><!-- header -->
-
-	<div id="mainmenu">
-
-	</div><!-- mainmenu -->
 	<?php if(isset($this->breadcrumbs)):?>
 		<?php $this->widget('zii.widgets.CBreadcrumbs', array(
 			'links'=>$this->breadcrumbs,
