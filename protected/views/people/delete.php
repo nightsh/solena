@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
 $this->menu = $this->generateMenu($model);
 ?>
 
-<h1>Delete account of <?php echo $model->cn; ?></h1>
+<h1>Delete account of <?php echo CHtml::encode($model->cn); ?></h1>
 
 <div class="form">
 
@@ -18,7 +18,7 @@ $this->menu = $this->generateMenu($model);
 )); ?>
 
 	<div class="row">
-		The account of '<?php echo $model->uid; ?>' will be deleted if you proceed.
+		The account of '<?php echo CHtml::encode($model->uid); ?>' will be deleted if you proceed.
 	</div>
 
 	<div class="row">

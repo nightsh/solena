@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
 $this->menu = $this->generateMenu($model);
 ?>
 
-<h1>Change Avatar of <?php echo $model->cn; ?></h1>
+<h1>Change Avatar of <?php echo CHtml::encode($model->cn); ?></h1>
 
 <div class="form">
 

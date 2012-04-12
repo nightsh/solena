@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
 $this->menu = $this->generateMenu($model);
 ?>
 
-<h1>Change parent organisational unit of <?php echo $model->cn; ?></h1>
+<h1>Change parent organisational unit of <?php echo CHtml::encode($model->cn); ?></h1>
 
 <div class="form">
 
@@ -17,7 +17,7 @@ $this->menu = $this->generateMenu($model);
 	'enableAjaxValidation' => false,
 )); ?>
 
-	<p class="note">This will change the Parent Organisation Unit for <?php echo $model->cn; ?> which may affect LDAP based logins</p>
+	<p class="note">This will change the Parent Organisation Unit for <?php echo CHtml::encode($model->cn); ?> which may affect LDAP based logins</p>
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'parentDn'); ?>

@@ -7,7 +7,7 @@ $this->breadcrumbs = array(
 $this->menu = $this->generateMenu($model);
 ?>
 
-<h1><?php echo $model->cn; ?></h1>
+<h1><?php echo CHtml::encode($model->cn); ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data' => $model,

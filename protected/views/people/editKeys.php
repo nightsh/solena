@@ -10,7 +10,7 @@ $this->menu = $this->generateMenu($model);
 Yii::app()->clientScript->registerScript("disableCheckAll", "$('input.select-on-check-all').hide();", CClientScript::POS_LOAD);
 ?>
 
-<h1>Manage SSH Keys of <?php echo $model->cn; ?></h1>
+<h1>Manage SSH Keys of <?php echo CHtml::encode($model->cn); ?></h1>
 
 <div class="form">
 
