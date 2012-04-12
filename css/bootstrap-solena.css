@@ -95,3 +95,7 @@
 .form .row input {
 	width: 100%;
 }
+
+.form .row input.btn {
+	width: auto;
+}
