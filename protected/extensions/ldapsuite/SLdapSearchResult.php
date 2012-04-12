@@ -96,7 +96,7 @@ class SLdapSearchResult extends CComponent implements Iterator
 			foreach( $metadata as $attr => $desc ) {
 				$direction = $desc ? SORT_DESC : SORT_ASC;
 				$multisort[] = &$data[$attr];
-				$multisort[] = &$direction
+				$multisort[] = &$direction;
 			}
 			$multisort[] = &$results;
 
