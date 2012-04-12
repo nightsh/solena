@@ -1,14 +1,14 @@
 <?php $this->beginContent('//layouts/main'); ?>
 <div id="page" class="span-7">
-	<div id="content">
+	<div>
 		<?php
 			foreach(Yii::app()->user->getFlashes() as $key => $message) {
 				echo CHtml::tag('div', array('class' => 'flash-' . $key), CHtml::encode($message));
 			}
 		?>
 		<?php echo $content; ?>
-	</div><!-- content -->
 	</div>
+</div>
 <div class="span-4">
 	<div id="sidebar">
 	<?php
