@@ -11,7 +11,7 @@ $this->menu = array(
 );
 ?>
 
-<h1>Delete registration of <?php echo $model->name; ?></h1>
+<h1>Delete registration of <?php echo CHtml::encode($model->name); ?></h1>
 
 <div class="form">
 
@@ -21,7 +21,7 @@ $this->menu = array(
 )); ?>
 
 	<div class="row">
-		The registration of '<?php echo $model->name; ?>' will be deleted if you proceed.
+		The registration of '<?php echo CHtml::encode($model->name); ?>' will be deleted if you proceed.
 	</div>
 
 	<div class="row">

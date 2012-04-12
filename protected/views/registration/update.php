@@ -11,7 +11,7 @@ $this->menu = array(
 );
 ?>
 
-<h1>Update registration of <?php echo $model->name; ?></h1>
+<h1>Update registration of <?php echo CHtml::encode($model->name); ?></h1>
 
 <div class="form">
 
