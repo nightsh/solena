@@ -51,9 +51,11 @@
 	</div>
 	
 <div class="container Neverland" id="page">
+	<div id="pageRow" class="row">
 
-	<?php echo $content; ?>
+		<?php echo $content; ?>
 
+	</div>
 	<div id="footerRow" class="row">
 		<div class="navbar navbar-bottom Neverland">
 			<div class="navbar-inner">
