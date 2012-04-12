@@ -67,25 +67,6 @@
 						<?php endif?>
 						</li>
 					</ul>
-					<ul class="nav pull-right">
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret-up"></b></a>
-							<?php $this->widget('zii.widgets.CMenu',array(
-								'items'=>array(
-									array('label' => 'Home', 'url' => array('/site/index'),
-									array('label' => 'People', 'url' => array('/people/index')),
-									array('label' => 'Groups', 'url' => array('/groups/index')),
-									array('label' => 'Registrations', 'url' => array('/registration/list'), 'visible' => Yii::app()->user->checkAccess('sysadmins')),
-									array('label' => 'Developer Applications', 'url' => array('/developerApplication/list'), 'visible' => Yii::app()->user->checkAccess('sysadmins')),
-									array('label' => 'My Account', 'url' => array('/people/view', 'uid' => Yii::app()->user->id), 'visible' => !Yii::app()->user->isGuest),
-									array('label' => 'Login', 'url'=>array('/site/login'), 'visible' => Yii::app()->user->isGuest),
-									array('label' => 'Register', 'url'=>array('/registration/index'), 'visible' => Yii::app()->user->isGuest),
-									array('label' => 'Logout ('.Yii::app()->user->name.')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest)
-								),
-								'htmlOptions' => array('class'=>'dropdown-menu bottom-up'),
-							)); ?>
-						</li>
-					</ul>
 				</div>
 			</div>
 		</div>
