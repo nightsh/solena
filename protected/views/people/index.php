@@ -8,6 +8,7 @@ $this->menu = array( array('label' => 'Create Person', 'url' => array('create'),
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=> 'person-grid',
+	'itemsCssClass' => 'table table-bordered table-striped',
 	'dataProvider'=> $dataProvider,
 	'filter'=> $model,
 	'columns'=> array(
