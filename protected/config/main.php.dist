@@ -92,5 +92,7 @@ return array(
 		'adminEmail' => 'webmaster@example.com',
 		'registrationUnit' => 'ou=people,dc=kde,dc=org',
 		'defaultGroup' => 'users',
+		'developerGroup' => 'developers',
+		'disabledDeveloperGroup' => 'disabled-developers',
 	),
 );
