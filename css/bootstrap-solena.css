@@ -1,0 +1,7 @@
+/*************************************
+ * Adjustments for Solena
+ *************************************/ 
+
+.navbar-fixed-top.Neverland .nav li {
+	width: auto;
+}
