@@ -25,6 +25,7 @@ $this->menu = $this->generateMenu($model);
 			'visible' => isset($model->memberStatus),
 		),
 	),
+	'htmlOptions' => array('class' => 'table table-bordered table-striped'),
 )); ?>
 <br />
 
