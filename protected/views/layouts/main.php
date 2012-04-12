@@ -80,5 +80,18 @@
 	</div>
 </div><!-- page -->
 
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap-transition.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap-dropdown.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap-scrollspy.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap-tooltip.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap-popover.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap-button.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap-collapse.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap-carousel.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap-neverland.js"></script>
 </body>
 </html>
