@@ -65,7 +65,7 @@ class Group extends SLdapModel
 		}
 		
 		// Make sure the user is not already a member - no need to add them twice....
-		if( in_array($user->uid, $this->memberUid) ) {
+		if( in_array($user->uid, (array) $this->memberUid) ) {
 			return false;
 		}
 		
@@ -90,7 +90,7 @@ class Group extends SLdapModel
 		}
 		
 		// Make sure the user is a member of the group - we cannot remove a person who is not a member of the group from the group
-		if( !in_array($user->uid, $this->memberUid) ) {
+		if( !in_array($user->uid, (array) $this->memberUid) ) {
 			return false;
 		}
 		
