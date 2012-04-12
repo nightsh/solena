@@ -2,6 +2,77 @@
  * Adjustments for Solena
  *************************************/ 
 
-.navbar-fixed-top.Neverland .nav li {
+.nav {
+	margin-bottom: 0.6em;
+}
+
+.navbar-top .navbar-inner {
+	padding-left: 0;
+	padding-right: 0;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+
+.container.Neverland {
+	margin-top: 0em;
+}
+
+.navbar-top.Neverland, .navbar-fixed-top.Neverland {
+	height: 4em;
+	background: transparent;
+}
+
+.navbar-fixed-top.Neverland .navbar-inner, .navbar-top.Neverland .navbar-inner {
+	background-image: url("../img/bg.png");
+	height: 4em;
+}
+
+.navbar-fixed-top.Neverland .nav li, .navbar-top.Neverland .nav li {
+	margin-top: 1.5em;
 	width: auto;
+}
+
+.navbar-top.Neverland .nav li a {
+	color: #636363;
+	padding: 0 30px 0 0;
+}
+
+.navbar-top.Neverland .nav li a :hover, .navbar-top.Neverland .nav li a :hover * {
+	color: #0068c6;
+}
+
+.navbar-top.Neverland .nav li a h2, .navbar-top.Neverland .nav li a small {
+	font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #636363;
+}
+
+.navbar-top.Neverland .nav li a h2 {
+	font-size: 1.4em;
+	line-height: 1em;
+	padding: 0;
+}
+
+.navbar-top.Neverland .nav li a h2 small {
+	font-size: 0.6em;
+	padding-top: 1.5em;
+}
+
+.navbar-top.Neverland .nav li.active a {
+	color: #2e3436;
+	background: none;
+}
+
+.navbar-top.Neverland .nav li.active a h2, .navbar-top.Neverland .nav li.active a small {
+	color: #2e3436;
+}
+
+.navbar-top.Neverland .brand {
+	padding: 12px 0px 12px;
+	margin: 0 30px 0 0;
+}
+
+.navbar-bottom.Neverland .navbar-inner {
+	color: #d3d7cf;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
