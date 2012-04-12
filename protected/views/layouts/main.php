@@ -32,7 +32,7 @@
 					<span class="icon-bar"></span>
 				</a>
 				<div class="nav-pills pull-right nav-collapse">
-				<?php $this->widget('zii.widgets.CMenu',array(
+				<?php $this->widget('application.components.NeverMenu',array(
 					'items'=>array(
 						array('label' => 'People', 'url' => array('/people/index'), 'template' => '<i class="icon-user"></i>{menu}'),
 						array('label' => 'Groups', 'url' => array('/groups/index'), 'template' => '<i class="icon-th-large"></i>{menu}'),
