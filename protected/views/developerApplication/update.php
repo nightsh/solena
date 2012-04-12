@@ -11,6 +11,6 @@ $this->menu = array(
 );
 ?>
 
-<h1>Update Developer Application by <?php echo $model->uid; ?></h1>
+<h1>Update Developer Application by <?php echo CHtml::encode($model->uid); ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model' => $model)); ?>

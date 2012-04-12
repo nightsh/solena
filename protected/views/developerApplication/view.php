@@ -10,7 +10,7 @@ $this->menu = array(
 );
 ?>
 
-<h1>Developer Application by <?php echo $model->applicant->cn; ?></h1>
+<h1>Developer Application by <?php echo CHtml::encode($model->applicant->cn); ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data' => $model,
