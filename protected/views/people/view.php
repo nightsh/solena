@@ -46,4 +46,5 @@ $this->menu = $this->generateMenu($model);
 			'visible' => isset($model->evMail),
 		),
 	),
+	'htmlOptions' => array('class' => 'table table-bordered table-striped'),
 )); ?>
