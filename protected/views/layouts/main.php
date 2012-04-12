@@ -22,7 +22,7 @@
 
 <body data-spy="scroll">
 
-	<div id="header" class="navbar navbar-top Neverland">
+	<div id="header" class="navbar navbar-fixed-top Neverland">
 		<div class="navbar-inner">
 			<div class="container">
 				<a class="brand" href="/"><img src="<?php echo Yii::app()->request->baseUrl; ?>/img/logo.plain.png"/></a>
