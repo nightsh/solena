@@ -4,7 +4,7 @@ $this->menu = array( array('label' => 'Create Group', 'url' => array('create'), 
 ?>
 
 <h1>Groups</h1>
-<p>All searches performed below will be done as contains filters. A maximum of 150 entries will be browsable at any one time</p>
+<p class="alert alert-info">All searches performed below will be done as contains filters. A maximum of 150 entries will be browsable at any one time</p>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id' => 'group-grid',
