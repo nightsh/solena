@@ -24,6 +24,7 @@ $this->menu = $this->generateMenu($model);
 			'name' => 'memberStatus',
 			'visible' => isset($model->memberStatus),
 		),
+		'cssClass' => 'table table-bordered table-striped'
 	),
 )); ?>
 <br />
@@ -44,5 +45,6 @@ $this->menu = $this->generateMenu($model);
 			'type' => 'email',
 			'visible' => isset($model->evMail),
 		),
+		'cssClass' => 'table table-bordered table-striped'
 	),
 )); ?>
