@@ -8,6 +8,7 @@ $this->menu = array( array('label' => 'Create Group', 'url' => array('create'), 
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id' => 'group-grid',
+	'itemsCssClass' => 'table table-bordered table-striped',
 	'dataProvider' => $dataProvider,
 	'filter' => $model,
 	'columns' => array(
