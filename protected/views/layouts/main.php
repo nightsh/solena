@@ -73,9 +73,9 @@
 			</div>
 		</div>
 		<footer class="Neverland">
-			<p>Copyright &copy; <?php echo date('Y'); ?> by My Company.</p>
-			<p>All Rights Reserved.</p>
-			<p><?php echo Yii::powered(); ?></p>
+			<p>Copyright &copy; <?php echo date('Y'); ?> by My Company.<br/>
+			All Rights Reserved.<br/>
+			<?php echo Yii::powered(); ?></p>
 		</footer>
 	</div>
 </div><!-- page -->
