@@ -33,7 +33,7 @@ $this->breadcrumbs=array(
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Login'); ?>
+		<?php echo CHtml::submitButton('Login', array('class' => 'btn btn-primary')); ?>
 		<?php echo CHtml::link('Reset password', array('passwordReset')); ?>
 	</div>
 
