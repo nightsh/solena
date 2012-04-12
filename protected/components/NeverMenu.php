@@ -41,7 +41,7 @@ class NeverMenu extends CMenu {
 			
 			if(isset($item['url']))
 			{
-				if($item['glyphIcon'])
+				if(!isset($item['glyphIcon']))
 				{
 					echo "icon needed";
 				}
