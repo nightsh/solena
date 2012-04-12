@@ -87,3 +87,7 @@
 .navbar-bottom.Neverland .breadcrumb li a {
 	color: #ffffff;
 }
+
+.grid-view .filters input, .grid-view .filters select {
+	width: auto;
+}
