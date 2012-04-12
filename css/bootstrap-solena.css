@@ -26,6 +26,9 @@
 .navbar-fixed-top.Neverland .navbar-inner, .navbar-top.Neverland .navbar-inner {
 	background-image: url("../img/bg.png");
 	height: 4em;
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
 }
 
 .navbar-fixed-top.Neverland .nav li, .navbar-top.Neverland .nav li {
