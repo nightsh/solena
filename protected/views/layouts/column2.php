@@ -1,5 +1,5 @@
 <?php $this->beginContent('//layouts/main'); ?>
-<div id="page" class="span8">
+<div id="page" class="span9">
 	<div>
 		<?php
 			foreach(Yii::app()->user->getFlashes() as $key => $message) {
