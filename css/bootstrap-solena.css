@@ -122,3 +122,7 @@ hr {
 select, input[type="file"] {
 	height: 33px;
 }
+
+#person-form fieldset {
+	margin-bottom: 9px;
+}
