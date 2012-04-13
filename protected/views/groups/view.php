@@ -10,7 +10,7 @@ $this->menu = $this->generateMenu($model);
 <h1>Members of group <?php echo CHtml::encode($model->description); ?></h1>
 <p>All searches performed below will be done as contains filters. A maximum of 500 entries will be browsable at any one time</p>
 
-<div class="form">
+<div class="form well">
 
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'person-form',
@@ -27,6 +27,7 @@ $this->menu = $this->generateMenu($model);
 	?>
 	<?php $this->widget('zii.widgets.grid.CGridView', array(
 		'id' => 'person-grid',
+		'itemsCssClass' => 'table table-bordered table-striped',
 		'dataProvider' => $dataProvider,
 		'filter' => $dataProvider->model,
 		'template' => $template,
