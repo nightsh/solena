@@ -126,7 +126,3 @@ select, input[type="file"] {
 #person-form fieldset {
 	margin-bottom: 9px;
 }
-
-#emailAddress-grid input {
-	margin-top: 4px;
-}
