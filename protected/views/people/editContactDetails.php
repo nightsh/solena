@@ -105,7 +105,7 @@ $this->menu = $this->generateMenu($model);
 
 	<?php echo CHtml::label('New email address', 'mail'); ?>
 	<?php echo CHtml::textField('mail', ''); ?>
-	<?php echo CHtml::submitButton('Add address', array("submit" => "", "params" => array("action" => "add")) ); ?>
+	<?php echo CHtml::submitButton('Add address', array("submit" => "", 'class' => 'btn btn-primary', "params" => array("action" => "add")) ); ?>
 
 <?php $this->endWidget(); ?>
 
