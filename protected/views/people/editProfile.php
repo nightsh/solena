@@ -10,14 +10,14 @@ $this->menu = $this->generateMenu($model);
 
 <h1>Edit profile of <?php echo CHtml::encode($model->cn); ?></h1>
 
-<div class="form">
+<div class="form well">
 
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'person-form',
 	'enableAjaxValidation' => false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="alert alert-info">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 

@@ -28,8 +28,8 @@ $this->menu = $this->generateMenu($model);
 	'htmlOptions' => array('class' => 'table table-bordered table-striped'),
 )); ?>
 <br />
-
-<h2>Contact information</h2>
+<hr/>
+<h3>Contact information</h3>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data' => $model,

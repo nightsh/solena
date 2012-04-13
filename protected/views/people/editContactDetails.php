@@ -10,7 +10,7 @@ $this->menu = $this->generateMenu($model);
 
 <h1>Edit contact details for <?php echo CHtml::encode($model->cn); ?></h1>
 
-<div class="form">
+<div class="form well">
 
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'person-form',
@@ -53,7 +53,7 @@ $this->menu = $this->generateMenu($model);
 	)); ?>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Update Contact Details'); ?>
+		<?php echo CHtml::submitButton('Update Contact Details', array('class' => 'btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
@@ -72,6 +72,7 @@ $this->menu = $this->generateMenu($model);
 
 	<?php $this->widget('zii.widgets.grid.CGridView', array(
 		'id' => 'emailAddress-grid',
+		'itemsCssClass' => 'table table-bordered table-striped',
 		'dataProvider' => $emailDataProvider,
 		'template' => '{items}',
 		'columns'=> array(

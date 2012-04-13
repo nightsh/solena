@@ -42,7 +42,7 @@ class MultiEdit extends CWidget
 	public function run()
 	{
 		// First we will setup some variables
-		$deleteButton = CHtml::button('Delete', array('onclick' => 'js:$(this).parent("div").detach();'));
+		$deleteButton = CHtml::button('Delete', array('onclick' => 'js:$(this).parent("div").detach();', 'class' => 'btn'));
 		$attribute = $this->attribute;
 		$data = (array) $this->model->$attribute;
 		$editorId = CHtml::getIdByName( CHtml::resolveName($this->model, $attribute) ) . '_editors';
@@ -71,7 +71,7 @@ class MultiEdit extends CWidget
 		echo CHtml::closeTag('div');
 		
 		// Add the Add new entry item
-		echo CHtml::button('Add', array('id' => 'add' . $editorId));
+		echo CHtml::button('Add', array('id' => 'add' . $editorId, 'class' => 'btn'));
 		echo CHtml::closeTag('fieldset');
 		
 		// Setup Javascript
