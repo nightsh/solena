@@ -9,11 +9,11 @@
 		<?php echo $content; ?>
 	</div>
 </div>
-<div class="span4">
+<div class="span3 pull-right">
 	<div id="sidebar">
 	<?php
 		$this->beginWidget('zii.widgets.CPortlet', array(
-			'title'=>'<h1>Operations</h1>',
+			'title'=>'<h3>Operations</h3>',
 		));
 	?>
 	<hr/>
