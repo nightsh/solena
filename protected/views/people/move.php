@@ -10,14 +10,14 @@ $this->menu = $this->generateMenu($model);
 
 <h1>Change parent organisational unit of <?php echo CHtml::encode($model->cn); ?></h1>
 
-<div class="form">
+<div class="form well">
 
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'person-form',
 	'enableAjaxValidation' => false,
 )); ?>
 
-	<p class="note">This will change the Parent Organisation Unit for <?php echo CHtml::encode($model->cn); ?> which may affect LDAP based logins</p>
+	<p class="alert alert-info">This will change the Parent Organisation Unit for <?php echo CHtml::encode($model->cn); ?> which may affect LDAP based logins</p>
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'parentDn'); ?>
@@ -26,7 +26,7 @@ $this->menu = $this->generateMenu($model);
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Move account'); ?>
+		<?php echo CHtml::submitButton('Move account', array('class' => 'btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
