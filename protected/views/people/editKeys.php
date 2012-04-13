@@ -24,7 +24,7 @@ Yii::app()->clientScript->registerScript("disableCheckAll", "$('input.select-on-
 		<?php
 			$template = '{items}';
 			if( $dataProvider->itemCount > 0 ) {
-				$template .= CHtml::submitButton('Remove selected keys', array('name' => 'removeKeys'));
+				$template .= CHtml::submitButton('Remove selected keys', array('name' => 'removeKeys', 'class' => 'btn'));
 			}
 		?>
 		<?php $this->widget('zii.widgets.grid.CGridView', array(
