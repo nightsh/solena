@@ -38,6 +38,6 @@ $this->menu = array(
 		),
 		'justification:ntext',
 		'evidence_links:ntext',
-		'htmlOptions' => array('class' => 'table table-bordered table-striped'),
 	),
+	'htmlOptions' => array('class' => 'table table-bordered table-striped')
 )); ?>
