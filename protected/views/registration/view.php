@@ -22,8 +22,6 @@ $this->menu = array(
 	'htmlOptions' => array('class' => 'table table-bordered table-striped'),
 )); ?>
 
-<br />
-
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'registrations-form',
 	'enableAjaxValidation' => false,

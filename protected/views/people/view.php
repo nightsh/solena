@@ -27,7 +27,7 @@ $this->menu = $this->generateMenu($model);
 	),
 	'htmlOptions' => array('class' => 'table table-bordered table-striped'),
 )); ?>
-<br />
+
 <hr/>
 <h3>Contact information</h3>
 
