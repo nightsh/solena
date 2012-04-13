@@ -17,7 +17,7 @@
 		));
 			$this->widget('zii.widgets.CMenu', array(
 				'items'=>$this->menu,
-				'htmlOptions'=>array('class'=>'nav nav-list Neverland'),
+				'htmlOptions'=>array('class'=>'nav Neverland'),
 				'linkLabelWrapper' => 'h3',
 			));
 		$this->endWidget();
