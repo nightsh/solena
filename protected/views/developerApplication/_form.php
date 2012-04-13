@@ -1,4 +1,4 @@
-<div class="form">
+<div class="form well">
 
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'developer-application-form',
@@ -6,7 +6,7 @@
 	'htmlOptions' => array('enctype' => 'multipart/form-data'),
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="alert alert-info">Fields with <span class="required">*</span> are required.</p>
 
 	<p>
 		Please fill in the below fields accurately to enable KDE Sysadmin to process your application quickly and accurately.<br />
@@ -80,7 +80,7 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Submit application' : 'Update'); ?>
+	<?php echo CHtml::submitButton($model->isNewRecord ? 'Submit application' : 'Update', array('class' => 'btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
