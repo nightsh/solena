@@ -109,3 +109,7 @@ hr {
 	-moz-border-radius: 2px;
 	border-radius: 2px;
 }
+
+portlet-content .nav.Neverland :hover > a:hover {
+	text-shadow: none;
+}
