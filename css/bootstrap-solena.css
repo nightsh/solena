@@ -103,7 +103,7 @@ hr {
 
 .portlet-content .nav.Neverland :hover > a, .portlet-content .nav.Neverland :hover > a:hover {
 	color: #ffffff;
-	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+	text-shadow: none;
 	background-color: #0068c6;
 	-webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
