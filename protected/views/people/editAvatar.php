@@ -10,7 +10,7 @@ $this->menu = $this->generateMenu($model);
 
 <h1>Change Avatar of <?php echo CHtml::encode($model->cn); ?></h1>
 
-<div class="form">
+<div class="form well">
 
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'person-form',
@@ -34,7 +34,7 @@ $this->menu = $this->generateMenu($model);
 		<?php echo $form->error($model, 'jpegPhoto'); ?>
 	</div>
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Upload', array('name' => 'uploadAvatar')); ?>
+		<?php echo CHtml::submitButton('Upload', array('name' => 'uploadAvatar', 'class' => 'btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
