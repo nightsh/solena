@@ -79,12 +79,12 @@ $this->menu = $this->generateMenu($model);
 			'mail:email:Email address',
 			array(
 				'type' => 'raw',
-				'value' => '($data["type"] == "secondary") ? CHtml::submitButton("Set as primary", array("submit" => "", "params" => array("action" => "primary", "mail" => $data["mail"])) ) : ""',
+				'value' => '($data["type"] == "secondary") ? CHtml::submitButton("Set as primary", array("submit" => "", "class" => "btn", "params" => array("action" => "primary", "mail" => $data["mail"])) ) : ""',
 				'htmlOptions' => array('style' => 'width: 100px;'),
 			),
 			array(
 				'type' => 'raw',
-				'value'=> '($data["type"] == "pending") ? CHtml::submitButton("Resend verification", array("submit" => "", "class" => "btn" "params" => array("action" => "resend", "mail" => $data["mail"])) ) : ""',
+				'value'=> '($data["type"] == "pending") ? CHtml::submitButton("Resend verification", array("submit" => "", "class" => "btn", "params" => array("action" => "resend", "mail" => $data["mail"])) ) : ""',
 				'htmlOptions' => array('style' => 'width: 100px;'),
 			),
 			array(
