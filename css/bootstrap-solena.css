@@ -95,3 +95,7 @@
 hr {
 	margin: 0.2em 0;
 }
+
+#person-form button, #person-form input, #person-form select, #person-form textarea {
+	vertical-align: top;
+	margin-right: 8px;
