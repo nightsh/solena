@@ -12,7 +12,7 @@ Yii::app()->clientScript->registerScript("disableCheckAll", "$('input.select-on-
 
 <h1>Manage SSH Keys of <?php echo CHtml::encode($model->cn); ?></h1>
 
-<div class="form">
+<div class="form well">
 
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'person-form',
@@ -29,6 +29,7 @@ Yii::app()->clientScript->registerScript("disableCheckAll", "$('input.select-on-
 		?>
 		<?php $this->widget('zii.widgets.grid.CGridView', array(
 			'id' => 'sshkey-grid',
+			'itemsCssClass' => 'table table-bordered table-striped',
 			'selectableRows' => 2,
 			'dataProvider' => $dataProvider,
 			'template' => $template,
@@ -52,7 +53,7 @@ Yii::app()->clientScript->registerScript("disableCheckAll", "$('input.select-on-
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Upload keys', array('name' => 'uploadKeys')); ?>
+		<?php echo CHtml::submitButton('Upload keys', array('name' => 'uploadKeys', 'class' => 'btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
