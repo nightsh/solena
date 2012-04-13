@@ -9,14 +9,14 @@ $this->menu = array();
 
 <h1>Register on <?php echo Yii::app()->name; ?></h1>
 
-<div class="form">
+<div class="form well">
 
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'registrations-form',
 	'enableAjaxValidation' => false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="alert alert-info">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
