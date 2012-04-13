@@ -110,6 +110,6 @@ hr {
 	border-radius: 2px;
 }
 
-portlet-content .nav.Neverland :hover > a:hover {
+portlet-content .nav.Neverland :hover > a:hover h5 {
 	text-shadow: none;
 }
