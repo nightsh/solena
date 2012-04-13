@@ -19,6 +19,7 @@ $this->menu = array(
 		'sn',
 		'mail',
 	),
+	'htmlOptions' => array('class' => 'table table-bordered table-striped'),
 )); ?>
 
 <br />
@@ -29,7 +30,7 @@ $this->menu = array(
 )); ?>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Resend confirmation', array('name' => 'resendConfirmation')); ?>
+		<?php echo CHtml::submitButton('Resend confirmation', array('name' => 'resendConfirmation', 'class' => 'btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
