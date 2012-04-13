@@ -249,7 +249,7 @@ class GroupsController extends Controller
 			$menu[] = array('label' => 'Edit Group', 'url' => array('edit', 'cn' => $model->cn));
 		}
 		if( Yii::app()->user->checkAccess('manageGroup', $params) && $this->action->id != 'addMember' ) {
-			$menu[] = array('label' => 'Add Member To Group', 'url' => array('addMember', 'cn' => $model->cn));
+			$menu[] = array('label' => 'Add Member', 'url' => array('addMember', 'cn' => $model->cn));
 		}
 		// Sysadmin only actions now
 		if( Yii::app()->user->checkAccess('sysadmins') && $this->action->id != 'delete' ) {
