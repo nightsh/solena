@@ -13,7 +13,7 @@ $this->menu = array(
 
 <h1>Delete registration of <?php echo CHtml::encode($model->name); ?></h1>
 
-<div class="form">
+<div class="form well">
 
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'registrations-form',
@@ -30,7 +30,7 @@ $this->menu = array(
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Delete registration', array('name' => 'deleteAccount')); ?>
+		<?php echo CHtml::submitButton('Delete registration', array('name' => 'deleteAccount', 'class' => 'btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

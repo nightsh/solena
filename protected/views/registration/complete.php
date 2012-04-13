@@ -9,7 +9,7 @@ $this->menu = array();
 
 <h1>Registration completed on <?php echo Yii::app()->name; ?></h1>
 
-<p>
+<p class="well">
   Your registration has now been completed <?php echo CHtml::encode($model->cn); ?>.
   The username for your account is '<?php echo CHtml::encode($model->uid); ?>'.
   <br /><br />
