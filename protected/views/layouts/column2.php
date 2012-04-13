@@ -15,6 +15,9 @@
 		$this->beginWidget('zii.widgets.CPortlet', array(
 			'title'=>'<h1>Operations</h1>',
 		));
+	?>
+	<hr/>
+	<?php
 			$this->widget('zii.widgets.CMenu', array(
 				'items'=>$this->menu,
 				'htmlOptions'=>array('class'=>'nav Neverland'),
