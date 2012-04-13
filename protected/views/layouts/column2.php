@@ -13,11 +13,8 @@
 	<div id="sidebar">
 	<?php
 		$this->beginWidget('zii.widgets.CPortlet', array(
-			'title'=>'<h3>Operations</h3>',
+			'title'=>'<h3>Operations</h3><hr/>',
 		));
-	?>
-	<hr/>
-	<?php
 			$this->widget('zii.widgets.CMenu', array(
 				'items'=>$this->menu,
 				'htmlOptions'=>array('class'=>'nav Neverland'),
