@@ -118,3 +118,7 @@ hr {
 .portlet {
 	margin-top: 14px;
 }
+
+select, input[type="file"] {
+	height: 33px;
+}
