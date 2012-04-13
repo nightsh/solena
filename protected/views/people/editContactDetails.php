@@ -84,13 +84,13 @@ $this->menu = $this->generateMenu($model);
 			),
 			array(
 				'type' => 'raw',
-				'value'=> '($data["type"] == "pending") ? CHtml::submitButton("Resend verification", array("submit" => "", "params" => array("action" => "resend", "mail" => $data["mail"])) ) : ""',
-				'htmlOptions' => array('style' => 'width: 100px;', 'class' => 'btn'),
+				'value'=> '($data["type"] == "pending") ? CHtml::submitButton("Resend verification", array("submit" => "", "class" => "btn" "params" => array("action" => "resend", "mail" => $data["mail"])) ) : ""',
+				'htmlOptions' => array('style' => 'width: 100px;'),
 			),
 			array(
 				'type' => 'raw',
-				'value'=> '($data["type"] != "primary") ? CHtml::submitButton("Remove address", array("submit" => "", "params" => array("action" => "remove", "mail" => $data["mail"])) ) : ""',
-				'htmlOptions' => array('style' => 'width: 100px;', 'class' => 'btn'),
+				'value'=> '($data["type"] != "primary") ? CHtml::submitButton("Remove address", array("submit" => "", "class" => "btn", "params" => array("action" => "remove", "mail" => $data["mail"])) ) : ""',
+				'htmlOptions' => array('style' => 'width: 100px;'),
 			),
 		),
 	)); ?>
