@@ -37,7 +37,7 @@ $this->menu = array(
 			'value' => $model->specialReasonName,
 		),
 		'justification:ntext',
-		'evidence_links:ntext',,
+		'evidence_links:ntext',
 		'htmlOptions' => array('class' => 'table table-bordered table-striped'),
 	),
 )); ?>
