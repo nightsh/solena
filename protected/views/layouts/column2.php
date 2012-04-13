@@ -1,5 +1,5 @@
 <?php $this->beginContent('//layouts/main'); ?>
-<div id="page" class="span9">
+<div id="page" class="span10">
 	<div>
 		<?php
 			foreach(Yii::app()->user->getFlashes() as $key => $message) {
@@ -9,7 +9,7 @@
 		<?php echo $content; ?>
 	</div>
 </div>
-<div class="span3 pull-right">
+<div class="span2 pull-right">
 	<div id="sidebar">
 	<?php
 		$this->beginWidget('zii.widgets.CPortlet', array(
