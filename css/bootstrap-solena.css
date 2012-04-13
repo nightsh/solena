@@ -101,7 +101,7 @@ hr {
 	margin-right: 8px;
 }
 
-.portlet-content .nav.Neverland :hover > a, .portlet-content .nav.Neverland :hover > a:hover {
+.portlet-content .nav.Neverland :hover > a, .portlet-content .nav.Neverland > a:hover {
 	color: #ffffff;
 	text-shadow: none;
 	background-color: #0068c6;
@@ -110,6 +110,7 @@ hr {
 	border-radius: 2px;
 }
 
-portlet-content .nav.Neverland :hover > a:hover h5 {
+portlet-content .nav.Neverland > a:hover h5 {
 	text-shadow: none;
+	color: #ffffff;
 }
