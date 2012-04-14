@@ -10,7 +10,7 @@ $this->menu = $this->generateMenu($model);
 
 <h1>Add member to group <?php echo CHtml::encode($model->description); ?></h1>
 <p>All searches performed below will be done as contains filters. A maximum of 150 entries will be browsable at any one time</p>
-
+<hr/>
 <div class="form">
 
 <?php $form = $this->beginWidget('CActiveForm', array(
