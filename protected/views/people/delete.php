@@ -21,15 +21,16 @@ $this->menu = $this->generateMenu($model);
 	'id' => 'person-form',
 	'enableAjaxValidation' => false,
 )); ?>
-
-	<p>
-		<?php echo CHtml::checkbox('confirmDeletion') ?>
-		Confirm account deletion
-	</p>
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Delete account', array('name' => 'deleteAccount', 'class' => 'btn btn-primary')); ?>
+	<div class="well">
+		<p>
+			<?php echo CHtml::checkbox('confirmDeletion') ?>
+			Confirm account deletion
+		</p>
+		<div class="row buttons">
+			<?php echo CHtml::submitButton('Delete account', array('name' => 'deleteAccount', 'class' => 'btn btn-primary')); ?>
+		</div>
 	</div>
-
+	
 <?php $this->endWidget(); ?>
 
 </div>
