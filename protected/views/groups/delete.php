@@ -22,12 +22,12 @@ $this->menu = $this->generateMenu($model);
 		The group '<?php echo CHtml::encode($model->cn); ?>' will be deleted if you proceed.
 	</div>
 	<div class="well">
-		<div class="row">
+		<p>
 			<?php echo CHtml::checkbox('confirmDeletion') ?>
 			Confirm group deletion
-		</div>
+		</p>
 
-		<div class="row buttons">
+		<div>
 			<?php echo CHtml::submitButton('Delete group', array('name' => 'deleteGroup', 'class' => 'btn btn-primary')); ?>
 		</div>
 	</div>
