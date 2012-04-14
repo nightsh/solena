@@ -134,6 +134,11 @@ class PeopleController extends Controller
 		$model = $this->loadModel($uid);
 		$model->setScenario('delete');
 
+		// Deleting yourself is not a good idea
+		if($model->dn == Yii::app()->user->dn) {
+			throw new CHttpException(403, 'You are not permitted to commit suicide.');
+		}
+
 		if( isset($_POST['confirmDeletion']) && isset($_POST['deleteAccount']) ) {
 			if( $model->delete() ) {
 				Yii::app()->user->setFlash('success', 'Person deleted successfully');
