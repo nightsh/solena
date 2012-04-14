@@ -9,6 +9,7 @@ $this->menu = $this->generateMenu($model);
 
 <h1><?php echo CHtml::encode($model->cn); ?></h1>
 
+<?php echo CHtml::image( CHtml::normalizeUrl(array('viewAvatar', 'uid' => $model->uid)) ); ?>
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data' => $model,
 	'attributes' => array(
