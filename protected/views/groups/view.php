@@ -17,7 +17,7 @@ $this->menu = $this->generateMenu($model);
 	'action' => array('removeMember', 'cn' => $model->cn),
 	'enableAjaxValidation' => false,
 )); ?>
-
+<hr/>
 	<?php
 		$template = '{summary}{items}';
 		if( Yii::app()->user->checkAccess('manageGroup', array('group' => $model)) && $dataProvider->itemCount > 0 ) {
