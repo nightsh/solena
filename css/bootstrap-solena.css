@@ -124,9 +124,12 @@ select, input[type="file"] {
 }
 
 #person-form fieldset {
-	margin-bottom: 9px;
+	margin-bottom: 16px;
 }
 
+#person-form fieldset label {
+	margin-bottom: 0px;
+}
 #emailAddress-grid table.table td {
 	vertical-align: middle;
 }
