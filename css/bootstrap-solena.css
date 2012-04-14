@@ -156,3 +156,8 @@ input.error {
 .span10 .span8, .span10 .span10 {
 	margin-left: 0px;
 }
+
+.span10 .span2 input[type="submit"] {
+	width: 100%;
+	margin-top: 6px;
+}
