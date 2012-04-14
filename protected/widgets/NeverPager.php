@@ -16,7 +16,7 @@ class NeverPager extends CLinkPager
 	/**
 	 * @var integer maximum number of page buttons that can be displayed. Defaults to 10.
 	 */
-	public $maxButtonCount=10;
+	public $maxButtonCount=2;
 	/**
 	 * @var string the text label for the next page button. Defaults to 'Next &gt;'.
 	 */
