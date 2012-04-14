@@ -9,9 +9,6 @@ $this->menu = $this->generateMenu($model);
 
 <h1><?php echo CHtml::encode($model->cn); ?></h1>
 
-<div class="span2 pull-right">
-<?php echo CHtml::image( CHtml::normalizeUrl(array('viewAvatar', 'uid' => $model->uid)), '',array('class' => 'thumbnail pull-right') ); ?>
-</div>
 <div class="span8">
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data' => $model,
@@ -32,7 +29,12 @@ $this->menu = $this->generateMenu($model);
 	'htmlOptions' => array('class' => 'table table-bordered table-striped'),
 )); ?>
 </div>
+<div class="span2">
+<?php echo CHtml::image( CHtml::normalizeUrl(array('viewAvatar', 'uid' => $model->uid)), '',array('class' => 'thumbnail pull-right') ); ?>
+</div>
+
 <hr/>
+
 <div class="span10">
 <h3>Contact information</h3>
 
