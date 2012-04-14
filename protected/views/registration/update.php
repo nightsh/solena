@@ -40,7 +40,7 @@ $this->menu = array(
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Save changes'); ?>
+		<?php echo CHtml::submitButton('Save changes', array('class' => 'btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
