@@ -18,7 +18,7 @@ $this->menu = $this->generateMenu($model);
 	'htmlOptions' => array('enctype' => 'multipart/form-data'),
 )); ?>
 
-	<div class="span8">
+	<div class="span7">
 		<?php echo $form->labelEx($model, 'jpegPhoto'); ?>
 		<?php echo $form->fileField($model, 'jpegPhoto'); ?>
 		<?php echo $form->error($model, 'jpegPhoto'); ?>
