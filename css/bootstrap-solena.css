@@ -153,6 +153,6 @@ input.error {
 	width: 300px
 }
 
-.span10 .span8 {
+.span10 .span8, .span10 .span10 {
 	margin-left: 0px;
 }
