@@ -33,6 +33,7 @@ $this->menu = $this->generateMenu($model);
 )); ?>
 </div>
 <hr/>
+<div class="span10">
 <h3>Contact information</h3>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
@@ -52,3 +53,4 @@ $this->menu = $this->generateMenu($model);
 	),
 	'htmlOptions' => array('class' => 'table table-bordered table-striped'),
 )); ?>
+</div>
