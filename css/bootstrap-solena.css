@@ -152,3 +152,7 @@ input.error {
 #person-form select {
 	width: 300px
 }
+
+.span10 .span8 {
+	margin-left: 0px;
+}
