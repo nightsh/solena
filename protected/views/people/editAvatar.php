@@ -28,13 +28,11 @@ $this->menu = $this->generateMenu($model);
 		<?php if( isset($model->jpegPhoto) && !$model->jpegPhoto instanceof CUploadedFile ) { ?>
 			<?php echo CHtml::submitButton('Clear avatar', array('name' => 'clearAvatar', 'class' => 'btn')); ?>
 		<?php } ?>
-	</div>
-
 	
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Upload', array('name' => 'uploadAvatar', 'class' => 'btn btn-primary')); ?>
 	</div>
-
+	</div>
 <?php $this->endWidget(); ?>
 
 </div>
