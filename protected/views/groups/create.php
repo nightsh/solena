@@ -12,6 +12,7 @@ $this->breadcrumbs = array(
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'group-form',
 	'enableAjaxValidation' => false,
+	'htmlOptions' => array('class' => 'alert alert-error'),
 )); ?>
 
 	<p class="alert alert-info">Fields with <span class="required">*</span> are required.</p>
@@ -21,13 +22,13 @@ $this->breadcrumbs = array(
 	<div class="row">
 		<?php echo $form->labelEx($model, 'cn'); ?>
 		<?php echo $form->textField($model, 'cn', array('size' => 60, 'maxlength' => 128)); ?>
-		<?php echo $form->error($model, 'cn'); ?>
+		<?php echo $form->error($model, 'cn', array('class' => 'alert alert-error')); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'description'); ?>
 		<?php echo $form->textField($model, 'description', array('size' => 60, 'maxlength' => 128)); ?>
-		<?php echo $form->error($model, 'description'); ?>
+		<?php echo $form->error($model, 'description', array('class' => 'alert alert-error')); ?>
 	</div>
 
 	<div class="row buttons">
