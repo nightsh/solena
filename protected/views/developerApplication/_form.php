@@ -38,7 +38,6 @@
 		<div class="row">
 			<?php echo $form->labelEx($model, 'status'); ?>
 			<?php echo $form->dropDownList($model, 'status', $model->validStatus(), array('empty'=> 'Not set')); ?>
-			<?php echo $form->error($model, 'status', array('class' => 'alert alert-error')); ?>
 		</div>
 	<?php } ?>
 
@@ -48,7 +47,6 @@
 			Only confirmed Google Summer of Code students with KDE qualify as participants.
 		</div>
 		<?php echo $form->dropDownList($model, 'special_reason', $model->validSpecialReason(), array('empty'=> 'Not set')); ?>
-		<?php echo $form->error($model, 'special_reason', array('class' => 'alert alert-error')); ?>
 	</div>
 
 	<div class="row">
@@ -58,7 +56,6 @@
 			Keep it short and to the point, and indicate which teams/people you have worked with.
 		</div>
 		<?php echo $form->textArea($model, 'justification', array('rows' => 6, 'cols' => 50)); ?>
-		<?php echo $form->error($model, 'justification', array('class' => 'alert alert-error')); ?>
 	</div>
 
 	<div class="row">
@@ -67,7 +64,6 @@
 			Please provide links to mailing list postings, review requests or other publicly accessible material which indicates your involvement with the KDE Community.
 		</div>
 		<?php echo $form->textArea($model, 'evidence_links', array('rows' => 6, 'cols' => 50)); ?>
-		<?php echo $form->error($model, 'evidence_links', array('class' => 'alert alert-error')); ?>
 	</div>
 
 	<div class="row">
@@ -76,7 +72,6 @@
 			Please provide a single RSA, DSA or ECDSA key which you will use to access infrastructure once your application is approved.
 		</div>
 		<?php echo $form->fileField($model, 'ssh_key'); ?>
-		<?php echo $form->error($model, 'ssh_key', array('class' => 'alert alert-error')); ?>
 	</div>
 
 	<div class="row buttons">
