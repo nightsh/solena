@@ -21,13 +21,11 @@ $this->breadcrumbs = array(
 	<div class="row">
 		<?php echo $form->labelEx($model, 'cn'); ?>
 		<?php echo $form->textField($model, 'cn', array('size' => 60, 'maxlength' => 128)); ?>
-		<?php echo $form->error($model, 'cn', array('class' => 'alert alert-error')); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'description'); ?>
 		<?php echo $form->textField($model, 'description', array('size' => 60, 'maxlength' => 128)); ?>
-		<?php echo $form->error($model, 'description', array('class' => 'alert alert-error')); ?>
 	</div>
 
 	<div class="row buttons">
