@@ -25,4 +25,4 @@ $this->menu = array( array('label' => 'Create Person', 'url' => array('create'),
 		'htmlOptions' => array('class' => 'pagination'),
 		'pagerCssClass' => '',
 	),
-)); ?>
+); ?>

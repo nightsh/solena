@@ -24,4 +24,4 @@ $this->menu = array( array('label' => 'Create Group', 'url' => array('create'), 
 		'htmlOptions' => array('class' => 'pagination'),
 		'pagerCssClass' => '',
 	),
-)); ?>
+); ?>
