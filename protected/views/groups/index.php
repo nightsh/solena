@@ -19,4 +19,9 @@ $this->menu = array( array('label' => 'Create Group', 'url' => array('create'), 
 		),
 		'description',
 	),
+	'pager' => array(
+		'class' => 'CLinkPager',
+		'htmlOptions' => array('class' => 'pagination'),
+		'pagerCssClass' => '',
+	),
 )); ?>
