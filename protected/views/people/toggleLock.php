@@ -26,7 +26,7 @@ $this->menu = $this->generateMenu($model);
 				echo CHtml::submitButton('Unlock account', array('name' => 'unlockAccount'));
 			}
 			if( $model->accountStatus != User::AccountPermanentLocked ) {
-				echo CHtml::submitButton('Lock account infinitely', array('name' => 'lockAccount'));
+				echo CHtml::submitButton('Lock account infinitely', array('name' => 'lockAccount', 'class' => 'btn btn-primary'));
 			}
 		?>
 	</div>
