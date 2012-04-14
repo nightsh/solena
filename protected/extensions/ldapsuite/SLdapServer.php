@@ -191,7 +191,7 @@ final class SLdapServer extends CApplicationComponent
 		$securePassword = Yii::app()->securityManager->encrypt($this->_credentials['bindpw'], $key);
 		
 		// Send the now encyrpted and armoured password back to the user
-		$cookie = new CHttpCookie('accessKey', $securePassword);
+		$cookie = new CHttpCookie('accessKey', base64_encode($securePassword));
 		$cookie->secure = Yii::app()->request->isSecureConnection;
 		$cookie->httpOnly = true;
 		
@@ -221,7 +221,7 @@ final class SLdapServer extends CApplicationComponent
 		// Retrieve and decrypt the password
 		$securedPassword = Yii::app()->request->cookies['accessKey']->value;
 		$passwordKey = Yii::app()->user->getState('userPasswordKey');
-		$plainPassword = Yii::app()->securityManager->decrypt($securedPassword, $passwordKey);
+		$plainPassword = Yii::app()->securityManager->decrypt(base64_decode($securedPassword), $passwordKey);
 		
 		// Set the configuration
 		$config['binddn'] = Yii::app()->user->getState('userDn');
