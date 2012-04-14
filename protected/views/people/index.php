@@ -4,8 +4,8 @@ $this->menu = array( array('label' => 'Create Person', 'url' => array('create'),
 ?>
 
 <h1>People</h1>
-<p class="alert alert-info">All searches performed below will be done as contains filters. A maximum of 150 entries will be browsable at any one time</p>
-
+<p>All searches performed below will be done as contains filters. A maximum of 150 entries will be browsable at any one time</p>
+<hr/>
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id'=> 'person-grid',
 	'itemsCssClass' => 'table table-bordered table-striped',
