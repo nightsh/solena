@@ -96,7 +96,9 @@ hr {
 	margin: 1.2em 0;
 }
 
-#person-form button, #person-form input, #person-form select, #person-form textarea, #emailAddress-form button, #emailAddress-form input, #emailAddress-form select, #emailAddress-form textarea {
+#person-form button, #person-form input, #person-form select, #person-form textarea,
+#emailAddress-form button, #emailAddress-form input, #emailAddress-form select, #emailAddress-form textarea,
+#group-form button, #group-form input, #group-form select, #group-form textarea {
 	vertical-align: top;
 	margin-right: 8px;
 }
