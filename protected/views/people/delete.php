@@ -10,17 +10,17 @@ $this->menu = $this->generateMenu($model);
 
 <h1>Delete account of <?php echo CHtml::encode($model->cn); ?></h1>
 
+<div class="alert">
+	<h4 class="alert-heading">Warning!</h4>
+	The account of '<?php echo CHtml::encode($model->uid); ?>' will be deleted if you proceed.
+</div>
+
 <div class="form well">
 
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'person-form',
 	'enableAjaxValidation' => false,
 )); ?>
-
-	<div class="alert">
-		<h4 class="alert-heading">Warning!</h4>
-		The account of '<?php echo CHtml::encode($model->uid); ?>' will be deleted if you proceed.
-	</div>
 
 	<p>
 		<?php echo CHtml::checkbox('confirmDeletion') ?>
