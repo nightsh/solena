@@ -32,6 +32,7 @@ $this->menu = $this->generateMenu($model);
 			<?php echo CHtml::submitButton('Clear avatar', array('name' => 'clearAvatar', 'class' => 'btn')); ?>
 		<?php } ?>
 	</div>
+	<div class="clearfix"></div>
 <?php $this->endWidget(); ?>
 
 </div>
