@@ -152,6 +152,7 @@ class RegistrationController extends Controller
 	public function actionUpdate($id)
 	{
 		$model = $this->loadModel($id);
+		$model->setScenario('register');
 
 		if( isset($_POST['Token']) ) {
 			$model->attributes = $_POST['Token'];
