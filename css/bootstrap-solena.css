@@ -127,10 +127,6 @@ select, input[type="file"] {
 	margin-bottom: 16px;
 }
 
-#person-form fieldset label {
-	margin-bottom: 0px;
-}
-
 #person-form fieldset legend {
 	margin-bottom: 0px;
 }
