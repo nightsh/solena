@@ -17,14 +17,15 @@ $this->menu = $this->generateMenu($model);
 	'enableAjaxValidation' => false,
 )); ?>
 
-	<div class="row">
+	<div class="alert">
+		<h4 class="alert-heading">Warning!</h4>
 		The account of '<?php echo CHtml::encode($model->uid); ?>' will be deleted if you proceed.
 	</div>
 
-	<div class="row">
+	<p>
 		<?php echo CHtml::checkbox('confirmDeletion') ?>
 		Confirm account deletion
-	</div>
+	</p>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Delete account', array('name' => 'deleteAccount', 'class' => 'btn btn-primary')); ?>
