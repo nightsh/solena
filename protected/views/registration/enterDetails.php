@@ -14,12 +14,11 @@ $this->menu = array();
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'registrations-form',
 	'enableAjaxValidation' => false,
-	'htmlOptions' => array('class' => 'alert alert-error'),
 )); ?>
 
 	<p class="alert alert-info">Fields with <span class="required">*</span> are required.</p>
 
-	<?php echo $form->errorSummary($model); ?>
+	<?php echo $form->errorSummary($model,'','',array('class' => 'alert alert-error')); ?>
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'givenName'); ?>
