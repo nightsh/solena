@@ -15,7 +15,7 @@ $this->menu = $this->generateMenu($model);
 	The account of '<?php echo CHtml::encode($model->uid); ?>' will be deleted if you proceed.
 </div>
 
-<div class="form well">
+<div class="form">
 
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'person-form',
