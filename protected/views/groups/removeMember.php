@@ -18,7 +18,7 @@ $this->menu = $this->generateMenu($model);
 )); ?>
 
 	<div class="alert">
-		<strong class="alert-heading">Warning!</strong>
+		<h4 class="alert-heading">Warning!</h4>
 		The member '<?php echo CHtml::encode($member->cn); ?>' will be removed from the group '<?php echo CHtml::encode($model->description); ?>' if you proceed.
 	</div>
 
