@@ -24,7 +24,7 @@ $this->menu = $this->generateMenu($model);
 
 	<?php if( isset($model->jpegPhoto) && !$model->jpegPhoto instanceof CUploadedFile ) { ?>
 	<div class="row">
-		<?php echo CHtml::submitButton('Clear avatar', array('name' => 'clearAvatar')); ?>
+		<?php echo CHtml::submitButton('Clear avatar', array('name' => 'clearAvatar', 'class' => 'btn')); ?>
 	</div>
 	<?php } ?>
 
