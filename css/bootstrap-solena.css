@@ -130,6 +130,11 @@ select, input[type="file"] {
 #person-form fieldset label {
 	margin-bottom: 0px;
 }
+
+#peron-form fieldset legend {
+	margin-bottom: 0px;
+}
+
 #emailAddress-grid table.table td {
 	vertical-align: middle;
 }
