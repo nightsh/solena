@@ -12,34 +12,31 @@ $this->menu = array(
 ?>
 
 <h1>Update registration of <?php echo CHtml::encode($model->name); ?></h1>
-
-<div class="form">
+<hr/>
+<div class="form well">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id' => 'registrations-form',
 	'enableAjaxValidation' => false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="alert alert-info">Fields with <span class="required">*</span> are required.</p>
 
-	<?php echo $form->errorSummary($model); ?>
+	<?php echo $form->errorSummary($model,'','',array('class' => 'alert alert-error')); ?>
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'givenName'); ?>
 		<?php echo $form->textField($model, 'givenName', array('size' => 50,'maxlength' => 50)); ?>
-		<?php echo $form->error($model, 'givenName'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'sn'); ?>
 		<?php echo $form->textField($model, 'sn', array('size' => 50, 'maxlength' => 50)); ?>
-		<?php echo $form->error($model, 'sn'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'mail'); ?>
 		<?php echo $form->textField($model, 'mail', array('size' => 50, 'maxlength' => 50)); ?>
-		<?php echo $form->error($model, 'mail'); ?>
 	</div>
 
 	<div class="row buttons">
