@@ -42,10 +42,9 @@ class MultiEdit extends CWidget
 	public function run()
 	{
 		// First we will setup some variables
-		$deleteButton = CHtml::button('Delete', array('onclick' => 'js:$(this).parent("div").detach();', 'class' => 'btn'));
+		$deleteButton = CHtml::button('Delete', array('onclick' => 'js:multiEditRemoveInput( $(this) )', 'class' => 'btn'));
 		$attribute = $this->attribute;
 		$data = (array) $this->model->$attribute;
-		$editorId = CHtml::getIdByName( CHtml::resolveName($this->model, $attribute) ) . '_editors';
 		
 		// If we have no data - then add a single empty entry so that a editor is shown - even if empty
 		if( empty($data) ) {
@@ -57,7 +56,7 @@ class MultiEdit extends CWidget
 		echo CHtml::tag('legend', array(), CHtml::activeLabel($this->model, $this->attribute));
 		
 		// Build the editor wrapper
-		echo CHtml::openTag('div', array('id' => $editorId));
+		echo CHtml::openTag('div');
 		foreach( $data as $key => $entry ) {
 			$indexedAttribute = $this->attribute . "[$key]";
 			$errorState = CHtml::error($this->model, $indexedAttribute);
@@ -71,23 +70,12 @@ class MultiEdit extends CWidget
 		echo CHtml::closeTag('div');
 		
 		// Add the Add new entry item
-		echo CHtml::button('Add', array('id' => 'add' . $editorId, 'class' => 'btn'));
+		echo CHtml::button('Add', array('class' => 'btn', 'onclick' => 'js:multiEditAddInput( $(this) )'));
 		echo CHtml::closeTag('fieldset');
 		
 		// Setup Javascript
 		Yii::app()->clientScript->registerCoreScript('jquery');
-		$javascript = "$('#add$editorId').click(function() {
-						var \$entries = $('#$editorId').children();
-						var \$clone = \$entries.first().clone();
-						var \$child = \$clone.children().first();
-						var \$id = \$child.attr('id').replace(/_\d+$/, '_' + \$entries.length);
-						var \$name = \$child.attr('name').replace(/\[\d+\]$/, '[' + \$entries.length + ']');
-						\$child.val('');
-						\$child.attr('id', \$id);
-						\$child.attr('name', \$name);
-						\$clone.appendTo('#$editorId'); });";
-		Yii::app()->clientScript->registerScript("add$editorId", $javascript);
-		
+		Yii::app()->clientScript->registerScriptFile("js/multiedit-widget.js");
 	}
 };
 
