@@ -13,6 +13,10 @@ $this->menu = array(
 
 <h1>Delete registration of <?php echo CHtml::encode($model->name); ?></h1>
 
+<div class="alert alert-warning">
+	<h4 class="alert-heading">Warning!</h4>
+	The registration of '<?php echo CHtml::encode($model->name); ?>' will be deleted if you proceed.
+</div>
 <div class="form well">
 
 <?php $form = $this->beginWidget('CActiveForm', array(
@@ -20,14 +24,11 @@ $this->menu = array(
 	'enableAjaxValidation' => false,
 )); ?>
 
-	<div class="row">
-		The registration of '<?php echo CHtml::encode($model->name); ?>' will be deleted if you proceed.
-	</div>
 
-	<div class="row">
+	<p>
 		<?php echo CHtml::checkbox('confirmDeletion') ?>
 		Confirm registration deletion
-	</div>
+	</p>
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Delete registration', array('name' => 'deleteAccount', 'class' => 'btn btn-primary')); ?>
