@@ -17,12 +17,13 @@ $this->menu = $this->generateMenu($model);
 	'enableAjaxValidation' => false,
 )); ?>
 
-	<div class="row">
+	<div class="alert">
+		<h4 class="alert-heading">Warning!</h4>
 		The member '<?php echo CHtml::encode($member->cn); ?>' will be removed from the group '<?php echo CHtml::encode($model->description); ?>' if you proceed.
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Confirm removal', array('name' => 'confirmRemoval')); ?>
+		<?php echo CHtml::submitButton('Confirm removal', array('name' => 'confirmRemoval', 'class' => 'btn btn-primary')); ?>
 	</div>
 
 	<?php echo CHtml::hiddenField('selectedPerson[0]', $member->dn); ?>
