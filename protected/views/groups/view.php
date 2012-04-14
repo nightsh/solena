@@ -10,7 +10,7 @@ $this->menu = $this->generateMenu($model);
 <h1>Members of group <?php echo CHtml::encode($model->description); ?></h1>
 <p>All searches performed below will be done as contains filters. A maximum of 500 entries will be browsable at any one time</p>
 
-<div class="form well">
+<div class="form">
 
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'person-form',
@@ -21,7 +21,7 @@ $this->menu = $this->generateMenu($model);
 	<?php
 		$template = '{summary}{items}';
 		if( Yii::app()->user->checkAccess('manageGroup', array('group' => $model)) && $dataProvider->itemCount > 0 ) {
-			$template .= CHtml::submitButton('Remove member', array('name' => 'removeMember', 'style' => 'float:left'));
+			$template .= CHtml::submitButton('Remove member', array('name' => 'removeMember', 'style' => 'float:left', 'class' => 'btn btn-primary'));
 		}
 		$template .= '{pager}';
 	?>

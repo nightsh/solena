@@ -10,7 +10,7 @@ $this->menu = $this->generateMenu($model);
 
 <h1>Delete group <?php echo CHtml::encode($model->description); ?></h1>
 
-<div class="form">
+<div class="form well">
 
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'group-form',
@@ -27,7 +27,7 @@ $this->menu = $this->generateMenu($model);
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Delete group', array('name' => 'deleteGroup')); ?>
+		<?php echo CHtml::submitButton('Delete group', array('name' => 'deleteGroup', 'class' => 'btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

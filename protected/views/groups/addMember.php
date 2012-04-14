@@ -21,12 +21,13 @@ $this->menu = $this->generateMenu($model);
 	<?php
 		$template = '{summary}{items}';
 		if( $dataProvider->itemCount > 0 ) {
-			$template .= CHtml::submitButton('Add member', array('name' => 'addMember', 'style' => 'float:left'));
+			$template .= CHtml::submitButton('Add member', array('name' => 'addMember', 'style' => 'float:left', 'class' => 'btn btn-primary'));
 		}
 		$template .= '{pager}';
 	?>
 	<?php $this->widget('zii.widgets.grid.CGridView', array(
 		'id' => 'person-grid',
+		'itemsCssClass' => 'table table-bordered table-striped',
 		'dataProvider' => $dataProvider,
 		'filter' => $dataProvider->model,
 		'template' => $template,

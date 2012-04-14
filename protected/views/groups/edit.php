@@ -10,7 +10,7 @@ $this->menu = $this->generateMenu($model);
 
 <h1>Edit information of group <?php echo CHtml::encode($model->description); ?></h1>
 
-<div class="form">
+<div class="form well">
 
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'group-form',
@@ -34,7 +34,7 @@ $this->menu = $this->generateMenu($model);
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Update Group'); ?>
+		<?php echo CHtml::submitButton('Update Group', array('class' => 'btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
