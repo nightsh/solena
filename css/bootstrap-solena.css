@@ -129,6 +129,8 @@ select, input[type="file"] {
 
 #person-form fieldset legend {
 	margin-bottom: 0px;
+	border-top: 1px solid #eee;
+	border-bottom: 0px;
 }
 
 #emailAddress-grid table.table td {
