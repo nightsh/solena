@@ -148,3 +148,7 @@ input.error {
 	border-color: #eed3d7;
 	color: #b94a48;
 }
+
+#person-form select {
+	width: 300px
+}
