@@ -12,6 +12,7 @@ $this->breadcrumbs = array(
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'group-form',
 	'enableAjaxValidation' => false,
+	'errorCss' => 'alert alert-error'
 )); ?>
 
 	<p class="alert alert-info">Fields with <span class="required">*</span> are required.</p>
