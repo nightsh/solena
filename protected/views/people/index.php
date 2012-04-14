@@ -23,6 +23,6 @@ $this->menu = array( array('label' => 'Create Person', 'url' => array('create'),
 	'pager' => array(
 		'class' => 'CLinkPager',
 		'htmlOptions' => array('class' => 'pagination'),
-		'pageSize' => 2,
+		'pagerCssClass' => '',
 	),
 )); ?>
