@@ -11,7 +11,7 @@ $this->menu = array();
 
 <p>Please fill out the details below to allow your account password to be reset.</p>
 
-<div class="form">
+<div class="form well">
 
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'passwordReset-form',
@@ -35,7 +35,7 @@ $this->menu = array();
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Request Password Reset'); ?>
+		<?php echo CHtml::submitButton('Request Password Reset', array('btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
