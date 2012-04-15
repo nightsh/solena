@@ -167,3 +167,18 @@ input.error, textarea.error {
 .gridview {
 	padding: 0px;
 }
+
+div.flash-success
+{
+	background:#E6EFC2;
+	color:#264409;
+	border-color:#C6D880;
+	padding:.8em;
+	margin-bottom:1em;
+	border:2px solid #C6D880;
+}
+
+div.flash-success a
+{
+	color:#264409;
+}
