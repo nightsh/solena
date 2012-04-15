@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
 $this->menu = $this->generateMenu($model);
 ?>
 
-<h1>Lock/Unlock account of <?php echo CHtml::encode($model->cn); ?></h1>
+<h1>Lock/Unlock Account of <?php echo CHtml::encode($model->cn); ?></h1>
 
 <div class="form">
 
@@ -23,10 +23,10 @@ $this->menu = $this->generateMenu($model);
 	<div class="row buttons">
 		<?php 
 			if( $model->accountStatus != User::AccountUnlocked ) {
-				echo CHtml::submitButton('Unlock account', array('name' => 'unlockAccount', 'class' => 'btn btn-primary'));
+				echo CHtml::submitButton('Unlock Account', array('name' => 'unlockAccount', 'class' => 'btn btn-primary'));
 			}
 			if( $model->accountStatus != User::AccountPermanentLocked ) {
-				echo CHtml::submitButton('Lock account infinitely', array('name' => 'lockAccount', 'class' => 'btn btn-primary'));
+				echo CHtml::submitButton('Lock Account Infinitely', array('name' => 'lockAccount', 'class' => 'btn btn-primary'));
 			}
 		?>
 	</div>

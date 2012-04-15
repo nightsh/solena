@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
 $this->menu = $this->generateMenu($model);
 ?>
 
-<h1>Edit contact details for <?php echo CHtml::encode($model->cn); ?></h1>
+<h1>Edit Contact Details for <?php echo CHtml::encode($model->cn); ?></h1>
 
 <div class="form well">
 
@@ -79,17 +79,17 @@ $this->menu = $this->generateMenu($model);
 			'mail:email:Email Address',
 			array(
 				'type' => 'raw',
-				'value' => '($data["type"] == "secondary") ? CHtml::submitButton("Set as primary", array("submit" => "", "class" => "btn", "params" => array("action" => "primary", "mail" => $data["mail"])) ) : ""',
+				'value' => '($data["type"] == "secondary") ? CHtml::submitButton("Set as Primary", array("submit" => "", "class" => "btn", "params" => array("action" => "primary", "mail" => $data["mail"])) ) : ""',
 				'htmlOptions' => array('style' => 'width: 100px;'),
 			),
 			array(
 				'type' => 'raw',
-				'value'=> '($data["type"] == "pending") ? CHtml::submitButton("Resend verification", array("submit" => "", "class" => "btn", "params" => array("action" => "resend", "mail" => $data["mail"])) ) : ""',
+				'value'=> '($data["type"] == "pending") ? CHtml::submitButton("Resend Verification", array("submit" => "", "class" => "btn", "params" => array("action" => "resend", "mail" => $data["mail"])) ) : ""',
 				'htmlOptions' => array('style' => 'width: 100px;'),
 			),
 			array(
 				'type' => 'raw',
-				'value'=> '($data["type"] != "primary") ? CHtml::submitButton("Remove address", array("submit" => "", "class" => "btn", "params" => array("action" => "remove", "mail" => $data["mail"])) ) : ""',
+				'value'=> '($data["type"] != "primary") ? CHtml::submitButton("Remove Address", array("submit" => "", "class" => "btn", "params" => array("action" => "remove", "mail" => $data["mail"])) ) : ""',
 				'htmlOptions' => array('style' => 'width: 100px;'),
 			),
 		),

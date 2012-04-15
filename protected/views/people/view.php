@@ -34,7 +34,7 @@ $this->menu = $this->generateMenu($model);
 </div>
 
 <div class="span10">
-<h3>Contact information</h3>
+<h3>Contact Information</h3>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data' => $model,

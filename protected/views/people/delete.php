@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
 $this->menu = $this->generateMenu($model);
 ?>
 
-<h1>Delete account of <?php echo CHtml::encode($model->cn); ?></h1>
+<h1>Delete Account of <?php echo CHtml::encode($model->cn); ?></h1>
 
 <div class="alert">
 	<h4 class="alert-heading">Warning!</h4>
@@ -27,7 +27,7 @@ $this->menu = $this->generateMenu($model);
 			Confirm account deletion
 		</p>
 		<div class="row buttons">
-			<?php echo CHtml::submitButton('Delete account', array('name' => 'deleteAccount', 'class' => 'btn btn-primary')); ?>
+			<?php echo CHtml::submitButton('Delete Account', array('name' => 'deleteAccount', 'class' => 'btn btn-primary')); ?>
 		</div>
 	</div>
 	

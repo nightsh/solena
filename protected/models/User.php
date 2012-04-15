@@ -98,8 +98,8 @@ class User extends SLdapModel
 			'homePostalAddress' => 'Physical Address',
 			'ircNick' => 'IRC Nickname',
 			'jabberID' => 'Jabber ID',
-			'jpegPhoto' => 'Avatar upload',
-			'timezoneName' => 'Timezone',
+			'jpegPhoto' => 'Avatar Upload',
+			'timezoneName' => 'Time Zone',
 			'memberStatus' => 'e.V Membership Status',
 			'evMail' => 'Email address for e.V matters',
 		);

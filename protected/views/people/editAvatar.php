@@ -23,13 +23,13 @@ $this->menu = $this->generateMenu($model);
 		<?php echo $form->fileField($model, 'jpegPhoto'); ?>
 		<?php echo $form->error($model, 'jpegPhoto'); ?>
 		<div class="row buttons">
-			<?php echo CHtml::submitButton('Upload', array('name' => 'uploadAvatar', 'class' => 'btn btn-primary')); ?>
+			<?php echo CHtml::submitButton('Upload Avatar', array('name' => 'uploadAvatar', 'class' => 'btn btn-primary')); ?>
 		</div>
 	</div>
 	<div class="span2">
 		<?php echo CHtml::image( CHtml::normalizeUrl(array('viewAvatar', 'uid' => $model->uid)), '', array('class' => 'thumbnail') ); ?>
 		<?php if( isset($model->jpegPhoto) && !$model->jpegPhoto instanceof CUploadedFile ) { ?>
-			<?php echo CHtml::submitButton('Clear avatar', array('name' => 'clearAvatar', 'class' => 'btn')); ?>
+			<?php echo CHtml::submitButton('Clear Avatar', array('name' => 'clearAvatar', 'class' => 'btn')); ?>
 		<?php } ?>
 	</div>
 	<div class="clearfix"></div>

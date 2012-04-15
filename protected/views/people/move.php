@@ -2,13 +2,13 @@
 $this->breadcrumbs = array(
 	'People' => array('index'),
 	$model->cn => array('view', 'uid' => $model->uid),
-	'Move (change parent organisational unit)',
+	'Move (Change Parent Organisational Unit)',
 );
 
 $this->menu = $this->generateMenu($model);
 ?>
 
-<h1>Change parent organisational unit of <?php echo CHtml::encode($model->cn); ?></h1>
+<h1>Change Parent Organisational Unit of <?php echo CHtml::encode($model->cn); ?></h1>
 
 <div class="form well">
 
@@ -17,7 +17,7 @@ $this->menu = $this->generateMenu($model);
 	'enableAjaxValidation' => false,
 )); ?>
 
-	<p class="alert alert-info">This will change the Parent Organisation Unit for <?php echo CHtml::encode($model->cn); ?> which may affect LDAP based logins</p>
+	<p class="alert alert-info">This will change the Parent Organisational Unit for <?php echo CHtml::encode($model->cn); ?> which may affect LDAP based logins</p>
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'parentDn'); ?>
@@ -26,7 +26,7 @@ $this->menu = $this->generateMenu($model);
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Move account', array('class' => 'btn btn-primary')); ?>
+		<?php echo CHtml::submitButton('Move Account', array('class' => 'btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
