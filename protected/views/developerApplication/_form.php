@@ -15,7 +15,7 @@
 		Requests without sufficient public or verifiable involvement will be declined, unless there are exceptional circumstances.<br />
 	</p>
 
-	<?php echo $form->errorSummary($model,'','',array('class' => 'alert alert-error')); ?>
+	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'supporter_uid'); ?>

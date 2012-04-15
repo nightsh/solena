@@ -16,7 +16,7 @@ $this->breadcrumbs = array(
 
 	<p class="alert alert-info">Fields with <span class="required">*</span> are required.</p>
 
-	<?php echo $form->errorSummary($model,'','',array('class' => 'alert alert-error')); ?>
+	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'cn'); ?>

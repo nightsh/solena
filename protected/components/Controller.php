@@ -21,6 +21,12 @@ class Controller extends CController
 	 */
 	public $breadcrumbs=array();
 
+	public function beforeRender($action)
+	{
+		CHtml::$errorSummaryCss = 'alert alert-error';
+		return true;
+	}
+
 	protected function sendEmail($to, $template, $template_data = array())
 	{
 		// Initial setup
