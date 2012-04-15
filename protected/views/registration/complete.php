@@ -13,5 +13,5 @@ $this->menu = array();
   Your registration has now been completed <?php echo CHtml::encode($model->cn); ?>.
   The username for your account is '<?php echo CHtml::encode($model->uid); ?>'.
   <br /><br />
-  To begin using your account, you may now <?php echo CHtml::link('login', array('site/login')); ?>
+  To begin using your account, please <?php echo CHtml::link('login', array('site/login')); ?>.
 </p>
