@@ -172,10 +172,6 @@ input.error, textarea.error {
 	margin-top: 6px;
 }
 
-.gridview {
+.grid-view {
 	padding: 0px;
-}
-
-.gridview table {
-	margin-bottom: 0px;
 }
