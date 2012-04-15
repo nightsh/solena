@@ -25,7 +25,7 @@
 	<div id="header" class="navbar navbar-top Neverland">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="brand" href="<?php echo Yii::app()->request->baseUrl; ?>"><img src="<?php echo Yii::app()->request->baseUrl; ?>/img/logo.plain.png"/></a>
+				<a class="brand" href="<?php echo Yii::app()->controller->createUrl('/site/index'); ?>"><img src="<?php echo Yii::app()->request->baseUrl; ?>/img/logo.plain.png"/></a>
 				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
