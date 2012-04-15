@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
 $this->menu = $this->generateMenu($model);
 ?>
 
-<h1>Remove Member from Group <?php echo CHtml::encode($model->description); ?></h1>
+<h1>Remove Member From Group <?php echo CHtml::encode($model->description); ?></h1>
 
 <div class="form">
 
