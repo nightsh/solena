@@ -121,6 +121,14 @@ hr {
 	margin-top: 14px;
 }
 
+.portlet ul.Neverland {
+	margin-left: -5px;
+}
+
+.portlet ul.Neverland li a {
+	padding-left: 5px
+}
+
 select, input[type="file"] {
 	height: 33px;
 }
