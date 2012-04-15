@@ -46,7 +46,7 @@ class Group extends SLdapModel
 	public function attributeLabels()
 	{
 		return array(
-			'cn' => 'Group name',
+			'cn' => 'Group Name',
 			'gidNumber' => 'Group ID Number',
 		);
 	}

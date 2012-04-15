@@ -60,9 +60,9 @@ class Token extends CActiveRecord
 	{
 		return array(
 			'uid' => 'Username',
-			'sn' => 'Last name',
-			'givenName' => 'First name',
-			'mail' => 'Email address',
+			'sn' => 'Last Name',
+			'givenName' => 'First Name',
+			'mail' => 'Email Address',
 		);
 	}
 

@@ -16,7 +16,7 @@ $this->menu = $this->generateMenu($model);
 		'uid',
 		'dateOfBirth',
 		'gender:gender',
-		'timezoneName:timezone:Current time',
+		'timezoneName:timezone:Current Time',
 		array(
 			'name' => 'timezone',
 			'visible' => isset($model->timezone),
@@ -44,7 +44,7 @@ $this->menu = $this->generateMenu($model);
 		'labeledURI:url',
 		'ircNick',
 		'jabberID',
-		'emailAddresses:email:Email addresses',
+		'emailAddresses:email',
 		array(
 			'name' => 'evMail',
 			'type' => 'email',
