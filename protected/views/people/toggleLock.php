@@ -17,8 +17,8 @@ $this->menu = $this->generateMenu($model);
 	'enableAjaxValidation' => false,
 )); ?>
 
-	<p class="note">Temporary locks are performed automatically when too many invalid password attempts are made, and will expire automatically</p>
-	<p><strong>Account Status:</strong> <?php echo CHtml::encode($model->accountStatus); ?></p>
+	<p class="note">Temporary locks are performed automatically when too many invalid password attempts are made, and will expire automatically.</p>
+	<p><strong>Account Status:</strong> <?php echo CHtml::encode($model->accountStatus); ?>.</p>
 
 	<div class="row buttons">
 		<?php 

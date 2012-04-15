@@ -17,7 +17,7 @@ $this->menu = $this->generateMenu($model);
 	'enableAjaxValidation' => false,
 )); ?>
 
-	<p class="alert alert-info">This will change the Parent Organisational Unit for <?php echo CHtml::encode($model->cn); ?> which may affect LDAP based logins</p>
+	<p class="alert alert-info">This will change the Parent Organisational Unit for <?php echo CHtml::encode($model->cn); ?> which may affect LDAP based logins.</p>
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'parentDn'); ?>

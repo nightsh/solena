@@ -46,7 +46,7 @@ Yii::app()->clientScript->registerScript("disableCheckAll", "$('input.select-on-
 	</div>
 
 	<hr />
-	<h3>Add new SSH Key</h3>
+	<h3>Add New SSH Key</h3>
 	<div class="row">
 		<?php echo $form->fileField($model, 'sshKeysAdded'); ?>
 		<?php echo $form->error($model, 'sshKeysAdded'); ?>
