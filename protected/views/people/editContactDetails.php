@@ -60,7 +60,7 @@ $this->menu = $this->generateMenu($model);
 
 <hr />
 
-<h3>Email addresses</h3>
+<h3>Email Addresses</h3>
 
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'emailAddress-form',
@@ -76,7 +76,7 @@ $this->menu = $this->generateMenu($model);
 		'dataProvider' => $emailDataProvider,
 		'template' => '{items}',
 		'columns'=> array(
-			'mail:email:Email address',
+			'mail:email:Email Address',
 			array(
 				'type' => 'raw',
 				'value' => '($data["type"] == "secondary") ? CHtml::submitButton("Set as primary", array("submit" => "", "class" => "btn", "params" => array("action" => "primary", "mail" => $data["mail"])) ) : ""',

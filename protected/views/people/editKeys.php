@@ -24,7 +24,7 @@ Yii::app()->clientScript->registerScript("disableCheckAll", "$('input.select-on-
 		<?php
 			$template = '{items}';
 			if( $dataProvider->itemCount > 0 ) {
-				$template .= CHtml::submitButton('Remove selected keys', array('name' => 'removeKeys', 'class' => 'btn'));
+				$template .= CHtml::submitButton('Remove Selected Keys', array('name' => 'removeKeys', 'class' => 'btn'));
 			}
 		?>
 		<?php $this->widget('zii.widgets.grid.CGridView', array(
@@ -53,7 +53,7 @@ Yii::app()->clientScript->registerScript("disableCheckAll", "$('input.select-on-
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Upload keys', array('name' => 'uploadKeys', 'class' => 'btn btn-primary')); ?>
+		<?php echo CHtml::submitButton('Upload Keys', array('name' => 'uploadKeys', 'class' => 'btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
