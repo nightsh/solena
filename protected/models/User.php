@@ -93,6 +93,7 @@ class User extends SLdapModel
 			'givenName' => 'First name',
 			'cn' => 'Full name',
 			'mail' => 'Email address',
+			'dateOfBirth' => 'Date of Birth',
 			'labeledURI' => 'Website',
 			'homePostalAddress' => 'Physical address',
 			'ircNick' => 'IRC Nickname',
