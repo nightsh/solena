@@ -103,9 +103,9 @@ $this->menu = $this->generateMenu($model);
 	'enableAjaxValidation' => false,
 )); ?>
 
-	<?php echo CHtml::label('New Email Address', 'mail'); ?>
+	<?php echo CHtml::label('Add Email Address', 'mail'); ?>
 	<?php echo CHtml::textField('mail', ''); ?>
-	<?php echo CHtml::submitButton('Add address', array("submit" => "", 'class' => 'btn btn-primary', "params" => array("action" => "add")) ); ?>
+	<?php echo CHtml::submitButton('Add', array("submit" => "", 'class' => 'btn btn-primary', "params" => array("action" => "add")) ); ?>
 
 <?php $this->endWidget(); ?>
 
