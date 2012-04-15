@@ -23,7 +23,7 @@ $this->menu = $this->generateMenu($model);
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Confirm removal', array('name' => 'confirmRemoval', 'class' => 'btn btn-primary')); ?>
+		<?php echo CHtml::submitButton('Confirm Removal', array('name' => 'confirmRemoval', 'class' => 'btn btn-primary')); ?>
 	</div>
 
 	<?php echo CHtml::hiddenField('selectedPerson[0]', $member->dn); ?>

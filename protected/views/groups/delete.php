@@ -8,7 +8,7 @@ $this->breadcrumbs = array(
 $this->menu = $this->generateMenu($model);
 ?>
 
-<h1>Delete group <?php echo CHtml::encode($model->description); ?></h1>
+<h1>Delete Group <?php echo CHtml::encode($model->description); ?></h1>
 
 <div class="form">
 
@@ -28,7 +28,7 @@ $this->menu = $this->generateMenu($model);
 		</p>
 
 		<div>
-			<?php echo CHtml::submitButton('Delete group', array('name' => 'deleteGroup', 'class' => 'btn btn-primary')); ?>
+			<?php echo CHtml::submitButton('Delete Group', array('name' => 'deleteGroup', 'class' => 'btn btn-primary')); ?>
 		</div>
 	</div>
 

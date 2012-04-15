@@ -21,7 +21,7 @@ $this->menu = $this->generateMenu($model);
 	<?php
 		$template = '{summary}{items}';
 		if( Yii::app()->user->checkAccess('manageGroup', array('group' => $model)) && $dataProvider->itemCount > 0 ) {
-			$template .= CHtml::submitButton('Remove member', array('name' => 'removeMember', 'style' => 'float:left', 'class' => 'btn btn-primary'));
+			$template .= CHtml::submitButton('Remove Member', array('name' => 'removeMember', 'style' => 'float:left', 'class' => 'btn btn-primary'));
 		}
 		$template .= '{pager}';
 	?>

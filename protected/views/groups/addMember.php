@@ -21,7 +21,7 @@ $this->menu = $this->generateMenu($model);
 	<?php
 		$template = '{summary}{items}';
 		if( $dataProvider->itemCount > 0 ) {
-			$template .= CHtml::submitButton('Add member', array('name' => 'addMember', 'style' => 'float:left', 'class' => 'btn btn-primary'));
+			$template .= CHtml::submitButton('Add Member', array('name' => 'addMember', 'style' => 'float:left', 'class' => 'btn btn-primary'));
 		}
 		$template .= '{pager}';
 	?>
