@@ -34,7 +34,7 @@ $this->breadcrumbs=array(
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Login', array('class' => 'btn btn-primary')); ?>
-		<?php echo CHtml::link('Reset password', array('passwordReset')); ?>
+		<?php echo CHtml::link('Reset Password', array('passwordReset')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
