@@ -8,7 +8,7 @@ $this->menu = $this->generateMenu($model);
 ?>
 
 <h1>Members of group <?php echo CHtml::encode($model->description); ?></h1>
-<p>All searches performed below will be done as contains filters. A maximum of 500 entries will be browsable at any one time</p>
+<p>Shown below are both full and partial matches against the entered filter text. A maximum of 500 results can be shown at any one time.</p>
 
 <div class="form">
 
