@@ -17,7 +17,7 @@ $this->menu = $this->generateMenu($model);
 	'enableAjaxValidation' => false,
 )); ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+	<p class="alert alert-info">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
