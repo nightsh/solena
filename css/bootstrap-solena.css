@@ -175,3 +175,7 @@ input.error, textarea.error {
 .grid-view {
 	padding: 0px;
 }
+
+[class^="icon-"], [class*=" icon-"] {
+	margin-right: 4px;
+}
