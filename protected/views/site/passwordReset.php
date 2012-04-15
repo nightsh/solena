@@ -1,14 +1,15 @@
 <?php
 $this->breadcrumbs = array(
 	'Reset Password',
+	'Begin',
 );
 
 $this->menu = array();
 ?>
 
-<h1>Reset password</h1>
+<h1>Reset Password</h1>
 
-<p>Please fill out the details below to allow your account password to be reset:
+<p>Please fill out the details below to allow your account password to be reset.</p>
 
 <div class="form">
 
@@ -34,7 +35,7 @@ $this->menu = array();
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Request password reset'); ?>
+		<?php echo CHtml::submitButton('Request Password Reset'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
