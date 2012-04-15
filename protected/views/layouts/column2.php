@@ -3,7 +3,7 @@
 	<div>
 		<?php
 			foreach(Yii::app()->user->getFlashes() as $key => $message) {
-				echo CHtml::tag('div', array('class' => 'flash-' . $key), CHtml::encode($message));
+				echo CHtml::tag('div', array('class' => 'alert alert-' . $key), CHtml::encode($message));
 			}
 		?>
 		<?php echo $content; ?>
