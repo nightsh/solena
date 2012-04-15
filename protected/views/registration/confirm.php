@@ -9,7 +9,7 @@ $this->menu = array();
 
 <h1>Complete Registration on <?php echo Yii::app()->name; ?></h1>
 
-<div class="form">
+<div class="form well">
 
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'registrations-form',
@@ -39,7 +39,7 @@ $this->menu = array();
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Register Account'); ?>
+		<?php echo CHtml::submitButton('Register Account', array('class' => 'btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
