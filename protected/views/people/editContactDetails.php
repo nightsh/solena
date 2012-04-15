@@ -17,7 +17,7 @@ $this->menu = $this->generateMenu($model);
 	'enableAjaxValidation' => false,
 )); ?>
 
-	<p class="note">Please ensure you save your contact details after adding details</p>
+	<p class="alert alert-info">Please ensure you save your contact details after adding details</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
@@ -68,7 +68,7 @@ $this->menu = $this->generateMenu($model);
 	'enableAjaxValidation' => false,
 )); ?>
 
-	<p class="note">Email address changes will take effect immediately, and do not require saving</p>
+	<p class="alert alert-info">Email address changes will take effect immediately, and do not require saving</p>
 
 	<?php $this->widget('zii.widgets.grid.CGridView', array(
 		'id' => 'emailAddress-grid',
