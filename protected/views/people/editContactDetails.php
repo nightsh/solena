@@ -70,11 +70,10 @@ $this->menu = $this->generateMenu($model);
 
 	<p class="alert alert-info">Email address changes will take effect immediately, and do not require saving.</p>
 
-	<?php $this->widget('zii.widgets.grid.CGridView', array(
+	<?php $this->widget('application.components.NeverGridView', array(
 		'id' => 'emailAddress-grid',
-		'itemsCssClass' => 'table table-bordered table-striped',
 		'dataProvider' => $emailDataProvider,
-		'template' => '{items}',
+		'template' => '{items}{pager}',
 		'columns'=> array(
 			'mail:email:Email Address',
 			array(

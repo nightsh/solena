@@ -18,19 +18,10 @@ $this->menu = $this->generateMenu($model);
 	'enableAjaxValidation' => false,
 )); ?>
 
-	<?php
-		$template = '{summary}{items}';
-		if( $dataProvider->itemCount > 0 ) {
-			$template .= CHtml::submitButton('Add Member', array('name' => 'addMember', 'style' => 'float:left', 'class' => 'btn btn-primary'));
-		}
-		$template .= '{pager}';
-	?>
-	<?php $this->widget('zii.widgets.grid.CGridView', array(
+	<?php $this->widget('application.components.NeverGridView', array(
 		'id' => 'person-grid',
-		'itemsCssClass' => 'table table-bordered table-striped',
 		'dataProvider' => $dataProvider,
 		'filter' => $dataProvider->model,
-		'template' => $template,
 		'columns' => array(
 			array(
 				'class' => 'CCheckBoxColumn',
@@ -41,6 +32,11 @@ $this->menu = $this->generateMenu($model);
 			'mail',
 		),
 	)); ?>
+	<?php
+		if( $dataProvider->itemCount > 0 ) {
+			echo CHtml::submitButton('Add Member', array('name' => 'addMember', 'class' => 'btn btn-primary'));
+		}
+	?>
 
 <?php $this->endWidget(); ?>
 

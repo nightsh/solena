@@ -18,19 +18,11 @@ $this->menu = $this->generateMenu($model);
 	'enableAjaxValidation' => false,
 )); ?>
 <hr/>
-	<?php
-		$template = '{summary}{items}';
-		if( Yii::app()->user->checkAccess('manageGroup', array('group' => $model)) && $dataProvider->itemCount > 0 ) {
-			$template .= CHtml::submitButton('Remove Member', array('name' => 'removeMember', 'style' => 'float:left', 'class' => 'btn btn-primary'));
-		}
-		$template .= '{pager}';
-	?>
-	<?php $this->widget('zii.widgets.grid.CGridView', array(
+
+	<?php $this->widget('application.components.NeverGridView', array(
 		'id' => 'person-grid',
-		'itemsCssClass' => 'table table-bordered table-striped',
 		'dataProvider' => $dataProvider,
 		'filter' => $dataProvider->model,
-		'template' => $template,
 		'columns' => array(
 			array(
 				'class' => 'CCheckBoxColumn',
@@ -46,6 +38,11 @@ $this->menu = $this->generateMenu($model);
 			'mail'
 		),
 	)); ?>
+	<?php
+		if( Yii::app()->user->checkAccess('manageGroup', array('group' => $model)) && $dataProvider->itemCount > 0 ) {
+			echo CHtml::submitButton('Remove Member', array('name' => 'removeMember', 'style' => 'float:left', 'class' => 'btn btn-primary'));
+		}
+	?>
 
 <?php $this->endWidget(); ?>
 

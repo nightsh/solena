@@ -21,18 +21,11 @@ Yii::app()->clientScript->registerScript("disableCheckAll", "$('input.select-on-
 )); ?>
 
 	<div class="row">
-		<?php
-			$template = '{items}';
-			if( $dataProvider->itemCount > 0 ) {
-				$template .= CHtml::submitButton('Remove Selected Keys', array('name' => 'removeKeys', 'class' => 'btn'));
-			}
-		?>
-		<?php $this->widget('zii.widgets.grid.CGridView', array(
+		<?php $this->widget('application.components.NeverGridView', array(
 			'id' => 'sshkey-grid',
-			'itemsCssClass' => 'table table-bordered table-striped',
 			'selectableRows' => 2,
 			'dataProvider' => $dataProvider,
-			'template' => $template,
+			'template' => '{items}{pager}',
 			'columns'=> array(
 				array(
 					'class' => 'CCheckBoxColumn',
@@ -43,6 +36,11 @@ Yii::app()->clientScript->registerScript("disableCheckAll", "$('input.select-on-
 				'comment:text:Comment',
 			),
 		)); ?>
+		<?php
+			if( $dataProvider->itemCount > 0 ) {
+				echo CHtml::submitButton('Remove Selected Keys', array('name' => 'removeKeys', 'class' => 'btn'));
+			}
+		?>
 	</div>
 
 	<hr />

@@ -8,9 +8,8 @@ $this->menu = array();
 
 <h1>Currently Pending Registrations</h1>
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php $this->widget('application.components.NeverGridView', array(
 	'id' => 'registrations-grid',
-	'itemsCssClass' => 'table table-bordered table-striped',
 	'dataProvider' => $dataProvider,
 	'filter' => $model,
 	'columns' => array(

@@ -6,9 +6,8 @@ $this->menu = array( array('label' => 'Create Person', 'url' => array('create'),
 <h1>People</h1>
 <p>Shown below are both full and partial matches against the entered filter text. A maximum of 150 results can be shown at any one time.</p>
 <hr/>
-<?php $this->widget('zii.widgets.grid.CGridView', array(
+<?php $this->widget('application.components.NeverGridView', array(
 	'id'=> 'person-grid',
-	'itemsCssClass' => 'table table-bordered table-striped',
 	'dataProvider'=> $dataProvider,
 	'filter'=> $model,
 	'columns'=> array(
@@ -20,9 +19,4 @@ $this->menu = array( array('label' => 'Create Person', 'url' => array('create'),
 		'cn',
 		'mail',
 	),
-	'pager' => array(
-		'class' => 'CLinkPager',
-		'htmlOptions' => array('class' => 'pagination'),
-	),
-	'pagerCssClass' => '',
 )); ?>
