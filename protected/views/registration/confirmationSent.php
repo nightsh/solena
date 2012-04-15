@@ -1,13 +1,13 @@
 <?php
 $this->breadcrumbs=array(
 	'Register',
-	'Confirmation sent',
+	'Confirmation Sent',
 );
 
 $this->menu = array();
 ?>
 
-<h1>Registration accepted on <?php echo Yii::app()->name; ?></h1>
+<h1>Registration Accepted on <?php echo Yii::app()->name; ?></h1>
 
 <p>
   Your registration has been accepted <?php echo CHtml::encode($model->name); ?>.

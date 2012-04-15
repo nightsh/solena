@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 $this->menu = array();
 ?>
 
-<h1>Complete registration on <?php echo Yii::app()->name; ?></h1>
+<h1>Complete Registration on <?php echo Yii::app()->name; ?></h1>
 
 <div class="form">
 
@@ -39,7 +39,7 @@ $this->menu = array();
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Register account'); ?>
+		<?php echo CHtml::submitButton('Register Account'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

@@ -6,12 +6,12 @@ $this->breadcrumbs=array(
 );
 
 $this->menu = array(
-	array('label' => 'View registration', 'url' => array('view', 'id' => $model->id)),
-	array('label' => 'Delete registration', 'url'=> array('delete', 'id' => $model->id)),
+	array('label' => 'View Registration', 'url' => array('view', 'id' => $model->id)),
+	array('label' => 'Delete Registration', 'url'=> array('delete', 'id' => $model->id)),
 );
 ?>
 
-<h1>Update registration of <?php echo CHtml::encode($model->name); ?></h1>
+<h1>Update Registration of <?php echo CHtml::encode($model->name); ?></h1>
 <hr/>
 <div class="form well">
 
@@ -40,7 +40,7 @@ $this->menu = array(
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Save changes', array('class' => 'btn btn-primary')); ?>
+		<?php echo CHtml::submitButton('Update Registration', array('class' => 'btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

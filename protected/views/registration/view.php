@@ -5,12 +5,12 @@ $this->breadcrumbs=array(
 );
 
 $this->menu = array(
-	array('label' => 'Update registration', 'url' => array('update', 'id' => $model->id)),
-	array('label' => 'Delete registration', 'url'=> array('delete', 'id' => $model->id)),
+	array('label' => 'Update Registration', 'url' => array('update', 'id' => $model->id)),
+	array('label' => 'Delete Registration', 'url'=> array('delete', 'id' => $model->id)),
 );
 ?>
 
-<h1>View registration of <?php echo CHtml::encode($model->name); ?></h1>
+<h1>View Registration of <?php echo CHtml::encode($model->name); ?></h1>
 
 <?php $this->widget('zii.widgets.CDetailView', array(
 	'data' => $model,
@@ -28,7 +28,7 @@ $this->menu = array(
 )); ?>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Resend confirmation', array('name' => 'resendConfirmation', 'class' => 'btn btn-primary')); ?>
+		<?php echo CHtml::submitButton('Resend Confirmation', array('name' => 'resendConfirmation', 'class' => 'btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

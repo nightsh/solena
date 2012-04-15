@@ -6,7 +6,7 @@ $this->breadcrumbs = array(
 $this->menu = array();
 ?>
 
-<h1>Currently pending registrations</h1>
+<h1>Currently Pending Registrations</h1>
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
 	'id' => 'registrations-grid',

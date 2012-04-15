@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
 	'Register',
-	'Enter details',
+	'Enter Details',
 );
 
 $this->menu = array();
@@ -36,7 +36,7 @@ $this->menu = array();
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Register account', array('class' => 'btn btn-primary')); ?>
+		<?php echo CHtml::submitButton('Register Account', array('class' => 'btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

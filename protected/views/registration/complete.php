@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 $this->menu = array();
 ?>
 
-<h1>Registration completed on <?php echo Yii::app()->name; ?></h1>
+<h1>Registration Completed on <?php echo Yii::app()->name; ?></h1>
 
 <p class="well">
   Your registration has now been completed <?php echo CHtml::encode($model->cn); ?>.

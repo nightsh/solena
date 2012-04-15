@@ -6,12 +6,12 @@ $this->breadcrumbs=array(
 );
 
 $this->menu = array(
-	array('label' => 'View registration', 'url' => array('view', 'id' => $model->id)),
-	array('label' => 'Update registration', 'url'=> array('update', 'id' => $model->id)),
+	array('label' => 'View Registration', 'url' => array('view', 'id' => $model->id)),
+	array('label' => 'Update Registration', 'url'=> array('update', 'id' => $model->id)),
 );
 ?>
 
-<h1>Delete registration of <?php echo CHtml::encode($model->name); ?></h1>
+<h1>Delete Registration of <?php echo CHtml::encode($model->name); ?></h1>
 
 <div class="alert alert-warning">
 	<h4 class="alert-heading">Warning!</h4>
@@ -31,7 +31,7 @@ $this->menu = array(
 		</p>
 
 		<div class="row buttons">
-			<?php echo CHtml::submitButton('Delete registration', array('name' => 'deleteAccount', 'class' => 'btn btn-primary')); ?>
+			<?php echo CHtml::submitButton('Delete Registration', array('name' => 'deleteAccount', 'class' => 'btn btn-primary')); ?>
 		</div>
 	</div>
 	
