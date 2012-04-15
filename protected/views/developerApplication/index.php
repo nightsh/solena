@@ -7,6 +7,6 @@ $this->breadcrumbs = array(
 $this->menu = array();
 ?>
 
-<h1>Apply for a developer account</h1>
+<h1>Apply for a Developer Account</h1>
 
 <?php echo $this->renderPartial('_form', array('model' => $model)); ?>

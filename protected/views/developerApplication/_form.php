@@ -75,7 +75,7 @@
 	</div>
 
 	<div class="row buttons">
-	<?php echo CHtml::submitButton($model->isNewRecord ? 'Submit application' : 'Update', array('class' => 'btn btn-primary')); ?>
+	<?php echo CHtml::submitButton($model->isNewRecord ? 'Submit Application' : 'Update', array('class' => 'btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
