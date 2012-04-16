@@ -24,7 +24,7 @@
 }
 
 .navbar-fixed-top.Neverland .navbar-inner, .navbar-top.Neverland .navbar-inner {
-	background-image: url("../img/bg.png");
+	background-image: url("http://files.kde.org/neverland/img/bg.png");
 	height: 4em;
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
