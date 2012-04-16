@@ -84,14 +84,14 @@
 <!-- Le javascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="http://files.kde.org/neverland//js/bootstrap-transition.js"></script>
-<script src="http://files.kde.org/neverland//js/bootstrap-dropdown.js"></script>
-<script src="http://files.kde.org/neverland//js/bootstrap-scrollspy.js"></script>
-<script src="http://files.kde.org/neverland//js/bootstrap-tooltip.js"></script>
-<script src="http://files.kde.org/neverland//js/bootstrap-popover.js"></script>
-<script src="http://files.kde.org/neverland//js/bootstrap-button.js"></script>
-<script src="http://files.kde.org/neverland//js/bootstrap-collapse.js"></script>
-<script src="http://files.kde.org/neverland//js/bootstrap-carousel.js"></script>
-<script src="http://files.kde.org/neverland//js/bootstrap-neverland.js"></script>
+<script src="http://files.kde.org/neverland/js/bootstrap-transition.js"></script>
+<script src="http://files.kde.org/neverland/js/bootstrap-dropdown.js"></script>
+<script src="http://files.kde.org/neverland/js/bootstrap-scrollspy.js"></script>
+<script src="http://files.kde.org/neverland/js/bootstrap-tooltip.js"></script>
+<script src="http://files.kde.org/neverland/js/bootstrap-popover.js"></script>
+<script src="http://files.kde.org/neverland/js/bootstrap-button.js"></script>
+<script src="http://files.kde.org/neverland/js/bootstrap-collapse.js"></script>
+<script src="http://files.kde.org/neverland/js/bootstrap-carousel.js"></script>
+<script src="http://files.kde.org/neverland/js/bootstrap-neverland.js"></script>
 </body>
 </html>
