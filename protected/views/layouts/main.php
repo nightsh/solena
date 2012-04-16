@@ -25,7 +25,7 @@
 	<div id="header" class="navbar navbar-top Neverland">
 		<div class="navbar-inner">
 			<div class="container">
-				<a class="brand" href="<?php echo Yii::app()->controller->createUrl('/site/index'); ?>"><img src="<?php echo Yii::app()->request->baseUrl; ?>/img/logo.plain.png"/></a>
+				<a class="brand" href="<?php echo Yii::app()->controller->createUrl('/site/index'); ?>"><img src="http://files.kde.org/neverland/img/logo.plain.png"/></a>
 				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
@@ -84,14 +84,14 @@
 <!-- Le javascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap-transition.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap-dropdown.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap-scrollspy.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap-tooltip.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap-popover.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap-button.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap-collapse.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap-carousel.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/bootstrap-neverland.js"></script>
+<script src="http://files.kde.org/neverland//js/bootstrap-transition.js"></script>
+<script src="http://files.kde.org/neverland//js/bootstrap-dropdown.js"></script>
+<script src="http://files.kde.org/neverland//js/bootstrap-scrollspy.js"></script>
+<script src="http://files.kde.org/neverland//js/bootstrap-tooltip.js"></script>
+<script src="http://files.kde.org/neverland//js/bootstrap-popover.js"></script>
+<script src="http://files.kde.org/neverland//js/bootstrap-button.js"></script>
+<script src="http://files.kde.org/neverland//js/bootstrap-collapse.js"></script>
+<script src="http://files.kde.org/neverland//js/bootstrap-carousel.js"></script>
+<script src="http://files.kde.org/neverland//js/bootstrap-neverland.js"></script>
 </body>
 </html>
