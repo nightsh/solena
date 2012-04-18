@@ -90,7 +90,7 @@ class PeopleController extends Controller
 			
 			// Create the new person
 			if( $model->save() ) {
-				Yii::app()->user->setFlash('success', 'Person created successfully');
+				Yii::app()->user->setFlash('success', 'Person created.');
 				$this->redirect(array('view', 'uid' => $model->uid));
 			}
 		}
@@ -141,7 +141,7 @@ class PeopleController extends Controller
 
 		if( isset($_POST['confirmDeletion']) && isset($_POST['deleteAccount']) ) {
 			if( $model->delete() ) {
-				Yii::app()->user->setFlash('success', 'Person deleted successfully');
+				Yii::app()->user->setFlash('success', 'Person deleted.');
 				$this->redirect( array('index') );
 			}
 		}
@@ -176,7 +176,7 @@ class PeopleController extends Controller
 			// Update all other attriutes...
 			$model->attributes = $_POST['User'];
 			if( $model->save() ) {
-				Yii::app()->user->setFlash('success', 'Profile updated successfully');
+				Yii::app()->user->setFlash('success', 'Profile updated.');
 				$this->redirect( array('view', 'uid' => $model->uid) );
 			}
 		}
@@ -195,13 +195,13 @@ class PeopleController extends Controller
 		$model->setScenario('editContactDetails');
 
 		if( !Yii::app()->user->checkAccess('changeUserDetails', array('user' => $model)) ) {
-			throw new CHttpException(403, 'You are not permitted to change the details of this person');
+			throw new CHttpException(403, 'You are not permitted to change the details of this person.');
 		}
 
 		if( isset($_POST['User']) ) {
 			$model->attributes = $_POST['User'];
 			if( $model->save() ) {
-				Yii::app()->user->setFlash('success', 'Contact details updated successfully');
+				Yii::app()->user->setFlash('success', 'Contact details updated.');
 				$this->redirect( array('view', 'uid' => $model->uid) );
 			}
 		}
@@ -220,7 +220,7 @@ class PeopleController extends Controller
 	{
 		// Make sure it is a POST request
 		if( !Yii::app()->request->isPostRequest ) {
-			throw new CHttpException(400, 'Attempted manipulation is not permitted');
+			throw new CHttpException(400, 'Attempted manipulation is not permitted.');
 		}
 
 		// Load the user
@@ -234,18 +234,18 @@ class PeopleController extends Controller
 		// Validate the email address
 		$validator = new CEmailValidator;
 		if( !$validator->validateValue($mail) ) {
-			throw new CHttpException(400, 'The given email address is not valid');
+			throw new CHttpException(400, 'The given email address is not valid.');
 		}
 
 		// Maybe we are changing the primary address?
 		if( $action == 'primary' ) {
 			// Try to make the given address the primary. The model will refuse if it is not permitted
 			if( !$model->setPrimaryEmailAddress($mail) ) {
-				throw new CHttpException(400, 'Attempted manipulation is not permitted');
+				throw new CHttpException(400, 'Attempted manipulation is not permitted.');
 			}
 			// Save the change
 			if( $model->save() ) {
-				Yii::app()->user->setFlash('success', 'Primary email address changed');
+				Yii::app()->user->setFlash('success', 'Primary email address changed.');
 			}
 		}
 
@@ -254,21 +254,21 @@ class PeopleController extends Controller
 			// Find the potential address....
 			$entry = Token::model()->findByAttributes( array('uid' => $model->uid, 'type' => Token::TypeVerifyAddress, 'mail' => $mail) );
 			if( !$entry instanceof CActiveRecord ) {
-				throw new CHttpException(400, 'Attempted manipulation is not permitted');
+				throw new CHttpException(400, 'Attempted manipulation is not permitted.');
 			}
 			// Send the mail...
 			$this->sendEmail($entry->mail, '/mail/verifyEmail', array('entry' => $entry, 'model' => $model));
-			Yii::app()->user->setFlash('success', 'Address verification resent');
+			Yii::app()->user->setFlash('success', 'Address verification resent.');
 		}
 
 		// Maybe we are removing an address?
 		if( $action == 'remove' ) {
 			// Try to remove the given address. The model will refuse if it is not permitted
 			if( !$model->removeEmailAddress($mail) ) {
-				throw new CHttpException(400, 'Attempted manipulation is not permitted');
+				throw new CHttpException(400, 'Attempted manipulation is not permitted.');
 			}
 			// Inform the user of our success....
-			Yii::app()->user->setFlash('success', 'Email address removed');
+			Yii::app()->user->setFlash('success', 'Email address removed.');
 		}
 
 		// Maybe we are adding an address, and if so, it is to ourselves?
@@ -281,7 +281,7 @@ class PeopleController extends Controller
 			// Save the new pending email - if successful send an email regarding that
 			if( $entry->save() ) {
 				$this->sendEmail($entry->mail, '/mail/verifyEmail', array('entry' => $entry, 'model' => $model));
-				Yii::app()->user->setFlash('success', 'Email address added pending validation');
+				Yii::app()->user->setFlash('success', 'Email address will be added once verification is completed.');
 			}
 		}
 		// If we are not adding to ourselves, then we do not need verification?
@@ -289,7 +289,7 @@ class PeopleController extends Controller
 			// If it is not ourselves then we can immediately add it
 			$model->addAttribute("secondaryMail", $mail);
 			if( $model->save() ) {
-				Yii::app()->user->setFlash('success', 'Email address added successfully');
+				Yii::app()->user->setFlash('success', 'Email address added.');
 			}
 		}
 
@@ -306,16 +306,16 @@ class PeopleController extends Controller
 		// Lookup the given token, and verify it
 		$entry = Token::model()->findByAttributes( array('type' => Token::TypeVerifyAddress, 'token' => $token) );
 		if( !$entry instanceof CActiveRecord ) {
-			throw new CHttpException(404, 'The given token could not be validated');
+			throw new CHttpException(404, 'The given token could not be validated.');
 		}
 
 		// We now have a valid token, add the new address
 		$model->addAttribute("secondaryMail", $entry->mail);
 		if( $model->save() && $entry->delete() ) {
-			Yii::app()->user->setFlash('success', 'Email address added successfully');
+			Yii::app()->user->setFlash('success', 'Email address verified and added.');
 			$this->redirect( array('view', 'uid' => $model->uid ) );
 		}
-		throw new CHttpException(400, 'An internal error has occurred while validating the address, please contact the site administrator');
+		throw new CHttpException(400, 'An internal error has occurred while validating the address, please contact the site administrator.');
 	}
 
 	/**
@@ -327,14 +327,14 @@ class PeopleController extends Controller
 		$model->setScenario('editAvatar');
 
 		if( !Yii::app()->user->checkAccess('changeUserAvatar', array('user' => $model)) ) {
-			throw new CHttpException(403, 'You are not permitted to change the details of this person');
+			throw new CHttpException(403, 'You are not permitted to change the details of this person.');
 		}
 
 		// Handle the upload of an image
 		if( isset($_POST['User']) ) {
 			$model->jpegPhoto = CUploadedFile::getInstance($model, 'jpegPhoto');
 			if( $model->save() ) {
-				Yii::app()->user->setFlash('success', 'Avatar updated');
+				Yii::app()->user->setFlash('success', 'Avatar updated.');
 			}
 		}
 		
@@ -342,7 +342,7 @@ class PeopleController extends Controller
 		if( isset($_POST['clearAvatar']) ) {
 			$model->removeAttribute("jpegPhoto");
 			if( $model->save() ) {
-				Yii::app()->user->setFlash('success', 'Avatar deleted');
+				Yii::app()->user->setFlash('success', 'Avatar removed.');
 			}
 		}
 		
@@ -360,7 +360,7 @@ class PeopleController extends Controller
 		$model->setScenario('editKeys');
 
 		if( !Yii::app()->user->checkAccess('changeUserSshKeys', array('user' => $model)) ) {
-			throw new CHttpException(403, 'You are not permitted to change the details of this person');
+			throw new CHttpException(403, 'You are not permitted to change the details of this person.');
 		}
 
 		// Are we removing any keys?
@@ -373,7 +373,7 @@ class PeopleController extends Controller
 			$keyUpload = CUploadedFile::getInstance($model, 'sshKeysAdded');
 			$model->addSSHKeys($keyUpload);
 			if( $model->save() ) {
-				Yii::app()->user->setFlash('success', 'SSH key(s) added');
+				Yii::app()->user->setFlash('success', 'SSH key(s) added.');
 			}
 		}
 		
@@ -421,14 +421,14 @@ class PeopleController extends Controller
 		
 		// Locking yourself is prohibited
 		if($model->dn == Yii::app()->user->dn) {
-			throw new CHttpException(403, 'You are not permitted to lock yourself out');
+			throw new CHttpException(403, 'You are not permitted to lock yourself out.');
 		}
 		
 		// Handle the unlocking of an account
 		if( isset($_POST['unlockAccount']) ) {
 			$model->removeAttribute("pwdAccountLockedTime");
 			if( $model->save() ) {
-				Yii::app()->user->setFlash('success', 'Account lock released');
+				Yii::app()->user->setFlash('success', 'Account lock released.');
 			}
 		}
 		
@@ -436,7 +436,7 @@ class PeopleController extends Controller
 		if( isset($_POST['lockAccount']) ) {
 			$model->replaceAttribute("pwdAccountLockedTime", User::InfinitelyLocked);
 			if( $model->save() ) {
-				Yii::app()->user->setFlash('success', 'Account infinitely locked');
+				Yii::app()->user->setFlash('success', 'Account locked infinitely.');
 			}
 		}
 		
@@ -454,13 +454,13 @@ class PeopleController extends Controller
 		$model->setScenario('changePassword');
 
 		if( !Yii::app()->user->checkAccess('changeUserPassword', array('user' => $model)) ) {
-			throw new CHttpException(403, 'You are not permitted to change the details of this person');
+			throw new CHttpException(403, 'You are not permitted to change the details of this person.');
 		}
 
 		if( isset($_POST['User']) ) {
 			$model->attributes = $_POST['User'];
 			if( $model->save() ) {
-				Yii::app()->user->setFlash('success', 'Password changed successfully');
+				Yii::app()->user->setFlash('success', 'Password changed.');
 				$this->redirect( array('view', 'uid' => $model->uid) );
 			}
 		}
@@ -540,7 +540,7 @@ class PeopleController extends Controller
 		$model->removeAttribute("sshPublicKey", $selectedKeys);
 		// Now try and save - if we succeed add a flash message so the user knows we succeeded
 		if( $model->save() ) {
-			Yii::app()->user->setFlash('success', 'SSH key(s) removed');
+			Yii::app()->user->setFlash('success', 'SSH key(s) removed.');
 			return true;
 		}
 		return false;
