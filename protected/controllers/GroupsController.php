@@ -81,7 +81,7 @@ class GroupsController extends Controller
 
 			// Create the new group
 			if( $model->save() ) {
-				Yii::app()->user->setFlash('success', 'Group created successfully' );
+				Yii::app()->user->setFlash('success', 'Group created successfully.' );
 				$this->redirect(array('view', 'cn' => $model->cn));
 			}
 		}
@@ -119,7 +119,7 @@ class GroupsController extends Controller
 		$model->setScenario('edit');
 
 		if( !Yii::app()->user->checkAccess('manageGroup', array('group' => $model)) ) {
-			throw new CHttpException(403, 'You are not permitted to change this group');
+			throw new CHttpException(403, 'You are not permitted to change this group.');
 		}
 
 		if( isset($_POST['Group']) ) {
@@ -127,7 +127,7 @@ class GroupsController extends Controller
 			$model->attributes = $_POST['Group'];
 			$model->setDnByParent( $model->getParentDn() );
 			if( $model->save() ) {
-				Yii::app()->user->setFlash('success', 'Group details updated successfully');
+				Yii::app()->user->setFlash('success', 'Group details updated successfully.');
 				$this->redirect( array('view', 'cn' => $model->cn) );
 			}
 		}
@@ -147,7 +147,7 @@ class GroupsController extends Controller
 
 		if( isset($_POST['confirmDeletion']) && isset($_POST['deleteGroup']) ) {
 			if( $model->delete() ) {
-				Yii::app()->user->setFlash('success', 'Group deleted successfully');
+				Yii::app()->user->setFlash('success', 'Group deleted successfully.');
 				$this->redirect( array('index') );
 			}
 		}
@@ -166,7 +166,7 @@ class GroupsController extends Controller
 		$model->setScenario('addMember');
 
 		if( !Yii::app()->user->checkAccess('manageGroup', array('group' => $model)) ) {
-			throw new CHttpException(403, 'You are not permitted to change this group');
+			throw new CHttpException(403, 'You are not permitted to change this group.');
 		}
 
 		// Maybe we need to add people to the group?
@@ -191,25 +191,25 @@ class GroupsController extends Controller
 		$model->setScenario('removeMember');
 
 		if( !Yii::app()->user->checkAccess('manageGroup', array('group' => $model)) ) {
-			throw new CHttpException(403, 'You are not permitted to change this group');
+			throw new CHttpException(403, 'You are not permitted to change this group.');
 		}
 
 		// Make sure this is a valid request....
 		if( !isset($_POST['selectedPerson']) ) {
-			throw new CHttpException(400, 'Invalid request - manipulation prohibited');
+			throw new CHttpException(400, 'Invalid request - manipulation prohibited.');
 		}
 
 		// Load the member we will be working with
 		$member = User::model()->findByDn( $_POST['selectedPerson'][0] );
 		if( is_null($member) ) {
-			throw new CHttpException(400, 'Invalid request - could not locate the member whose removal has been requested');
+			throw new CHttpException(400, 'Invalid request - could not locate the member whose removal has been requested.');
 		}
 
 		// Has the removal been confirmed?
 		if( isset($_POST['confirmRemoval']) ) {
 			$model->removeMember($member);
 			if( $model->save() && $member->save() ) {
-				Yii::app()->user->setFlash('success', sprintf('%s removed from group successfully', $member->cn) );
+				Yii::app()->user->setFlash('success', sprintf('%s removed from group successfully.', $member->cn) );
 				$this->redirect(array('view', 'cn' => $model->cn));
 			}
 		}
@@ -295,7 +295,7 @@ class GroupsController extends Controller
 		// Add them into the given group
 		$group->addMember( $selectedUser );
 		if( $group->save() && $selectedUser->save() ) {
-			Yii::app()->user->setFlash('success', sprintf('%s added to group successfully', $selectedUser->cn) );
+			Yii::app()->user->setFlash('success', sprintf('%s added to group successfully.', $selectedUser->cn) );
 			$this->redirect(array('view', 'cn' => $group->cn));
 			return true;
 		}
