@@ -132,7 +132,7 @@ class SiteController extends Controller
 		}
 
 		// Load the user now
-		$filter = Net_LDAP2_Filter::create('uid', 'equals', $uid);
+		$filter = Net_LDAP2_Filter::create('uid', 'equals', $entry->uid);
 		$model = User::model()->findFirstByFilter($filter);
 		if( !$model instanceof User ) {
 			throw new CHttpException(404, 'The specified user could not be found');
