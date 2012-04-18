@@ -128,14 +128,14 @@ class SiteController extends Controller
 		// Load the token first - if that is invalid then they cannot reset the password
 		$entry = Token::model()->findByAttributes( array('uid' => $uid, 'type' => Token::TypeResetPassword, 'token' => $token) );
 		if( !$entry instanceof Token ) {
-			throw new CHttpException(404, 'The given token could not be authenticated');
+			throw new CHttpException(404, 'The given token could not be authenticated.');
 		}
 
 		// Load the user now
 		$filter = Net_LDAP2_Filter::create('uid', 'equals', $entry->uid);
 		$model = User::model()->findFirstByFilter($filter);
 		if( !$model instanceof User ) {
-			throw new CHttpException(404, 'The specified user could not be found');
+			throw new CHttpException(404, 'The specified user could not be found.');
 		}
 		$model->setScenario('changePassword');
 
