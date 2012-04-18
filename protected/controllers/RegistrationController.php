@@ -141,7 +141,7 @@ class RegistrationController extends Controller
 
 		if( isset($_POST['resendConfirmation']) ) {
 			$this->sendEmail($model->mail, '/mail/confirmRegistration', array('model' => $model));
-			Yii::app()->user->setFlash('success', 'Registration confirmation has been resent');
+			Yii::app()->user->setFlash('success', 'Registration confirmation has been resent.');
 		}
 
 		$this->render('view', array(
