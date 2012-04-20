@@ -75,6 +75,11 @@ class SiteController extends Controller
 	{
 		$model = new LoginForm;
 
+		// If they are already logged in, they cannot login again...
+		if( !Yii::app()->user->isGuest ) {
+			$this->redirect( Yii::app()->homeUrl );
+		}
+
 		// Handle a AJAX validation request if we have one
 		if( isset($_POST['ajax']) && $_POST['ajax'] === 'login-form' ) {
 			echo CActiveForm::validate($model);
