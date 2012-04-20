@@ -35,7 +35,7 @@ $this->menu = array();
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Request Password Reset', array('btn btn-primary')); ?>
+		<?php echo CHtml::submitButton('Request Password Reset', array('class' => 'btn btn-primary')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
