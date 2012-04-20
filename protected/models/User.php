@@ -295,7 +295,7 @@ class User extends SLdapModel
 		// Now we check their password...
 		$state = User::getLdapConnection()->reauthenticate($this->dn, $this->$attribute);
 		if( !$state ) {
-			$this->addError($attribute, 'Password is not correct');
+			$this->addError($attribute, 'Password is not correct.');
 		}
 		return $state;
 	}
@@ -320,7 +320,7 @@ class User extends SLdapModel
 			try {
 				$im->readImage($this->jpegPhoto->tempName);
 			} catch( Exception $e ) {
-				$this->addError("jpegPhoto", "Invalid or corrupted image uploaded");
+				$this->addError("jpegPhoto", "Invalid or corrupted image uploaded.");
 				return false;
 			}
 			// gif/png images which use Alpha channels are distorted without this
