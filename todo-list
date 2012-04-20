@@ -1,7 +1,5 @@
 === Current todo ===
 
-* people/<general>: Support adding of email addresses (this is going to be slightly messy)
-
 * SLdapModel API adjustments - findByFilter to be gone:
   * findByDn( dn, attributes )
   * findByUniqueAttribute( value, attributes )
