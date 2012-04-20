@@ -20,6 +20,10 @@ class Formatter extends CFormatter
 		foreach( $value as $entry ) {
 			$results[] = parent::format($entry, $type);
 		}
+		// If it is multi-lined text, then we need to double up to get the needed effect
+		if( $type == "ntext" ) {
+			return implode($this->arraySeperator . $this->arraySeperator, $results);
+		}
 		return implode($this->arraySeperator, $results);
 	}
 
