@@ -25,20 +25,17 @@ $this->menu = $this->generateMenu($model);
 		<div class="row">
 			<?php echo $form->labelEx($model, 'currentPassword'); ?>
 			<?php echo $form->passwordField($model, 'currentPassword', array('size' => 60, 'maxlength' => 128)); ?>
-			<?php echo $form->error($model, 'currentPassword'); ?>
 		</div>
 	<?php } ?>
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'newPassword'); ?>
 		<?php echo $form->passwordField($model, 'newPassword', array('size' => 60, 'maxlength' => 128)); ?>
-		<?php echo $form->error($model, 'newPassword'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'confirmNewPassword'); ?>
 		<?php echo $form->passwordField($model, 'confirmNewPassword', array('size' => 60, 'maxlength' => 128)); ?>
-		<?php echo $form->error($model, 'confirmNewPassword'); ?>
 	</div>
 
 	<div class="row buttons">

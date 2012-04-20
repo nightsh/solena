@@ -25,13 +25,11 @@ $this->menu = array();
 	<div class="row">
 		<?php echo $form->labelEx($model, 'uid'); ?>
 		<?php echo $form->textField($model, 'uid'); ?>
-		<?php echo $form->error($model, 'uid'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'mail'); ?>
 		<?php echo $form->textField($model, 'mail'); ?>
-		<?php echo $form->error($model, 'mail'); ?>
 	</div>
 
 	<div class="row buttons">

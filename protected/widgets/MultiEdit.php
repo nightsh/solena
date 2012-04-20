@@ -59,11 +59,10 @@ class MultiEdit extends CWidget
 		echo CHtml::openTag('div');
 		foreach( $data as $key => $entry ) {
 			$indexedAttribute = $this->attribute . "[$key]";
-			$errorState = CHtml::error($this->model, $indexedAttribute);
 			if( strtolower($this->editorType) == 'textarea' ) {
-				$content = CHtml::activeTextArea($this->model, $indexedAttribute, $this->editorHtmlOptions) . $deleteButton . $errorState;
+				$content = CHtml::activeTextArea($this->model, $indexedAttribute, $this->editorHtmlOptions) . $deleteButton;
 			} else {
-				$content = CHtml::activeTextField($this->model, $indexedAttribute, $this->editorHtmlOptions) . $deleteButton . $errorState;
+				$content = CHtml::activeTextField($this->model, $indexedAttribute, $this->editorHtmlOptions) . $deleteButton;
 			}
 			echo CHtml::tag('div', array(), $content);
 		}

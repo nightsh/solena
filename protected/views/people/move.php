@@ -18,11 +18,11 @@ $this->menu = $this->generateMenu($model);
 )); ?>
 
 	<p class="alert alert-info">This will change the Parent Organisational Unit for <?php echo CHtml::encode($model->cn); ?> which may affect LDAP based logins.</p>
+	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'parentDn'); ?>
 		<?php echo $form->dropDownList($model, 'parentDn', CHtml::listData(OrganisationalUnit::model()->findByFilter(null), 'dn', 'dn'), array('empty'=> 'Select Parent Unit')); ?>
-		<?php echo $form->error($model, 'parentDn'); ?>
 	</div>
 
 	<div class="row buttons">

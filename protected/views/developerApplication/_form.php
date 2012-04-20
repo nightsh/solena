@@ -31,7 +31,6 @@
 			),
 			'htmlOptions' => array('size' => 60, 'maxlength' => 64),
 		)); ?>
-		<?php echo $form->error($model, 'supporter_uid', array('class' => 'alert alert-error')); ?>
 	</div>
 
 	<?php if(Yii::app()->user->checkAccess('sysadmins')) { ?>
