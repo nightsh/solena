@@ -115,13 +115,17 @@ class Group extends SLdapModel
 			return false;
 		}
 
-		// Remove the old user data
-		$this->removeAttribute('memberUid', $originalUid);
-		$this->removeAttribute('member', $user->originalDn);
+		// Do we need to update the username?
+		if( $originalUid != $user->uid ) {
+			$this->removeAttribute('memberUid', $originalUid);
+			$this->addAttribute('memberUid', $user->uid);
+		}
 
-		// Add in the new user data
-		$this->addAttribute('memberUid', $user->uid);
-		$this->addAttribute('member', $user->dn);
+		// Do we need to update the DN?
+		if( $user->originalDn != $user->dn ) {
+			$this->removeAttribute('member', $user->originalDn);
+			$this->addAttribute('member', $user->dn);
+		}
 	}
 
 	protected function beforeSave()
