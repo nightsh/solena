@@ -377,7 +377,7 @@ class PeopleController extends Controller
 			$keyUpload = CUploadedFile::getInstance($model, 'sshKeysAdded');
 			$model->addSSHKeys($keyUpload);
 			if( $model->save() ) {
-				Yii::app()->user->setFlash('success', 'SSH key(s) added.');
+				Yii::app()->user->setFlash('success', 'SSH Key(s) added.');
 			}
 		}
 		
@@ -544,7 +544,7 @@ class PeopleController extends Controller
 		$model->removeAttribute("sshPublicKey", $selectedKeys);
 		// Now try and save - if we succeed add a flash message so the user knows we succeeded
 		if( $model->save() ) {
-			Yii::app()->user->setFlash('success', 'SSH key(s) removed.');
+			Yii::app()->user->setFlash('success', 'SSH Key(s) removed.');
 			return true;
 		}
 		return false;

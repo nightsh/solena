@@ -20,12 +20,12 @@ class SSHKeyValidator extends CValidator
 			// Make sure the key is valid....
 			$split = SSHKeyValidator::splitKey($key);
 			if( !$split ) {
-				$this->addError($object, $attribute, "The uploaded SSH key is not a valid DSS, RSA or ECDSA key");
+				$this->addError($object, $attribute, "The uploaded SSH Key is not a valid DSS, RSA or ECDSA key.");
 				continue;
 			}
 			// Make sure we haven't already got that key....
 			if( in_array($split['fingerprint'], $knownFingerprints) ) {
-				$this->addError($object, $attribute, "The uploaded SSH Key is already present");
+				$this->addError($object, $attribute, "The uploaded SSH Key is already present.");
 				continue;
 			}
 			$knownFingerprints[] = $split['fingerprint'];

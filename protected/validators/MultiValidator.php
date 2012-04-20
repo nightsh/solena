@@ -15,12 +15,12 @@ class MultiValidator extends CValidator
 		}
 		// Make sure we have a valid configuration....
 		if( is_null($this->validator) ) {
-			$this->addError($object, $attribute, 'Validator configuration invalid - validator class not specified');
+			$this->addError($object, $attribute, 'Validator configuration invalid - validator class not specified.');
 			return;
 		}
 		// Make sure we are actually trying to validate an array....
 		if( !is_array($data) ) {
-			$this->addError($object, $attribute, 'Attribute being validated is not an array');
+			$this->addError($object, $attribute, 'Attribute being validated is not an array.');
 			return;
 		}
 
