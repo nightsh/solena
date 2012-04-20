@@ -10,7 +10,7 @@
 * @author    Benedikt Hallinger <beni@php.net>
 * @copyright 2009 Benedikt Hallinger
 * @license   http://www.gnu.org/licenses/lgpl-3.0.txt LGPLv3
-* @version   SVN: $Id: Filter.php 318470 2011-10-27 12:57:05Z beni $
+* @version   SVN: $Id: Filter.php 325072 2012-04-12 07:02:47Z beni $
 * @link      http://pear.php.net/package/Net_LDAP2/
 */
 
@@ -327,6 +327,17 @@ class Net_LDAP2_Filter extends PEAR
     public static function parse($FILTER)
     {
         if (preg_match('/^\((.+?)\)$/', $FILTER, $matches)) {
+            // Check for right bracket syntax: count of unescaped opening
+            // brackets must match count of unescaped closing brackets.
+            // At this stage we may have:
+            //   1. one filter component with already removed outer brackets
+            //   2. one or more subfilter components
+            $c_openbracks  = preg_match_all('/(?<!\\\\)\(/' , $matches[1], $notrelevant);
+            $c_closebracks = preg_match_all('/(?<!\\\\)\)/' , $matches[1], $notrelevant);
+            if ($c_openbracks != $c_closebracks) {
+                return PEAR::raiseError("Filter parsing error: invalid filter syntax - opening brackets do not match close brackets!");
+            }
+
             if (in_array(substr($matches[1], 0, 1), array('!', '|', '&'))) {
                 // Subfilter processing: pass subfilters to parse() and combine
                 // the objects using the logical operator detected

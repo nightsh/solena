@@ -10,7 +10,7 @@
 * @author    Benedikt Hallinger <beni@php.net>
 * @copyright 2009 Benedikt Hallinger
 * @license   http://www.gnu.org/licenses/lgpl-3.0.txt LGPLv3
-* @version   SVN: $Id: LDIF.php 302696 2010-08-23 12:48:07Z beni $
+* @version   SVN: $Id: LDIF.php 324918 2012-04-06 12:31:04Z clockwerx $
 * @link      http://pear.php.net/package/Net_LDAP2/
 */
 
@@ -339,6 +339,7 @@ class Net_LDAP2_LDIF extends PEAR
                     $num_of_changes      = count($entry_attrs_changes['add'])
                                            + count($entry_attrs_changes['replace'])
                                            + count($entry_attrs_changes['delete']);
+
 
                     $is_changed = ($num_of_changes > 0 || $entry->willBeDeleted() || $entry->willBeMoved());
 

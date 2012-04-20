@@ -12,7 +12,7 @@
 * @author    Benedikt Hallinger <beni@php.net>
 * @copyright 2009 Tarjej Huse, Jan Wagner, Benedikt Hallinger
 * @license   http://www.gnu.org/licenses/lgpl-3.0.txt LGPLv3
-* @version   SVN: $Id: Entry.php 307580 2011-01-19 12:32:05Z beni $
+* @version   SVN: $Id: Entry.php 324918 2012-04-06 12:31:04Z clockwerx $
 * @link      http://pear.php.net/package/Net_LDAP2/
 */
 
@@ -541,31 +541,31 @@ class Net_LDAP2_Entry extends PEAR
         }
         if ($this->isNew()) {
             $this->setAttributes($attr);
-        } else {
-            foreach ($attr as $k => $v) {
-                $k = $this->getAttrName($k);
-                if (false == is_array($v)) {
-                    // Do not add empty values
-                    if ($v == null) {
-                        continue;
-                    } else {
-                        $v = array($v);
-                    }
-                }
-                // add new values to existing attribute or add new attribute
-                if ($this->exists($k)) {
-                    $this->_attributes[$k] = array_unique(array_merge($this->_attributes[$k], $v));
-                } else {
-                    $this->_map[strtolower($k)] = $k;
-                    $this->_attributes[$k]      = $v;
-                }
-                // save changes for update()
-                if (empty($this->_changes["add"][$k])) {
-                    $this->_changes["add"][$k] = array();
-                }
-                $this->_changes["add"][$k] = array_unique(array_merge($this->_changes["add"][$k], $v));
-            }
         }
+        foreach ($attr as $k => $v) {
+            $k = $this->getAttrName($k);
+            if (false == is_array($v)) {
+                // Do not add empty values
+                if ($v == null) {
+                    continue;
+                } else {
+                    $v = array($v);
+                }
+            }
+            // add new values to existing attribute or add new attribute
+            if ($this->exists($k)) {
+                $this->_attributes[$k] = array_unique(array_merge($this->_attributes[$k], $v));
+            } else {
+                $this->_map[strtolower($k)] = $k;
+                $this->_attributes[$k]      = $v;
+            }
+            // save changes for update()
+            if (!isset($this->_changes["add"][$k])) {
+                $this->_changes["add"][$k] = array();
+            }
+            $this->_changes["add"][$k] = array_unique(array_merge($this->_changes["add"][$k], $v));
+        }
+
         $return = true;
         return $return;
     }
