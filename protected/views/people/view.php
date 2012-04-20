@@ -54,3 +54,22 @@ $this->menu = $this->generateMenu($model);
 	'htmlOptions' => array('class' => 'table table-bordered table-striped'),
 )); ?>
 </div>
+
+<div class="span10">
+<h3>Member of Groups</h3>
+
+<?php $this->widget('application.components.NeverGridView', array(
+	'id'=> 'group-grid',
+	'dataProvider'=> $groupData,
+	'template' => '{items}{pager}',
+	'columns'=> array(
+		array(
+			'class' => 'LinkDataColumn',
+			'name' => 'cn',
+			'header' => 'Group Name',
+			'urlExpression' => 'Yii::app()->createUrl("/groups/view", array("cn" => $data->cn))',
+		),
+		'description:text:Description',
+	),
+)); ?>
+</div>

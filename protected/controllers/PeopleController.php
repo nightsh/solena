@@ -105,8 +105,12 @@ class PeopleController extends Controller
 	 */
 	public function actionView($uid)
 	{
+		$model =  $this->loadModel($uid);
+
+		$groupData = new CArrayDataProvider($model->groups->entries(), array('keyField' => false));
 		$this->render('view', array(
-			'model' => $this->loadModel($uid),
+			'model' => $model,
+			'groupData' => $groupData,
 		));
 	}
 
