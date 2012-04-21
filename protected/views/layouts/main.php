@@ -51,12 +51,12 @@
 	</div>
 	
 <div class="container-fluid Neverland" id="page">
-	<div id="pageRow" class="row">
+	<div id="pageRow" class="row-fluid">
 
 		<?php echo $content; ?>
 
 	</div>
-	<div id="footerRow" class="row">
+	<div id="footerRow" class="row-fluid">
 		<div class="navbar navbar-bottom Neverland">
 			<div class="navbar-inner">
 				<div class="row-fluid">
