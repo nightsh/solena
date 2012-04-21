@@ -9,7 +9,7 @@
 		<?php echo $content; ?>
 	</div>
 </div>
-<div class="span2 pull-right">
+<div class="span2">
 	<div id="sidebar">
 	<?php
 		$this->beginWidget('zii.widgets.CPortlet', array(
