@@ -27,10 +27,9 @@
 		<div class="navbar-inner">
 			<div class="container-fluid">
 				<a class="brand" href="<?php echo Yii::app()->controller->createUrl('/site/index'); ?>"><img src="http://files.kde.org/neverland/img/logo.plain.png"/></a>
-				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
+				<a class="btn menu" data-toggle="collapse" data-target=".nav-collapse">
+					Menu
+					<span class="caret"></span>
 				</a>
 				<div class="nav-pills pull-right nav-collapse">
 				<?php $this->widget('application.components.NeverMenu',array(
