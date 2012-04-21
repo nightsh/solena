@@ -24,7 +24,7 @@
 
 	<div id="header" class="navbar navbar-top Neverland">
 		<div class="navbar-inner">
-			<div class="container">
+			<div class="container-fluid">
 				<a class="brand" href="<?php echo Yii::app()->controller->createUrl('/site/index'); ?>"><img src="http://files.kde.org/neverland/img/logo.plain.png"/></a>
 				<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
 					<span class="icon-bar"></span>
@@ -50,7 +50,7 @@
 		</div>
 	</div>
 	
-<div class="container Neverland" id="page">
+<div class="container-fluid Neverland" id="page">
 	<div id="pageRow" class="row">
 
 		<?php echo $content; ?>
@@ -59,7 +59,7 @@
 	<div id="footerRow" class="row">
 		<div class="navbar navbar-bottom Neverland">
 			<div class="navbar-inner">
-				<div class="container">
+				<div class="row-fluid">
 					<ul class="breadcrumb">
 						<li>
 						<?php if(isset($this->breadcrumbs)):?>
