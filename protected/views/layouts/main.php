@@ -35,7 +35,7 @@
 				<?php $this->widget('application.components.NeverMenu',array(
 					'items'=>array(
 						array('label' => 'People', 'url' => array('/people/index'), 'glyphIcon' => 'user'),
-						array('label' => 'Groups', 'url' => array('/groups/index'), 'glyphIcon' => 'th-large'),
+						array('label' => 'Groups', 'url' => array('/groups/index'), 'glyphIcon' => 'th-list'),
 						array('label' => 'Registrations', 'url' => array('/registration/list'), 'glyphIcon' => 'pencil', 'visible' => Yii::app()->user->checkAccess('sysadmins')),
 						array('label' => 'Developer Applications', 'url' => array('/developerApplication/list'), 'glyphIcon' => 'file', 'visible' => Yii::app()->user->checkAccess('sysadmins')),
 						array('label' => 'My Account', 'url' => array('/people/view', 'uid' => Yii::app()->user->id), 'glyphIcon' => 'user', 'visible' => !Yii::app()->user->isGuest),
