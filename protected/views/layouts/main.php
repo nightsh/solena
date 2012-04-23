@@ -9,6 +9,7 @@
 
 	<!-- Le styles -->
 	<!--<link href="http://files.kde.org/neverland/css/bootstrap.css" rel="stylesheet">-->
+	<?php Yii::app()->clientScript->registerCssFile('bootstrap.css'); ?>
 	<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.css" rel="stylesheet">
 	<!--<link href="http://files.kde.org/neverland/css/bootstrap-responsive.css" rel="stylesheet">-->
 	<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap-responsive.css" rel="stylesheet">
