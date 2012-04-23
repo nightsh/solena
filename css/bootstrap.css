@@ -1200,7 +1200,7 @@ table .span12 {
   display: inline-block;
   width: 14px;
   height: 13px;
-  background-image: url("http://files.kde.org/neverland/img/glyphicons-halflings.png");
+  background-image: url("http://cdn.kde.org/img/glyphicons-halflings.png");
   background-position: 14px 14px;
   background-repeat: no-repeat;
   *margin-right: .3em;
@@ -1209,10 +1209,10 @@ table .span12 {
   *margin-left: 0;
 }
 .icon-white {
-  background-image: url("http://files.kde.org/neverland/img/glyphicons-halflings-white.png");
+  background-image: url("http://cdn.kde.org/img/glyphicons-halflings-white.png");
 }
 .icon-black {
-  background-image: url("http://files.kde.org/neverland/img/glyphicons-halflings-black.png");
+  background-image: url("http://cdn.kde.org/img/glyphicons-halflings-black.png");
 }
 .icon-glass {
   background-position: 0      0;
@@ -2302,7 +2302,7 @@ button.btn.small, input[type="submit"].btn.small {
 .nav-tabs > .active > a, .nav-tabs > .active > a:hover {
   color: #636363;
   background-color: #fafafa;
-  background-image: url("http://files.kde.org/neverland/img/bg.png");
+  background-image: url("http://cdn.kde.org/img/bg.png");
   background-repeat: repeat;
   background-position: 0, 0;
   border: 1px solid #d3d7cf;
@@ -2944,7 +2944,7 @@ button.btn.small, input[type="submit"].btn.small {
   width: 560px;
   margin: -250px 0 0 -280px;
   background-color: #fafafa;
-  background-image: url("http://files.kde.org/neverland/img/bg.png");
+  background-image: url("http://cdn.kde.org/img/bg.png");
   background-repeat: repeat;
   background-position: 0, 0;
   border: 1px solid #gray;
@@ -3448,7 +3448,7 @@ a.thumbnail:hover {
   line-height: 1.7600000000000002em;
 }
 body {
-  background-image: url("http://files.kde.org/neverland/img/bg.png");
+  background-image: url("http://cdn.kde.org/img/bg.png");
   background-repeat: repeat;
   background-position: 0, 0;
 }
@@ -3480,12 +3480,12 @@ body {
 
 .navbar-fixed-top.Neverland {
   height: 9em;
-  background-image: url('http://files.kde.org/neverland/img/headerFadeout.png');
+  background-image: url('http://cdn.kde.org/img/headerFadeout.png');
   background-repeat: repeat-x;
   background-position: bottom, left;
 }
 .navbar-fixed-top.Neverland .navbar-inner {
-  background-image: url("http://files.kde.org/neverland/img/bg.png");
+  background-image: url("http://cdn.kde.org/img/bg.png");
   background-repeat: repeat;
   background-position: 0, 0;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
@@ -3569,7 +3569,7 @@ body {
   margin-top: 2em;
 }
 .navbar-bottom.Neverland .navbar-inner {
-  background-image: url('http://files.kde.org/neverland/img/navbar.png');
+  background-image: url('http://cdn.kde.org/img/navbar.png');
   background-repeat: repeat;
   background-position: 0, 0;
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
