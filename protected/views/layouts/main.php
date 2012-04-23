@@ -79,7 +79,7 @@
 						<ul class="breadcrumb">
 							<li>
 							<?php if(isset($this->breadcrumbs)):?>
-								<?php $this->widget('zii.widgets.CBreadcrumbs', array(
+								<?php $this->widget('application.widgets.NBreadcrumbs', array(
 									'links'=>$this->breadcrumbs,
 								)); ?><!-- breadcrumbs -->
 							<?php endif?>
