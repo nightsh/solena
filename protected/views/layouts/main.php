@@ -14,7 +14,6 @@
 	Yii::app()->clientScript->registerCssFile('css/bootstrap-solena.css');
 
 	/* Javascript files */
-	Yii::app()->clientScript->registerCoreScripts();
 	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap.js", CClientScript::POS_END);
 	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap-transition.js", CClientScript::POS_END);
 	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap-dropdown.js", CClientScript::POS_END);
