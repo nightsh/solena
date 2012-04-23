@@ -8,9 +8,22 @@
 	<meta name="author" content="Ben Cooksley">
 
 	<?php
+	/* Stylesheet files for Neverland */
 	Yii::app()->clientScript->registerCssFile('css/bootstrap.css');
 	Yii::app()->clientScript->registerCssFile('css/bootstrap-responsive.css');
 	Yii::app()->clientScript->registerCssFile('css/bootstrap-solena.css');
+
+	/* Javascript files */
+	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap.js", CClientScript::POS_END);
+	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap-transition.js", CClientScript::POS_END);
+	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap-dropdown.js", CClientScript::POS_END);
+	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap-scrollspy.js", CClientScript::POS_END);
+	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap-tooltip.js", CClientScript::POS_END);
+	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap-popover.js", CClientScript::POS_END);
+	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap-button.js", CClientScript::POS_END);
+	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap-collapse.js", CClientScript::POS_END);
+	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap-carousel.js", CClientScript::POS_END);
+	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap-neverland.js", CClientScript::POS_END);
 	?>
 
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -81,18 +94,5 @@
 		</footer>
 	</div>
 </div><!-- page -->
-
-<!-- Le javascript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="http://files.kde.org/neverland/js/bootstrap-transition.js"></script>
-<script src="http://files.kde.org/neverland/js/bootstrap-dropdown.js"></script>
-<script src="http://files.kde.org/neverland/js/bootstrap-scrollspy.js"></script>
-<script src="http://files.kde.org/neverland/js/bootstrap-tooltip.js"></script>
-<script src="http://files.kde.org/neverland/js/bootstrap-popover.js"></script>
-<script src="http://files.kde.org/neverland/js/bootstrap-button.js"></script>
-<script src="http://files.kde.org/neverland/js/bootstrap-collapse.js"></script>
-<script src="http://files.kde.org/neverland/js/bootstrap-carousel.js"></script>
-<script src="http://files.kde.org/neverland/js/bootstrap-neverland.js"></script>
 </body>
 </html>
