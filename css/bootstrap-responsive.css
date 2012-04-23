@@ -330,7 +330,6 @@
   }
   .navbar .nav > li > a, .navbar .dropdown-menu a {
     padding: 6px 15px;
-    font-weight: bold;
     color: #d3d7cf;
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
