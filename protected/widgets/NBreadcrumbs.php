@@ -35,15 +35,15 @@ class NBreadcrumbs extends CBreadcrumbs {
 		echo CHtml::openTag($this->tagName,$this->htmlOptions)."\n";
 		$links=array();
 		if($this->homeLink===null)
-			$links[]="<li>".CHtml::link(Yii::t('zii','Home'),Yii::app()->homeUrl)."<li>";
+			$links[]='<li>'.CHtml::link(Yii::t('zii','Home'),Yii::app()->homeUrl).'</li>';
 		else if($this->homeLink!==false)
-			$links[]="<li>".$this->homeLink."<li>";
+			$links[]='<li>'.$this->homeLink.'<span class="divider">|</span></li>';
 		foreach($this->links as $label=>$url)
 		{
 			if(is_string($label) || is_array($url))
-				$links[]="<li>".CHtml::link($this->encodeLabel ? CHtml::encode($label) : $label, $url)."<li>";
+				$links[]=CHtml::link($this->encodeLabel ? '<li><span class="divider">|</span>'.CHtml::encode($label).'</li>' :'<li>'. $label, $url.'</li>');
 			else
-				$links[]="<li>".($this->encodeLabel ? CHtml::encode($url) : $url)."<li>";
+				$links[]=($this->encodeLabel ? '<li><span class="divider">|</span>'.CHtml::encode($url).'</li>' : '<li>'.$url.'</li>');
 		}
 		echo implode($links);
 		echo CHtml::closeTag($this->tagName);
