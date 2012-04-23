@@ -1,4 +1,7 @@
 <?php
+
+Yii::import('zii.widgets.CBreadcrumbs');
+
 /***********************************************************
  * Meant to overwrite default Breadcrumbs and output a list 
  * instead of pure links
