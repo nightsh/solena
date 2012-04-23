@@ -190,3 +190,21 @@ input.error, textarea.error {
 	color: #D3D7CF;
 	font-weight: bold;
 }
+
+@media (max-width: 979px) {
+	.navbar-top.Neverland .navbar-inner .menu, .navbar-fixed-top.Neverland .navbar-inner .menu {
+		display: inline-block;
+	}
+	.navbar-top.Neverland .navbar-inner .pull-right {
+		float: left;
+	}
+	.navbar-fixed-top.Neverland .nav li, .navbar-top.Neverland .nav li {
+		margin-top: 0.5em;
+	}
+	.navbar-top.Neverland .nav li a {
+		padding: 4px 30px 4px 4px;
+	}
+	.navbar-top.Neverland .nav li a:hover {
+		color: #ffffff;
+	}
+}
