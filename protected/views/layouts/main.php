@@ -7,15 +7,12 @@
 	<meta name="description" content="">
 	<meta name="author" content="Ben Cooksley">
 
-	<!-- Le styles -->
-	<!--<link href="http://files.kde.org/neverland/css/bootstrap.css" rel="stylesheet">-->
-	<?php Yii::app()->clientScript->registerCssFile('bootstrap.css'); ?>
-	<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap.css" rel="stylesheet">
-	<!--<link href="http://files.kde.org/neverland/css/bootstrap-responsive.css" rel="stylesheet">-->
-	<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap-responsive.css" rel="stylesheet">
-	<!--<link href="http://files.kde.org/neverland/css/bootstrap-solena.css" rel="stylesheet"> -->
-	<link href="<?php echo Yii::app()->request->baseUrl; ?>/css/bootstrap-solena.css" rel="stylesheet">
-	
+	<?php
+	Yii::app()->clientScript->registerCssFile('css/bootstrap.css');
+	Yii::app()->clientScript->registerCssFile('css/bootstrap-responsive.css');
+	Yii::app()->clientScript->registerCssFile('css/bootstrap-solena.css');
+	?>
+
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
 	<script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
