@@ -24,11 +24,13 @@ class NBreadcrumbs extends CBreadcrumbs {
 		if(empty($this->links))
 		{
 			echo CHtml::openTag($this->tagName,$this->htmlOptions)."\n";
-			echo CHtml::openTag("li\n");
+			echo CHtml::openTag('li\n');
+			echo CHtml::openTag('i class="icon-home icon-white');
+			echo CHtml::closeTag('i');
 			echo CHtml::openTag('a href="'.Yii::app()->homeUrl.'"');
 			echo "Home";
-			echo CHtml::closeTag("a");
-			echo CHtml::closeTag("li");
+			echo CHtml::closeTag('a');
+			echo CHtml::closeTag('li');
 			echo CHtml::closeTag($this->tagName);
 			return;
 		}
