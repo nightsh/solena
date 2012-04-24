@@ -38,13 +38,13 @@ class NBreadcrumbs extends CBreadcrumbs {
 		if($this->homeLink===null)
 			$links[]='<li>'.CHtml::link(Yii::t('zii','Home'),Yii::app()->homeUrl).'</li>';
 		else if($this->homeLink!==false)
-			$links[]='<li>'.$this->homeLink.'<span class="divider">|</span></li>';
+			$links[]='<li>'.$this->homeLink.'<li class="divider-vertical"></li></li>';
 		foreach($this->links as $label=>$url)
 		{
 			if(is_string($label) || is_array($url))
-				$links[]=CHtml::link($this->encodeLabel ? '<li><span class="divider">|</span>'.CHtml::encode($label).'</li>' :'<li>'. $label, $url.'</li>');
+				$links[]=CHtml::link($this->encodeLabel ? '<li><li class="divider-vertical"></li>'.CHtml::encode($label).'</li>' :'<li>'. $label, $url.'</li>');
 			else
-				$links[]=($this->encodeLabel ? '<li><span class="divider">|</span>'.CHtml::encode($url).'</li>' : '<li>'.$url.'</li>');
+				$links[]=($this->encodeLabel ? '<li><li class="divider-vertical"></li>'.CHtml::encode($url).'</li>' : '<li>'.$url.'</li>');
 		}
 		echo implode($links);
 		echo CHtml::closeTag($this->tagName);
