@@ -70,7 +70,7 @@
 		<div id="pageRow" class="row-fluid">
 
 			<?php echo $content; ?>
-
+			<div class="clearfix"></div>
 			<div id="footerRow" class="row-fluid">
 				<div class="navbar navbar-bottom Neverland">
 					<div class="navbar-inner">
