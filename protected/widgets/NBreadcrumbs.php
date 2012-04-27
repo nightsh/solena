@@ -9,13 +9,11 @@ Yii::import('zii.widgets.CBreadcrumbs');
 
 class NBreadcrumbs extends CBreadcrumbs {
 
-	public $tagName='ul';
+	public $tagName = 'ul';
 
-	public $htmlOptions=array('class'=>'nav');
+	public $htmlOptions = array('class'=>'nav');
 
-	public $separator='';
-
-	public $icon;
+	public $separator = ' &raquo; ';
 
 	public function init() {
 		parent::init();
