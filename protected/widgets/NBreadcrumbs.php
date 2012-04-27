@@ -15,6 +15,8 @@ class NBreadcrumbs extends CBreadcrumbs {
 
 	public $separator='';
 
+	public $icon;
+
 	public function init() {
 		parent::init();
 	}
@@ -26,8 +28,8 @@ class NBreadcrumbs extends CBreadcrumbs {
 			echo CHtml::openTag($this->tagName,$this->htmlOptions)."\n";
 			echo CHtml::openTag("li\n");
 			echo CHtml::openTag('a href="'.Yii::app()->homeUrl.'"');
-			$icon = CHtml::tag('i', array( 'class' => 'icon-home icon-white'), ' ', true);
-			echo $icon." Home";
+			$this->icon = CHtml::tag('i', array( 'class' => 'icon-home icon-white'), ' ', true);
+			echo $this->icon." Home";
 			echo CHtml::closeTag('a');
 			echo CHtml::closeTag('li');
 			echo CHtml::closeTag($this->tagName);
@@ -36,7 +38,7 @@ class NBreadcrumbs extends CBreadcrumbs {
 		echo CHtml::openTag($this->tagName,$this->htmlOptions)."\n";
 		$links=array();
 		if($this->homeLink===null)
-			$links[]='<li>'.CHtml::link(Yii::t('zii', $icon.' Home'),Yii::app()->homeUrl).'</li>';
+			$links[]='<li>'.CHtml::link(Yii::t('zii', $this->icon.' Home'),Yii::app()->homeUrl).'</li>';
 		else if($this->homeLink!==false)
 			$links[]='<li>'.$this->homeLink.'</li><li class="divider-vertical"></li>';
 		foreach($this->links as $label=>$url)
