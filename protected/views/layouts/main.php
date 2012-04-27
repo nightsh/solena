@@ -80,7 +80,8 @@
 									'links'=>$this->breadcrumbs,
 									'htmlOptions' => array(
 											'class' => 'breadcrumb',
-									)
+									),
+									'homeLink' => Yii::app()->homeUrl('/'),
 								)); ?><!-- breadcrumbs -->
 							<?php endif?>
 						</div>
