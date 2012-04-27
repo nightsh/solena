@@ -46,7 +46,7 @@ class NBreadcrumbs extends CBreadcrumbs {
 			if(is_string($label) || is_array($url))
 				$links[]=CHtml::link($this->encodeLabel ? '<li class="divider-vertical"></li><li>'.CHtml::encode($label).'</li>' :'<li>'. $label, $url.'</li>');
 			else
-				$links[]=($this->encodeLabel ? '<li class="divider-vertical"></li><li>'.CHtml::encode($url).'</li>' : '<li>'.$url.'</li>');
+				$links[]=($this->encodeLabel ? '<li class="divider-vertical"></li><li>'.CHtml::encode($label).'</li>' : '<li>'.$url.'</li>');
 		}
 		echo implode($links);
 		echo CHtml::closeTag($this->tagName);
