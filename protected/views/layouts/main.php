@@ -76,7 +76,7 @@
 					<div class="navbar-inner">
 						<div class="row-fluid">
 							<?php if(isset($this->breadcrumbs)):?>
-								<?php $this->widget('application.widgets.NBreadcrumbs', array(
+								<?php $this->widget('yii.widgets.CBreadcrumbs', array(
 									'links'=>$this->breadcrumbs,
 								)); ?><!-- breadcrumbs -->
 							<?php endif?>
