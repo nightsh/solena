@@ -11,7 +11,7 @@ class NBreadcrumbs extends CBreadcrumbs {
 
 	public $tagName='ul';
 
-	public $htmlOptions=array('class'=>'nav breadcrumb');
+	public $htmlOptions=array('class'=>'nav');
 
 	public $separator='';
 

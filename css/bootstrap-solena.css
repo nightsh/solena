@@ -84,8 +84,17 @@
 	text-shadow: none;
 }
 
-.navbar-bottom.Neverland .breadcrumb li a {
+.navbar-bottom.Neverland .nav li a {
 	color: #ffffff;
+}
+
+.navbar .nav > li {
+float: none;
+padding: 10px 10px 11px;
+line-height: 19px;
+color: #D3D7CF;
+text-decoration: none;
+text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
 .grid-view .filters input, .grid-view .filters select {
