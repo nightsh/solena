@@ -75,15 +75,11 @@
 				<div class="navbar navbar-bottom Neverland">
 					<div class="navbar-inner">
 						<div class="row-fluid">
-							<ul class="nav">
-								<li>
-									<?php if(isset($this->breadcrumbs)):?>
-										<?php $this->widget('application.widgets.NBreadcrumbs', array(
-											'links'=>$this->breadcrumbs,
-										)); ?><!-- breadcrumbs -->
-									<?php endif?>
-								</li>
-							</ul>
+							<?php if(isset($this->breadcrumbs)):?>
+								<?php $this->widget('application.widgets.NBreadcrumbs', array(
+									'links'=>$this->breadcrumbs,
+								)); ?><!-- breadcrumbs -->
+							<?php endif?>
 						</div>
 					</div>
 				</div>
