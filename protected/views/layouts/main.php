@@ -81,7 +81,7 @@
 									'htmlOptions' => array(
 											'class' => 'breadcrumb',
 									),
-									'homeLink' => Yii::app()->controller->createUrl('/site/index'),
+									'homeLink' => '<a href="'.Yii::app()->controller->createUrl('/site/index').'">Home</a>',
 								)); ?><!-- breadcrumbs -->
 							<?php endif?>
 						</div>
