@@ -36,7 +36,7 @@ class NBreadcrumbs extends CBreadcrumbs {
 		echo CHtml::openTag($this->tagName,$this->htmlOptions)."\n";
 		$links=array();
 		if($this->homeLink===null)
-			$links[]='<li>'.CHtml::tag('i', array( 'class' => 'icon-home icon-white'), ' ', true).CHtml::link(Yii::t('zii','Home'),Yii::app()->homeUrl).'</li>';
+			$links[]='<li>'.CHtml::link(Yii::t('zii', $icon.' Home'),Yii::app()->homeUrl).'</li>';
 		else if($this->homeLink!==false)
 			$links[]='<li>'.$this->homeLink.'</li><li class="divider-vertical"></li>';
 		foreach($this->links as $label=>$url)
