@@ -44,7 +44,7 @@ class NBreadcrumbs extends CBreadcrumbs {
 		foreach($this->links as $label=>$url)
 		{
 			if(is_string($label) || is_array($url))
-				$links[]=CHtml::link($this->encodeLabel ? '<li class="divider-vertical"></li><li>'.CHtml::encode($label).'</li>' :'<li>'. $label, $url.'</li>');
+				$links[]=CHtml::link($this->encodeLabel ? '<li class="divider-vertical">sdfgsdfg</li><li>'.CHtml::encode($label).'</li>' :'<li>'. $label, $url.'</li>');
 			else
 				$links[]='<span>'.($this->encodeLabel ? CHtml::encode($url) : $url).'</span>';
 		}
