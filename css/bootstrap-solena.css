@@ -88,8 +88,7 @@
 	color: #ffffff;
 }
 
-.navbar .nav > li {
-float: none;
+.navbar-bottom.Neverland .nav > li {
 padding: 10px 10px 11px;
 line-height: 19px;
 color: #D3D7CF;
