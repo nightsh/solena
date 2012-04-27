@@ -75,15 +75,19 @@
 				<div class="navbar navbar-bottom Neverland">
 					<div class="navbar-inner">
 						<div class="row-fluid">
-							<?php if(isset($this->breadcrumbs)):?>
-								<?php $this->widget('zii.widgets.CBreadcrumbs', array(
-									'links'=>$this->breadcrumbs,
-									'htmlOptions' => array(
+							<ul class="nav">
+								<li>
+								<?php if(isset($this->breadcrumbs)):?>
+									<?php $this->widget('zii.widgets.CBreadcrumbs', array(
+										'links'=>$this->breadcrumbs,
+										'htmlOptions' => array(
 											'class' => 'breadcrumb',
-									),
-									'homeLink' => '<a href="'.Yii::app()->controller->createUrl('/site/index').'">Home</a>',
-								)); ?><!-- breadcrumbs -->
-							<?php endif?>
+										),
+										'homeLink' => '<a href="'.Yii::app()->controller->createUrl('/site/index').'">Home</a>',
+									)); ?><!-- breadcrumbs -->
+								<?php endif?>
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
