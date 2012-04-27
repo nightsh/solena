@@ -33,7 +33,7 @@ $this->menu = $this->generateMenu($model);
 		<?php echo CHtml::image( CHtml::normalizeUrl(array('viewAvatar', 'uid' => $model->uid)), '',array('class' => 'thumbnail pull-right') ); ?>
 	</div>
 
-	<div class="span12">
+	<div class="row">
 		<h3>Contact Information</h3>
 
 		<?php $this->widget('zii.widgets.CDetailView', array(
@@ -55,7 +55,7 @@ $this->menu = $this->generateMenu($model);
 		)); ?>
 	</div>
 
-	<div class="span12">
+	<div class="row">
 		<h3>Member of Groups</h3>
 
 		<?php $this->widget('application.components.NeverGridView', array(
