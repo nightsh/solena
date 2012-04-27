@@ -15,15 +15,7 @@
 
 	/* Javascript files */
 	Yii::app()->clientScript->registerCoreScript('jquery');
-	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap.js", CClientScript::POS_END);
-	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap-transition.js", CClientScript::POS_END);
-	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap-dropdown.js", CClientScript::POS_END);
-	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap-scrollspy.js", CClientScript::POS_END);
-	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap-tooltip.js", CClientScript::POS_END);
-	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap-popover.js", CClientScript::POS_END);
-	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap-button.js", CClientScript::POS_END);
-	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap-collapse.js", CClientScript::POS_END);
-	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap-carousel.js", CClientScript::POS_END);
+	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/min/bootstrap.js", CClientScript::POS_END);
 	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap-neverland.js", CClientScript::POS_END);
 	?>
 
