@@ -81,7 +81,7 @@
 									<?php $this->widget('zii.widgets.CBreadcrumbs', array(
 										'links'=>$this->breadcrumbs,
 										'htmlOptions' => array(
-											'class' => 'breadcrumb',
+											'class' => 'breadcrumbs',
 										),
 										'homeLink' => '<a href="'.Yii::app()->controller->createUrl('/site/index').'">Home</a>',
 									)); ?><!-- breadcrumbs -->
