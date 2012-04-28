@@ -33,7 +33,7 @@
 	<div id="header" class="navbar navbar-top Neverland">
 		<div class="navbar-inner">
 			<div class="container-fluid">
-				<a class="brand" href="<?php echo Yii::app()->controller->createUrl('/site/index'); ?>"><img src="http://files.kde.org/neverland/img/logo.plain.png"/></a>
+				<a class="brand" href="<?php echo Yii::app()->controller->createUrl('/site/index'); ?>"><img src="http://cdn.kde.org/img/logo.plain.png"/></a>
 				<a class="btn menu" data-toggle="collapse" data-target=".nav-collapse">
 					Menu
 					<span class="caret"></span>
