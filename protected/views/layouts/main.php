@@ -9,7 +9,7 @@
 
 	<?php
 	/* Stylesheet files for Neverland */
-	Yii::app()->clientScript->registerCssFile('css/bootstrap.css');
+	Yii::app()->clientScript->registerCssFile('http://cdn.kde.org/css/min/bootstrap.css');
 	Yii::app()->clientScript->registerCssFile('css/bootstrap-responsive.css');
 	Yii::app()->clientScript->registerCssFile('css/bootstrap-solena.css');
 
