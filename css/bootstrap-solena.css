@@ -90,6 +90,10 @@
 	padding-top: 0px;
 }
 
+.navbar-bottom.Neverland #global-nav li a {
+	color: #2E3436;
+}
+
 .navbar-bottom.Neverland .nav > li {
 padding: 10px 10px 11px;
 line-height: 19px;
