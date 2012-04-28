@@ -17,6 +17,7 @@
 	Yii::app()->clientScript->registerCoreScript('jquery');
 	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/min/bootstrap.js", CClientScript::POS_END);
 	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap-neverland.js", CClientScript::POS_END);
+	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/global-nav.js", CClientScript::POS_END);
 	?>
 
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -78,6 +79,12 @@
 										'homeLink' => '<a href="'.Yii::app()->controller->createUrl('/site/index').'">Home</a>',
 									)); ?><!-- breadcrumbs -->
 								<?php endif?>
+								</li>
+							</ul>
+							<ul class="nav pull-right">
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown">KDE Links <b class="caret-up"></b></a>
+									<ul id="global-nav" class="dropdown-menu bottom-up"></ul>
 								</li>
 							</ul>
 						</div>
