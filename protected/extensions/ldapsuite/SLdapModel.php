@@ -499,6 +499,16 @@ abstract class SLdapModel extends CModel
 			return false;
 		}
 		
+		// We need to make sure they are not trying to duplicate values...
+		foreach( $this->_entry->attributes() as $attribute ) {
+			if( is_array($this->$attribute) && count(array_unique($this->$attribute)) != count($this->$attribute) ) {
+				$this->addError($attribute . '[0]', "The entered values are not unique");
+			}
+		}
+		if( $this->hasErrors() ) {
+			return false;
+		}
+		
 		// Does beforeSave permit us to save?
 		if( !$this->beforeSave() ) {
 			return false;
