@@ -59,7 +59,7 @@ $this->menu = $this->generateMenu($model);
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'timezoneName'); ?>
-		<?php echo $form->dropDownList($model, 'timezoneName', $model->validTimezones(), array('empty'=> 'Not set')); ?>
+		<?php echo $form->dropDownList($model, 'timezoneName', $model->preppedTimezones(), array('empty'=> 'Not set')); ?>
 	</div>
 
 	<?php if( Yii::app()->user->checkAccess('manageEvMembershipData', array('user' => $model)) ) { ?>

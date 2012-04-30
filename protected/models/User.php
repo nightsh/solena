@@ -245,6 +245,18 @@ class User extends SLdapModel
 		return $timezoneNames;
 	}
 
+    public function preppedTimezones()
+    {
+        $timezones = validTimezones();
+
+        // split per continent.
+        foreach ($timezones as $timezone) {
+            list($continent, $country) = preg_split('/\//', $timezone);
+            $temp[$continent][] = array($timezone => $country);
+        }
+        return $temp;
+    }  
+
 	public function validMemberStatus()
 	{
 		return array('Active' => 'Active', 'Extraordinary' => 'Extraordinary', 'Supporting' => 'Supporting');
