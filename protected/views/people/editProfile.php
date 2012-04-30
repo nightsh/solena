@@ -28,39 +28,41 @@ $this->menu = $this->generateMenu($model);
 		</div>
 	<?php } ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model, 'givenName'); ?>
-		<?php echo $form->textField($model, 'givenName', array('size' => 60, 'maxlength' => 128)); ?>
-	</div>
+	<?php if( Yii::app()->user->checkAccess('changeUserDetails', array('user' => $model)) ) { ?>
+		<div class="row">
+			<?php echo $form->labelEx($model, 'givenName'); ?>
+			<?php echo $form->textField($model, 'givenName', array('size' => 60, 'maxlength' => 128)); ?>
+		</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model, 'sn'); ?>
-		<?php echo $form->textField($model, 'sn', array('size' => 60, 'maxlength' => 128)); ?>
-	</div>
+		<div class="row">
+			<?php echo $form->labelEx($model, 'sn'); ?>
+			<?php echo $form->textField($model, 'sn', array('size' => 60, 'maxlength' => 128)); ?>
+		</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model, 'dateOfBirth'); ?>
-		<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
-			'model' => $model,
-			'attribute' => 'dateOfBirth',
-			'options' => array(
-				'showAnim' => 'fold',
-				'dateFormat' => 'dd/mm/yy',
-				'changeYear' => true,
-			),
-			'htmlOptions' => array('size' => 60),
-		)); ?>
-	</div>
+		<div class="row">
+			<?php echo $form->labelEx($model, 'dateOfBirth'); ?>
+			<?php $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+				'model' => $model,
+				'attribute' => 'dateOfBirth',
+				'options' => array(
+					'showAnim' => 'fold',
+					'dateFormat' => 'dd/mm/yy',
+					'changeYear' => true,
+				),
+				'htmlOptions' => array('size' => 60),
+			)); ?>
+		</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model, 'gender'); ?>
-		<?php echo $form->dropDownList($model, 'gender', $model->validGenders(), array('empty'=> 'Not set')); ?>
-	</div>
+		<div class="row">
+			<?php echo $form->labelEx($model, 'gender'); ?>
+			<?php echo $form->dropDownList($model, 'gender', $model->validGenders(), array('empty'=> 'Not set')); ?>
+		</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model, 'timezoneName'); ?>
-		<?php echo $form->dropDownList($model, 'timezoneName', $model->preppedTimezones(), array('empty'=> 'Not set')); ?>
-	</div>
+		<div class="row">
+			<?php echo $form->labelEx($model, 'timezoneName'); ?>
+			<?php echo $form->dropDownList($model, 'timezoneName', $model->preppedTimezones(), array('empty'=> 'Not set')); ?>
+		</div>
+	<?php } ?>
 
 	<?php if( Yii::app()->user->checkAccess('manageEvMembershipData', array('user' => $model)) ) { ?>
 		<div class="row">

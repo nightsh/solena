@@ -163,7 +163,7 @@ class PeopleController extends Controller
 		$model = $this->loadModel($uid);
 		$model->setScenario('editProfile');
 
-		if( !Yii::app()->user->checkAccess('changeUserDetails', array('user' => $model)) ) {
+		if( !Yii::app()->user->checkAccess('changeUserDetails', array('user' => $model)) && !Yii::app()->user->checkAccess('manageEvMembershipData', array('user' => $model)) ) {
 			throw new CHttpException(403, 'You are not permitted to change the details of this person');
 		}
 
@@ -173,12 +173,13 @@ class PeopleController extends Controller
 				$model->uid = $_POST['User']['uid'];
 				$model->setDnByParent( $model->getParentDn() );
 			}
-			// If we have permission to update their KDE e.V membership
+			// If we have permission to update their KDE e.V. membership
 			if( Yii::app()->user->checkAccess('manageEvMembershipData', array('user' => $model)) ) {
 				$model->memberStatus = $_POST['User']['memberStatus'];
 			}
-			// Update all other attriutes...
+			// Update all other attributes...
 			$model->attributes = $_POST['User'];
+			// Save the changes
 			if( $model->save() ) {
 				Yii::app()->user->setFlash('success', 'Profile updated.');
 				$this->redirect( array('view', 'uid' => $model->uid) );
@@ -499,6 +500,8 @@ class PeopleController extends Controller
 			$menu[] = array('label' => 'View Profile', 'url' => array('view', 'uid' => $model->uid));
 		}
 		if( Yii::app()->user->checkAccess('changeUserDetails', $params) && $this->action->id != 'editProfile' ) {
+			$menu[] = array('label' => 'Edit Profile', 'url' => array('editProfile', 'uid' => $model->uid));
+		} else if( Yii::app()->user->checkAccess('manageEvMembershipData', $params) && $this->action-> id != 'editProfile' ) {
 			$menu[] = array('label' => 'Edit Profile', 'url' => array('editProfile', 'uid' => $model->uid));
 		}
 		if( Yii::app()->user->checkAccess('changeUserDetails', $params) && $this->action->id != 'editContactDetails' ) {
