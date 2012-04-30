@@ -71,13 +71,24 @@
 							<ul class="nav">
 								<li>
 								<?php if(isset($this->breadcrumbs)):?>
-									<?php $this->widget('application.widgets.NBreadcrumbs', array(
-										'links'=>$this->breadcrumbs,
-										'htmlOptions' => array(
-											'class' => 'breadcrumb',
-										),
-										'homeLink' => '<a href="'.Yii::app()->controller->createUrl('/site/index').'">Home</a>',
-									)); ?><!-- breadcrumbs -->
+									<?php
+										if(Yii::app()->user->isGuest) {
+											$this->widget('application.widgets.NBreadcrumbs', array(
+												'links'=>$this->breadcrumbs,
+												'htmlOptions' => array(
+													'class' => 'breadcrumb',
+												),
+												'homeLink' => '<a href="'.Yii::app()->controller->createUrl('/site/login').'">Home</a>',
+											));
+										} else {
+											$this->widget('application.widgets.NBreadcrumbs', array(
+												'links'=>$this->breadcrumbs,
+													'htmlOptions' => array(
+													'class' => 'breadcrumb',
+												),
+												'homeLink' => '<a href="'.Yii::app()->controller->createUrl('/site/index').'">Home</a>',
+										));
+										}?><!-- breadcrumbs -->
 								<?php endif?>
 								</li>
 							</ul>
