@@ -248,6 +248,7 @@ class User extends SLdapModel
 	public function preppedTimezones()
 	{
 		$timezones = $this->validTimezones();
+		$temp = array();
 
 		// split per continent.
 		foreach ($timezones as $timezone) {
@@ -258,7 +259,7 @@ class User extends SLdapModel
 			} else {
 				$continent = $country = $timezone;
 			}
-			if (is_array( $temp[$continent])) {
+			if(isset( $temp[$continent])) {
 				$temp[$continent] = array_merge($temp[$continent],
 					array($timezone => $country));
 			} else {
