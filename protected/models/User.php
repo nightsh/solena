@@ -252,13 +252,18 @@ class User extends SLdapModel
 		// split per continent.
 		foreach ($timezones as $timezone) {
 			$splitted = explode('/', $timezone);
-			if (count($splitted) == 2) {
+			if (count($splitted) >= 2) {
 				$continent = $splitted[0];
-				$country = $splitted[1];
+				$country = implode(array_slice($splitted,1),'/');
 			} else {
 				$continent = $country = $timezone;
 			}
-			$temp[$continent][] = array($timezone => $country);
+			if (is_array( $temp[$continent])) {
+				$temp[$continent] = array_merge($temp[$continent],
+					array($timezone => $country));
+			} else {
+				$temp[$continent] = array($timezone => $country);
+			}
 		}
 		return $temp;
 	}
