@@ -1,13 +1,14 @@
 <?php
 $this->breadcrumbs = array(
 	'Groups' => array('index'),
-	$model->description,
+	$model->cn,
 );
 
 $this->menu = $this->generateMenu($model);
 ?>
 
-<h1>Members of Group <?php echo CHtml::encode($model->description); ?></h1>
+<h1>Members of Group <?php echo CHtml::encode($model->cn); ?>
+<small><?php echo CHtml::encode($model->description); ?></small></h1>
 <p>Shown below are both full and partial matches against the entered filter text. A maximum of 500 results can be shown at any one time.</p>
 
 <div class="form">
