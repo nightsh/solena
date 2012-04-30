@@ -461,6 +461,10 @@ abstract class SLdapModel extends CModel
 		if( is_array($value) ) {
 			$value = array_values( array_filter($value) );
 		}
+		// If the value is the same, no point in replacing it....
+		if( $this->getAttribute($name) == $value ) {
+			return true;
+		}
 		
 		$replacement = array($name => $value);
 		return $this->_entry->replace($replacement, true);
