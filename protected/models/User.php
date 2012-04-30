@@ -245,17 +245,23 @@ class User extends SLdapModel
 		return $timezoneNames;
 	}
 
-    public function preppedTimezones()
-    {
-        $timezones = validTimezones();
+	public function preppedTimezones()
+	{
+		$timezones = $this->validTimezones();
 
-        // split per continent.
-        foreach ($timezones as $timezone) {
-            list($continent, $country) = preg_split('/\//', $timezone);
-            $temp[$continent][] = array($timezone => $country);
-        }
-        return $temp;
-    }  
+		// split per continent.
+		foreach ($timezones as $timezone) {
+			$splitted = explode('/', $timezone);
+			if (count($splitted) == 2) {
+				$continent = $splitted[0];
+				$country = $splitted[1];
+			} else {
+				$continent = $country = $timezone;
+			}
+			$temp[$continent][] = array($timezone => $country);
+		}
+		return $temp;
+	}
 
 	public function validMemberStatus()
 	{
