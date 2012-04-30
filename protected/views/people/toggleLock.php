@@ -20,7 +20,7 @@ $this->menu = $this->generateMenu($model);
 	<p class="alert alert-info">Temporary locks are performed automatically when too many invalid password attempts are made, and will expire automatically.</p>
 	<p><strong>Account Status:</strong> <?php echo CHtml::encode($model->accountStatus); ?>.</p>
 
-	<div class="row buttons">
+	<div class="row-fluid buttons">
 		<?php 
 			if( $model->accountStatus != User::AccountUnlocked ) {
 				echo CHtml::submitButton('Unlock Account', array('name' => 'unlockAccount', 'class' => 'btn btn-primary'));

@@ -19,12 +19,12 @@ $this->menu = $this->generateMenu($model);
 )); ?>
 
 	<div class="span7">
-		<div class="row">
+		<div class="row-fluid">
 			<?php echo $form->labelEx($model, 'jpegPhoto'); ?>
 			<?php echo $form->error($model, 'jpegPhoto'); ?>
 			<?php echo $form->fileField($model, 'jpegPhoto'); ?>
 		</div>
-		<div class="row buttons">
+		<div class="row-fluid buttons">
 			<?php echo CHtml::submitButton('Upload Avatar', array('name' => 'uploadAvatar', 'class' => 'btn btn-primary')); ?>
 		</div>
 	</div>

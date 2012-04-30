@@ -21,17 +21,17 @@ $this->menu = $this->generateMenu($model);
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+	<div class="row-fluid">
 		<?php echo $form->labelEx($model, 'cn'); ?>
 		<?php echo $form->textField($model, 'cn', array('size' => 60, 'maxlength' => 128)); ?>
 	</div>
 
-	<div class="row">
+	<div class="row-fluid">
 		<?php echo $form->labelEx($model, 'description'); ?>
 		<?php echo $form->textField($model, 'description', array('size' => 60, 'maxlength' => 128)); ?>
 	</div>
 
-	<div class="row buttons">
+	<div class="row-fluid buttons">
 		<?php echo CHtml::submitButton('Update Group', array('class' => 'btn btn-primary')); ?>
 	</div>
 

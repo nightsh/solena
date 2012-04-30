@@ -17,7 +17,7 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+	<div class="row-fluid">
 		<?php echo $form->labelEx($model, 'supporter_uid'); ?>
 		<div>
 			If you have a supporter, enter their name, username or email address and select them from the drop down.
@@ -34,13 +34,13 @@
 	</div>
 
 	<?php if(Yii::app()->user->checkAccess('sysadmins')) { ?>
-		<div class="row">
+		<div class="row-fluid">
 			<?php echo $form->labelEx($model, 'status'); ?>
 			<?php echo $form->dropDownList($model, 'status', $model->validStatus(), array('empty'=> 'Not set')); ?>
 		</div>
 	<?php } ?>
 
-	<div class="row">
+	<div class="row-fluid">
 		<?php echo $form->labelEx($model, 'special_reason'); ?>
 		<div>
 			Only confirmed Google Summer of Code students with KDE qualify as participants.
@@ -48,7 +48,7 @@
 		<?php echo $form->dropDownList($model, 'special_reason', $model->validSpecialReason(), array('empty'=> 'Not set')); ?>
 	</div>
 
-	<div class="row">
+	<div class="row-fluid">
 		<?php echo $form->labelEx($model, 'justification'); ?>
 		<div>
 			Please explain the reason for your application.
@@ -57,7 +57,7 @@
 		<?php echo $form->textArea($model, 'justification', array('rows' => 6, 'cols' => 50)); ?>
 	</div>
 
-	<div class="row">
+	<div class="row-fluid">
 		<?php echo $form->labelEx($model, 'evidence_links'); ?>
 		<div>
 			Please provide links to mailing list postings, review requests or other publicly accessible material which indicates your involvement with the KDE Community.
@@ -65,7 +65,7 @@
 		<?php echo $form->textArea($model, 'evidence_links', array('rows' => 6, 'cols' => 50)); ?>
 	</div>
 
-	<div class="row">
+	<div class="row-fluid">
 		<?php echo $form->labelEx($model, 'ssh_key'); ?>
 		<div>
 			Please provide a single RSA, DSA or ECDSA key which you will use to access infrastructure once your application is approved.
@@ -73,7 +73,7 @@
 		<?php echo $form->fileField($model, 'ssh_key'); ?>
 	</div>
 
-	<div class="row buttons">
+	<div class="row-fluid buttons">
 	<?php echo CHtml::submitButton($model->isNewRecord ? 'Submit Application' : 'Update', array('class' => 'btn btn-primary')); ?>
 	</div>
 

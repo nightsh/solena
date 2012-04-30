@@ -26,7 +26,7 @@ $this->menu = $this->generateMenu($model);
 			<?php echo CHtml::checkbox('confirmDeletion') ?>
 			Confirm account deletion
 		</p>
-		<div class="row buttons">
+		<div class="row-fluid buttons">
 			<?php echo CHtml::submitButton('Delete Account', array('name' => 'deleteAccount', 'class' => 'btn btn-primary')); ?>
 		</div>
 	</div>

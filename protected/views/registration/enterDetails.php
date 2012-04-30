@@ -20,22 +20,22 @@ $this->menu = array();
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+	<div class="row-fluid">
 		<?php echo $form->labelEx($model, 'givenName'); ?>
 		<?php echo $form->textField($model, 'givenName', array('size' => 50, 'maxlength' => 50)); ?>
 	</div>
 
-	<div class="row">
+	<div class="row-fluid">
 		<?php echo $form->labelEx($model, 'sn'); ?>
 		<?php echo $form->textField($model, 'sn', array('size' => 50, 'maxlength' => 50)); ?>
 	</div>
 
-	<div class="row">
+	<div class="row-fluid">
 		<?php echo $form->labelEx($model, 'mail'); ?>
 		<?php echo $form->textField($model, 'mail', array('size' => 50, 'maxlength' => 50)); ?>
 	</div>
 
-	<div class="row buttons">
+	<div class="row-fluid buttons">
 		<?php echo CHtml::submitButton('Register Account', array('class' => 'btn btn-primary')); ?>
 	</div>
 

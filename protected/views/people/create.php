@@ -18,32 +18,32 @@ $this->breadcrumbs = array(
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+	<div class="row-fluid-fluid">
 		<?php echo $form->labelEx($model, 'uid'); ?>
 		<?php echo $form->textField($model, 'uid', array('size' => 60, 'maxlength' => 128)); ?>
 	</div>
 
-	<div class="row">
+	<div class="row-fluid">
 		<?php echo $form->labelEx($model, 'givenName'); ?>
 		<?php echo $form->textField($model, 'givenName', array('size' => 60, 'maxlength' => 128)); ?>
 	</div>
 
-	<div class="row">
+	<div class="row-fluid">
 		<?php echo $form->labelEx($model, 'sn'); ?>
 		<?php echo $form->textField($model, 'sn', array('size' => 60, 'maxlength' => 128)); ?>
 	</div>
 
-	<div class="row">
+	<div class="row-fluid">
 		<?php echo $form->labelEx($model, 'mail'); ?>
 		<?php echo $form->textField($model, 'mail', array('size' => 60, 'maxlength' => 128)); ?>
 	</div>
 
-	<div class="row">
+	<div class="row-fluid">
 		<?php echo $form->labelEx($model, 'parentDn'); ?>
 		<?php echo $form->dropDownList($model, 'parentDn', CHtml::listData(OrganisationalUnit::model()->findByFilter(null), 'dn', 'dn'), array('empty'=> 'Select Parent Unit')); ?>
 	</div>
 
-	<div class="row buttons">
+	<div class="row-fluid buttons">
 		<?php echo CHtml::submitButton('Create', array('class' => 'btn btn-primary')); ?>
 	</div>
 

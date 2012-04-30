@@ -22,17 +22,17 @@ $this->menu = array();
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
+	<div class="row-fluid">
 		<?php echo $form->labelEx($model, 'uid'); ?>
 		<?php echo $form->textField($model, 'uid'); ?>
 	</div>
 
-	<div class="row">
+	<div class="row-fluid">
 		<?php echo $form->labelEx($model, 'mail'); ?>
 		<?php echo $form->textField($model, 'mail'); ?>
 	</div>
 
-	<div class="row buttons">
+	<div class="row-fluid buttons">
 		<?php echo CHtml::submitButton('Request Password Reset', array('class' => 'btn btn-primary')); ?>
 	</div>
 

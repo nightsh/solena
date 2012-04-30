@@ -18,12 +18,12 @@ $this->menu = array();
 	'enableAjaxValidation' => false,
 )); ?>
 
-	<div class="row">
+	<div class="row-fluid">
 		<?php echo CHtml::checkbox('confirmAcceptance') ?>
 		I accept the above conditions
 	</div>
 
-	<div class="row buttons">
+	<div class="row-fluid buttons">
 	<?php echo CHtml::submitButton('Continue Registration', array('name' => 'continue', 'class' => 'btn btn-primary')); ?>
 	</div>
 

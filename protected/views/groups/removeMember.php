@@ -22,7 +22,7 @@ $this->menu = $this->generateMenu($model);
 		The member '<?php echo CHtml::encode($member->cn); ?>' will be removed from the group '<?php echo CHtml::encode($model->description); ?>' if you proceed.
 	</div>
 
-	<div class="row buttons">
+	<div class="row-fluid buttons">
 		<?php echo CHtml::submitButton('Confirm Removal', array('name' => 'confirmRemoval', 'class' => 'btn btn-primary')); ?>
 	</div>
 

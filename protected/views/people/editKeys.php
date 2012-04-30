@@ -20,7 +20,7 @@ Yii::app()->clientScript->registerScript("disableCheckAll", "$('input.select-on-
 	'htmlOptions' => array('enctype' => 'multipart/form-data'),
 )); ?>
 
-	<div class="row">
+	<div class="row-fluid">
 		<?php $this->widget('application.components.NeverGridView', array(
 			'id' => 'sshkey-grid',
 			'selectableRows' => 2,
@@ -45,12 +45,12 @@ Yii::app()->clientScript->registerScript("disableCheckAll", "$('input.select-on-
 
 	<hr />
 	<h3>Add New SSH Key</h3>
-	<div class="row">
+	<div class="row-fluid">
 		<?php echo $form->error($model, 'sshKeysAdded'); ?>
 		<?php echo $form->fileField($model, 'sshKeysAdded'); ?>
 	</div>
 
-	<div class="row buttons">
+	<div class="row-fluid buttons">
 		<?php echo CHtml::submitButton('Upload Keys', array('name' => 'uploadKeys', 'class' => 'btn btn-primary')); ?>
 	</div>
 

@@ -30,7 +30,7 @@ $this->menu = array(
 			Confirm registration deletion
 		</p>
 
-		<div class="row buttons">
+		<div class="row-fluid buttons">
 			<?php echo CHtml::submitButton('Delete Registration', array('name' => 'deleteAccount', 'class' => 'btn btn-primary')); ?>
 		</div>
 	</div>

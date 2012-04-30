@@ -52,7 +52,7 @@ $this->menu = $this->generateMenu($model);
 		'editorHtmlOptions' => array('size' => 60),
 	)); ?>
 
-	<div class="row buttons">
+	<div class="row-fluid buttons">
 		<?php echo CHtml::submitButton('Update Contact Details', array('class' => 'btn btn-primary')); ?>
 	</div>
 

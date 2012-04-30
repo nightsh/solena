@@ -27,7 +27,7 @@ $this->menu = array(
 	'enableAjaxValidation' => false,
 )); ?>
 
-	<div class="row buttons">
+	<div class="row-fluid buttons">
 		<?php echo CHtml::submitButton('Resend Confirmation', array('name' => 'resendConfirmation', 'class' => 'btn btn-primary')); ?>
 	</div>
 
