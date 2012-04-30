@@ -61,7 +61,7 @@
 	padding-top: 1.5em;
 }
 
-.navbar-top.Neverland .nav li.active a {
+.navbar-top.Neverland .nav li.active a, .navbar-top.Neverland .nav li a:hover {
 	color: #2e3436;
 	background: none;
 }
@@ -84,22 +84,8 @@
 	text-shadow: none;
 }
 
-.navbar-bottom.Neverland .nav li a {
+.navbar-bottom.Neverland .breadcrumb li a {
 	color: #ffffff;
-	padding-bottom: 0px;
-	padding-top: 0px;
-}
-
-.navbar-bottom.Neverland #global-nav li a {
-	color: #2E3436;
-}
-
-.navbar-bottom.Neverland .nav > li {
-padding: 10px 10px 11px;
-line-height: 19px;
-color: #D3D7CF;
-text-decoration: none;
-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
 .grid-view .filters input, .grid-view .filters select {
@@ -203,22 +189,4 @@ input.error, textarea.error {
 .pagination ul li.selected a, .pagination ul li.hidden a {
 	color: #D3D7CF;
 	font-weight: bold;
-}
-
-@media (max-width: 979px) {
-	.navbar-top.Neverland .navbar-inner .menu, .navbar-fixed-top.Neverland .navbar-inner .menu {
-		display: inline-block;
-	}
-	.navbar-top.Neverland .navbar-inner .pull-right {
-		float: left;
-	}
-	.navbar-fixed-top.Neverland .nav li, .navbar-top.Neverland .nav li {
-		margin-top: 0.5em;
-	}
-	.navbar-top.Neverland .nav li a {
-		padding: 4px 30px 4px 4px;
-	}
-	.navbar-top.Neverland .nav li a:hover {
-		color: #ffffff;
-	}
 }
