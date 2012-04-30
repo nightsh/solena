@@ -35,7 +35,7 @@ return array(
 
 	'ev-members' => array(
 		'type' => CAuthItem::TYPE_ROLE,
-		'description' => 'Is a member of the KDE e.V',
+		'description' => 'Is a member of the KDE e.V.',
 		'bizRule' => '',
 		'data' => '',
 		'children' => array('selfChangeUserEvDetails'),
@@ -43,7 +43,7 @@ return array(
 
 	'ev-board' => array(
 		'type' => CAuthItem::TYPE_ROLE,
-		'description' => 'Is a member of the KDE e.V Board',
+		'description' => 'Is a member of the KDE e.V. Board',
 		'bizRule' => '',
 		'data' => '',
 		'children' => array('manageEvMembership', 'manageEvMembershipData'),
@@ -68,7 +68,7 @@ return array(
 	'changeUserSshKeys' => array(
 		'type' => CAuthItem::TYPE_OPERATION,
 		'description' => 'Allowed to modify user SSH keys',
-		'bizRule' => '',
+		'bizRule' => 'return in_array("developers", $params["user"]->groupMember) || in_array("disabled-developers", $params["user"]->groupMember);',
 		'data' => '',
 	),
 
@@ -95,7 +95,7 @@ return array(
 
 	'changeUserEvDetails' => array(
 		'type' => CAuthItem::TYPE_OPERATION,
-		'description' => 'Allowed to change user KDE e.V membership related details, excluding type',
+		'description' => 'Allowed to change user KDE e.V. membership related details, excluding type',
 		'bizRule' => 'return in_array("ev-members", $params["user"]->groupMember);',
 		'data' => '',
 	),
@@ -133,7 +133,7 @@ return array(
 
 	'selfChangeUserEvDetails' => array(
 		'type' => CAuthItem::TYPE_TASK,
-		'description' => 'e.V Members are permitted to change their own membership details',
+		'description' => 'e.V. Members are permitted to change their own membership details',
 		'bizRule' => 'return Yii::app()->user->dn == $params["user"]->dn;',
 		'data' => '',
 		'children' => array('changeUserEvDetails'),
@@ -157,10 +157,10 @@ return array(
 
 	'manageEvMembershipData' => array(
 		'type' => CAuthItem::TYPE_TASK,
-		'description' => 'Allowed to access and change data on KDE e.V members',
+		'description' => 'Allowed to access and change data on KDE e.V. members',
 		'bizRule' => 'return in_array("ev-members", $params["user"]->groupMember);',
 		'data' => '',
-		'children' => array('changeUserEvDetails', 'changeUserDetails'),
+		'children' => array('changeUserEvDetails'),
 	),
 );
 
