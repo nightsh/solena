@@ -247,24 +247,20 @@ class User extends SLdapModel
 
 	public function preppedTimezones()
 	{
-		$timezones = $this->validTimezones();
-		$temp = array();
-
 		// split per continent.
-		foreach ($timezones as $timezone) {
+		$temp = array();
+		foreach( DateTimeZone::listIdentifiers() as $timezone ) {
 			$splitted = explode('/', $timezone);
-			if (count($splitted) >= 2) {
+			if( count($splitted) >= 2 ) {
 				$continent = $splitted[0];
 				$country = implode(array_slice($splitted,1),'/');
 			} else {
 				$continent = $country = $timezone;
 			}
-			if(isset( $temp[$continent])) {
-				$temp[$continent] = array_merge($temp[$continent],
-					array($timezone => $country));
-			} else {
-				$temp[$continent] = array($timezone => $country);
+			if( !isset($temp[$continent]) ) {
+				$temp[$continent] = array();
 			}
+			$temp[$continent][$timezone] = $country;
 		}
 		return $temp;
 	}
