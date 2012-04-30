@@ -17,7 +17,7 @@ $this->breadcrumbs=array(
 		'validateOnSubmit'=>true,
 	),
 )); ?>
-
+	<p>Not registered yet? Go to the <a href="<?php Yii::app()->controller->createUrl('/registration/index');?>">Registration Page</a></p>
 	<p class="alert alert-info">Fields with <span class="required">*</span> are required.</p>
 
 	<div class="row-fluid">
