@@ -46,6 +46,7 @@ $this->menu = $this->generateMenu($model);
 			'options' => array(
 				'showAnim' => 'fold',
 				'dateFormat' => 'dd/mm/yy',
+				'changeYear' => true,
 			),
 			'htmlOptions' => array('size' => 60),
 		)); ?>
@@ -64,14 +65,14 @@ $this->menu = $this->generateMenu($model);
 	<?php if( Yii::app()->user->checkAccess('manageEvMembershipData', array('user' => $model)) ) { ?>
 		<div class="row">
 			<?php echo $form->labelEx($model, 'memberStatus'); ?>
-			<?php echo $form->dropDownList($model, 'memberStatus', $model->validMemberStatus(), array('empty'=> 'Not set')); ?>
+			<?php echo $form->dropDownList($model, 'memberStatus', $model->validMemberStatus()); ?>
 		</div>
 	<?php } ?>
 
 	<?php if( Yii::app()->user->checkAccess('changeUserEvDetails', array('user' => $model)) ) { ?>
 		<div class="row">
 			<?php echo $form->labelEx($model, 'evMail'); ?>
-			<?php echo $form->dropDownList($model, 'evMail', $model->validEmailAddresses(), array('empty'=> 'Not set')); ?>
+			<?php echo $form->dropDownList($model, 'evMail', $model->validEmailAddresses()); ?>
 		</div>
 	<?php } ?>
 
