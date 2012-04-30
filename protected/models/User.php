@@ -54,7 +54,7 @@ class User extends SLdapModel
 			array('dateOfBirth', 'date', 'format' => 'dd/MM/yyyy', 'on' => 'editProfile'),
 			array('gender', 'in', 'range' => array_keys($this->validGenders()), 'on' => 'editProfile'),
 			array('timezoneName', 'in', 'range' => array_keys($this->validTimezones()), 'on' => 'editProfile'),
-			// KDE e.V membership detail editing
+			// KDE e.V. membership detail editing
 			array('memberStatus', 'unsafe', 'on' => 'editProfile'),
 			array('memberStatus', 'in', 'range' => array_keys($this->validMemberStatus()), 'on' => 'editProfile'),
 			array('evMail', 'in', 'range' => array_keys($this->validEmailAddresses()), 'on' => 'editProfile'),
@@ -63,7 +63,7 @@ class User extends SLdapModel
 			array('jabberID', 'MultiValidator', 'validator' => 'email', 'on' => 'editContactDetails'),
 			array('secondaryMail', 'MultiValidator', 'validator' => 'email',  'on' => 'editContactDetails'),
 			array('labeledURI', 'MultiValidator', 'validator' => 'url', 'defaultScheme' => 'http', 'on' => 'editContactDetails'),
-			array('homePostalAddress, homePhone, ircNick', 'MultiValidator', 'validator' => 'length',  'min' => 4, 'on' => 'editContactDetails'),
+			array('homePostalAddress, homePhone, ircNick', 'MultiValidator', 'validator' => 'length',  'min' => 3, 'on' => 'editContactDetails'),
 			// SSH Key management
 			array('sshPublicKey', 'application.validators.SSHKeyValidator', 'on' => 'editKeys'),
 			array('sshKeysAdded', 'application.validators.SSHKeyValidator', 'existingKeys' => (array) $this->getAttribute("sshPublicKey"), 'on' => 'editKeys'),
@@ -95,13 +95,13 @@ class User extends SLdapModel
 			'mail' => 'Email Address',
 			'dateOfBirth' => 'Date of Birth',
 			'labeledURI' => 'Website',
-			'homePostalAddress' => 'Physical Address',
+			'homePostalAddress' => 'Home Address',
 			'ircNick' => 'IRC Nickname',
 			'jabberID' => 'Jabber ID',
 			'jpegPhoto' => 'Avatar Upload',
 			'timezoneName' => 'Time Zone',
-			'memberStatus' => 'e.V Membership Status',
-			'evMail' => 'Email address for e.V matters',
+			'memberStatus' => 'e.V. Membership Status',
+			'evMail' => 'Email address for e.V. matters',
 		);
 	}
 
@@ -333,7 +333,7 @@ class User extends SLdapModel
 		}
 		
 		// Have we set a timezoneName? If so, clear timezone as it is deprecated now
-		if( isset($this->timezoneName) && isset($this->timezone) ) {
+		if( $this->scenario == 'editProfile' && isset($this->timezone) ) {
 			$this->removeAttribute('timezone');
 		}
 		
