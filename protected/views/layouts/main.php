@@ -74,7 +74,7 @@
 									<?php $this->widget('application.widgets.NBreadcrumbs', array(
 										'links'=>$this->breadcrumbs,
 										'htmlOptions' => array(
-											'class' => 'breadcrumbs',
+											'class' => 'breadcrumb',
 										),
 										'homeLink' => '<a href="'.Yii::app()->controller->createUrl('/site/index').'">Home</a>',
 									)); ?><!-- breadcrumbs -->
