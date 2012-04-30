@@ -52,7 +52,7 @@ class GroupsController extends Controller
 		}
 
 		// Prepare the data provider - and apply a filter to it to ensure filters are applied
-		$dataProvider = new SLdapDataProvider($model);
+		$dataProvider = new SLdapDataProvider($model, array('pagination' => array('pageSize' => 50)));
 		$dataProvider->setFilterByModel($model, array('cn', 'description'));
 		$dataProvider->setAttributesToLoad( array('cn', 'description') );
 
