@@ -36,6 +36,11 @@ class User extends SLdapModel
 		return array('homePostalAddress', 'homePhone', 'labeledURI', 'ircNick', 'jabberID', 'secondaryMail', 'sshPublicKey', 'groupMember');
 	}
 
+	public function potentialObjectClasses()
+	{
+		return array('kdeAccount', 'kdeEvMember');
+	}
+
 	public function rules()
 	{
 		// NOTE: you should only define rules for those attributes that

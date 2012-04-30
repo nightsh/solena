@@ -164,6 +164,15 @@ abstract class SLdapModel extends CModel
 	}
 
 	/**
+	 * Returns a list of object classes which are potential candidates for this model.
+	 * This allows the class values to be seen as settable before adding the object class, easing interaction.
+	 */
+	public function potentialObjectClasses()
+	{
+		return array();
+	}
+
+	/**
 	 * Returns the static model of the specified LM class.
 	 * The model returned is a static instance of the LM class.
 	 * It is provided for invoking class-level methods (something similar to static class methods.)
@@ -330,8 +339,8 @@ abstract class SLdapModel extends CModel
 		}
 		
 		$schema = $this->getLdapConnection()->schema();
-		$objectClasses = $this->getAttribute("objectClass");
-		return $schema->checkAttribute($name, (array) $objectClasses);
+		$objectClasses = array_merge($this->potentialObjectClasses(), (array) $this->getAttribute("objectClass"));
+		return $schema->checkAttribute($name, $objectClasses);
 	}
 
 	/**
