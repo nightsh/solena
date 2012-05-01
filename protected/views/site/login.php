@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 
 <h1>Login</h1>
 
-<p>Please fill out the following form with your login credentials:</p>
+<p>Not registered yet? You can begin registration <a href="<?php Yii::app()->controller->createUrl('/registration/index');?>">here</a></p>
 
 <div class="form well">
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -17,7 +17,6 @@ $this->breadcrumbs=array(
 		'validateOnSubmit'=>true,
 	),
 )); ?>
-	<p>Not registered yet? Go to the <a href="<?php Yii::app()->controller->createUrl('/registration/index');?>">Registration Page</a></p>
 	<p class="alert alert-info">Fields with <span class="required">*</span> are required.</p>
 
 	<div class="row-fluid">
@@ -30,6 +29,10 @@ $this->breadcrumbs=array(
 		<?php echo $form->labelEx($model,'password'); ?>
 		<?php echo $form->passwordField($model,'password'); ?>
 		<?php echo $form->error($model,'password'); ?>
+	</div>
+
+	<div class="row-fluid">
+		<?php echo $form->error($model, 'authentication'); ?>
 	</div>
 
 	<div class="row-fluid buttons">
