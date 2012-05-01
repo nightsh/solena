@@ -149,8 +149,8 @@ return array(
 
 	'manageEvMembership' => array(
 		'type' => CAuthItem::TYPE_TASK,
-		'description' => 'People permitted to manage the ev-members group',
-		'bizRule' => 'return $params["group"]->cn == "ev-members";',
+		'description' => 'People permitted to manage the ev-members and ev-board groups',
+		'bizRule' => 'return $params["group"]->cn == "ev-members" || $params["group"]->cn == "ev-board";',
 		'data' => '',
 		'children' => array('manageGroup'),
 	),
