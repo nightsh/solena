@@ -31,7 +31,7 @@ class PeopleController extends Controller
 				'users' => array('@'),
 			),
 			array('allow', // Everyone is allowed to change their profile, contact details, avatar and password
-				'actions' => array('editProfile', 'editContactDetails', 'changeEmail', 'verifyEmail', 'editAvatar', 'changePassword'),
+				'actions' => array('editProfile', 'editContactDetails', 'editEmailAddresses', 'verifyEmail', 'editAvatar', 'changePassword'),
 				'users' => array('@'),
 			),
 			array('allow', // Developers, Disabled Developers and Sysadmins are allowed to change SSH keys
@@ -211,95 +211,89 @@ class PeopleController extends Controller
 			}
 		}
 		
-		$emailDataProvider = new CArrayDataProvider($model->emailAddressData);
 		$this->render('editContactDetails', array(
 			'model' => $model,
-			'emailDataProvider' => $emailDataProvider,
 		));
 	}
 
-	/**
-	 * Functions for changing the email addresses on file for a user
-	 */
-	public function actionChangeEmail($uid)
+	public function actionEditEmailAddresses($uid)
 	{
-		// Make sure it is a POST request
-		if( !Yii::app()->request->isPostRequest ) {
-			throw new CHttpException(400, 'Attempted manipulation is not permitted.');
-		}
-
-		// Load the user
 		$model = $this->loadModel($uid);
 		$model->setScenario('editContactDetails');
 
-		// Load the data
-		$action = $_POST['action'];
-		$mail = $_POST['mail'];
-
-		// Validate the email address
-		$validator = new CEmailValidator;
-		if( !$validator->validateValue($mail) ) {
-			throw new CHttpException(400, 'The given email address is not valid.');
+		if( !Yii::app()->user->checkAccess('changeUserDetails', array('user' => $model)) ) {
+			throw new CHttpException(403, 'You are not permitted to change the details of this person.');
 		}
 
-		// Maybe we are changing the primary address?
-		if( $action == 'primary' ) {
-			// Try to make the given address the primary. The model will refuse if it is not permitted
-			if( !$model->setPrimaryEmailAddress($mail) ) {
-				throw new CHttpException(400, 'Attempted manipulation is not permitted.');
+		// Setup the Token which we use to ensure the addresses submitted to us are valid (and other things)
+		$token = new Token;
+		if( isset($_POST['Token']) ) {
+			$token->uid = $model->uid;
+			$token->mail = $_POST['Token']['mail'];
+			$token->type = Token::TypeVerifyAddress;
+		}
+
+		if( isset($_POST['action']) && isset($_POST['Token']) && $token->validate() ) {
+			// Which action is being processed?
+			$action = $_POST['action'];
+
+			// Maybe we are changing the primary address?
+			if( $action == 'primary' ) {
+				// Try to make the given address the primary. The model will refuse if it is not permitted
+				if( $model->setPrimaryEmailAddress($token->mail) && $model->save() ) {
+					Yii::app()->user->setFlash('success', 'Primary email address changed.');
+				}
 			}
-			// Save the change
-			if( $model->save() ) {
-				Yii::app()->user->setFlash('success', 'Primary email address changed.');
+
+			// Maybe we are resending a verification?
+			if( $action == 'resend' ) {
+				// Find the potential address....
+				$entry = Token::model()->findByAttributes( array('uid' => $model->uid, 'type' => Token::TypeVerifyAddress, 'mail' => $token->mail) );
+				if( $entry instanceof CActiveRecord ) {
+					// Send the mail...
+					$this->sendEmail($entry->mail, '/mail/verifyEmail', array('entry' => $entry, 'model' => $model));
+					Yii::app()->user->setFlash('success', 'Address verification resent.');
+				}
+			}
+
+			// Maybe we are removing an address?
+			if( $action == 'remove' ) {
+				// Try to remove the given address. The model will refuse if it is not permitted
+				if( $model->removeEmailAddress($token->mail) ) {
+					Yii::app()->user->setFlash('success', 'Email address removed.');
+				}
+			}
+
+			// Maybe we are adding an address, and if so, it is to ourselves?
+			if( $action == 'add' && Yii::app()->user->dn == $model->dn ) {
+				// Save the new pending email - if successful send an email regarding that
+				$token->setScenario('verify');
+				if( $token->save() ) {
+					$this->sendEmail($token->mail, '/mail/verifyEmail', array('entry' => $token, 'model' => $model));
+					Yii::app()->user->setFlash('success', 'Email address will be added once verification is completed.');
+				}
+			}
+			// If we are not adding to ourselves, then we do not need verification
+			if( $action == 'add' && Yii::app()->user->dn != $model->dn ) {
+				// If it is not ourselves then we can immediately add it
+				$model->addAttribute("secondaryMail", $token->mail);
+				if( $model->save() ) {
+					Yii::app()->user->setFlash('success', 'Email address added.');
+				}
+			}
+
+			// If we have a flash then assume success and clear the email address
+			if( Yii::app()->user->getFlashes(false) !== array() ) {
+				unset($token->mail);
 			}
 		}
 
-		// Maybe we are resending a verification?
-		if( $action == 'resend' ) {
-			// Find the potential address....
-			$entry = Token::model()->findByAttributes( array('uid' => $model->uid, 'type' => Token::TypeVerifyAddress, 'mail' => $mail) );
-			if( !$entry instanceof CActiveRecord ) {
-				throw new CHttpException(400, 'Attempted manipulation is not permitted.');
-			}
-			// Send the mail...
-			$this->sendEmail($entry->mail, '/mail/verifyEmail', array('entry' => $entry, 'model' => $model));
-			Yii::app()->user->setFlash('success', 'Address verification resent.');
-		}
-
-		// Maybe we are removing an address?
-		if( $action == 'remove' ) {
-			// Try to remove the given address. The model will refuse if it is not permitted
-			if( !$model->removeEmailAddress($mail) ) {
-				throw new CHttpException(400, 'Attempted manipulation is not permitted.');
-			}
-			// Inform the user of our success....
-			Yii::app()->user->setFlash('success', 'Email address removed.');
-		}
-
-		// Maybe we are adding an address, and if so, it is to ourselves?
-		if( $action == 'add' && Yii::app()->user->dn == $model->dn ) {
-			// Add the entry to the list of pending accounts
-			$entry = new Token('verify');
-			$entry->uid = $model->uid;
-			$entry->type = Token::TypeVerifyAddress;
-			$entry->mail = $mail;
-			// Save the new pending email - if successful send an email regarding that
-			if( $entry->save() ) {
-				$this->sendEmail($entry->mail, '/mail/verifyEmail', array('entry' => $entry, 'model' => $model));
-				Yii::app()->user->setFlash('success', 'Email address will be added once verification is completed.');
-			}
-		}
-		// If we are not adding to ourselves, then we do not need verification?
-		if( $action == 'add' && Yii::app()->user->dn != $model->dn ) {
-			// If it is not ourselves then we can immediately add it
-			$model->addAttribute("secondaryMail", $mail);
-			if( $model->save() ) {
-				Yii::app()->user->setFlash('success', 'Email address added.');
-			}
-		}
-
-		// Send them back to where they came from
-		$this->redirect( array('editContactDetails', 'uid' => $model->uid) );
+		$emailDataProvider = new CArrayDataProvider($model->emailAddressData);
+		$this->render('editEmailAddresses', array(
+			'model' => $model,
+			'token' => $token,
+			'emailDataProvider' => $emailDataProvider,
+		));
 	}
 
 	public function actionVerifyEmail($uid, $token)
@@ -506,6 +500,9 @@ class PeopleController extends Controller
 		}
 		if( Yii::app()->user->checkAccess('changeUserDetails', $params) && $this->action->id != 'editContactDetails' ) {
 			$menu[] = array('label' => 'Edit Contact Details', 'url' => array('editContactDetails', 'uid' => $model->uid));
+		}
+		if( Yii::app()->user->checkAccess('changeUserDetails', $params) && $this->action->id != 'editEmailAddresses' ) {
+			$menu[] = array('label' => 'Manage Email Addresses', 'url' => array('editEmailAddresses', 'uid' => $model->uid));
 		}
 		if( Yii::app()->user->checkAccess('changeUserAvatar', $params) && $this->action->id != 'editAvatar' ) {
 			$menu[] = array('label' => 'Change Avatar', 'url' => array('editAvatar', 'uid' => $model->uid));
