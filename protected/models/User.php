@@ -131,11 +131,11 @@ class User extends SLdapModel
 	public function getEmailAddressData()
 	{
 		// Start the list of email data, starting with the primary address....
-		$emailData = array( array('id' => 0, 'mail' => $this->mail, 'type' => 'primary') );
+		$emailData = array( array('id' => 0, 'mail' => $this->mail, 'type' => 'primary', 'status' => 'Primary Address') );
 
 		// Now add secondary addresses
 		foreach( (array) $this->secondaryMail as $address ) {
-			$emailData[] = array('id' => count($emailData), 'mail' => $address, 'type' => 'secondary');
+			$emailData[] = array('id' => count($emailData), 'mail' => $address, 'type' => 'secondary', 'status' => 'Verified Address');
 		}
 
 		// Finally add any pending addresses...
