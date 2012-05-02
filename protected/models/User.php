@@ -56,7 +56,7 @@ class User extends SLdapModel
 			array('mail', 'email', 'on' => 'editContactDetails, create, register'),
 			// Profile Editing
 			array('uid', 'unsafe', 'on' => 'editProfile'), // The username can never be mass-assigned
-			array('dateOfBirth', 'date', 'format' => 'dd/MM/yyyy', 'on' => 'editProfile'),
+			array('dateOfBirth', 'date', 'format' => 'dd/MM/yyyy', 'message' => 'The format of {attribute} must be dd/MM/yyyy.', 'on' => 'editProfile'),
 			array('gender', 'in', 'range' => array_keys($this->validGenders()), 'on' => 'editProfile'),
 			array('timezoneName', 'in', 'range' => array_keys($this->validTimezones()), 'on' => 'editProfile'),
 			// KDE e.V. membership detail editing
