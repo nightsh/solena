@@ -82,7 +82,7 @@ class Token extends CActiveRecord
 		// Check against LDAP
 		$result = User::model()->findByFilter($filter);
 		if( $result->count() > 0 ) {
-			$this->addError("mail", "Email address is already in use.");
+			$this->addError("mail", 'Email address "' . CHtml::encode($this->$attribute) . '" has already been taken.');
 		}
 	}
 
