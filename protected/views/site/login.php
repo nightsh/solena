@@ -7,7 +7,7 @@ $this->breadcrumbs=array(
 
 <h1>Login</h1>
 
-<p>Not registered yet? You can begin registration <a href="<?php Yii::app()->controller->createUrl('/registration/index');?>">here</a></p>
+<p>Not registered yet? You can begin registration <?php echo CHtml::link('here', array('/registration/index')); ?>.</p>
 
 <div class="form well">
 <?php $form=$this->beginWidget('CActiveForm', array(
