@@ -303,7 +303,7 @@ class PeopleController extends Controller
 		$model->setScenario('editContactDetails');
 
 		// Lookup the given token, and verify it
-		$entry = Token::model()->findByAttributes( array('type' => Token::TypeVerifyAddress, 'token' => $token) );
+		$entry = Token::model()->findByAttributes( array('type' => Token::TypeVerifyAddress, 'uid' => $model->uid, 'token' => $token) );
 		if( !$entry instanceof CActiveRecord ) {
 			throw new CHttpException(404, 'The given token could not be validated.');
 		}
