@@ -54,7 +54,7 @@
 			Please explain the reason for your application.
 			Keep it short and to the point, and indicate which teams/people you have worked with.
 		</div>
-		<?php echo $form->textArea($model, 'justification', array('rows' => 6, 'cols' => 50)); ?>
+		<?php echo $form->textArea($model, 'justification', array('rows' => 6, 'cols' => 50, 'style' => 'width: auto;')); ?>
 	</div>
 
 	<div class="row-fluid">
@@ -62,7 +62,7 @@
 		<div>
 			Please provide links to mailing list postings, review requests or other publicly accessible material which indicates your involvement with the KDE Community.
 		</div>
-		<?php echo $form->textArea($model, 'evidence_links', array('rows' => 6, 'cols' => 50)); ?>
+		<?php echo $form->textArea($model, 'evidence_links', array('rows' => 6, 'cols' => 50, 'style' => 'width: auto;')); ?>
 	</div>
 
 	<div class="row-fluid">
