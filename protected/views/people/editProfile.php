@@ -48,6 +48,7 @@ $this->menu = $this->generateMenu($model);
 					'showAnim' => 'fold',
 					'dateFormat' => 'dd/mm/yy',
 					'changeYear' => true,
+					'yearRange' => 'c-120:c+0',
 				),
 				'htmlOptions' => array('size' => 60),
 			)); ?>
