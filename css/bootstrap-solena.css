@@ -190,3 +190,7 @@ input.error, textarea.error {
 	color: #D3D7CF;
 	font-weight: bold;
 }
+
+.alert-success {
+	margin-bottom: 0;
+}
