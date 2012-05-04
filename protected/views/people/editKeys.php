@@ -35,6 +35,7 @@ Yii::app()->clientScript->registerScript("disableCheckAll", "$('input.select-on-
 				'fingerprint:text:Fingerprint',
 				'comment:text:Comment',
 			),
+			'itemsCssClass' => 'table table-striped table-condensed',
 		)); ?>
 		<?php
 			if( $dataProvider->itemCount > 0 ) {
