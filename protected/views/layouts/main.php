@@ -15,9 +15,9 @@
 
 	/* Javascript files */
 	Yii::app()->clientScript->registerCoreScript('jquery');
-	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/min/bootstrap.js", CClientScript::POS_END);
-	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/js/bootstrap-neverland.js", CClientScript::POS_END);
-	Yii::app()->clientScript->registerScriptFile("http://cdn.kde.org/nav/global-nav.js", CClientScript::POS_END);
+	Yii::app()->clientScript->registerScriptFile("js/min/bootstrap.js", CClientScript::POS_END);
+	Yii::app()->clientScript->registerScriptFile("js/min/bootstrap-neverland.js", CClientScript::POS_END);
+	Yii::app()->clientScript->registerScriptFile("js/nav/global-nav.js", CClientScript::POS_END);
 	?>
 
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
