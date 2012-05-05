@@ -502,7 +502,7 @@ class PeopleController extends Controller
 			$menu[] = array('label' => 'Edit Contact Details', 'url' => array('editContactDetails', 'uid' => $model->uid));
 		}
 		if( Yii::app()->user->checkAccess('changeUserDetails', $params) && $this->action->id != 'editEmailAddresses' ) {
-			$menu[] = array('label' => 'Manage Email Addresses', 'url' => array('editEmailAddresses', 'uid' => $model->uid));
+			$menu[] = array('label' => 'Edit Email Addresses', 'url' => array('editEmailAddresses', 'uid' => $model->uid));
 		}
 		if( Yii::app()->user->checkAccess('changeUserAvatar', $params) && $this->action->id != 'editAvatar' ) {
 			$menu[] = array('label' => 'Change Avatar', 'url' => array('editAvatar', 'uid' => $model->uid));
