@@ -45,7 +45,7 @@
 		<div>
 			Only confirmed Google Summer of Code students with KDE qualify as participants.
 		</div>
-		<?php echo $form->dropDownList($model, 'special_reason', $model->validSpecialReason(), array('empty'=> 'Not set')); ?>
+		<?php echo $form->dropDownList($model, 'special_reason', $model->validSpecialReason()); ?>
 	</div>
 
 	<div class="row-fluid">
