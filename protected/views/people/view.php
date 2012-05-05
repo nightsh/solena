@@ -14,9 +14,21 @@ $this->menu = $this->generateMenu($model);
 		'data' => $model,
 		'attributes' => array(
 			'uid',
-			'dateOfBirth',
-			'gender:gender',
-			'timezoneName:timezone:Current Time',
+			array(
+				'name' => 'dateOfBirth',
+				'visible' => isset($model->dateOfBirth),
+			),
+			array(
+				'name' => 'gender',
+				'type' => 'gender',
+				'visible' => isset($model->gender),
+			),
+			array(
+				'name' => 'timezoneName',
+				'type' => 'timezone',
+				'label' => 'Current Time',
+				'visible' => isset($model->timezoneName),
+			),
 			array(
 				'name' => 'timezone',
 				'visible' => isset($model->timezone),
@@ -40,12 +52,32 @@ $this->menu = $this->generateMenu($model);
 			<?php $this->widget('zii.widgets.CDetailView', array(
 				'data' => $model,
 				'attributes' => array(
-					'homePostalAddress:ntext',
-					'homePhone',
-					'labeledURI:url',
-					'ircNick',
-					'jabberID',
-					'emailAddresses:email',
+					array(
+						'name' => 'homePostalAddress',
+						'type' => 'ntext',
+						'visible' => isset($model->homePostalAddress),
+					),
+					array(
+						'name' => 'homePhone',
+						'visible' => isset($model->homePhone),
+					),
+					array(
+						'name' => 'labeledURI',
+						'type' => 'url',
+						'visible' => isset($model->labeledURI),
+					),
+					array(
+						'name' => 'ircNick',
+						'visible' => isset($model->ircNick),
+					),
+					array(
+						'name' => 'jabberID',
+						'visible' => isset($model->jabberID),
+					),
+					array(
+						'name' => 'emailAddresses',
+						'type' => 'email',
+					),
 					array(
 						'name' => 'evMail',
 						'type' => 'email',
