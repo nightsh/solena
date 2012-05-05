@@ -8,4 +8,9 @@
 		<br />
 		A KDE Identity account allows unified access to most KDE.org websites, and commit access to the various code repositories.
 	</p>
+
+	<?php if( Yii::app()->user->isGuest ) { ?>
+		<h2>Login</h2>
+		<?php $this->renderPartial('_login', array('model' => $model));
+	} ?>
 </div>
