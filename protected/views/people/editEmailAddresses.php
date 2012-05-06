@@ -17,6 +17,8 @@ $this->menu = $this->generateMenu($model);
 	'enableAjaxValidation' => false,
 )); ?>
 
+	<p class="alert alert-info">The primary email address cannot be removed as all accounts must have a email address associated with them.</p>
+
 	<?php $this->widget('application.components.NeverGridView', array(
 		'id' => 'emailAddress-grid',
 		'dataProvider' => $emailDataProvider,
@@ -25,19 +27,13 @@ $this->menu = $this->generateMenu($model);
 			'mail:email:Email Address',
 			array(
 				'type' => 'raw',
-				'header' => 'Status',
-				'value'=> '($data["type"] == "pending") ? CHtml::submitButton("Resend Verification", array("submit" => "", "class" => "btn", "params" => array("action" => "resend", "Token[mail]" => $data["mail"])) ) : $data["status"]',
+				'value'=> 'EmailHelper::showVerification($data);',
 				'htmlOptions' => array('style' => 'width: 150px;'),
 			),
 			array(
 				'type' => 'raw',
-				'value' => '($data["type"] == "secondary") ? CHtml::submitButton("Set as Primary", array("submit" => "", "class" => "btn", "params" => array("action" => "primary", "Token[mail]" => $data["mail"])) ) : ""',
-				'htmlOptions' => array('style' => 'width: 100px;'),
-			),
-			array(
-				'type' => 'raw',
-				'value'=> '($data["type"] != "primary") ? CHtml::submitButton("Remove Address", array("submit" => "", "class" => "btn", "params" => array("action" => "remove", "Token[mail]" => $data["mail"])) ) : ""',
-				'htmlOptions' => array('style' => 'width: 100px;'),
+				'value'=> 'EmailHelper::showDelete($data);',
+				'htmlOptions' => array('style' => 'width: 150px;'),
 			),
 		),
 	)); ?>
