@@ -16,7 +16,7 @@
 	/* Javascript files */
 	Yii::app()->clientScript->registerCoreScript('jquery');
 	Yii::app()->clientScript->registerScriptFile("js/min/bootstrap.js", CClientScript::POS_END);
-	Yii::app()->clientScript->registerScriptFile("js/min/bootstrap-neverland.js", CClientScript::POS_END);
+	Yii::app()->clientScript->registerScriptFile("js/bootstrap-neverland.js", CClientScript::POS_END);
 	Yii::app()->clientScript->registerScriptFile("js/nav/global-nav.js", CClientScript::POS_END);
 	?>
 
