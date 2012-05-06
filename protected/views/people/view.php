@@ -38,7 +38,7 @@ $this->menu = $this->generateMenu($model);
 				'visible' => isset($model->memberStatus),
 			),
 		),
-		'htmlOptions' => array('class' => 'table table-bordered table-condensed'),
+		'htmlOptions' => array('class' => 'table table-bordered table-striped table-condensed'),
 	)); ?>
 	</div>
 	<div class="span2">
@@ -84,7 +84,7 @@ $this->menu = $this->generateMenu($model);
 						'visible' => isset($model->evMail),
 					),
 				),
-				'htmlOptions' => array('class' => 'table table-bordered table-condensed'),
+				'htmlOptions' => array('class' => 'table table-bordered table-striped table-condensed'),
 			)); ?>
 		</div>
 	</div>
