@@ -131,11 +131,11 @@ class User extends SLdapModel
 	public function getEmailAddressData()
 	{
 		// Start the list of email data, starting with the primary address....
-		$emailData = array( array('id' => 0, 'mail' => $this->mail, 'type' => 'primary', 'status' => 'Primary Address') );
+		$emailData = array( array('id' => 0, 'mail' => $this->mail, 'type' => 'primary') );
 
 		// Now add secondary addresses
 		foreach( (array) $this->secondaryMail as $address ) {
-			$emailData[] = array('id' => count($emailData), 'mail' => $address, 'type' => 'secondary', 'status' => 'Verified Address');
+			$emailData[] = array('id' => count($emailData), 'mail' => $address, 'type' => 'secondary');
 		}
 
 		// Finally add any pending addresses...
@@ -175,6 +175,10 @@ class User extends SLdapModel
 			return $pending->delete();
 		// No pending address found, so maybe it is a secondary address...
 		} else if( in_array($address, $this->secondaryMail) ) {
+			// If the address to be removed is their evMail address, we reset it to the primary address
+			if( $this->evMail == $address ) {
+				$this->evMail = $this->mail;
+			}
 			$this->removeAttribute("secondaryMail", $address);
 			return $this->save();
 		}
