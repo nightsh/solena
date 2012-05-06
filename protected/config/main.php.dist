@@ -3,6 +3,10 @@
 // uncomment the following to define a path alias
 // Yii::setPathOfAlias('local','path/to/local-folder');
 
+// Secure the session cookie
+ini_set('session.cookie_httponly', true);
+ini_set('session.cookie_secure', true);
+
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 return array(
@@ -40,6 +44,7 @@ return array(
 		'request' => array(
 			'enableCookieValidation' => true,
 			'enableCsrfValidation' => true,
+			'csrfCookie' => array('secure' => true, 'httpOnly' => true),
 		),
 		'securityManager' => array(
 			'cryptAlgorithm' => 'rijndael-256',
