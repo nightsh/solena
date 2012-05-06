@@ -194,3 +194,9 @@ input.error, textarea.error {
 .alert-success {
 	margin-bottom: 0;
 }
+
+.fixed-cell th {
+	float: none;
+	width: 19em;
+	margin-left: 0;
+}
