@@ -14,7 +14,7 @@ $this->menu = $this->generateMenu($model);
 <div class="form">
 
 <?php $form = $this->beginWidget('CActiveForm', array(
-	'id' => 'person-form',
+	'id' => 'person-grid-form',
 	'action' => array('removeMember', 'cn' => $model->cn),
 	'enableAjaxValidation' => false,
 )); ?>
@@ -36,7 +36,13 @@ $this->menu = $this->generateMenu($model);
 				'urlExpression' => 'Yii::app()->createUrl("/people/view", array("uid" => $data->uid))',
 			),
 			'cn',
-			'mail'
+			'mail',
+			array(
+				'class' => 'CDataColumn',
+				'name' => 'memberStatus',
+				'filter' => $dataProvider->model->validMemberStatus(),
+				'visible' => $model->cn == 'ev-members',
+			),
 		),
 	)); ?>
 	<?php

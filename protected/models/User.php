@@ -47,7 +47,7 @@ class User extends SLdapModel
 		// will receive user inputs.
 		return array(
 			// Searching (used on index)
-			array('uid, cn, mail, secondaryMail', 'safe', 'on' => 'search'),
+			array('uid, cn, mail, secondaryMail, memberStatus', 'safe', 'on' => 'search'),
 			// Shared validations...
 			array('uid, givenName, sn', 'required', 'on' => 'editProfile, create, register'),
 			array('uid, givenName, sn', 'length', 'min' => 2, 'max' => 64, 'on' => 'editProfile, create, register'),

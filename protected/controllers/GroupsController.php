@@ -272,11 +272,11 @@ class GroupsController extends Controller
 
 		// Create a data provider
 		$dataProvider = new SLdapDataProvider($user);
-		$dataProvider->setAttributesToLoad( array('uid', 'cn', 'mail') );
+		$dataProvider->setAttributesToLoad( array('uid', 'cn', 'mail', 'memberStatus') );
 
 		// Setup filters on the data provider - to provide their requested filters + the search done by the user
 		$dataProvider->setFilter($filter);
-		$dataProvider->setFilterByModel($user, array('uid', 'cn', 'mail'));
+		$dataProvider->setFilterByModel($user, array('uid', 'cn', 'mail', 'memberStatus'));
 
 		return $dataProvider;
 	}

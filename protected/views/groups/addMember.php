@@ -14,7 +14,7 @@ $this->menu = $this->generateMenu($model);
 <div class="form">
 
 <?php $form = $this->beginWidget('CActiveForm', array(
-	'id' => 'person-form',
+	'id' => 'person-grid-form',
 	'enableAjaxValidation' => false,
 )); ?>
 
