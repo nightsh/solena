@@ -26,12 +26,12 @@ if (_browserLang.length > 0) {
 /* Add the links script */
 var _links       = document.createElement('script');
     _links.type  = 'text/javascript';
-    _links.src   = 'http://cdn.kde.org/nav/global-nav-links.' + _lang + '.js';
+    _links.src   = 'js/nav/global-nav-links.' + _lang + '.js';
 
 /* Add the parser script */
 var _parser      = document.createElement('script');
     _parser.type = 'text/javascript';
-    _parser.src  = 'http://cdn.kde.org/nav/global-nav-parser.js';
+    _parser.src  = 'js/nav/global-nav-parser.js';
 
 document.getElementsByTagName('head')[0].appendChild(_links);
 document.getElementsByTagName('head')[0].appendChild(_parser);
