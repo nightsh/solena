@@ -276,7 +276,7 @@ class User extends SLdapModel
 
 	public function validMemberStatus()
 	{
-		return array('Active' => 'Active', 'Extraordinary' => 'Extraordinary', 'Supporting' => 'Supporting');
+		return array('Active' => 'Active', 'Extraordinary' => 'Extraordinary');
 	}
 
 	public function validEmailAddresses()
