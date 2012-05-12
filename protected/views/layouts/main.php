@@ -104,7 +104,7 @@
 				</div>
 				<footer class="Neverland">
 					Maintained by <a href="https://bugs.kde.org/enter_sysadmin_request.cgi">KDE Sysadmin.</a> Design by <a href="mailto:kde-www@kde.org">KDE Webteam.</a><br>
-					KDE<sup>&reg;</sup> and <a href="www.kde.org/media/images/trademark_kde_gear_black_logo.png">the K Desktop Environment<sup>&reg;</sup> logo</a>
+					KDE<sup>&reg;</sup> and <a href="http://www.kde.org/media/images/trademark_kde_gear_black_logo.png">the K Desktop Environment<sup>&reg;</sup> logo</a>
 					are registered trademarks of <a title="Homepage of the KDE non-profit Organization" href="http://ev.kde.org/">KDE e.V.</a> |
 					<a href="http://www.kde.org/community/whatiskde/impressum.php">Legal</a>
 				</footer>
