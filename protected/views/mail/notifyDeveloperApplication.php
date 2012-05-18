@@ -1,5 +1,6 @@
 <?php
 	$mailer->subject = sprintf('Developer account application by %s on %s', $model->applicant->cn, Yii::app()->name);
+	$mailer->from = $model->applicant->mail;
 ?>
 Hi site administrator,
 
@@ -10,8 +11,8 @@ Their profile can be found at <?php echo Yii::app()->controller->createAbsoluteU
 
 <?php if( $model->special_reason == DeveloperApplication::ReasonGsoc ) { ?>
 They have indicated that they are a confirmed Google Summer of Code participant.
-<?php } ?>
 
+<?php } ?>
 <?php if( $model->supporter instanceof User ) { ?>
 They have specified <?php echo $model->supporter->cn; ?> as their supporter, whose profile may be found at:
 <?php echo Yii::app()->controller->createAbsoluteUrl('/people/view', array('uid' => $model->supporter_uid)); ?>
