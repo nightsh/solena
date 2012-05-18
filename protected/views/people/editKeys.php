@@ -20,6 +20,8 @@ Yii::app()->clientScript->registerScript("disableCheckAll", "$('input.select-on-
 	'htmlOptions' => array('enctype' => 'multipart/form-data'),
 )); ?>
 
+	<p class="alert alert-info">Please be aware that SSH Key changes must be synced to KDE infrastructure by a KDE Sysadmin in order to become active.</p>
+
 	<div class="row-fluid">
 		<?php $this->widget('application.components.NeverGridView', array(
 			'id' => 'sshkey-grid',
