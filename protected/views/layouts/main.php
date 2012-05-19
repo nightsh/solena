@@ -47,6 +47,7 @@
 						array('label' => 'Registrations', 'url' => array('/registration/list'), 'glyphIcon' => 'pencil', 'visible' => Yii::app()->user->checkAccess('sysadmins')),
 						array('label' => 'Developer Applications', 'url' => array('/developerApplication/list'), 'glyphIcon' => 'file', 'visible' => Yii::app()->user->checkAccess('sysadmins')),
 						array('label' => 'Apply for Developer Access', 'url' => 'http://techbase.kde.org/Contribute/Get_a_Contributor_Account', 'glyphIcon' => 'file', 'visible' => Yii::app()->user->checkAccess('users')),
+						array('label' => 'Privacy Policy', 'url' => array('/site/page', 'view' => 'privacypolicy'), 'glyphIcon' => 'flag'),
 						array('label' => 'My Account', 'url' => array('/people/view', 'uid' => Yii::app()->user->id), 'glyphIcon' => 'user', 'visible' => !Yii::app()->user->isGuest),
 						array('label' => 'Login', 'url'=>array('/site/login'), 'glyphIcon' => 'cog', 'visible' => Yii::app()->user->isGuest),
 						array('label' => 'Register', 'url'=>array('/registration/index'), 'glyphIcon' => 'pencil', 'visible' => Yii::app()->user->isGuest),
