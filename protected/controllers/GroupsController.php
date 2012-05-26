@@ -234,7 +234,7 @@ class GroupsController extends Controller
 	}
 
 	/**
-	 * Generate a Menu for one of the Model based views...
+	 * Generate a Menu for one of the Model based views.
 	 */
 	protected function generateMenu($model)
 	{

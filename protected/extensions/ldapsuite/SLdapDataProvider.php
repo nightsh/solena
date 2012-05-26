@@ -105,8 +105,8 @@ class SLdapDataProvider extends CDataProvider
 	}
 
 	/**
-	 * Returns the names of the attributes that this data provider will be loading
-	 * If an empty array is returned, then all attributes held by items will be retrieved
+	 * Returns the names of the attributes that this data provider will be loading.
+	 * If an empty array is returned, then all attributes held by items will be retrieved.
 	 */
 	public function getAttributesToLoad()
 	{
@@ -114,7 +114,7 @@ class SLdapDataProvider extends CDataProvider
 	}
 
 	/**
-	 * Sets the attributes which this data provider will be loading
+	 * Sets the attributes which this data provider will be loading.
 	 * If a requested attribute is not found on a retrieved entry, then the value requested will be null.
 	 * Attempting to read attributes not included in this list, other than 'objectClass' will lead to null being returned.
 	 */
@@ -186,8 +186,8 @@ class SLdapDataProvider extends CDataProvider
 	}
 	
 	/**
-	 * Builds a filter to be used in case the user has not specified one
-	 * The filter simply assures that all unique attributes, specified either by the user or model are present
+	 * Builds a filter to be used in case the user has not specified one.
+	 * The filter simply assures that all unique attributes, specified either by the user or model are present.
 	 */
 	private function buildFilter()
 	{

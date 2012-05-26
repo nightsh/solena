@@ -8,7 +8,7 @@ class User extends SLdapModel
 	const AccountUnlocked = "Unlocked";
 	const AccountTemporaryLocked = "Temporarily locked";
 	const AccountPermanentLocked = "Permanently locked";
-	const InfinitelyLocked = "000001010000Z"; // Magic value meaning "infinitely locked by an administrator"
+	const InfinitelyLocked = "000001010000Z"; ///< Magic value meaning "infinitely locked by an administrator"
 
 	protected $_requiredObjectClasses = array('kdeAccount');
 	public $sshKeysAdded = array();
@@ -125,8 +125,8 @@ class User extends SLdapModel
 	}
 
 	/**
-	 * Provides detailed information about the email addresses held by this user
-	 * Specifies the primary, secondary and pending addresses - and includes this information
+	 * Provides detailed information about the email addresses held by this user.
+	 * Specifies the primary, secondary and pending addresses - and includes this information.
 	 */
 	public function getEmailAddressData()
 	{
@@ -149,7 +149,7 @@ class User extends SLdapModel
 
 	/**
 	 * Sets the primary email address for the user.
-	 * The given address must already be set as a secondary address
+	 * The given address must already be set as a secondary address.
 	 */
 	public function setPrimaryEmailAddress($address)
 	{
@@ -188,7 +188,7 @@ class User extends SLdapModel
 
 	/**
 	 * Converts the unpresentable SSH Keys into a presentable format.
-	 * Includes the key type, fingerprint and it's comment if it has one
+	 * Includes the key type, fingerprint and it's comment if it has one.
 	 */
 	public function getProcessedSshKeys()
 	{
@@ -213,9 +213,9 @@ class User extends SLdapModel
 	}
 
 	/**
-	 * Stages the uploaded SSH Keys for saving to the model
-	 * They will not be available until the model has been validated and saved
-	 * Does not perform the saving procedure itself
+	 * Stages the uploaded SSH Keys for saving to the model.
+	 * They will not be available until the model has been validated and saved.
+	 * Does not perform the saving procedure itself.
 	 */
 	public function addSSHKeys($uploadedKeys)
 	{
@@ -226,8 +226,8 @@ class User extends SLdapModel
 	}
 
 	/**
-	 * Hashes the given password and sets it to the user model, in preperation for saving it
-	 * Does not perform the saving procedure itself
+	 * Hashes the given password and sets it to the user model, in preperation for saving it.
+	 * Does not perform the saving procedure itself.
 	 */
 	public function changePassword($newPassword)
 	{

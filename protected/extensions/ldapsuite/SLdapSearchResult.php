@@ -7,7 +7,7 @@ class SLdapSearchResult extends CComponent implements Iterator
 	 */
 	protected $_search = null;
 	/**
-	 * Cache of our internal validity
+	 * Cache of our internal validity.
 	 * We need to be able to continue to operate - even if the search is invalid to contain complexity from other areas
 	 */
 	protected $_validResults = false;
@@ -58,7 +58,7 @@ class SLdapSearchResult extends CComponent implements Iterator
 	}
 	
 	/**
-	 * Set the Model class which this Search Result instance will be using...
+	 * Set the Model class which this Search Result instance will be using.
 	 */
 	public function setModelClass($class)
 	{

@@ -5,50 +5,50 @@ include_once('Net/LDAP2.php');
 final class SLdapServer extends CApplicationComponent
 {
 	/**
-	 * Hostname of the LDAP server we will be connecting to
+	 * Hostname of the LDAP server we will be connecting to.
 	 * 'localhost' by default
 	 */
 	public $host = 'localhost';
 	/**
-	 * Port number of the LDAP server we will be connecting to
+	 * Port number of the LDAP server we will be connecting to.
 	 * '389' by default
 	 */
 	public $port = 389;
 	/**
-	 * Should TLS be enabled in our connection to the LDAP server
+	 * Should TLS be enabled in our connection to the LDAP server.
 	 * 'false' by default, as the connection is to localhost by default and not all servers have TLS enabled
 	 */
 	public $tlsEnabled = false;
 	/**
-	 * Base DN on the LDAP server which we should operate under
-	 * No value is set by default, this must be provided
-	 * If not set, a CException will be raised
+	 * Base DN on the LDAP server which we should operate under.
+	 * No value is set by default, this must be provided.
+	 * If not set, a CException will be raised.
 	 */
 	public $baseDn = null;
 	/**
-	 * DN we should Bind to the LDAP server as for general operations
-	 * This will only be used when the user is logged out if $operateAsUser is true
-	 * If not provided, then an anonymous connection will be attempted
-	 * $bindPassword must also be set otherwise this will not be used
+	 * DN we should Bind to the LDAP server as for general operations.
+	 * This will only be used when the user is logged out if $operateAsUser is true.
+	 * If not provided, then an anonymous connection will be attempted.
+	 * $bindPassword must also be set otherwise this will not be used.
 	 */
 	public $bindDn = null;
 	/**
-	 * Password of the DN we should bind to LDAP server as for general operations
-	 * This will only be used when the user is logged out if $operateAsUser is true
-	 * This will not be used if $bindDn has not been set
+	 * Password of the DN we should bind to LDAP server as for general operations.
+	 * This will only be used when the user is logged out if $operateAsUser is true.
+	 * This will not be used if $bindDn has not been set.
 	 */
 	public $bindPassword = null;
 	/**
 	 * Should we operate as the user currently logged into the application?
-	 * 'false' by default
-	 * If enabled, then SLdapServer will bind using their credentials instead
-	 * If binding as the user fails and this is enabled, then the user will be logged out
+	 * 'false' by default.
+	 * If enabled, then SLdapServer will bind using their credentials instead.
+	 * If binding as the user fails and this is enabled, then the user will be logged out.
 	 */
 	public $operateAsUser = false;
 	/** 
-	 * Path to the cache file on disk to be used for schema operations
-	 * This file must be writable by the application
-	 * Whilst this may be disabled, it will cause a severe performance impact as the LDAP schemas must be retrieved each time
+	 * Path to the cache file on disk to be used for schema operations.
+	 * This file must be writable by the application.
+	 * Whilst this may be disabled, it will cause a severe performance impact as the LDAP schemas must be retrieved each time.
 	 * Defaults to protected/data/ldap_schema.cache 
 	 */
 	public $schemaCachePrefix = "runtime/ldap_schema.cache";
@@ -167,13 +167,13 @@ final class SLdapServer extends CApplicationComponent
 	/**
 	 * This function stores the previously given credentials so that the application will be able to "operate as the user".
 	 *
-	 * Every user session will have an encryption key uniquely generated for them
-	 * The password will then be encyrpted using CSecurityManager, and HMAC armoured to prevent tampering
+	 * Every user session will have an encryption key uniquely generated for them.
+	 * The password will then be encyrpted using CSecurityManager, and HMAC armoured to prevent tampering.
 	 *
-	 * The encryption key will be stored in the user's session - and the password stored in a seperate cookie
+	 * The encryption key will be stored in the user's session - and the password stored in a seperate cookie.
 	 * The cookie will be restricted to prevent it being read in javascript, and will be stored for the length of the session only.
 	 *
-	 * This process will fail if the user's session is being maintained using Cookies - a PHP session must be used
+	 * This process will fail if the user's session is being maintained using Cookies - a PHP session must be used.
 	 */
 	public function retainCredentials()
 	{

@@ -50,7 +50,7 @@ abstract class SLdapModel extends CModel
 
 	/**
 	 * Initializes the model.
-	 * Called once model has been created, and the scenario set
+	 * Called once model has been created, and the scenario set.
 	 * Override this to provide code needed to initialize the model
 	 * (Eg: initial setup)
 	 */
@@ -108,8 +108,8 @@ abstract class SLdapModel extends CModel
 
 	/**
 	 * Sets a component property to be null.
-	 * Clears the specified LDAP attribute
-	 * Attempting to clear objectClass will result in a CException
+	 * Clears the specified LDAP attribute.
+	 * Attempting to clear objectClass will result in a CException.
 	 * @param string $name the property name or the event name
 	 * @see removeAttribute
 	 */
@@ -124,7 +124,7 @@ abstract class SLdapModel extends CModel
 
 	/**
 	 * Returns the ldap server connection used by this LDAP model.
-	 * By default, the "ldap" application component is used
+	 * By default, the "ldap" application component is used.
 	 * You may override this method if you want to use a different ldap server connection.
 	 * @return LDAPServer the ldap server used by this model
 	 */
@@ -212,7 +212,7 @@ abstract class SLdapModel extends CModel
 	}
 
 	/**
-	 * Returns the DN for the current LDAP entry
+	 * Returns the DN for the current LDAP entry.
 	 * Will return null if this is a new entry which does not yet have a DN unless it has been set with {@link setDn}
 	 * @return mixed Current DN
 	 */
@@ -232,8 +232,8 @@ abstract class SLdapModel extends CModel
 	}
 
 	/**
-	 * Sets a new DN for the current entry
-	 * This will fail if $newdn does not exist, or the rdn attributes are not currently in the entry
+	 * Sets a new DN for the current entry.
+	 * This will fail if $newdn does not exist, or the rdn attributes are not currently in the entry.
 	 * @return boolean status of DN change
 	 */
 	public function setDn($newdn)
@@ -247,7 +247,7 @@ abstract class SLdapModel extends CModel
 	}
 	
 	/**
-	 * Creates a new DN for the current entry, based on an automaticaly generated RDN and the DN of a parent
+	 * Creates a new DN for the current entry, based on an automaticaly generated RDN and the DN of a parent.
 	 * @return boolean status of DN change
 	 */
 	public function setDnByParent($parent)
@@ -303,8 +303,8 @@ abstract class SLdapModel extends CModel
 
 	/**
 	 * Returns the list of all attribute names of the model.
-	 * This would return a list of all attribute names currently in use
-	 * Adding new attributes will cause this to change (however new attributes must be permitted by current object classes)
+	 * This would return a list of all attribute names currently in use.
+	 * Adding new attributes will cause this to change (however new attributes must be permitted by current object classes).
 	 * @return array list of attribute names.
 	 */
 	public function attributeNames()
@@ -315,7 +315,7 @@ abstract class SLdapModel extends CModel
 	
 	/**
 	 * Returns an array of the default attributes which will be applied to all new entries.
-	 * It is expected that the default object classes (including structural ones such as 'top') are included in this
+	 * It is expected that the default object classes (including structural ones such as 'top') are included in this.
 	 * This must be implemented, otherwise new object creation will likely fail
 	 * @return array of default attributes
 	 */
@@ -325,7 +325,7 @@ abstract class SLdapModel extends CModel
 	}
 
 	/**
-	 * Checks if this LDAP Model has or can have the named attribute
+	 * Checks if this LDAP Model has or can have the named attribute.
 	 * @param string $name attribute name
 	 * @return boolean whether this LDAP Model has the named attribute (permitted by object classes)
 	 */
@@ -344,7 +344,7 @@ abstract class SLdapModel extends CModel
 	}
 
 	/**
-	 * Checks if this LDAP Model has the named object class
+	 * Checks if this LDAP Model has the named object class.
 	 * @param string $objectClassName object class name
 	 * @return boolean whether this LDAP Model has the specified object class
 	 */
@@ -378,9 +378,9 @@ abstract class SLdapModel extends CModel
 	}
 
 	/**
-	 * Removes the named attribute from the entry
-	 * If $value is provided, only the $name attribute with that value will be removed
-	 * If $value is null, then all attributes with $name will be removed from the entry
+	 * Removes the named attribute from the entry.
+	 * If $value is provided, only the $name attribute with that value will be removed.
+	 * If $value is null, then all attributes with $name will be removed from the entry.
 	 * @param string $name the attribute name to remove
 	 * @param string $value the attribute value to remove
 	 * @return boolean whether the removal failed. If the attribute is not set, or the value does not exist it will fail
@@ -401,9 +401,9 @@ abstract class SLdapModel extends CModel
 	}
 
 	/**
-	 * Removes all attributes supported by the named object class
-	 * If an attribute is supported by another class on the object, then it will not be removed
-	 * The named class will also be removed from the list of objectClass'es the entry has
+	 * Removes all attributes supported by the named object class.
+	 * If an attribute is supported by another class on the object, then it will not be removed.
+	 * The named class will also be removed from the list of objectClass'es the entry has.
 	 * @param string $objectClassName the object class to remove
 	 * @return boolean true if the object class was removed successfully. false if the object class is not present in the entry
 	 */
@@ -431,10 +431,10 @@ abstract class SLdapModel extends CModel
 	}
 
 	/**
-	 * Adds a attribute to the entry with the specified value
-	 * If an attribute with the given name already exists, it will not be replaced
-	 * If the attribute is not permitted by the current object class then it will fail
-	 * If needed, the specified value may be an array of values to add
+	 * Adds a attribute to the entry with the specified value.
+	 * If an attribute with the given name already exists, it will not be replaced.
+	 * If the attribute is not permitted by the current object class then it will fail.
+	 * If needed, the specified value may be an array of values to add.
 	 * @param string $name the name of the attribute to add
 	 * @param mixed $value the values of the newly added attribute
 	 */
@@ -454,10 +454,10 @@ abstract class SLdapModel extends CModel
 	}
 
 	/**
-	 * Replaces an attribute on the entry with the specified value
-	 * If the attribute does not exist, it will simply be added
-	 * All current values of the named attribute will be replaced with $value
-	 * If needed, the specified value may be an array of values to replace with
+	 * Replaces an attribute on the entry with the specified value.
+	 * If the attribute does not exist, it will simply be added.
+	 * All current values of the named attribute will be replaced with $value.
+	 * If needed, the specified value may be an array of values to replace with.
 	 * @param string $name the name of the attribute to add
 	 * @param mixed $value the values to replace the named attribute with
 	 */
@@ -563,9 +563,9 @@ abstract class SLdapModel extends CModel
 	}
     
 	/**
-	 * Deletes the object from the LDAP server
-	 * If this deletion is recursive (default is false) then all children entries will also be deleted
-	 * If the item is new, then this will fail
+	 * Deletes the object from the LDAP server.
+	 * If this deletion is recursive (default is false) then all children entries will also be deleted.
+	 * If the item is new, then this will fail.
 	 * @param boolean should the deletion be recursive?
 	 * @return boolean whether the deletion is successful.
 	 */
@@ -729,9 +729,9 @@ abstract class SLdapModel extends CModel
 	}
 
 	/**
-	 * Instantiates a instance of the Model and initializes it appropriately
-	 * This function is strictly for internal usage inside ldapsuite and must never be invoked otherwise
-	 * It must be public for technical reasons, and should be considered as a private function
+	 * Instantiates a instance of the Model and initializes it appropriately.
+	 * This function is strictly for internal usage inside ldapsuite and must never be invoked otherwise.
+	 * It must be public for technical reasons, and should be considered as a private function.
 	 */
 	public function createInstance( $entry )
 	{
@@ -757,7 +757,7 @@ abstract class SLdapModel extends CModel
 	}
 
 	/**
-	 * This event is raised prior to the entry being saved
+	 * This event is raised prior to the entry being saved.
 	 * @param CEvent $event the event parameter
 	 */
 	public function onBeforeSave($event)
@@ -813,7 +813,7 @@ abstract class SLdapModel extends CModel
 	}
 
 	/**
-	 * This method is called prior to an entry being saved, after validation is performed if required
+	 * This method is called prior to an entry being saved, after validation is performed if required.
 	 * By default this raises the {@link onBeforeSave} event.
 	 * This method may be overridden to prepare the object to be saved.
 	 * If overridden then the parent implementation must be invoked otherwise the event will not be raised properly.
@@ -832,8 +832,8 @@ abstract class SLdapModel extends CModel
 	/**
 	 * This method is called after an entry has been saved successfully.
 	 * By default this raises the {@link onAfterSave} event.
-	 * This method may be overridden to perform needed post-processing,
-	 * If overridden then the parent implementation must be invoked otherwise the event will not be raised properly.
+	 * This method may be overridden to perform needed post-processing.
+	 * If overridden then the parent implementation must be invoked, otherwise the event will not be raised properly.
 	 */
 	protected function afterSave()
 	{
@@ -846,8 +846,8 @@ abstract class SLdapModel extends CModel
 	/**
 	 * This method is called after an new entry dn has been created in LDAP successfully.
 	 * By default this raises the {@link onAfterCreate} event.
-	 * This method may be overridden to perform needed post-processing,
-	 * If overridden then the parent implementation must be invoked otherwise the event will not be raised properly.
+	 * This method may be overridden to perform needed post-processing.
+	 * If overridden then the parent implementation must be invoked, otherwise the event will not be raised properly.
 	 */
 	protected function afterCreate()
 	{
@@ -860,7 +860,7 @@ abstract class SLdapModel extends CModel
 	/**
 	 * This method is called after an entry dn has been changed and then saved successfully.
 	 * By default this raises the {@link onAfterMove} event.
-	 * This method may be overridden to perform needed post-processing,
+	 * This method may be overridden to perform needed post-processing.
 	 * If overridden then the parent implementation must be invoked otherwise the event will not be raised properly.
 	 * @param SLdapModel $previousState copy of the SLdapModel instance made right before the save was performed
 	 */
@@ -891,7 +891,7 @@ abstract class SLdapModel extends CModel
 	/**
 	 * This method is invoked after an entry has been deleted.
 	 * By default this raises the {@link onAfterDelete} event.
-	 * This method may be overridden to perform needed post-processing,
+	 * This method may be overridden to perform needed post-processing.
 	 * If overridden then the parent implementation must be invoked otherwise the event will not be raised properly.
 	 */
 	protected function afterDelete()

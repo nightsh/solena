@@ -530,8 +530,8 @@ class PeopleController extends Controller
 	}
 
 	/**
-	 * Process the removal of SSH Key's from a user
-	 * To be used by actionEditKeys only
+	 * Process the removal of SSH Key's from a user.
+	 * To be used by #actionEditKeys only.
 	 */
 	protected function processKeyRemoval($model, $selectedKeys)
 	{
