@@ -168,10 +168,10 @@ final class SLdapServer extends CApplicationComponent
 	 * This function stores the previously given credentials so that the application will be able to "operate as the user".
 	 *
 	 * Every user session will have an encryption key uniquely generated for them.
-	 * The password will then be encyrpted using CSecurityManager, and HMAC armoured to prevent tampering.
+	 * The password will then be encrypted using CSecurityManager, and HMAC armoured to prevent tampering.
 	 *
-	 * The encryption key will be stored in the user's session - and the password stored in a seperate cookie.
-	 * The cookie will be restricted to prevent it being read in javascript, and will be stored for the length of the session only.
+	 * The encryption key will be stored in the user's session - and the password stored in a separate cookie.
+	 * The cookie will be restricted to prevent it being read in Javascript, and will be stored for the length of the session only.
 	 *
 	 * This process will fail if the user's session is being maintained using Cookies - a PHP session must be used.
 	 */
@@ -190,7 +190,7 @@ final class SLdapServer extends CApplicationComponent
 		$key = sprintf('%08x%08x%08x%08x',mt_rand(),mt_rand(),mt_rand(),mt_rand());
 		$securePassword = Yii::app()->securityManager->encrypt($this->_credentials['bindpw'], $key);
 		
-		// Send the now encyrpted and armoured password back to the user
+		// Send the now encrypted and armoured password back to the user
 		$cookie = new CHttpCookie('accessKey', base64_encode($securePassword));
 		$cookie->secure = Yii::app()->request->isSecureConnection;
 		$cookie->httpOnly = true;

@@ -74,7 +74,7 @@ class User extends SLdapModel
 			array('sshKeysAdded', 'application.validators.SSHKeyValidator', 'existingKeys' => (array) $this->getAttribute("sshPublicKey"), 'on' => 'editKeys'),
 			// Avatar changing - 3MB max upload limit, file must be a jpeg/gif/png image
 			array('jpegPhoto', 'file', 'types' => 'jpg, jpeg, gif, png', 'maxSize' => 1024 * 1024 * 3, 'allowEmpty' => true, 'on' => 'editAvatar'),
-			// Password validation - to ensure only Salted-SHA1 passwords are saved to protect outselves
+			// Password validation - to ensure only Salted-SHA1 passwords are saved to protect ourselves
 			array('userPassword', 'unsafe', 'on' => 'changePassword, register'), // The direct value for the password can never be mass-assigned
 			array('userPassword', 'match', 'pattern' => '/\{SSHA\}.+/', 'on' => 'changePassword, register'),
 			array('currentPassword', 'verifyPassword', 'on' => 'changePassword'),
@@ -226,7 +226,7 @@ class User extends SLdapModel
 	}
 
 	/**
-	 * Hashes the given password and sets it to the user model, in preperation for saving it.
+	 * Hashes the given password and sets it to the user model, in preparation for saving it.
 	 * Does not perform the saving procedure itself.
 	 */
 	public function changePassword($newPassword)

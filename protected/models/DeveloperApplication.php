@@ -30,7 +30,7 @@ class DeveloperApplication extends CActiveRecord
 			array('status, uid, special_reason, justification, evidence_links, ssh_key', 'required'),
 			// The system itself sets uid, and the status can only be changed by sysadmins
 			array('uid, status', 'unsafe', 'on' => 'insert, update'),
-			// Ensure that the fields hae the correct values in them
+			// Ensure that the fields have the correct values in them
 			array('status', 'in', 'range' => array_keys($this->validStatus())),
 			array('special_reason', 'in', 'range' => array_keys($this->validSpecialReason())),
 			// The supporting user must exist (the applicant is set internally)

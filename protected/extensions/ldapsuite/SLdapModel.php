@@ -247,7 +247,7 @@ abstract class SLdapModel extends CModel
 	}
 	
 	/**
-	 * Creates a new DN for the current entry, based on an automaticaly generated RDN and the DN of a parent.
+	 * Creates a new DN for the current entry, based on an automatically generated RDN and the DN of a parent.
 	 * @return boolean status of DN change
 	 */
 	public function setDnByParent($parent)
@@ -296,7 +296,7 @@ abstract class SLdapModel extends CModel
 		if( Net_LDAP2::isError($parent) ) {
 			return null;
 		}
-		// Seperate our RDN off and return the Parent DN
+		// Separate our RDN off and return the Parent DN
 		$child = array_shift($parent);
 		return strtolower( Net_LDAP2_Util::canonical_dn($parent) );
 	}
@@ -875,7 +875,7 @@ abstract class SLdapModel extends CModel
 	/**
 	 * This method is called prior to the deletion of an entry,
 	 * By default this raises the {@link onBeforeDelete} event.
-	 * This method may be overridden to perform pre-deletion preperations.
+	 * This method may be overridden to perform pre-deletion preparations.
 	 * If overridden then the parent implementation must be invoked otherwise the event will not be raised properly.
 	 * @return boolean whether the entry should be deleted. Defaults to true.
 	 */
