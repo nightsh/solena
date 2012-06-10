@@ -78,6 +78,13 @@ return array(
 			'transportType' => 'php',
 			'viewPath' => 'application.views.mail',
 		),
+		'tokenGrid' => array(
+			'class' => 'application.components.TokenGridManager',
+			'gridRows' => 10,
+			'gridColumns' => 10,
+			'tokenLength' => 4,
+			'gridSalt' => '',
+		),
 		'errorHandler' => array(
 			'errorAction' => 'site/error',
 		),
