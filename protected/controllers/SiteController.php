@@ -174,6 +174,7 @@ class SiteController extends Controller
 		// Handle the actual password reset
 		if( isset($_POST['User']) ) {
 			$model->attributes = $_POST['User'];
+			$model->removeAttribute('twoFactorAuthentication');
 			if( $model->save() ) {
 				$entry->delete();
 				$this->render('passwordResetSuccessful', array('model' => $model));
