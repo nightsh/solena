@@ -111,6 +111,11 @@ class SiteController extends Controller
 		$model = new LoginForm('twoFactor');
 		$model->username = $username;
 
+		$entry = AccountSecurity::model()->retrieveAccount($username);
+		if( $entry->event_count >= 5 ) {
+			throw new CHttpException(403, 'Two-factor authentication attempts have failed too many times recently for this account, please try again later. If you have lost your grid, please perform a password reset.');
+		}
+
 		// Handle input
 		if( isset($_POST['LoginForm']) ) {
 			$model->attributes = $_POST['LoginForm'];
@@ -118,6 +123,9 @@ class SiteController extends Controller
 			if( $model->validate() && $model->login() ) {
 				$return = Yii::app()->user->getReturnUrl( array('/people/view', 'uid' => Yii::app()->user->id) );
 				$this->redirect( $return );
+			} else {
+				// Flag an attempt on this account
+				$entry->save();
 			}
 		}
 
