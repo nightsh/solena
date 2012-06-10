@@ -31,7 +31,7 @@ class PeopleController extends Controller
 				'users' => array('@'),
 			),
 			array('allow', // Everyone is allowed to change their profile, contact details, avatar and password
-				'actions' => array('editProfile', 'editContactDetails', 'editEmailAddresses', 'verifyEmail', 'editAvatar', 'changePassword'),
+				'actions' => array('editProfile', 'editContactDetails', 'editEmailAddresses', 'verifyEmail', 'editAvatar', 'changePassword', 'twoFactorAuthentication'),
 				'users' => array('@'),
 			),
 			array('allow', // Developers, Disabled Developers and Sysadmins are allowed to change SSH keys
@@ -470,6 +470,36 @@ class PeopleController extends Controller
 	}
 
 	/**
+	 * Administer two-factor authentication for a person
+	 */
+	public function actionTwoFactorAuthentication($uid)
+	{
+		$model = $this->loadModel($uid);
+		$model->setScenario('twoFactorAuthentication');
+
+		if( !Yii::app()->user->checkAccess('selfChangeUserData', array('user' => $model)) ) {
+			throw new CHttpException(403, 'You are not permitted to change the details of this person.');
+		}
+
+		if( isset($_POST['disableTwoFactor']) ) {
+			$model->removeAttribute('twoFactorAuthentication');
+			if( $model->save() ) {
+				Yii::app()->user->setFlash('success', 'Two-Factor authentication disabled.');
+			}
+		}
+		if( isset($_POST['enableTwoFactor']) ) {
+			$model->addAttribute('twoFactorAuthentication', 'Enabled');
+			if( $model->save() ) {
+				Yii::app()->user->setFlash('success', 'Two-Factor authentication enabled.');
+			}
+		}
+
+		$this->render('twoFactorAuthentication', array(
+			'model' => $model,
+		));
+	}
+
+	/**
 	 * Retrieve the user specified by $uid from the LDAP Server
 	 */
 	protected function loadModel($uid, $attributes = array())
@@ -512,6 +542,9 @@ class PeopleController extends Controller
 		}
 		if( Yii::app()->user->checkAccess('changeUserPassword', $params) && $this->action->id != 'changePassword' ) {
 			$menu[] = array('label' => 'Change Password', 'url' => array('changePassword', 'uid' => $model->uid));
+		}
+		if( Yii::app()->user->checkAccess('selfChangeUserData', $params) && $this->action->id != 'twoFactorAuthentication' ) {
+			$menu[] = array('label' => 'Two-Factor Authentication', 'url' => array('twoFactorAuthentication', 'uid' => $model->uid));
 		}
 		// Sysadmin only actions now
 		if( Yii::app()->user->checkAccess('sysadmins') ) {
