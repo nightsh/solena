@@ -7,7 +7,14 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 
-DROP TABLE IF EXISTS `developer_applications`;
+CREATE TABLE IF NOT EXISTS `account_security` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `uid` varchar(255) NOT NULL,
+  `event_count` int(11) NOT NULL,
+  `last_event` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
 CREATE TABLE IF NOT EXISTS `developer_applications` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `status` int(1) NOT NULL,
@@ -20,7 +27,6 @@ CREATE TABLE IF NOT EXISTS `developer_applications` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=10 ;
 
-DROP TABLE IF EXISTS `tokens`;
 CREATE TABLE IF NOT EXISTS `tokens` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `token` varchar(50) NOT NULL,
