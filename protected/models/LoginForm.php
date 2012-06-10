@@ -8,6 +8,7 @@ class LoginForm extends CFormModel
 {
 	public $username;
 	public $password;
+	public $token;
 
 	private $_identity;
 
@@ -23,6 +24,8 @@ class LoginForm extends CFormModel
 			array('username, password', 'required'),
 			// password needs to be authenticated
 			array('password', 'authenticate'),
+			// token is needed for two-factor authentication
+			array('token', 'length', 'min' => 4, 'max' => 4, 'on' => 'twoFactor'),
 		);
 	}
 
@@ -33,9 +36,14 @@ class LoginForm extends CFormModel
 	public function authenticate($attribute, $params)
 	{
 		if( !$this->hasErrors() ) {
-			$this->_identity = new UserIdentity($this->username, $this->password);
-			if( !$this->_identity->authenticate() ) {
+			// Authenticate the user if necessary
+			$this->_identity = new UserIdentity($this->username, $this->password, $this->token);
+			$this->_identity->authenticate();
+			if( $this->_identity->errorCode === UserIdentity::ERROR_USERNAME_INVALID || $this->_identity->errorCode === UserIdentity::ERROR_PASSWORD_INVALID ) {
 				$this->addError('authentication', 'Incorrect username or password.');
+			}
+			if( $this->scenario == 'twoFactor' && $this->_identity->errorCode === UserIdentity::ERROR_TWOFACTOR_INVALID ) {
+				$this->addError('authentication', 'Incorrect two-factor token.');
 			}
 		}
 	}
@@ -47,7 +55,7 @@ class LoginForm extends CFormModel
 	public function login()
 	{
 		if( $this->_identity === null ) {
-			$this->_identity = new UserIdentity($this->username, $this->password);
+			$this->_identity = new UserIdentity($this->username, $this->password, $this->token);
 			$this->_identity->authenticate();
 		}
 		if( $this->_identity->errorCode === UserIdentity::ERROR_NONE ) {

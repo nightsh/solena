@@ -94,11 +94,36 @@ class SiteController extends Controller
 			if( $model->validate() && $model->login() ) {
 				$return = Yii::app()->user->getReturnUrl( array('/people/view', 'uid' => Yii::app()->user->id) );
 				$this->redirect( $return );
+			} else if( $model->validate() ) {
+				$this->redirect( array('loginTwoFactor', 'username' => $model->username) );
 			}
 		}
 
 		// Display the login form
 		$this->render('login', array('model' => $model));
+	}
+
+	/**
+	 * Performs two factor authentication if necessary
+	 */
+	public function actionLoginTwoFactor( $username )
+	{
+		$model = new LoginForm('twoFactor');
+		$model->username = $username;
+
+		// Handle input
+		if( isset($_POST['LoginForm']) ) {
+			$model->attributes = $_POST['LoginForm'];
+			// Validate the login and redirect to the previous page if needed
+			if( $model->validate() && $model->login() ) {
+				$return = Yii::app()->user->getReturnUrl( array('/people/view', 'uid' => Yii::app()->user->id) );
+				$this->redirect( $return );
+			}
+		}
+
+		// Display the two-factor authentication form
+		$gridPosition = Yii::app()->tokenGrid->getRandomGridPosition( $model->username );
+		$this->render('loginTwoFactor', array('model' => $model, 'gridPosition' => $gridPosition));
 	}
 
 	/**

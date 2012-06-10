@@ -7,7 +7,19 @@
  */
 class UserIdentity extends CUserIdentity
 {
+	// Two-Factor authentication failure constant
+	const ERROR_TWOFACTOR_INVALID = 3;
+	// Two-Factor authentication token
+	public $token;
+	// Full Name of the authenticated user
 	private $fullName;
+
+	public function __construct($username, $password, $token = null)
+	{
+		$this->username = $username;
+		$this->password = $password;
+		$this->token = $token;
+	}
 
 	/**
 	 * Authenticates a user.
@@ -16,7 +28,7 @@ class UserIdentity extends CUserIdentity
 	public function authenticate()
 	{
 		// Perform a search to see if the provided username exists, and to retrieve it's DN....
-		$attributes = array('uid', 'cn', 'groupMember');
+		$attributes = array('uid', 'cn', 'groupMember', 'twoFactorAuthentication');
 		$filter = Net_LDAP2_Filter::create('uid', 'equals', $this->username);
 		$entry = User::model()->findFirstByFilter($filter, $attributes);
 		
@@ -31,6 +43,13 @@ class UserIdentity extends CUserIdentity
 		$valid = User::getLdapConnection()->reauthenticate($dn, $this->password);
 		if( !$valid ) {
 			$this->errorCode = self::ERROR_PASSWORD_INVALID;
+			return false;
+		}
+		
+		// Maybe this user requires two-factor authentication?
+		$requiresTwoFactor = isset($entry->twoFactorAuthentication);
+		if( $requiresTwoFactor && !Yii::app()->tokenGrid->validateToken($this->token, $entry->uid) ) {
+			$this->errorCode = self::ERROR_TWOFACTOR_INVALID;
 			return false;
 		}
 		
