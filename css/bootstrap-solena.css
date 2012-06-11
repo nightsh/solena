@@ -200,3 +200,8 @@ input.error, textarea.error {
 	width: 19em;
 	margin-left: 0;
 }
+
+.table-center-mono td {
+	text-align: center;
+	font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+}
