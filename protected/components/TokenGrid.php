@@ -295,7 +295,7 @@ class TokenGrid
         $xhtml_output = "";
         $grid_array = $this->GetGridArray($grid_id);
 
-        $xhtml_output .= "<table>";
+        $xhtml_output .= "<table class='table table-bordered table-condensed table-striped table-center-mono'>";
         for ($line = 0; $line <= $this->_y_grid_size; $line++)
         {
             $xhtml_output .= "<tr>";
