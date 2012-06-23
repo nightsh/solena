@@ -1,5 +1,7 @@
 <?php
 	$mailer->subject = sprintf('Developer account application approval by %s', $model->applicant->cn);
+	$guidelines_path = Yii::app()->basePath . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'mail' . DIRECTORY_SEPARATOR . 'guidelines.txt';
+	$mailer->attach(Swift_Attachment::fromPath($guidelines_path));
 	if( $model->special_reason == DeveloperApplication::ReasonGsoc ) {
 		$mailer->cc = array('kde-soc-mentor-owner@kde.org', Yii::app()->params['adminEmail']);
 	} else {
@@ -11,8 +13,8 @@ Hello <?php echo $model->supporter->cn; ?>,
 This is an automatically generated message.
 <?php echo $model->applicant->cn; ?> has indicated that you have encouraged him/her to apply for a developer account.
 Please confirm your support of this request by replying to this email. Their application will not be accepted until you respond.
-You may view their profile at <?php echo Yii::app()->controller->createAbsoluteUrl('/people/view', array('uid' => $model->uid)); ?>
 
+Guidelines how to evaluate their application is attached to this mail.
 
 <?php if( $model->special_reason == DeveloperApplication::ReasonGsoc ) { ?>
 They have also indicated that they are a confirmed Google Summer of Code participant.
