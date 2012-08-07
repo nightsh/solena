@@ -3,7 +3,7 @@
 class SSHKeyValidator extends CValidator
 {
 	public $existingKeys = array();
-	static private $regex = '/^(ssh-(?:dss|rsa)|ecdsa-sha2-nistp(?:256|384|521))\s+([a-zA-Z0-9+\/.=]+)\s*([[:print:]]*)$/';
+	static private $regex = '/^(ssh-(?:dss|rsa))\s+([a-zA-Z0-9+\/.=]+)\s*([[:print:]]*)$/';
 
 	protected function validateAttribute($object, $attribute)
 	{
@@ -20,7 +20,7 @@ class SSHKeyValidator extends CValidator
 			// Make sure the key is valid....
 			$split = SSHKeyValidator::splitKey($key);
 			if( !$split ) {
-				$this->addError($object, $attribute, "The uploaded SSH Key is not a valid DSS, RSA or ECDSA key.");
+				$this->addError($object, $attribute, "The uploaded SSH Key is not a valid DSS or RSA key.");
 				continue;
 			}
 			// Make sure we haven't already got that key....

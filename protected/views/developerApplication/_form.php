@@ -68,7 +68,7 @@
 	<div class="row-fluid">
 		<?php echo $form->labelEx($model, 'ssh_key'); ?>
 		<div>
-			Please provide a single RSA, DSA or ECDSA key which you will use to access infrastructure once your application is approved.
+			Please provide a single RSA or DSA key which you will use to access infrastructure once your application is approved.
 		</div>
 		<?php echo $form->fileField($model, 'ssh_key'); ?>
 	</div>
