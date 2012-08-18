@@ -54,6 +54,59 @@ class GroupManagementCommand extends CConsoleCommand
 		// Save changes to the group
 		$evActiveGroup->save();
 	}
+
+	public function actionSyncJoinTheGameMembers( $filename )
+	{
+		// First we retrieve the jointhegame-members group
+		$filter = Net_LDAP2_Filter::create('cn', 'equals', 'jointhegame-members');
+		$joinTheGameGroup = Group::model()->findFirstByFilter( $filter );
+
+		// Decode the data
+		$data = file_get_contents($filename);
+		$data = json_decode($data);
+
+		// Start matching up who we can...
+		$foundPeople = array();
+		foreach( $data as $email => $fullName ) {
+			// Assemble the filter
+			$primaryMail = Net_LDAP2_Filter::create('mail', 'equals', $email);
+			$secondaryMail = Net_LDAP2_Filter::create('secondaryMail', 'equals', $email);
+			$filter = Net_LDAP2_Filter::combine('or', array($primaryMail, $secondaryMail));
+			// Find a person, if they exist
+			$person = User::model()->findFirstByFilter($filter);
+
+			// Validate the person
+			if( !$person instanceof User ) {
+				continue;
+			}
+			// The person is valid :) add them to our list
+			$username = $person->uid;
+			$foundPeople[$username] = $person;
+		}
+
+		// Get a list of currently listed people
+		$listedPeople = array();
+		foreach( $joinTheGameGroup->members as $person ) {
+			$username = $person->uid;
+			$listedPeople[$username] = $person;
+		}
+
+		// Remove anyone who is no longer a valid member
+		$toRemove = array_diff_key( $listedPeople, $foundPeople );
+		foreach( $toRemove as $username => $person ) {
+			// Remove them
+			$joinTheGameGroup->removeMember($person);
+			$person->save();
+		}
+
+		// Add anyone who is not listed currently
+		$toAdd = array_diff_key( $foundPeople, $listedPeople );
+		foreach( $toAdd as $username => $person ) {
+			// Add them
+			$joinTheGameGroup->addMember($person);
+			$person->save();
+		}
+        }
 };
 
 ?>
