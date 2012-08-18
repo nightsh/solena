@@ -37,6 +37,10 @@ $this->menu = $this->generateMenu($model);
 				'name' => 'memberStatus',
 				'visible' => isset($model->memberStatus),
 			),
+			array(
+				'name' => 'accountStatus',
+				'visible' => Yii::app()->user->checkAccess('sysadmins'),
+			),
 		),
 		'htmlOptions' => array('class' => 'table table-bordered table-striped table-condensed fixed-cell'),
 	)); ?>
