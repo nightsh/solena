@@ -106,6 +106,9 @@ class GroupManagementCommand extends CConsoleCommand
 			$joinTheGameGroup->addMember($person);
 			$person->save();
 		}
+
+		// Save the group now
+		$joinTheGameGroup->save();
         }
 };
 
