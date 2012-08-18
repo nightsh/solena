@@ -105,7 +105,7 @@ class PeopleController extends Controller
 	 */
 	public function actionView($uid)
 	{
-		$model =  $this->loadModel($uid);
+		$model =  $this->loadModel($uid, array('pwdAccountLockedTime', '*'));
 
 		$groupData = new CArrayDataProvider($model->groups->entries(), array('keyField' => false));
 		$this->render('view', array(
