@@ -1,5 +1,10 @@
 <div class="form well">
 
+<p>
+	Before applying, please ensure you have read the 
+	<?php echo CHtml::link('information concerning developer accounts.', 'http://techbase.kde.org/Contribute/Get_a_Contributor_Account'); ?>
+</p>
+
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'developer-application-form',
 	'enableAjaxValidation' => false,
