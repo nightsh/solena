@@ -1,10 +1,5 @@
 <div class="form well">
 
-<p>
-	Before applying, please ensure you have read the 
-	<?php echo CHtml::link('information concerning developer accounts.', 'http://techbase.kde.org/Contribute/Get_a_Contributor_Account'); ?>
-</p>
-
 <?php $form = $this->beginWidget('CActiveForm', array(
 	'id' => 'developer-application-form',
 	'enableAjaxValidation' => false,
@@ -14,6 +9,8 @@
 	<p class="alert alert-info">Fields with <span class="required">*</span> are required.</p>
 
 	<p>
+		Before applying, please ensure you have read the 
+		<?php echo CHtml::link('information concerning developer accounts.', 'http://techbase.kde.org/Contribute/Get_a_Contributor_Account'); ?><br /><br />
 		Please fill in the below fields accurately to enable KDE Sysadmin to process your application quickly and accurately.<br />
 		Whilst a supporter is not required, it is recommended as it speeds up the process of approving a application.<br /><br />
 		Be aware that involvement in the KDE Community is required before you can apply for a developer account.<br />
