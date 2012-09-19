@@ -17,7 +17,7 @@
 		Please fill in the below fields accurately to enable KDE Sysadmin to process your application quickly and accurately.<br />
 		Whilst a supporter is not required, it is recommended as it speeds up the process of approving a application.<br /><br />
 		Be aware that involvement in the KDE Community is required before you can apply for a developer account.<br />
-		Requests without sufficient public or verifiable involvement will be declined, unless there are exceptional circumstances.<br />
+		Activity on mailing lists, the submission of patches on Reviewboard and other similar activities qualify as involvement.<br />
 	</p>
 
 	<?php echo $form->errorSummary($model); ?>
@@ -48,7 +48,8 @@
 	<div class="row-fluid">
 		<?php echo $form->labelEx($model, 'special_reason'); ?>
 		<div>
-			Only confirmed Google Summer of Code students with KDE qualify as participants.
+			Only confirmed Google Summer of Code students with KDE qualify as participants.<br />
+			If you have no special reason, please ensure "None" is selected.
 		</div>
 		<?php echo $form->dropDownList($model, 'special_reason', $model->validSpecialReason()); ?>
 	</div>
@@ -73,7 +74,8 @@
 	<div class="row-fluid">
 		<?php echo $form->labelEx($model, 'ssh_key'); ?>
 		<div>
-			Please provide a single RSA or DSA key which you will use to access infrastructure once your application is approved.
+			Please provide a single RSA or DSA key which you will use to access infrastructure once your application is approved.<br />
+			Other keys can be added or removed through the "My Account" section after approval.
 		</div>
 		<?php echo $form->fileField($model, 'ssh_key'); ?>
 	</div>
