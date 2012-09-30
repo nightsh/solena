@@ -54,6 +54,10 @@ class RegistrationController extends Controller
 		if( Yii::app()->user->getState('registerTermsAccepted') == 'confirmed' ) {
 			$this->redirect( array('enterDetails') );
 		}
+		// Make sure they are not an attempted spammer
+		if( $this->performSpamCheck() ) {
+			throw new CHttpException(403, "Client rejected by automatic spammer detection system");
+		}
 
 		$this->render('index');
 	}
@@ -71,6 +75,9 @@ class RegistrationController extends Controller
 		if( isset($_POST['Token']) ) {
 			$model->type = Token::TypeRegisterAccount;
 			$model->attributes = $_POST['Token'];
+			if( $this->performSpamCheck($model->mail) ) {
+				throw new CHttpException(403, "Client rejected by automatic spammer detection system");
+			}
 			if( $model->save() ) {
 				$this->sendEmail($model->mail, '/mail/confirmRegistration', array('model' => $model));
 				$this->render('confirmationSent', array('model' => $model));
@@ -181,6 +188,49 @@ class RegistrationController extends Controller
 		$this->render('delete', array(
 			'model' => $model,
 		));
+	}
+
+	protected function performSpamCheck($email = "")
+	{
+		// Address of the API we are using
+		$query = "http://www.stopforumspam.com/api";
+		// We want php serialized data
+		$query .= "?f=serial";
+		// Add email address and ip address parameters if we have them...
+		if( $email != "" ) {
+			$query .= "&email=" . trim($email);
+		}
+		// Add the ip address
+		$query .= "&ip=" . Yii::app()->request->userHostAddress;
+
+		// Perform the query...
+		$result = file_get_contents($query);
+
+		// if we have network issues, let him through.
+		if( $result === false ) {
+			return false;
+		}
+
+		// Decode the data we recieved
+		$result = unserialize($result);
+
+		// if the query failed, permit the request
+		if( $result["success"] != 1 ) {
+			return false;
+		}
+
+		// If there is a greater than 80% the ip address is used by spammers, reject the request
+		if( isset($result["ip"]["confidence"] ) && $result["ip"]["confidence"] > 80 ) {
+			return true;
+		}
+
+		// If the email address has been used to spam anywhere, reject the request
+		if( $email != "" && isset($result["email"]["confidence"]) && $result["email"]["confidence"] > 0 ) {
+			return true;
+		}
+
+		// let everyone through.
+		return false;
 	}
 
 	protected function loadModel($id)
