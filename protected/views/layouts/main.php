@@ -94,7 +94,7 @@
 								<?php endif?>
 								</li>
 							</ul>
-							<ul class="nav pull-right">
+							<ul class="nav nav-collapse pull-right">
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle" data-toggle="dropdown">KDE Links <b class="caret-up"></b></a>
 									<ul id="global-nav" class="dropdown-menu bottom-up"></ul>
