@@ -9,15 +9,15 @@
 
 	<?php
 	/* Stylesheet files for Neverland */
-	Yii::app()->clientScript->registerCssFile('css/bootstrap.css');
-	Yii::app()->clientScript->registerCssFile('css/bootstrap-responsive.css');
-	Yii::app()->clientScript->registerCssFile('css/bootstrap-solena.css');
+	Yii::app()->clientScript->registerCssFile('//cdn.kde.org/css/bootstrap.css');
+	Yii::app()->clientScript->registerCssFile('//cdn.kde.org/css/bootstrap-responsive.css');
+	Yii::app()->clientScript->registerCssFile('//cdn.kde.org/css/bootstrap-solena.css');
 
 	/* Javascript files */
 	Yii::app()->clientScript->registerCoreScript('jquery');
-	Yii::app()->clientScript->registerScriptFile("js/min/bootstrap.js", CClientScript::POS_END);
-	Yii::app()->clientScript->registerScriptFile("js/bootstrap-neverland.js", CClientScript::POS_END);
-	Yii::app()->clientScript->registerScriptFile("js/nav/global-nav.js", CClientScript::POS_END);
+	Yii::app()->clientScript->registerScriptFile("//cdn.kde.org/js/bootstrap.js", CClientScript::POS_END);
+	Yii::app()->clientScript->registerScriptFile("//cdn.kde.org/js/bootstrap-neverland.js", CClientScript::POS_END);
+	Yii::app()->clientScript->registerScriptFile("//cdn.kde.org/nav/global-nav.js", CClientScript::POS_END);
 	?>
 
 	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -26,91 +26,92 @@
 	<![endif]-->
 	
 	<!-- Le fav and touch icons -->
-	<link rel="shortcut icon" href="<?php echo Yii::app()->request->baseUrl; ?>/img/favicon.ico">
+	<link rel="shortcut icon" href="<?php echo Yii::app()->request->baseUrl; ?>/images/favicon.ico">
 </head>
 
 <body data-spy="scroll">
-
-	<div id="header" class="navbar navbar-top Neverland">
+	<div id="header" class="navbar navbar-static-top Neverland">
 		<div class="navbar-inner">
-			<div class="container-fluid">
-				<a class="brand" href="<?php echo Yii::app()->controller->createUrl('/site/index'); ?>"><img src="img/logo.plain.png"/></a>
-				<a class="btn menu" data-toggle="collapse" data-target=".nav-collapse">
-					Menu
-					<span class="caret"></span>
+			<div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+				<a class="brand" href="<?php echo Yii::app()->controller->createUrl('/site/index'); ?>">
+					<img src="http://cdn.kde.org/img/logo.plain.small.png"/>
+					KDE Identity
 				</a>
-				<div class="nav-pills pull-right nav-collapse">
-				<?php $this->widget('application.components.NeverMenu',array(
-					'items'=>array(
-						array('label' => 'People', 'url' => array('/people/index'), 'glyphIcon' => 'user'),
-						array('label' => 'Groups', 'url' => array('/groups/index'), 'glyphIcon' => 'th-list'),
-						array('label' => 'Registrations', 'url' => array('/registration/list'), 'glyphIcon' => 'pencil', 'visible' => Yii::app()->user->checkAccess('sysadmins')),
-						array('label' => 'Developer Applications', 'url' => array('/developerApplication/list'), 'glyphIcon' => 'file', 'visible' => Yii::app()->user->checkAccess('sysadmins')),
-						array('label' => 'Apply for Developer Access', 'url' => array('/developerApplication'), 'glyphIcon' => 'file', 'visible' => Yii::app()->user->checkAccess('users')),
-						array('label' => 'Privacy Policy', 'url' => array('/site/page', 'view' => 'privacypolicy'), 'glyphIcon' => 'flag'),
-						array('label' => 'My Account', 'url' => array('/people/view', 'uid' => Yii::app()->user->id), 'glyphIcon' => 'user', 'visible' => !Yii::app()->user->isGuest),
-						array('label' => 'Login', 'url'=>array('/site/login'), 'glyphIcon' => 'cog', 'visible' => Yii::app()->user->isGuest),
-						array('label' => 'Register', 'url'=>array('/registration/index'), 'glyphIcon' => 'pencil', 'visible' => Yii::app()->user->isGuest),
-						array('label' => 'Logout ('.Yii::app()->user->name.')', 'url' => array('/site/logout'), 'glyphIcon' => 'remove-sign', 'visible' => !Yii::app()->user->isGuest)
-					),
-					'htmlOptions' => array('class'=>'nav'),
-					)); ?>
+				<div class="nav-collapse">
+					<div class="nav pull-right">
+					<?php $this->widget('application.components.NeverMenu',array(
+						'items'=>array(
+							array('label' => 'People', 'url' => array('/people/index'), 'glyphIcon' => 'user'),
+							array('label' => 'Groups', 'url' => array('/groups/index'), 'glyphIcon' => 'th-list'),
+							array('label' => 'Registrations', 'url' => array('/registration/list'), 'glyphIcon' => 'pencil', 'visible' => Yii::app()->user->checkAccess('sysadmins')),
+							array('label' => 'Developer Applications', 'url' => array('/developerApplication/list'), 'glyphIcon' => 'file', 'visible' => Yii::app()->user->checkAccess('sysadmins')),
+							array('label' => 'My Account', 'url' => array('/people/view', 'uid' => Yii::app()->user->id), 'glyphIcon' => 'user', 'visible' => !Yii::app()->user->isGuest),
+							array('label' => 'Login', 'url'=>array('/site/login'), 'glyphIcon' => 'cog', 'visible' => Yii::app()->user->isGuest),
+							array('label' => 'Register', 'url'=>array('/registration/index'), 'glyphIcon' => 'pencil', 'visible' => Yii::app()->user->isGuest),
+							array('label' => 'Logout ('.Yii::app()->user->name.')', 'url' => array('/site/logout'), 'glyphIcon' => 'remove-sign', 'visible' => !Yii::app()->user->isGuest)
+						),
+						'htmlOptions' => array('class'=>'nav'),
+						)); ?>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="clearfix"></div>
 	
-	<div class="container-fluid Neverland" id="page">
-		<div id="pageRow" class="row-fluid">
-
+	<div id="pageRow" class="container">
+		<div class="row">
 			<?php echo $content; ?>
 			<div class="clearfix"></div>
-			<div id="footerRow" class="row-fluid">
-				<div class="navbar navbar-bottom Neverland">
-					<div class="navbar-inner">
-						<div class="row-fluid">
-							<ul class="nav">
-								<li>
-								<?php if(isset($this->breadcrumbs)):?>
-									<?php
-										if(Yii::app()->user->isGuest) {
-											$this->widget('application.widgets.NBreadcrumbs', array(
-												'links'=>$this->breadcrumbs,
-												'htmlOptions' => array(
-													'class' => 'breadcrumb',
-												),
-												'homeLink' => '<a href="'.Yii::app()->controller->createUrl('/site/login').'">Home</a>',
-											));
-										} else {
-											$this->widget('application.widgets.NBreadcrumbs', array(
-												'links'=>$this->breadcrumbs,
-													'htmlOptions' => array(
-													'class' => 'breadcrumb',
-												),
-												'homeLink' => '<a href="'.Yii::app()->controller->createUrl('/site/index').'">Home</a>',
+		</div>
+		<div id="footerRow">
+			<div class="navbar navbar-bottom Neverland">
+				<div class="navbar-inner">
+					<div class="container">
+						<ul class="nav">
+							<li>
+							<?php if(isset($this->breadcrumbs)):?>
+								<?php
+									if(Yii::app()->user->isGuest) {
+										$this->widget('application.widgets.NBreadcrumbs', array(
+											'links'=>$this->breadcrumbs,
+											'htmlOptions' => array(
+												'class' => 'breadcrumb',
+											),
+											'homeLink' => '<li><a href="'.Yii::app()->controller->createUrl('/site/login').'">Home</a></li>',
 										));
-										}?><!-- breadcrumbs -->
-								<?php endif?>
-								</li>
-							</ul>
-							<ul class="nav nav-collapse pull-right">
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown">KDE Links <b class="caret-up"></b></a>
-									<ul id="global-nav" class="dropdown-menu bottom-up"></ul>
-								</li>
-							</ul>
-						</div>
+									} else {
+										$this->widget('application.widgets.NBreadcrumbs', array(
+											'links'=>$this->breadcrumbs,
+												'htmlOptions' => array(
+												'class' => 'breadcrumb',
+											),
+											'homeLink' => '<li><a href="'.Yii::app()->controller->createUrl('/site/index').'">Home</a></li>',
+									));
+									}?><!-- breadcrumbs -->
+							<?php endif?>
+							</li>
+						</ul>
+						<ul class="nav pull-right">
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">KDE Links <b class="caret-up"></b></a>
+								<ul id="global-nav" class="dropdown-menu bottom-up"></ul>
+							</li>
+						</ul>
 					</div>
 				</div>
-				<footer class="Neverland">
-					Maintained by <a href="https://bugs.kde.org/enter_sysadmin_request.cgi">KDE Sysadmin.</a> Design by <a href="mailto:kde-www@kde.org">KDE Webteam.</a><br>
-					KDE<sup>&reg;</sup> and <a href="http://www.kde.org/media/images/trademark_kde_gear_black_logo.png">the K Desktop Environment<sup>&reg;</sup> logo</a>
-					are registered trademarks of <a title="Homepage of the KDE non-profit Organization" href="http://ev.kde.org/">KDE e.V.</a> |
-					<a href="http://www.kde.org/community/whatiskde/impressum.php">Legal</a>
-				</footer>
 			</div>
-		</div><!-- page -->
-	</div>
+			<footer class="Neverland">
+				Maintained by <a href="https://bugs.kde.org/enter_sysadmin_request.cgi">KDE Sysadmin.</a> Design by <a href="mailto:kde-www@kde.org">KDE Webteam.</a><br>
+				KDE<sup>&reg;</sup> and <a href="/media/images/trademark_kde_gear_black_logo.png">the K Desktop Environment<sup>&reg;</sup> logo</a>
+				are registered trademarks of <a title="Homepage of the KDE non-profit Organization" href="http://ev.kde.org/">KDE e.V.</a> |
+				<a href="http://www.kde.org/community/whatiskde/impressum.php">Legal</a>
+			</footer>
+		</div>
+	</div><!-- container -->
 </body>
 </html>
