@@ -50,6 +50,7 @@
 							array('label' => 'Groups', 'url' => array('/groups/index'), 'glyphIcon' => 'th-list'),
 							array('label' => 'Registrations', 'url' => array('/registration/list'), 'glyphIcon' => 'pencil', 'visible' => Yii::app()->user->checkAccess('sysadmins')),
 							array('label' => 'Developer Applications', 'url' => array('/developerApplication/list'), 'glyphIcon' => 'file', 'visible' => Yii::app()->user->checkAccess('sysadmins')),
+							array('label' => 'Privacy Policy', 'url' => array('/site/page', 'view' => 'privacypolicy'), 'glyphIcon' => 'eye-open'),
 							array('label' => 'My Account', 'url' => array('/people/view', 'uid' => Yii::app()->user->id), 'glyphIcon' => 'user', 'visible' => !Yii::app()->user->isGuest),
 							array('label' => 'Login', 'url'=>array('/site/login'), 'glyphIcon' => 'cog', 'visible' => Yii::app()->user->isGuest),
 							array('label' => 'Register', 'url'=>array('/registration/index'), 'glyphIcon' => 'pencil', 'visible' => Yii::app()->user->isGuest),
