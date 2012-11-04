@@ -83,7 +83,7 @@
 											'htmlOptions' => array(
 												'class' => 'breadcrumb',
 											),
-											'homeLink' => '<li><a href="'.Yii::app()->controller->createUrl('/site/login').'">Home</a></li>',
+											'homeLink' => '<li><a href="'.Yii::app()->controller->createUrl('/site/login').'"><i class="icon-home icon-white"></i>Home</a></li>',
 										));
 									} else {
 										$this->widget('application.widgets.NBreadcrumbs', array(
@@ -91,7 +91,7 @@
 												'htmlOptions' => array(
 												'class' => 'breadcrumb',
 											),
-											'homeLink' => '<li><a href="'.Yii::app()->controller->createUrl('/site/index').'">Home</a></li>',
+											'homeLink' => '<li></i><a href="'.Yii::app()->controller->createUrl('/site/index').'"><i class="icon-home icon-white">Home</a></li>',
 									));
 									}?><!-- breadcrumbs -->
 							<?php endif?>
@@ -99,7 +99,7 @@
 						</ul>
 						<ul class="nav pull-right">
 							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">KDE Links <b class="caret-up"></b></a>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list icon-white"></i>KDE Links <b class="caret-up"></b></a>
 								<ul id="global-nav" class="dropdown-menu bottom-up"></ul>
 							</li>
 						</ul>
