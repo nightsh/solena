@@ -91,7 +91,7 @@
 												'htmlOptions' => array(
 												'class' => 'breadcrumb',
 											),
-											'homeLink' => '<li></i><a href="'.Yii::app()->controller->createUrl('/site/index').'"><i class="icon-home icon-white">Home</a></li>',
+											'homeLink' => '<li><a href="'.Yii::app()->controller->createUrl('/site/index').'"><i class="icon-home icon-white"></i>Home</a></li>',
 									));
 									}?><!-- breadcrumbs -->
 							<?php endif?>
