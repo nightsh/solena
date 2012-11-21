@@ -33,6 +33,8 @@ class DeveloperApplication extends CActiveRecord
 			// Ensure that the fields have the correct values in them
 			array('status', 'in', 'range' => array_keys($this->validStatus())),
 			array('special_reason', 'in', 'range' => array_keys($this->validSpecialReason())),
+			// The bugzilla email flag must be a boolean
+			array('bugzilla_email', 'boolean'),
 			// The supporting user must exist (the applicant is set internally)
 			array('uid, supporter_uid', 'length', 'max' => 64),
 			array('supporter_uid', 'validateUsernameExists'),
@@ -56,6 +58,7 @@ class DeveloperApplication extends CActiveRecord
 			'uid' => 'Applicant',
 			'supporter_uid' => 'Supporter',
 			'special_reason' => 'Special Reason',
+			'bugzilla_email' => 'Bugzilla Email Matches Identity Email',
 			'justification' => 'Justification',
 			'evidence_links' => 'Supporting Evidence',
 			'ssh_key' => 'SSH Key',

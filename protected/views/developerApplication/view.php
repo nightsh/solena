@@ -27,6 +27,10 @@ $this->menu = array(
 			'value' => $model->statusName,
 		),
 		array(
+			'type' => 'boolean',
+			'name' => 'bugzilla_email',
+		),
+		array(
 			'type' => 'raw',
 			'label' => 'Supporter',
 			'value' => empty($model->supporter_uid) ? 'None' : CHtml::link( $model->supporter->cn, array('people/view', 'uid' => $model->supporter->uid) ),

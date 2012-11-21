@@ -27,7 +27,7 @@ They also provided the following supporting evidence for their justification:
 <?php echo trim($model->evidence_links); ?>
 
 
-To confirm the developer registration, run 'sync <?php echo $model->uid; ?> <?php echo $model->applicant->mail; ?>'
+To confirm the developer registration, run 'sync <?php echo $model->uid; ?> <?php if( $model->bugzilla_email ) { echo $model->applicant->mail; } ?>'
 
 Once you have confirmed their developer registration, please send them the following text:
 

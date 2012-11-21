@@ -52,6 +52,16 @@
 	</div>
 
 	<div class="row-fluid">
+		<?php echo $form->labelEx($model, 'bugzilla_email'); ?>
+		<div>
+			Do you have an account on KDE Bugzilla (bugs.kde.org)? 
+			If so, is it registered with the same email address as your Identity account?
+		</div>
+		<?php echo $form->checkBox($model, 'bugzilla_email'); ?>
+		<?php echo $form->error($model, 'bugzilla_email'); ?>
+	</div>
+
+	<div class="row-fluid">
 		<?php echo $form->labelEx($model, 'justification'); ?>
 		<div>
 			Please explain the reason for your application.
