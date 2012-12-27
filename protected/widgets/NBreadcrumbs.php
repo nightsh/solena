@@ -12,7 +12,7 @@ class NBreadcrumbs extends CBreadcrumbs {
 
 	public $htmlOptions = array('class'=>'nav');
 
-	public $separator = ' &raquo; ';
+	public $separator = '&nbsp;&raquo;&nbsp;';
 
 	public function init() {
 		parent::init();
@@ -35,11 +35,11 @@ class NBreadcrumbs extends CBreadcrumbs {
 		foreach($this->links as $label=>$url)
 		{
 			if(is_string($label) || is_array($url))
-				$links[]=CHtml::link($this->encodeLabel ? CHtml::encode($label) : $label, $url);
+				$links[]='<li>'.$this->separator.CHtml::link($this->encodeLabel ? CHtml::encode($label) : $label, $url).'</li>';
 			else
-				$links[]='<span>'.($this->encodeLabel ? CHtml::encode($url) : $url).'</span>';
+				$links[]='<li>'.$this->separator.($this->encodeLabel ? CHtml::encode($url) : $url).'</li>';
 			}
-			echo implode($this->separator,$links);
+			echo implode($links);
 			echo CHtml::closeTag($this->tagName);
         }
 
