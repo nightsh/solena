@@ -39,7 +39,7 @@
                     <span class="icon-bar"></span>
                 </a>
 				<a class="brand" href="<?php echo Yii::app()->controller->createUrl('/site/index'); ?>">
-					<img src="//cdn.kde.org/img/logo.plain.small.png"/>
+					<img src="//cdn.kde.org/img/logo.plain.small.png" alt="Home"/>
 					KDE Identity
 				</a>
 				<div class="nav-collapse">
