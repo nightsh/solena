@@ -109,6 +109,9 @@ return array(
 		'refererWhiteList' => array(
 			'forum.kde.org',
 			'projects.kde.org',
+			'userbase.kde.org',
+			'techbase.kde.org',
+			'community.kde.org'
 		),
 	),
 );
