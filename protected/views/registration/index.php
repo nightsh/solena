@@ -9,6 +9,12 @@ $this->menu = array();
 
 <h1>Register on <?php echo Yii::app()->name; ?></h1>
 
+<?php if( SiteReferer::getReferer() != null ): ?>
+	<p class="well">
+		You have been redirected here from <?php echo CHtml::link(SiteReferer::getReferer(), SiteReferer::getReferer()); ?> for registering your account.
+	</p>
+<?php endif; ?>
+
 <div class="form">
 
 <p>I agree to abide by the terms of the <a href="http://www.kde.org/code-of-conduct">KDE Code of Conduct</a></p>

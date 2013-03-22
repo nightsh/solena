@@ -59,6 +59,14 @@ class RegistrationController extends Controller
 			throw new CHttpException(403, "Client rejected by automatic spammer detection system");
 		}
 
+		/**
+		 * Check referer during the registration process to be able to show the user
+		 * the page he is coming from and be able to redirect him at the end of the
+		 * registration process.
+		 */
+		$refererHelper = new SiteReferer();
+		$refererHelper->checkReferer();
+
 		$this->render('index');
 	}
 

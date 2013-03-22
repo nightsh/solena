@@ -106,5 +106,9 @@ return array(
 		'defaultGroup' => 'users',
 		'developerGroup' => 'developers',
 		'disabledDeveloperGroup' => 'disabled-developers',
+		'refererWhiteList' => array(
+			'forum.kde.org',
+			'projects.kde.org',
+		),
 	),
 );
