@@ -186,7 +186,7 @@ class DeveloperApplicationController extends Controller
 	protected function sendApplicationEmails($model)
 	{
 		// First we send the general mail to the site administrator
-		$this->sendEmail(Yii::app()->params['adminEmail'], '/mail/notifyDeveloperApplication', array('model' => $model));
+		$this->sendEmail(Yii::app()->params['devApplicationEmail'], '/mail/notifyDeveloperApplication', array('model' => $model));
 		// Now we send the mail to the supporter
 		if( $model->supporter instanceof User ) {
 			$this->sendEmail($model->supporter->mail, '/mail/confirmDeveloperApplicationSupport', array('model' => $model));
