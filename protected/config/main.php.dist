@@ -102,7 +102,7 @@ return array(
 	// application-level parameters
 	'params' => array(
 		'adminEmail' => 'webmaster@example.com',
-		'devApplicationEmail' => 'webmaster@example.com',
+		'registerNotify' => 'webmaster@example.com',
 		'registrationUnit' => 'ou=people,dc=kde,dc=org',
 		'defaultGroup' => 'users',
 		'developerGroup' => 'developers',

@@ -122,7 +122,7 @@ class RegistrationController extends Controller
 				// Creation succeeded, so cleanup....
 				$tokenModel->delete();
 				// Inform the site administrator of the account creation
-				$this->sendEmail(Yii::app()->params['adminEmail'], '/mail/notifyRegistration', array('model' => $model));
+				$this->sendEmail(Yii::app()->params['registerNotify'], '/mail/notifyRegistration', array('model' => $model));
 				// Give the user a page informing them of their account details
 				$this->render('complete', array('model' => $model));
 				Yii::app()->end();
