@@ -21,11 +21,6 @@ class NBreadcrumbs extends CBreadcrumbs {
 
 	public function run()
 	{
-		if(empty($this->links))
-		{
-			echo $this->homeLink;
-			return;
-		}
 		echo CHtml::openTag($this->tagName,$this->htmlOptions)."\n";
 		$links=array();
 		if($this->homeLink===null)
@@ -38,10 +33,10 @@ class NBreadcrumbs extends CBreadcrumbs {
 				$links[]='<li>'.$this->separator.CHtml::link($this->encodeLabel ? CHtml::encode($label) : $label, $url).'</li>';
 			else
 				$links[]='<li>'.$this->separator.($this->encodeLabel ? CHtml::encode($url) : $url).'</li>';
-			}
-			echo implode($links);
-			echo CHtml::closeTag($this->tagName);
-        }
+		}
+		echo implode($links);
+		echo CHtml::closeTag($this->tagName);
+	}
 
 }
 
